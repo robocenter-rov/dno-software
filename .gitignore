@@ -274,3 +274,7 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 MATE_ROV_2017_DNO/__vm/.MATE_ROV_2017_DNO.vsarduino.h
+MATE_ROV_2017_DNO/__vm/Compile.vmps.xml
+MATE_ROV_2017_DNO/__vm/Configuration.Debug.vmps.xml
+MATE_ROV_2017_DNO/__vm/Configuration.Release.vmps.xml
+MATE_ROV_2017_DNO/__vm/Upload.vmps.xml

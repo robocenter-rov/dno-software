@@ -50,7 +50,7 @@
       <AdditionalIncludeDirectories>D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -87,14 +87,16 @@
     <ClInclude Include="AutoCourse.h" />
     <ClInclude Include="AutoPosition.h" />
     <ClInclude Include="AutoRotation.h" />
-    <ClInclude Include="AutoVelocity_t.h" />
+    <ClInclude Include="AutoVelocity.h" />
     <ClInclude Include="Communicator.h" />
+    <ClInclude Include="CoordinateSystemConverter.h" />
     <ClInclude Include="Exceptions.h" />
-    <ClInclude Include="LocalMovement.h" />
+    <ClInclude Include="LocalMotorsForceDistributor.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Motor.h" />
     <ClInclude Include="Motors.h" />
+    <ClInclude Include="MotorsForceDistributor.h" />
     <ClInclude Include="Movement.h" />
     <ClInclude Include="PidCoefficients.h" />
     <ClInclude Include="PinManager.h" />
