@@ -1,6 +1,5 @@
 #pragma once
 #include "Motor.h"
-#include "Exceptions.h"
 
 class Motors_t {
 private:

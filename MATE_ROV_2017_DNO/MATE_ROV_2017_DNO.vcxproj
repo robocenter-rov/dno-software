@@ -47,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8\utility;D:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src\utility;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jq1hplm1.uie\Micro Platforms\default\debuggers\VM_DBG;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jq1hplm1.uie\Micro Platforms\default\debuggers;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -59,10 +59,14 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8\utility;D:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src\utility;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\jq1hplm1.uie\Micro Platforms\default\debuggers;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -82,15 +86,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AutoAngularVelocity.h" />
-    <ClInclude Include="AutoDepth.h" />
-    <ClInclude Include="AutoCourse.h" />
-    <ClInclude Include="AutoPosition.h" />
-    <ClInclude Include="AutoRotation.h" />
-    <ClInclude Include="AutoVelocity.h" />
+    <ClInclude Include="AngularVelocityRegulator.h" />
+    <ClInclude Include="DepthRegulator.h" />
+    <ClInclude Include="CourseRegulator.h" />
+    <ClInclude Include="FlashlightPeriphery.h" />
+    <ClInclude Include="PositionRegulator.h" />
+    <ClInclude Include="RotationRegulator.h" />
+    <ClInclude Include="VelocityRegulator.h" />
     <ClInclude Include="Communicator.h" />
     <ClInclude Include="CoordinateSystemConverter.h" />
-    <ClInclude Include="Exceptions.h" />
     <ClInclude Include="LocalMotorsForceDistributor.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Message.h" />
@@ -98,8 +102,8 @@
     <ClInclude Include="Motors.h" />
     <ClInclude Include="MotorsForceDistributor.h" />
     <ClInclude Include="Movement.h" />
+    <ClInclude Include="PeripheryManager.h" />
     <ClInclude Include="PidCoefficients.h" />
-    <ClInclude Include="PinManager.h" />
     <ClInclude Include="Regulators.h" />
     <ClInclude Include="SensorDepth.h" />
     <ClInclude Include="SensorManager.h" />
@@ -107,10 +111,10 @@
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Communicator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Movement.cpp" />
-    <ClCompile Include="PinManager.cpp" />
     <ClCompile Include="SensorDepth.cpp" />
     <ClCompile Include="SensorManager.cpp" />
     <ClCompile Include="SensorRotation.cpp" />
@@ -118,4 +122,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties arduino.upload.port="COM11" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
