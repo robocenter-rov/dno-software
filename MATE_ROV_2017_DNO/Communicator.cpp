@@ -4,7 +4,7 @@ Message_t* Communicator_t::ReceiveMessage() {
 	return nullptr;
 }
 
-void Communicator_t::SendMessage(Message_t*, unsigned message_size) {
+void Communicator_t::SendMessage(Message_t* msg, unsigned int message_size) {
 	
 }
 

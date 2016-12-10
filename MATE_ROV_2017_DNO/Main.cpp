@@ -19,7 +19,7 @@ void Main_t::RecieveSetPositionMessage(Main_t* _this, Message_t* message) {
 }
 
 void Main_t::RecieveSetFlashlightMessage(Main_t* _this, Message_t* message) {
-	auto m = static_cast<SetFlashlightState_t*>(message);
+	auto m = static_cast<SetFlashlightStateMessage_t*>(message);
 	_this->_periphery_manager->SetFlashlightState(m->state);
 }
 

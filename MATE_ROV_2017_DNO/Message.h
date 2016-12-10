@@ -18,7 +18,7 @@ struct SetPositionMessage_t : public Message_t {
 	float position;
 };
 
-struct SetFlashlightState_t : public Message_t {
+struct SetFlashlightStateMessage_t : public Message_t {
 	char state;
 };
 

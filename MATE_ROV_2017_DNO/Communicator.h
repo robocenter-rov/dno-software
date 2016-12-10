@@ -9,8 +9,9 @@ class Communicator_t {
 protected:
 	char buffer[MAX_MESSAGE_SIZE];
 public:
+	virtual ~Communicator_t() {}
 	virtual Message_t* ReceiveMessage();
-	virtual void SendMessage(Message_t*, unsigned int message_size);
+	virtual void SendMessage(Message_t* msg, unsigned int message_size);
 };
 
 class UDPCommunicator_t : public Communicator_t {
