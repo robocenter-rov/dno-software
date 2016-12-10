@@ -16,7 +16,7 @@ private:
 	static void RecieveSetPositionMessage(Main_t* _this, Message_t* message);
 	static void RecieveSetFlashlightMessage(Main_t* _this, Message_t* message);
 
-	message_receiver_t message_receivers[MAX_MESSAGE_TYPE_ID];
+	message_receiver_t message_receivers[MT_MAX_MESSAGE_TYPE_ID];
 public:
 	Main_t(Communicator_t* communicator, Movement_t* movement, 
 		SensorManager_t* sensor_manager, PeripheryManager_t* periphery_manager);

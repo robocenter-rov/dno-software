@@ -8,8 +8,8 @@ Main_t::Main_t(Communicator_t* communicator, Movement_t* movement,
 	_sensor_manager = sensor_manager;
 	_periphery_manager = periphery_manager;
 
-	message_receivers[SET_POSITION_MT] = &RecieveSetPositionMessage;
-	message_receivers[SET_FLASHLIGHT_STATE_MT] = &RecieveSetFlashlightMessage;
+	message_receivers[MT_SET_POSITION] = &RecieveSetPositionMessage;
+	message_receivers[MT_SET_FLASHLIGHT_STATE] = &RecieveSetFlashlightMessage;
 }
 
 void Main_t::RecieveSetPositionMessage(Main_t* _this, Message_t* message) {
