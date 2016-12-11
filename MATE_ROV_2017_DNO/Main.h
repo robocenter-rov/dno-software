@@ -3,6 +3,7 @@
 #include "Movement.h"
 #include "PeripheryManager.h"
 #include "Message.h"
+#include "TaskPool.h"
 
 class Main_t {
 private:
@@ -10,11 +11,18 @@ private:
 	Movement_t* _movement;
 	SensorManager_t* _sensor_manager;
 	PeripheryManager_t* _periphery_manager;
+	TaskPool_t _task_pool;
 
-	typedef void (*message_receiver_t)(Main_t* _this, Message_t* message);
+	typedef void (*message_receiver_t)(Main_t* _this, const MessageUnion_t& message);
 
-	static void RecieveSetPositionMessage(Main_t* _this, Message_t* message);
-	static void RecieveSetFlashlightMessage(Main_t* _this, Message_t* message);
+	void SendTaskState(unsigned int worker_id) const;
+
+	static void RecieveSetPositionMessage(Main_t* _this, const MessageUnion_t& message);
+
+	static void RecieveFreeWorkerMessage(Main_t* _this, const MessageUnion_t& message);
+
+	static void RecieveSetFlashlightMessage(Main_t* _this, const MessageUnion_t& message);
+	static void RecieveBlinkFlashlightMessage(Main_t* _this, const MessageUnion_t& message);
 
 	message_receiver_t message_receivers[MT_MAX_MESSAGE_TYPE_ID];
 public:

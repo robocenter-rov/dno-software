@@ -8,8 +8,8 @@
 class Communicator_t {
 public:
 	virtual ~Communicator_t() {}
-	virtual bool ReceiveMessage(Message_t* out_message);
-	virtual void SendMessage(Message_t* msg, unsigned int message_size);
+	virtual bool ReceiveMessage(MessageUnion_t& out_message) { return false; };
+	virtual void SendMessage(const Message_t* message) {};
 };
 
 class UDPCommunicator_t : public Communicator_t {
@@ -25,6 +25,6 @@ private:
 public:
 	UDPCommunicator_t(byte mac[6], IPAddress ip, unsigned int local_port);
 	UDPCommunicator_t(byte mac[6], unsigned int local_port);
-	bool ReceiveMessage(Message_t* out_message) override;
-	void SendMessage(Message_t* message, unsigned int message_size) override;
+	bool ReceiveMessage(MessageUnion_t& out_message) override;
+	void SendMessage(const Message_t* message) override;
 };
