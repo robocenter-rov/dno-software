@@ -117,6 +117,9 @@
     <ClInclude Include="Task.h">
       <Filter>Task</Filter>
     </ClInclude>
+    <ClInclude Include="TaskPool.h">
+      <Filter>Task</Filter>
+    </ClInclude>
     <ClInclude Include="TaskState.h">
       <Filter>Task</Filter>
     </ClInclude>
@@ -148,6 +151,9 @@
     </ClCompile>
     <ClCompile Include="ResourceLocker.cpp">
       <Filter>ResourceLocker</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskPool.cpp">
+      <Filter>Task</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

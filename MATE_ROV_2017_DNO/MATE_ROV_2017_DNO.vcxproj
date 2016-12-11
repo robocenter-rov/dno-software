@@ -94,6 +94,7 @@
     <ClInclude Include="ResourceLocker.h" />
     <ClInclude Include="RotationRegulator.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="TaskPool.h" />
     <ClInclude Include="TaskState.h" />
     <ClInclude Include="VelocityRegulator.h" />
     <ClInclude Include="Communicator.h" />
@@ -123,6 +124,7 @@
     <ClCompile Include="SensorManager.cpp" />
     <ClCompile Include="SensorRotation.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TaskPool.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
