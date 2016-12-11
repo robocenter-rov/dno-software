@@ -6,11 +6,9 @@
 #define MAX_MESSAGE_SIZE 100
 
 class Communicator_t {
-protected:
-	char buffer[MAX_MESSAGE_SIZE];
 public:
 	virtual ~Communicator_t() {}
-	virtual Message_t* ReceiveMessage();
+	virtual bool ReceiveMessage(Message_t* out_message);
 	virtual void SendMessage(Message_t* msg, unsigned int message_size);
 };
 
@@ -27,6 +25,6 @@ private:
 public:
 	UDPCommunicator_t(byte mac[6], IPAddress ip, unsigned int local_port);
 	UDPCommunicator_t(byte mac[6], unsigned int local_port);
-	Message_t* ReceiveMessage() override;
+	bool ReceiveMessage(Message_t* out_message) override;
 	void SendMessage(Message_t* message, unsigned int message_size) override;
 };

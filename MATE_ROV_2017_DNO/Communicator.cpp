@@ -1,12 +1,10 @@
 #include "Communicator.h"
 
-Message_t* Communicator_t::ReceiveMessage() {
-	return nullptr;
+bool Communicator_t::ReceiveMessage(Message_t* out_message) {
+	return false;
 }
 
-void Communicator_t::SendMessage(Message_t* msg, unsigned int message_size) {
-	
-}
+void Communicator_t::SendMessage(Message_t* msg, unsigned int message_size) {}
 
 UDPCommunicator_t::UDPCommunicator_t(byte mac[6], IPAddress ip, unsigned int local_port) {
 	memcpy(mac, _mac, sizeof(byte) * 6);
@@ -39,8 +37,10 @@ UDPCommunicator_t::UDPCommunicator_t(byte mac[6], unsigned int local_port) {
 	_udp.begin(_local_port);
 }
 
-Message_t* UDPCommunicator_t::ReceiveMessage() {
+bool UDPCommunicator_t::ReceiveMessage(Message_t* message) {
 	if (int packet_size = _udp.parsePacket()) {
+		char* buffer = reinterpret_cast<char*>(message);
+
 		_last_remote_ip = _udp.remoteIP();
 		_last_remote_port = _udp.remotePort();
 
@@ -57,10 +57,12 @@ Message_t* UDPCommunicator_t::ReceiveMessage() {
 
 		Serial.print('\n');
 		Serial.print("Message type: ");
-		Serial.println(reinterpret_cast<Message_t*>(buffer)->message_type);
+		Serial.println(message->message_type);
 
-		return reinterpret_cast<Message_t*>(buffer);
+		return true;
 	}
+
+	return false;
 }
 
 void UDPCommunicator_t::SendMessage(Message_t* message, unsigned int message_size) {

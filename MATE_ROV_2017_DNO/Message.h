@@ -22,4 +22,10 @@ struct SetFlashlightStateMessage_t : public Message_t {
 	char state;
 };
 
+union MessageUnion_t {
+	Message_t base_message;
+	SetPositionMessage_t set_position_message;
+	SetFlashlightStateMessage_t set_flashlight_state_message;
+};
+
 #pragma pack(pop)

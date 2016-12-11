@@ -24,8 +24,9 @@ void Main_t::RecieveSetFlashlightMessage(Main_t* _this, Message_t* message) {
 }
 
 void Main_t::Loop() {
-	Message_t* message;
-	while(message = _communicator->ReceiveMessage()) {
+	MessageUnion_t message_union;
+	Message_t* message = reinterpret_cast<Message_t*>(&message_union);
+	while(_communicator->ReceiveMessage(message)) {
 		message_receivers[message->message_type](this, message);
 	}
 }
