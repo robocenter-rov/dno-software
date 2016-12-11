@@ -91,6 +91,7 @@
     <ClInclude Include="CourseRegulator.h" />
     <ClInclude Include="FlashlightPeriphery.h" />
     <ClInclude Include="PositionRegulator.h" />
+    <ClInclude Include="ResourceLocker.h" />
     <ClInclude Include="RotationRegulator.h" />
     <ClInclude Include="VelocityRegulator.h" />
     <ClInclude Include="Communicator.h" />
@@ -115,6 +116,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="ResourceLocker.cpp" />
     <ClCompile Include="SensorDepth.cpp" />
     <ClCompile Include="SensorManager.cpp" />
     <ClCompile Include="SensorRotation.cpp" />

@@ -31,6 +31,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{6b9ac58c-23c7-4df8-a7c1-e1d4f386db03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ResourceLocker">
+      <UniqueIdentifier>{14aefdb1-f72b-4bc1-abc0-f32d91fdb41c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="MATE_ROV_2017_DNO.ino" />
@@ -105,6 +108,9 @@
     <ClInclude Include="CoordinateSystemConverter.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="ResourceLocker.h">
+      <Filter>ResourceLocker</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="Movement.cpp">
       <Filter>Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceLocker.cpp">
+      <Filter>ResourceLocker</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
