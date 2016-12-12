@@ -23,6 +23,8 @@ private:
 
 	void SendTaskState(unsigned int worker_id) const;
 
+	static void RecieveSetMotorThrustMessage(Main_t* _this, const MessageUnion_t& message);
+
 	static void RecieveSetPositionMessage(Main_t* _this, const MessageUnion_t& message);
 
 	static void RecieveFreeWorkerMessage(Main_t* _this, const MessageUnion_t& message);

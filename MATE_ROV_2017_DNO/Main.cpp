@@ -9,6 +9,7 @@ Main_t::Main_t(Communicator_t* communicator, Movement_t* movement,
 	_sensor_manager = sensor_manager;
 	_periphery_manager = periphery_manager;
 
+	message_receivers[MT_SET_MOTOR_THRUST] = &RecieveSetMotorThrustMessage;
 	message_receivers[MT_SET_POSITION] = &RecieveSetPositionMessage;
 	message_receivers[MT_FREE_WORKER] = &RecieveFreeWorkerMessage;
 	message_receivers[MT_SET_FLASHLIGHT_STATE] = &RecieveSetFlashlightMessage;
@@ -27,6 +28,20 @@ void Main_t::SendTaskState(unsigned int worker_id) const {
 
 	TaskStateMessage_t send_message(task_state_union);
 	_communicator->SendMessage(&send_message);
+}
+
+void Main_t::RecieveSetMotorThrustMessage(Main_t* _this, const MessageUnion_t& message) {
+	auto m = &message.set_motor_thrust_message;
+
+#ifdef _DEBUG
+	Serial.println("RecieveSetMotorThrustMessage");
+	Serial.print("Message type: ");
+	Serial.println(int(m->message_type));
+	Serial.print("Thrust: ");
+	Serial.println(m->thrust);
+#endif
+
+	_this->_movement->SetMotorThrust(0, m->thrust * 1.0f / 400);
 }
 
 void Main_t::RecieveSetPositionMessage(Main_t* _this, const MessageUnion_t& message) {
