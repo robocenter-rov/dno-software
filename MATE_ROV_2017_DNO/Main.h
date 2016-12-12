@@ -5,7 +5,13 @@
 #include "Message.h"
 #include "TaskPool.h"
 
-class Main_t {
+class BaseMain_t {
+public:
+	virtual void Loop() {}
+	virtual ~BaseMain_t() {}
+};
+
+class Main_t : public BaseMain_t {
 private:
 	Communicator_t* _communicator;
 	Movement_t* _movement;
@@ -29,5 +35,7 @@ public:
 	Main_t(Communicator_t* communicator, Movement_t* movement, 
 		SensorManager_t* sensor_manager, PeripheryManager_t* periphery_manager);
 
-	void Loop();
+	void Loop() override;
+};
+
 };
