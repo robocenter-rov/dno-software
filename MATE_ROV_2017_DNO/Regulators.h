@@ -1,7 +1,7 @@
 #pragma once
-#include "AutoDepth.h"
-#include "AutoRotation.h"
-#include "AutoPosition.h"
+#include "DepthRegulator.h"
+#include "RotationRegulator.h"
+#include "PositionRegulator.h"
 
 class Regulators_t {
 private:
