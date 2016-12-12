@@ -38,4 +38,12 @@ public:
 	void Loop() override;
 };
 
+class DebugMotorsMain_t : public BaseMain_t {
+private:
+	Motor_t* _motor;
+public:
+	DebugMotorsMain_t(Motor_t* motor);
+
+	void Loop() override;
+
 };
