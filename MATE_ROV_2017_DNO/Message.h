@@ -3,6 +3,8 @@
 #include "Task.h"
 
 enum MESSAGE_TYPE {
+	MT_SET_MOTOR_THRUST,
+
 	MT_SET_POSITION,
 
 	MT_FREE_WORKER,
@@ -21,6 +23,10 @@ struct Message_t {
 	MESSAGE_TYPE message_type;
 	Message_t() {}
 	Message_t(MESSAGE_TYPE message_type) : message_type(message_type) {}
+};
+
+struct SetMotorThrustMessage_t : Message_t {
+	int thrust;
 };
 
 struct SetPositionMessage_t : public Message_t {
@@ -51,6 +57,7 @@ struct TaskStateMessage_t : public Message_t {
 
 union MessageUnion_t {
 	Message_t base_message;
+	SetMotorThrustMessage_t set_motor_thrust_message;
 	SetPositionMessage_t set_position_message;
 	FreeWorkerMessage_t free_worker_message;
 	SetFlashlightStateMessage_t set_flashlight_state_message;
@@ -60,6 +67,7 @@ union MessageUnion_t {
 };
 
 const unsigned int MESSAGE_SIZES[] = {
+	sizeof(SetMotorThrustMessage_t),
 	sizeof(SetPositionMessage_t),
 	sizeof(FreeWorkerMessage_t),
 	sizeof(SetFlashlightStateMessage_t),
