@@ -6,7 +6,17 @@ UDPCommunicator_t::UDPCommunicator_t(byte mac[6], IPAddress ip, unsigned int loc
 	_local_port = local_port;
 
 	Ethernet.begin(_mac, _local_ip);
+
 	_udp.begin(_local_port);
+
+#ifdef _DEBUG
+	Serial.print("My IP address: ");
+	for (byte thisByte = 0; thisByte < 4; thisByte++) {
+		// print the value of each byte of the IP address:
+		Serial.print(Ethernet.localIP()[thisByte], DEC);
+		Serial.print(".");
+	}
+#endif
 }
 
 UDPCommunicator_t::UDPCommunicator_t(byte mac[6], unsigned int local_port) {
