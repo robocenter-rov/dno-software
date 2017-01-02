@@ -34,7 +34,7 @@ public:
 			_data = static_cast<T*>(realloc(_data, sizeof(K)));
 			_size = sizeof(K);
 		}
-		memcpy(_data, &e, sizeof(K));
+		new (_data) K(e);
 	}
 
 	T* operator->() {
