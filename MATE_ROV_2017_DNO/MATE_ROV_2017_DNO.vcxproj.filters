@@ -1,17 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Periphery">
       <UniqueIdentifier>{c8e4112a-5db0-4bfc-b96d-b0da924f97d1}</UniqueIdentifier>
@@ -25,17 +17,38 @@
     <Filter Include="Movement">
       <UniqueIdentifier>{4a2b8717-7772-4044-a52c-91813aba7f7f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Communicator">
-      <UniqueIdentifier>{9a6d2af5-e41f-4529-a634-21b71baea0f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{6b9ac58c-23c7-4df8-a7c1-e1d4f386db03}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ResourceLocker">
       <UniqueIdentifier>{14aefdb1-f72b-4bc1-abc0-f32d91fdb41c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Task">
       <UniqueIdentifier>{429393ce-64a5-464c-b1c7-56e73652b0ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{11b3a400-1d23-48aa-b5a4-8b5c894580f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication">
+      <UniqueIdentifier>{9a6d2af5-e41f-4529-a634-21b71baea0f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\ConnectionProviders">
+      <UniqueIdentifier>{6ab8fb40-4187-4b2a-bd61-db97cbc32c9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\Communicators">
+      <UniqueIdentifier>{ebb643b3-9417-40fa-8d5e-bdc6680c6d18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{8184dbe4-b7e0-40c9-a558-a42539889d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Math">
+      <UniqueIdentifier>{6b9ac58c-23c7-4df8-a7c1-e1d4f386db03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{7b3ff783-a8cd-4f20-afec-28d529e3f64b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions\RegisterExceptions">
+      <UniqueIdentifier>{1e85c45b-43d3-4bdd-93fb-be2db0210e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication\RegisterMessages">
+      <UniqueIdentifier>{a45f4c0e-8ca1-43c3-b683-db386f548d5a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -43,9 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PidCoefficients.h">
@@ -99,17 +109,11 @@
     <ClInclude Include="Movement.h">
       <Filter>Movement</Filter>
     </ClInclude>
-    <ClInclude Include="Communicator.h">
-      <Filter>Communicator</Filter>
-    </ClInclude>
-    <ClInclude Include="Message.h">
-      <Filter>Communicator</Filter>
-    </ClInclude>
     <ClInclude Include="LocalMotorsForceDistributor.h">
       <Filter>Movement</Filter>
     </ClInclude>
     <ClInclude Include="CoordinateSystemConverter.h">
-      <Filter>Math</Filter>
+      <Filter>Utils\Math</Filter>
     </ClInclude>
     <ClInclude Include="ResourceLocker.h">
       <Filter>ResourceLocker</Filter>
@@ -123,11 +127,59 @@
     <ClInclude Include="TaskState.h">
       <Filter>Task</Filter>
     </ClInclude>
+    <ClInclude Include="ConnectionProvider.h">
+      <Filter>Communication\ConnectionProviders</Filter>
+    </ClInclude>
+    <ClInclude Include="UdpConnectionProvider.h">
+      <Filter>Communication\ConnectionProviders</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SetFlashlightStateMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Communicator.h">
+      <Filter>Communication\Communicators</Filter>
+    </ClInclude>
+    <ClInclude Include="StdCommunicator.h">
+      <Filter>Communication\Communicators</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedPtr.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteArray.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SelfExpandoContainer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugMotorsMain.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="StdMain.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterExceptions.h">
+      <Filter>Exceptions\RegisterExceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="CantTakeAdressFromDHCPException.h">
+      <Filter>Exceptions\RegisterExceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SensorManager.cpp">
       <Filter>Sensors</Filter>
     </ClCompile>
@@ -136,9 +188,6 @@
     </ClCompile>
     <ClCompile Include="SensorDepth.cpp">
       <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="Communicator.cpp">
-      <Filter>Communicator</Filter>
     </ClCompile>
     <ClCompile Include="Motor.cpp">
       <Filter>Movement</Filter>
@@ -154,6 +203,27 @@
     </ClCompile>
     <ClCompile Include="TaskPool.cpp">
       <Filter>Task</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpConnectionProvider.cpp">
+      <Filter>Communication\ConnectionProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="Exceptions.cpp">
+      <Filter>Exceptions</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionProvider.cpp">
+      <Filter>Communication\ConnectionProviders</Filter>
+    </ClCompile>
+    <ClCompile Include="Communicator.cpp">
+      <Filter>Communication\Communicators</Filter>
+    </ClCompile>
+    <ClCompile Include="StdCommunicator.cpp">
+      <Filter>Communication\Communicators</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugMotorsMain.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="StdMain.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
