@@ -12,6 +12,10 @@ public:
 	ByteArray_t(void* source, unsigned int size) : _ptr(new byte[size]), _size(size) {
 		memcpy(_ptr.Get(), source, _size);
 	}
+	template<typename T>
+	ByteArray_t(const T& o) : _ptr(new byte[sizeof(T)]), _size(sizeof(T)) {
+		memcpy(_ptr.Get(), &o, _size);
+	}
 	byte* Get() const { return _ptr.Get(); }
 	unsigned int GetSize() const { return _size; }
 };
