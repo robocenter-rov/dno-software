@@ -21,6 +21,20 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return main->AddTask(new SetFlashlightStateTask_t(tag, state, main->_periphery_manager));
 	}, this);
+
+	_communicator->SetOnBlinkFlashlightReceive([](void* data, unsigned int tag, unsigned int count) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+#ifdef _DEBUG
+		Serial.println("SetOnBlinkFlashlightReceive");
+		Serial.print("tag: ");
+		Serial.println(tag);
+		Serial.print("count: ");
+		Serial.println(count);
+#endif
+
+		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager));
+	}, this);
 }
 
 int StdMain_t::Begin() {
