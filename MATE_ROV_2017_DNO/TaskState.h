@@ -29,6 +29,10 @@ struct TaskState_t {
 
 		return ByteArray_t(buffer);
 	}
+
+	void *operator new(unsigned int size, void *ptr) {
+		return ptr;
+	}
 };
 
 struct OkTaskState_t : public TaskState_t {
