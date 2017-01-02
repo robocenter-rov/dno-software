@@ -21,6 +21,16 @@ public:
 			if (_data) {
 				free(_data);
 			}
+
+#ifdef _DEBUG
+			Serial.print("SelfExpandoContainer: reallocate memory from ");
+			Serial.print(_size); 
+			Serial.print(" bytes, to ");
+			Serial.print(sizeof(K));
+			Serial.println(" bytes");
+			delay(100);
+#endif
+
 			_data = static_cast<T*>(realloc(_data, sizeof(K)));
 			_size = sizeof(K);
 		}

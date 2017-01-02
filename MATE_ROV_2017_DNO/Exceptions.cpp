@@ -48,5 +48,10 @@ const char* Exceptions::GetMessage(EXCEPTION_CODE exception) {
 }
 
 void Exceptions::Release() {
+
+#ifdef _DEBUG
+	Serial.println("Releasing exceptions");
+#endif
+
 	_exception_list.Clear();
 }
