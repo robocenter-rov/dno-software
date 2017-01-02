@@ -168,8 +168,13 @@ int TaskPool_t::AddTask(Task_t* task) {
 }
 
 int TaskPool_t::FreeWorker(unsigned int worker_id) {
-	if (!check_worker_id(worker_id) || _worker_nodes[worker_id].task == nullptr) {
+	if (!check_worker_id(worker_id)) {
+		ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
 		return 1;
+	}
+
+	if (_worker_nodes[worker_id].task == nullptr) {
+		return 0;
 	}
 
 	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];

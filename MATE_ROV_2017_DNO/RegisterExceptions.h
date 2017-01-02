@@ -17,3 +17,4 @@ reg_except(203, SC_RECEIVER_NOT_SETTED, "Receiver function is not setted")
 
 reg_except(300, TP_FULL, "Can't add task to pool: pool is full")
 reg_except(301, TP_RESOURCE_LOCKED, "Can't add task to pool: resource locked")
+reg_except(302, TP_INVALID_WORKER_ID, "Invalid worker id")
