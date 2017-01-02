@@ -27,7 +27,7 @@ struct TaskState_t {
 		buffer.worker_id = worker_id;
 		buffer.status = status;
 
-		return ByteArray_t(&buffer, sizeof buffer);
+		return ByteArray_t(buffer);
 	}
 };
 
@@ -56,6 +56,6 @@ struct BlinkFlashlightTaskState_t : public TaskState_t {
 		buffer.status = status;
 		buffer.blinked_count = blinked_count;
 
-		return ByteArray_t(&buffer, sizeof buffer);
+		return ByteArray_t(buffer);
 	}
 };
