@@ -48,7 +48,6 @@ struct BlinkFlashlightTaskState_t : public TaskState_t {
 			unsigned int task_id;
 			unsigned int worker_id;
 			TASK_STATUS status;
-			RESOURCE resource;
 			unsigned int blinked_count;
 		} buffer;
 
