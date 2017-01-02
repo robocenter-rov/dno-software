@@ -1,10 +1,11 @@
 #include "TaskPool.h"
+#include "Exceptions.h"
 
 inline bool TaskPool_t::check_worker_id(unsigned int worker_id) const {
 	return worker_id < _pool_size;
 }
 
-void TaskPool_t::UpdateTask(WorkerQueryNode_t* worker) {
+void TaskPool_t::UpdateTask(WorkerQueueNode_t* worker) {
 	Task_t* task = worker->task;
 
 #ifdef _DEBUG
@@ -15,7 +16,7 @@ void TaskPool_t::UpdateTask(WorkerQueryNode_t* worker) {
 	delay(200);
 #endif
 
-	if (task->UpdateState(reinterpret_cast<TaskState_t*>(&worker->state))) {
+	if (task->UpdateState(worker->state)) {
 
 #ifdef _DEBUG
 		Serial.println("Task finished, removing task");
@@ -27,8 +28,8 @@ void TaskPool_t::UpdateTask(WorkerQueryNode_t* worker) {
 }
 
 void TaskPool_t::Update() {
-	for (WorkerQueryNode_t* node = _busy_workers; node != nullptr; ) {
-		WorkerQueryNode_t* next_node = node->next_node;
+	for (WorkerQueueNode_t* node = _busy_workers; node != nullptr; ) {
+		WorkerQueueNode_t* next_node = node->next_node;
 
 		UpdateTask(node);
 
@@ -36,7 +37,7 @@ void TaskPool_t::Update() {
 	}
 }
 
-void TaskPool_t::MoveWorker(WorkerQueryNode_t*& from, WorkerQueryNode_t*& to, WorkerQueryNode_t* worker) {
+void TaskPool_t::MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, WorkerQueueNode_t* worker) {
 
 #ifdef _DEBUG
 	Serial.println("Moving worker");
@@ -83,7 +84,7 @@ void TaskPool_t::MoveWorker(WorkerQueryNode_t*& from, WorkerQueryNode_t*& to, Wo
 	to = worker;
 }
 
-void TaskPool_t::RemoveTask(WorkerQueryNode_t* worker) {
+void TaskPool_t::RemoveTask(WorkerQueueNode_t* worker) {
 
 #ifdef _DEBUG
 	Serial.print("Task removed, id: ");
@@ -100,7 +101,7 @@ void TaskPool_t::RemoveTask(WorkerQueryNode_t* worker) {
 
 TaskPool_t::TaskPool_t(unsigned int pool_size) {
 	_pool_size = pool_size;
-	_worker_nodes = new WorkerQueryNode_t[pool_size];
+	_worker_nodes = new WorkerQueueNode_t[pool_size];
 
 	for (int i = 0; i < pool_size; i++) {
 		_worker_nodes[i].task = nullptr;
@@ -114,7 +115,7 @@ TaskPool_t::TaskPool_t(unsigned int pool_size) {
 	_last_added_task_worker_id = 0;
 }
 
-bool TaskPool_t::AddTask(Task_t* task) {
+int TaskPool_t::AddTask(Task_t* task) {
 
 #ifdef _DEBUG
 	Serial.print("Adding task, id: ");
@@ -128,10 +129,12 @@ bool TaskPool_t::AddTask(Task_t* task) {
 		Serial.println(task->GetId());
 		delay(200);
 #endif
-		return false;
+
+		ThrowException(Exceptions::EC_TP_FULL);
+		return 1;
 	}
 
-	WorkerQueryNode_t* current_worker = _free_workers;
+	WorkerQueueNode_t* current_worker = _free_workers;
 
 	RESOURCE locked_resource;
 	if (task->LockNeededResources(locked_resource)) {
@@ -154,44 +157,62 @@ bool TaskPool_t::AddTask(Task_t* task) {
 		delay(200);
 #endif
 
-		current_worker->state.resource_locked_task_state
-			= ResourceLockedTaskState_t(task->GetId(), current_worker->id, locked_resource, ResourceLocker::GetOwner(locked_resource));
+		ThrowException(Exceptions::EC_TP_RESOURCE_LOCKED);
+
+		return 1;
 	}
 
 	_last_added_task_worker_id = current_worker->id;
 
-	return true;
+	return 0;
 }
 
-bool TaskPool_t::FreeWorker(unsigned int worker_id) {
+int TaskPool_t::FreeWorker(unsigned int worker_id) {
 	if (!check_worker_id(worker_id) || _worker_nodes[worker_id].task == nullptr) {
-		return false;
+		return 1;
 	}
 
-	WorkerQueryNode_t* current_worker = &_worker_nodes[worker_id];
+	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];
 
-	current_worker->state.cancelled_task_state =
+	current_worker->state =
 		CancelledTaskState_t(current_worker->task->GetId(), worker_id);
 
 	RemoveTask(current_worker);
 
-	return true;
+	return 0;
 }
 
-void TaskPool_t::GetTaskState(unsigned int worker_id, TaskStateUnion_t& out_state) const {
+void TaskPool_t::GetTaskState(unsigned int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const {
 	if (!check_worker_id(worker_id)) {
 		return;
 	}
 	out_state = _worker_nodes[worker_id].state;
 }
 
-void TaskPool_t::GetLastAddedTaskState(TaskStateUnion_t& out_state) const {
+TaskState_t* TaskPool_t::GetTaskStatePtr(unsigned int worker_id) const {
+	if (!check_worker_id(worker_id)) {
+		return nullptr;
+	}
+	return _worker_nodes[worker_id].state.Get();
+}
+
+
+void TaskPool_t::GetLastAddedTaskState(SelfExpandoContainer_t<TaskState_t>& out_state) const {
 #ifdef _DEBUG
-	Serial.println("Getting last added task state, last worker_id: ");
+	Serial.print("Getting last added task state, last worker_id: ");
 	Serial.println(_last_added_task_worker_id);
 	delay(200);
 #endif
 	out_state = _worker_nodes[_last_added_task_worker_id].state;
+}
+
+TaskState_t* TaskPool_t::GetLastAddedTaskStatePtr() const {
+#ifdef _DEBUG
+	Serial.print("Getting last added task state, last worker_id: ");
+	Serial.println(_last_added_task_worker_id);
+	delay(200);
+#endif
+	return _worker_nodes[_last_added_task_worker_id].state.Get();
 }
 
 unsigned int TaskPool_t::GetLastAddedTaskWorkerId() const {

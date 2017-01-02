@@ -20,9 +20,9 @@ bool SetFlashlightStateTask_t::LockNeededResources(RESOURCE& out_locked_resource
 	}
 }
 
-bool SetFlashlightStateTask_t::UpdateState(TaskState_t* out_state) {
+bool SetFlashlightStateTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) {
 	_periphery_manager->SetFlashlightState(_flashlight_state);
-	*static_cast<OkTaskState_t*>(out_state) = OkTaskState_t(_id, _worker_id);
+	out_state = OkTaskState_t(_id, _worker_id);
 	return true;
 }
 
@@ -44,20 +44,19 @@ bool BlinkFlashlightTask_t::LockNeededResources(RESOURCE& out_locked_resource) {
 	}
 }
 
-bool BlinkFlashlightTask_t::UpdateState(TaskState_t* out_state) {
+bool BlinkFlashlightTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) {
 	unsigned long  current_time = millis();
 	if (current_time - _last_change_time > 500) {
 		_periphery_manager->SetFlashlightState(!_periphery_manager->GetFlashlightState());
 		_last_change_time = current_time;
 		_change_count++;
 		if (_change_count / 2 >= _blink_count) {
-			*static_cast<OkTaskState_t*>(out_state) = OkTaskState_t(_id, _worker_id);
+			out_state = OkTaskState_t(_id, _worker_id);
 			return true;
 		}
 	}
 
-	*static_cast<BlinkFlashlightTaskState_t*>(out_state) = 
-		BlinkFlashlightTaskState_t(_id, _worker_id, _change_count / 2);
+	out_state = BlinkFlashlightTaskState_t(_id, _worker_id, _change_count / 2);
 
 	return false;
 }
