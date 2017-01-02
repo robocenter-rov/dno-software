@@ -35,6 +35,18 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager));
 	}, this);
+
+	_communicator->SetOnCancelTaskReceive([](void* data, unsigned int worker_id) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+#ifdef _DEBUG
+		Serial.println("SetOnCancelTaskReceive");
+		Serial.print("worker id: ");
+		Serial.println(worker_id);
+#endif
+
+		return main->_task_pool.FreeWorker(worker_id);
+	}, this);
 }
 
 int StdMain_t::Begin() {
@@ -56,6 +68,7 @@ int StdMain_t::AddTask(Task_t* task) {
 		if (_communicator->SendException(Exceptions::GetLastException())) {
 			return 1;
 		}
+		Exceptions::Release();
 	} else {
 		if (_communicator->SendTaskState(_task_pool.GetLastAddedTaskStatePtr())) {
 			return 1;
