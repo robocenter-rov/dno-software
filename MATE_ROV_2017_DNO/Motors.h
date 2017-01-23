@@ -21,6 +21,12 @@ public:
 		_motors[motor_id]->SetThrust(thrust);
 	}
 
+	void SetMotorsThrust(float* thrust) const {
+		for (int i = 0; i < _motor_count; i++) {
+			_motors[i]->SetThrust(thrust[i]);
+		}
+	}
+
 	void SetFrontMotorThrust(float thrust) const {
 		SetMotorThrust(0, thrust);
 	}
