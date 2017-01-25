@@ -1,4 +1,5 @@
 #include "DebugMotorsMain.h"
+#include "Arduino.h"
 
 DebugMotorsMain_t::DebugMotorsMain_t(Motor_t* motor) {
 	_motor = motor;

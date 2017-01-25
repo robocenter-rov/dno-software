@@ -7,6 +7,7 @@
 #include "StdMain.h"
 #include "StdCommunicator.h"
 #include "UdpConnectionProvider.h"
+#include "PCA96685Motor.h"
 Main_t* Main;
 
 void setup() {
@@ -14,10 +15,16 @@ void setup() {
 
 	Serial.begin(9600);
 
-	Motor_t* m1 = new PololuMotor_t(3, 4);
+	auto pwm1 = new Adafruit_PWMServoDriver(0x40);
+	auto pwm2 = new Adafruit_PWMServoDriver(0x41);
 
-	Motors_t* motors = new Motors_t(2);
-	motors->AddMotor(m1);
+	Motors_t* motors = new Motors_t(6);
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 2, 3, 0));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 5, 1));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 7, 2));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 8, 9, 3));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 4));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 12, 13, 5));
 
 	Movement_t* movement = new Movement_t(nullptr, motors, nullptr);
 
