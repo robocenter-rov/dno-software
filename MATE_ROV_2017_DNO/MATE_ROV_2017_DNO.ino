@@ -7,16 +7,24 @@
 #include "StdMain.h"
 #include "StdCommunicator.h"
 #include "UdpConnectionProvider.h"
+#include <Wire.h>
 #include "PCA96685Motor.h"
+
 Main_t* Main;
 
 void setup() {
 	Exceptions::Init();
-
+	Wire.begin();
 	Serial.begin(9600);
 
 	auto pwm1 = new Adafruit_PWMServoDriver(0x40);
 	auto pwm2 = new Adafruit_PWMServoDriver(0x41);
+
+	pwm1->begin();
+	pwm1->setPWMFreq(1600);
+
+	pwm2->begin();
+	pwm2->setPWMFreq(1600);
 
 	Motors_t* motors = new Motors_t(6);
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 2, 3, 0));
