@@ -48,16 +48,24 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return main->_task_pool.FreeWorker(worker_id);
 	}, this);
 
-	_communicator->SetOnSetMotorsThrustReceive([](void* data, unsigned int motor1Thrust, unsigned int motor2Thrust, unsigned int motor3Thrust, 
-		unsigned int motor4Thrust, unsigned int motor5Thrust, unsigned int motor6Thrust) -> int {
+	_communicator->SetOnSetMotorsThrustReceive([](void* data, int motor1Thrust, int motor2Thrust, int motor3Thrust, 
+		int motor4Thrust, int motor5Thrust, int motor6Thrust) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 #ifdef _DEBUG
-		Serial.println("SetOnBlinkFlashlightReceive");
-		Serial.print("tag: ");
-		Serial.println(tag);
-		Serial.print("count: ");
-		Serial.println(count);
+		Serial.println("SetMotorsThrustReceive");
+		Serial.print("motor1: ");
+		Serial.println(motor1Thrust);
+		Serial.print("motor2: ");
+		Serial.println(motor2Thrust);
+		Serial.print("motor3: ");
+		Serial.println(motor3Thrust);
+		Serial.print("motor4: ");
+		Serial.println(motor4Thrust);
+		Serial.print("motor5: ");
+		Serial.println(motor5Thrust);
+		Serial.print("motor6: ");
+		Serial.println(motor6Thrust);
 #endif
 
 		main->_movement->SetMotorThrust(0, motor1Thrust / 4096.f);
