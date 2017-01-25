@@ -1,16 +1,14 @@
 #include "PCA96685Motor.h"
 
-
-
-PCA96685Motor_t::PCA96685Motor_t(Adafruit_PWMServoDriver *pwm, unsigned int PINa, unsigned int PINb, int pwmNum)
+PCA96685Motor_t::PCA96685Motor_t(Adafruit_PWMServoDriver *pwm, unsigned int pin_a, unsigned int pin_b, unsigned int pwmNum)
 {
 	_pwm = pwm;
-	_PINA = PINa;
-	_PINB = PINb;
+	_pinA = pin_a;
+	_pinB = pin_b;
 	_pwmNum = pwmNum;
 
-	pinMode(_PINA, OUTPUT);
-	pinMode(_PINB, OUTPUT);
+	pinMode(_pinA, OUTPUT);
+	pinMode(_pinB, OUTPUT);
 }
 
 PCA96685Motor_t::~PCA96685Motor_t()
@@ -19,15 +17,22 @@ PCA96685Motor_t::~PCA96685Motor_t()
 
 void PCA96685Motor_t::SetThrust(float thrust) 
 {
-	_pwm->setPWM(_pwmNum, 0, 4096 * min(abs(thrust),1));
+#ifdef _DEBUG
+	Serial.print("Setting motor ");
+	Serial.print(_pwmNum);
+	Serial.print(": ");
+	Serial.println(4095 * min(abs(thrust), 1));
+#endif
+
+	_pwm->setPWM(_pwmNum, 0, 4095 * min(abs(thrust),1));
 
 	if (thrust > 0) {
-		digitalWrite(_PINA, 1);
-		digitalWrite(_PINB, 0);
+		digitalWrite(_pinA, 1);
+		digitalWrite(_pinB, 0);
 	}
 	else {
-		digitalWrite(_PINA, 0);
-		digitalWrite(_PINB, 1);
+		digitalWrite(_pinA, 0);
+		digitalWrite(_pinB, 1);
 	}
 	
 }
