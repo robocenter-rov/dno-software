@@ -178,6 +178,21 @@
     <ClInclude Include="CantTakeAdressFromDHCPException.h">
       <Filter>Exceptions\RegisterExceptions</Filter>
     </ClInclude>
+    <ClInclude Include="PololuMotor.h">
+      <Filter>Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="PCA96685Motor.h">
+      <Filter>Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="CancelTaskMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="BlinkFlashlightMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMotorsThrustMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -224,6 +239,12 @@
     </ClCompile>
     <ClCompile Include="StdMain.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="PololuMotor.cpp">
+      <Filter>Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="PCA96685Motor.cpp">
+      <Filter>Movement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -63,7 +63,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;C:\Users\JIukaviy\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src;C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;C:\Program Files (x86)\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries;C:\Users\Veiber\Documents\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\cores\arduino;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\variants\mega;C:\Users\Veiber\Source\Repos\dno-software\MATE_ROV_2017_DNO;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2/avr/include/;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2//avr/include/avr/;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -87,7 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AngularVelocityRegulator.h" />
+    <ClInclude Include="BlinkFlashlightMessage.h" />
     <ClInclude Include="ByteArray.h" />
+    <ClInclude Include="CancelTaskMessage.h" />
     <ClInclude Include="CantTakeAdressFromDHCPException.h" />
     <ClInclude Include="ConnectionProvider.h" />
     <ClInclude Include="DebugMotorsMain.h" />
@@ -98,12 +100,15 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Messages.h" />
+    <ClInclude Include="PCA96685Motor.h" />
+    <ClInclude Include="PololuMotor.h" />
     <ClInclude Include="SelfExpandoContainer.h" />
     <ClInclude Include="SetFlashlightStateMessage.h" />
     <ClInclude Include="PositionRegulator.h" />
     <ClInclude Include="RegisterExceptions.h" />
     <ClInclude Include="ResourceLocker.h" />
     <ClInclude Include="RotationRegulator.h" />
+    <ClInclude Include="SetMotorsThrustMessage.h" />
     <ClInclude Include="StdCommunicator.h" />
     <ClInclude Include="StdMain.h" />
     <ClInclude Include="Task.h" />
@@ -135,6 +140,8 @@
     <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="Motor.cpp" />
     <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="PCA96685Motor.cpp" />
+    <ClCompile Include="PololuMotor.cpp" />
     <ClCompile Include="ResourceLocker.cpp" />
     <ClCompile Include="SensorDepth.cpp" />
     <ClCompile Include="SensorManager.cpp" />
