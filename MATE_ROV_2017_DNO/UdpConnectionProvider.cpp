@@ -41,7 +41,9 @@ int UdpConnectionProvider_t::Begin() {
 #endif
 		Ethernet.begin(_mac, _local_ip);
 	} else {
+#if _DEBUG
 		Serial.println("Using DHCP");
+#endif
 		if (!Ethernet.begin(_mac)) {
 			ThrowException(Exceptions::EC_CP_CANT_TAKE_ADRESS_FROM_DHCP);
 			return 1;
