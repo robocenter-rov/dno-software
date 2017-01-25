@@ -60,12 +60,12 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		Serial.println(count);
 #endif
 
-		main->_movement->SetMotorThrust(0, motor1Thrust);
-		main->_movement->SetMotorThrust(1, motor2Thrust);
-		main->_movement->SetMotorThrust(2, motor3Thrust);
-		main->_movement->SetMotorThrust(3, motor4Thrust);
-		main->_movement->SetMotorThrust(4, motor5Thrust);
-		main->_movement->SetMotorThrust(5, motor6Thrust);
+		main->_movement->SetMotorThrust(0, motor1Thrust / 4096.f);
+		main->_movement->SetMotorThrust(1, motor2Thrust / 4096.f);
+		main->_movement->SetMotorThrust(2, motor3Thrust / 4096.f);
+		main->_movement->SetMotorThrust(3, motor4Thrust / 4096.f);
+		main->_movement->SetMotorThrust(4, motor5Thrust / 4096.f);
+		main->_movement->SetMotorThrust(5, motor6Thrust / 4096.f);
 
 		return 0;
 	}, this);
