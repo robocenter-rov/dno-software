@@ -30,9 +30,9 @@ void setup() {
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 2, 3, 0));
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 5, 1));
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 7, 2));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 8, 9, 3));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 4));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 12, 13, 5));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 8, 9, 3));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 10, 11, 4));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 13, 5));
 
 	Movement_t* movement = new Movement_t(nullptr, motors, nullptr);
 
