@@ -8,6 +8,9 @@ PCA96685Motor_t::PCA96685Motor_t(Adafruit_PWMServoDriver *pwm, unsigned int PINa
 	_PINA = PINa;
 	_PINB = PINb;
 	_pwmNum = pwmNum;
+
+	pinMode(_PINA, OUTPUT);
+	pinMode(_PINB, OUTPUT);
 }
 
 PCA96685Motor_t::~PCA96685Motor_t()
