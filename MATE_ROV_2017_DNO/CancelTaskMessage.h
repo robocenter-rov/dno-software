@@ -1,4 +1,4 @@
-reg_msg_info(10, CancelTask)
+reg_msg_info(100, CancelTask)
 
 reg_msg_begin_fields_list
 
