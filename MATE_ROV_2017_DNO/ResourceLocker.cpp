@@ -3,13 +3,13 @@
 
 int ResourceLocker::_owners[R_MAX_RESOURCE_ID] = {-1};
 
-ResourceLocker::AutoLocker_t::AutoLocker_t(RESOURCE resource, int owner) {
+ResourceLocker::AutoLocker_t::AutoLocker_t(RESOURCE resource) {
 	_resource = resource;
-	_owner = owner;
 	_locking_successfull = false;
 }
 
-bool ResourceLocker::AutoLocker_t::Lock() {
+bool ResourceLocker::AutoLocker_t::Lock(int owner) {
+	_owner = owner;
 	return (_locking_successfull = ResourceLocker::Lock(_resource, _owner));
 }
 

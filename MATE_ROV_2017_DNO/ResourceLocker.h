@@ -17,8 +17,8 @@ public:
 		bool _locking_successfull;
 		int _owner;
 	public:
-		AutoLocker_t(RESOURCE resource, int owner);
-		bool Lock();
+		AutoLocker_t(RESOURCE resource);
+		bool Lock(int owner);
 		int RealOwner() const;
 		~AutoLocker_t();
 	};
