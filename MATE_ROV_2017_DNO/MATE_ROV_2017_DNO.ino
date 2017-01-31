@@ -9,43 +9,67 @@
 #include "UdpConnectionProvider.h"
 #include <Wire.h>
 #include "PCA96685Motor.h"
+#include "MS5803SensorDepth.h"
 
 Main_t* Main;
 
 void setup() {
 	Exceptions::Init();
 	Wire.begin();
+#ifdef _DEBUG
 	Serial.begin(9600);
-
+#endif
 	auto pwm1 = new Adafruit_PWMServoDriver(0x40);
 	auto pwm2 = new Adafruit_PWMServoDriver(0x41);
 
 	pwm1->begin();
-	pwm1->setPWMFreq(1600);
+	pwm1->setPWMFreq(60);
 
 	pwm2->begin();
-	pwm2->setPWMFreq(1600);
-
+	pwm2->setPWMFreq(60);
+	
 	Motors_t* motors = new Motors_t(6);
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 2, 3, 0));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 5, 1));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 7, 2));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 8, 9, 3));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 10, 11, 4));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 13, 5));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 13, 14, 15));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 12, 12, 1));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 12, 12, 2));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 3));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 4));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 5));
 
 	Movement_t* movement = new Movement_t(nullptr, motors, nullptr);
-
+	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(13);
-	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery);
+
+	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
+		new PCA9685ServoMotor_t(pwm1, 7),
+		new PCA9685ServoMotor_t(pwm2, 15)
+	);
+
+	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery);
+
+	SensorRotation_t* rotation_sensor = new SensorRotation_t();
+	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
+
+	SensorManager_t* sensor_manager = new SensorManager_t(rotation_sensor, depth_sensor);
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-	ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, 3000);
+	ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
 	Communicator_t* communicator = new StdCommunicator_t(connection_provider);
 
-	Main = new StdMain_t(communicator, movement, nullptr, periphery_manager);
+	Main = new StdMain_t(communicator, movement, sensor_manager, periphery_manager);
 
-	Main->Begin();
+	if (Main->Begin()) {
+#ifdef _DEBUG
+		Serial.println("Fail at the begin");
+		auto node = Exceptions::GetList().FrontNode();
+		while (node) {
+			Serial.println(node->GetData().GetFullMessage());
+			node = node->GetNext();
+		}
+		Exceptions::Release();
+#endif
+		while (true) {}
+	}
 }
 
 void loop() {
