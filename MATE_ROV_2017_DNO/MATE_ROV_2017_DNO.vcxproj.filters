@@ -50,6 +50,18 @@
     <Filter Include="Communication\RegisterMessages">
       <UniqueIdentifier>{a45f4c0e-8ca1-43c3-b683-db386f548d5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Periphery\Manipulator">
+      <UniqueIdentifier>{18a62e95-75ab-4b98-b570-2401208d5b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Periphery\Camera">
+      <UniqueIdentifier>{7c8390b9-01aa-4a85-b17e-05d9ec040e5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Task\Tasks">
+      <UniqueIdentifier>{687622c0-4872-4b44-9e76-b1af83b3b04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Movement\Motors">
+      <UniqueIdentifier>{584a5188-cd97-4608-a6f2-99878b049328}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="MATE_ROV_2017_DNO.ino" />
@@ -178,12 +190,6 @@
     <ClInclude Include="CantTakeAdressFromDHCPException.h">
       <Filter>Exceptions\RegisterExceptions</Filter>
     </ClInclude>
-    <ClInclude Include="PololuMotor.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="PCA96685Motor.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
     <ClInclude Include="CancelTaskMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
@@ -192,6 +198,48 @@
     </ClInclude>
     <ClInclude Include="SetMotorsThrustMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="MathConstants.h">
+      <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SetManipulatorPositionMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="ManipulatorPeriphery.h">
+      <Filter>Periphery\Manipulator</Filter>
+    </ClInclude>
+    <ClInclude Include="PCA9685ServoMotor.h">
+      <Filter>Periphery</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraPeriphery.h">
+      <Filter>Periphery\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SetFlashlightStateTask.h">
+      <Filter>Task\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="BlinkFlashLightTask.h">
+      <Filter>Task\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="SendSensorDataTask.h">
+      <Filter>Task\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorData.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="StartSendingSensorDataMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="PololuMotor.h">
+      <Filter>Movement\Motors</Filter>
+    </ClInclude>
+    <ClInclude Include="PCA96685Motor.h">
+      <Filter>Movement\Motors</Filter>
+    </ClInclude>
+    <ClInclude Include="MS5803SensorDepth.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+    <ClInclude Include="ReceiveBluetoothMessageTask.h">
+      <Filter>Task\Tasks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -240,11 +288,32 @@
     <ClCompile Include="StdMain.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="PololuMotor.cpp">
-      <Filter>Movement</Filter>
+    <ClCompile Include="ManipulatorPeriphery.cpp">
+      <Filter>Periphery\Manipulator</Filter>
+    </ClCompile>
+    <ClCompile Include="PCA9685ServoMotor.cpp">
+      <Filter>Periphery</Filter>
+    </ClCompile>
+    <ClCompile Include="SetFlashLightStateTask.cpp">
+      <Filter>Task\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="BlinkFlashLightTask.cpp">
+      <Filter>Task\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="SendSensorDataTask.cpp">
+      <Filter>Task\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="PCA96685Motor.cpp">
-      <Filter>Movement</Filter>
+      <Filter>Movement\Motors</Filter>
+    </ClCompile>
+    <ClCompile Include="PololuMotor.cpp">
+      <Filter>Movement\Motors</Filter>
+    </ClCompile>
+    <ClCompile Include="MS5803SensorDepth.cpp">
+      <Filter>Sensors</Filter>
+    </ClCompile>
+    <ClCompile Include="ReceiveBluetoothMessageTask.cpp">
+      <Filter>Task\Tasks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
