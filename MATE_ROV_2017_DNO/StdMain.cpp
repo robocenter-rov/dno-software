@@ -95,6 +95,22 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return 0;
 	}, this);
 
+	_communicator->SetOnStartSendingSensorDataReceive([](void* data, unsigned int tag, unsigned int interval) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+#ifdef _DEBUG
+		Serial.println("StartSendingSensorDataReceive");
+		Serial.print("tag: ");
+		Serial.println(tag);
+		Serial.print("interval: ");
+		Serial.println(interval);
+#endif
+
+		main->AddTask(new SendSensorDataTask_t(tag, main->_sensor_manager, main->_communicator, interval));
+
+		return 0;
+	}, this);
+
 }
 
 int StdMain_t::Begin() {
