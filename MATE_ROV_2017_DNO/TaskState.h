@@ -17,12 +17,13 @@ struct TaskState_t {
 	TASK_STATUS status;
 	TaskState_t(int task_id, int worker_id, TASK_STATUS status) : task_id(task_id), worker_id(worker_id), status(status) {}
 	virtual ByteArray_t ToByteArray() const {
+#pragma pack(push, 1)
 		struct {
 			unsigned int task_id;
 			unsigned int worker_id;
 			TASK_STATUS status;
 		} buffer;
-
+#pragma pack(pop)
 		buffer.task_id = task_id;
 		buffer.worker_id = worker_id;
 		buffer.status = status;
@@ -48,12 +49,14 @@ struct BlinkFlashlightTaskState_t : public TaskState_t {
 	BlinkFlashlightTaskState_t(unsigned int task_id, unsigned int worker_id, unsigned int blinked_count)
 		: TaskState_t(task_id, worker_id, TS_BLINKING), blinked_count(blinked_count) {}
 	ByteArray_t ToByteArray() const override {
+#pragma pack(push, 1)
 		struct {
 			unsigned int task_id;
 			unsigned int worker_id;
 			TASK_STATUS status;
 			unsigned int blinked_count;
 		} buffer;
+#pragma pack(pop)
 
 		buffer.task_id = task_id;
 		buffer.worker_id = worker_id;
