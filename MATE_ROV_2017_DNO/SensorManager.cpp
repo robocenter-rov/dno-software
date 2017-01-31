@@ -12,3 +12,10 @@ float SensorManager_t::GetDepth() const {
 SensorRotation_t::Data_t SensorManager_t::GetRotation() const {
 	return _sensorRotation->GetRotation();
 }
+
+SensorData_t SensorManager_t::GetSensorData() const {
+	SensorData_t res;
+	res.rotationData = GetRotation();
+	res.depthData = GetDepth();
+	return res;
+}

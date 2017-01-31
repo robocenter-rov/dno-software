@@ -13,5 +13,7 @@ public:
 	float GetDepth() const;
 	SensorRotation_t::Data_t GetRotation() const;
 
+	SensorData_t GetSensorData() const;
+
 	void Update();
 };
