@@ -1,4 +1,8 @@
 #include "StdMain.h"
+#include "MathConstants.h"
+#include "BlinkFlashLightTask.h"
+#include "SetFlashlightStateTask.h"
+#include "SendSensorDataTask.h"
 
 StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	SensorManager_t* sensor_manager, PeripheryManager_t* periphery_manager)
