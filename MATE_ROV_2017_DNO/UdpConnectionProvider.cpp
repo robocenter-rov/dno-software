@@ -78,7 +78,10 @@ int UdpConnectionProvider_t::Connected() {
 int UdpConnectionProvider_t::BeginPacket() {
 
 #ifdef _DEBUG
-	Serial.println("Begin packet");
+	Serial.println("Begin packet to");
+	_remote_ip.printTo(Serial);
+	Serial.print(":");
+	Serial.println(_remote_port);
 #endif
 
 	_udp.beginPacket(_remote_ip, _remote_port);
@@ -141,6 +144,14 @@ int UdpConnectionProvider_t::EndPacket() {
 }
 
 int UdpConnectionProvider_t::Send(void* buffer, unsigned int size) {
+
+#ifdef _DEBUG
+	Serial.print("Sending packet to ");
+	_remote_ip.printTo(Serial);
+	Serial.print(":");
+	Serial.println(_remote_port);
+#endif
+
 	_udp.beginPacket(_remote_ip, _remote_port);
 	_udp.write(static_cast<uint8_t*>(buffer), size);
 	_udp.endPacket();
@@ -170,6 +181,7 @@ int UdpConnectionProvider_t::Receive(unsigned int& readed_bytes) {
 			Serial.print(int(static_cast<char*>(_buffer)[i]));
 			Serial.print(' ');
 		}
+
 		Serial.println();
 		delay(200);
 #endif
