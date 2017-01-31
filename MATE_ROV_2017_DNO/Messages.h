@@ -4,3 +4,4 @@
 #include "SetMotorsThrustMessage.h"
 #include "SetManipulatorPositionMessage.h"
 #include "StartSendingSensorDataMessage.h"
+#include "StartBluetoothReadingMessage.h"

@@ -3,6 +3,7 @@
 #include "BlinkFlashLightTask.h"
 #include "SetFlashlightStateTask.h"
 #include "SendSensorDataTask.h"
+#include "ReceiveBluetoothMessageTask.h"
 
 StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	SensorManager_t* sensor_manager, PeripheryManager_t* periphery_manager)
@@ -115,6 +116,19 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return 0;
 	}, this);
 
+	_communicator->SetOnStartBlutoothReadingReceive([](void* data, unsigned int tag) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+#ifdef _DEBUG
+		Serial.println("StartBlutoothReadingReceive");
+		Serial.print("tag: ");
+		Serial.println(tag);
+#endif
+
+		main->AddTask(new ReceiveBluetoothMessageTask_t(tag));
+
+		return 0;
+	}, this);
 }
 
 int StdMain_t::Begin() {
