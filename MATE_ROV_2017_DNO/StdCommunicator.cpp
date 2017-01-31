@@ -158,10 +158,7 @@ int StdCommunicator_t::Update() {
 }
 
 int StdCommunicator_t::Begin() {
-	if(!_connection_provider->Begin()) {
-		return 1;
-	}
-	return 0;
+	return _connection_provider->Begin();
 }
 
 int StdCommunicator_t::Connected() {
