@@ -10,6 +10,10 @@ public:
 		float AngleVelocityY;
 		float AngleVelocityZ;
 
+		Data_t() {
+			RotationX = RotationY = RotationZ = AngleVelocityX = AngleVelocityY = AngleVelocityZ = 0;
+		}
+
 		Data_t(float r_x, float r_y, float r_z, float v_x, float v_y, float v_z) {
 			RotationX = r_x;
 			RotationY = r_y;
