@@ -2,4 +2,5 @@
 #include "BlinkFlashlightMessage.h"
 #include "CancelTaskMessage.h"
 #include "SetMotorsThrustMessage.h"
+#include "SetManipulatorPositionMessage.h"
 #include "StartSendingSensorDataMessage.h"
