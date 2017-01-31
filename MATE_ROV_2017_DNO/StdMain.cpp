@@ -77,6 +77,24 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return 0;
 	}, this);
+
+	_communicator->SetOnSetManipulatorPositionReceive([](void* data, unsigned int handPosition, unsigned int armPosition) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+#ifdef _DEBUG
+		Serial.println("SetManipulatorPositionReceive");
+		Serial.print("handPosition: ");
+		Serial.println(handPosition);
+		Serial.print("armPosition: ");
+		Serial.println(armPosition);
+#endif
+
+		main->_periphery_manager->GetManipulator()->SetHandAngle(constrain(handPosition, 0, 4095) / 4095.f * PI2);
+		main->_periphery_manager->GetManipulator()->SetArmAngle(constrain(armPosition, 0, 4095) / 4095.f * PI2);
+
+		return 0;
+	}, this);
+
 }
 
 int StdMain_t::Begin() {
