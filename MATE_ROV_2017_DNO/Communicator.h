@@ -1,6 +1,7 @@
 #pragma once
 #include "TaskState.h"
 #include "Exceptions.h"
+#include "SensorData.h"
 
 class Communicator_t {
 protected:
@@ -47,6 +48,7 @@ public:
 
 	virtual int SendException(const Exceptions::Exception_t* exception) = 0;
 	virtual int SendTaskState(const TaskState_t* task_state) = 0;
+	virtual int SendSensorData(const SensorData_t* sensor_data) = 0;
 
 	virtual int Begin() = 0;
 	virtual int Connected() = 0;

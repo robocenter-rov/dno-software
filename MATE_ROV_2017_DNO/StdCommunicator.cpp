@@ -1,5 +1,6 @@
 #include "StdCommunicator.h"
 #include "Exceptions.h"
+#include "MathConstants.h"
 
 #pragma pack(push, 1)
 
@@ -124,6 +125,46 @@ int StdCommunicator_t::SendTaskState(const TaskState_t* task_state) {
 	_connection_provider->BeginPacket();
 	_connection_provider->Write(1);
 	_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize());
+	_connection_provider->EndPacket();
+	return 0;
+}
+
+int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
+	if (!Connected()) {
+		ThrowException(Exceptions::EC_SC_NOT_CONNECTED);
+		return 1;
+	}
+
+#ifdef _DEBUG
+
+	Serial.println("Sending sensor data: ");
+
+	Serial.print("Rotation X");
+	Serial.println(sensor_data->rotationData.RotationX);
+	Serial.print("Rotation Y");
+	Serial.println(sensor_data->rotationData.RotationY);
+	Serial.print("Rotation Z");
+	Serial.println(sensor_data->rotationData.RotationZ);
+
+#endif
+
+#pragma pack(push, 1)
+	struct {
+		int Rx;
+		int Ry;
+		int Rz;
+		int depth;
+	} sendingData{
+		sensor_data->rotationData.RotationX / PI2 * (1 << 15),
+		sensor_data->rotationData.RotationY / PI2 * (1 << 15),
+		sensor_data->rotationData.RotationZ / PI2 * (1 << 15),
+		sensor_data->depthData
+	};
+#pragma pack(pop)
+
+	_connection_provider->BeginPacket();
+	_connection_provider->Write(2);
+	_connection_provider->Write(&sendingData, sizeof(sendingData));
 	_connection_provider->EndPacket();
 	return 0;
 }

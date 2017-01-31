@@ -27,6 +27,7 @@ public:
 
 	int SendException(const Exceptions::Exception_t* exception) override;
 	int SendTaskState(const TaskState_t* task_state) override;
+	int SendSensorData(const SensorData_t* sensor_data) override;
 
 	int Update() override;
 	int Begin() override;
