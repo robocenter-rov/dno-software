@@ -10,8 +10,7 @@ enum TASK_STATUS {
 	TS_BLINKING,
 	TS_SENDING,
 
-	TS_BLUETOOTH_WAITING_FOR_CONNECTION,
-	TS_BLUETOOTH_DATA_READED
+	TS_BLUETOOTH_WAITING_FOR_CONNECTION
 };
 
 struct TaskState_t {
@@ -81,9 +80,13 @@ struct BluetoothWaitingForConnectionTaskState_t : public TaskState_t {
 
 struct BluetoothDataReadedTaskState_t : public TaskState_t {
 	char message[7];
-	BluetoothDataReadedTaskState_t(unsigned int task_id, unsigned int worker_id, char* msg) : TaskState_t(task_id, worker_id, TS_BLUETOOTH_DATA_READED) {
-		memcpy(message, msg, 7);
+
+	BluetoothDataReadedTaskState_t(unsigned int task_id, unsigned int worker_id, char* msg) : TaskState_t(task_id, worker_id, TS_OK) {
+		if (msg) {
+			memcpy(message, msg, 7);
+		}
 	}
+
 	ByteArray_t ToByteArray() const override {
 #pragma pack(push, 1)
 		struct {
