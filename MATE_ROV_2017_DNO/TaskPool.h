@@ -28,14 +28,16 @@ private:
 	int _last_added_task_worker_id;
 
 	inline bool check_worker_id(int worker_id) const;
-	static void UpdateTask(WorkerQueueNode_t* worker);
+	void UpdateTask(WorkerQueueNode_t* worker);
 
 	static void MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, WorkerQueueNode_t* worker);
 	static void RemoveTask(WorkerQueueNode_t* worker);
+	void MakeWorkerFree(WorkerQueueNode_t* worker);
+	void MakeWorkerAwait(WorkerQueueNode_t* worker);
 public:
 	TaskPool_t(unsigned int pool_size);
 
-	void Update() const;
+	void Update();
 
 	int AddTask(Task_t* task, int worker_id = -1);
 	int FreeWorker(int worker_id);

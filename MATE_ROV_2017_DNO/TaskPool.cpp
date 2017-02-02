@@ -17,11 +17,11 @@ void TaskPool_t::UpdateTask(WorkerQueueNode_t* worker) {
 
 		LOGLN("Task finished, removing task");
 
-		RemoveTask(worker);
+		MakeWorkerAwait(worker);
 	}
 }
 
-void TaskPool_t::Update() const {
+void TaskPool_t::Update() {
 	for (WorkerQueueNode_t* node = _busy_workers; node != nullptr; ) {
 		WorkerQueueNode_t* next_node = node->next_node;
 
@@ -69,6 +69,36 @@ void TaskPool_t::RemoveTask(WorkerQueueNode_t* worker) {
 
 	delete worker->task;
 	worker->task = nullptr;
+}
+
+void TaskPool_t::MakeWorkerFree(WorkerQueueNode_t* worker) {
+	if (worker->status == WS_FREE) {
+		return;
+	}
+
+	RemoveTask(worker);
+
+	LOG("Move worker: ");
+	LOG(worker->id);
+	if (worker->status == WS_BUSY) {
+		LOGLN(" from busy to free query");
+		MoveWorker(_busy_workers, _free_workers, worker);
+	} else {
+		LOGLN(" from awaiting to free query");
+		MoveWorker(_awaiting_workers, _free_workers, worker);
+	}
+
+	worker->status = WS_FREE;
+}
+
+void TaskPool_t::MakeWorkerAwait(WorkerQueueNode_t* worker) {
+	if (worker->status == WS_FREE || worker->status == WS_AWAIT) {
+		return;
+	}
+
+	RemoveTask(worker);
+
+	MoveWorker(_busy_workers, _awaiting_workers, worker);
 }
 
 TaskPool_t::TaskPool_t(unsigned int pool_size) {
@@ -153,21 +183,7 @@ int TaskPool_t::FreeWorker(int worker_id) {
 		return 1;
 	}
 
-	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];
-
-	if (current_worker->status == WS_FREE) {
-		return 0;
-	}
-
-	RemoveTask(current_worker);
-
-	if (current_worker->status == WS_BUSY) {
-		MoveWorker(_busy_workers, _free_workers, current_worker);
-	} else {
-		MoveWorker(_awaiting_workers, _free_workers, current_worker);
-	}
-
-	current_worker->status = WS_FREE;
+	MakeWorkerFree(&_worker_nodes[worker_id]);
 
 	return 0;
 }
@@ -178,15 +194,7 @@ int TaskPool_t::CancelWorker(int worker_id) {
 		return 1;
 	}
 
-	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];
-
-	if (current_worker->status == WS_FREE || current_worker->status == WS_AWAIT) {
-		return 0;
-	}
-
-	RemoveTask(current_worker);
-
-	MoveWorker(_busy_workers, _awaiting_workers, current_worker);
+	MakeWorkerAwait(&_worker_nodes[worker_id]);
 
 	return 0;
 }
