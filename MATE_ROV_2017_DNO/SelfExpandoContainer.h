@@ -8,16 +8,23 @@ private:
 	unsigned int _size;
 	SelfExpandoContainer_t(const SelfExpandoContainer_t& e) : _data(nullptr), _size(0) {}
 public:
-	SelfExpandoContainer_t() : _data(nullptr), _size(0) {}
+	SelfExpandoContainer_t() : _data(nullptr), _size(0) {
+		LOGLN("New SelfExpandoContainer");
+	}
 
 	template<typename K>
 	SelfExpandoContainer_t(const K& e) {
 		_size = sizeof(K);
 		_data = malloc(_size);
+		LOG("New SelfExpandoContainer with size: ");
+		LOGLN(sizeof(K));
 		memcpy(_data, &e, _size);
 	}
 
 	~SelfExpandoContainer_t() {
+
+		LOGLN("Free SelfExpandoContainer");
+
 		if (_data) {
 			free(_data);
 		}
@@ -35,7 +42,7 @@ public:
 			LOG(_size);
 			LOG(" bytes, to ");
 			LOG(sizeof(K));
-			LOG(" bytes");
+			LOGLN(" bytes");
 
 			_data = static_cast<T*>(realloc(_data, sizeof(K)));
 			_size = sizeof(K);

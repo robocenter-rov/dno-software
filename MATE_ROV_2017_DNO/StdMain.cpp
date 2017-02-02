@@ -17,6 +17,8 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("SetOnSetFlashlightStateReceive");
+		LOG("worker_id: ");
+		LOGLN(worker_id);
 		LOG("tag: ");
 		LOGLN(tag);
 		LOG("state: ");
@@ -29,6 +31,8 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("SetOnBlinkFlashlightReceive");
+		LOG("worker_id: ");
+		LOGLN(worker_id);
 		LOG("tag: ");
 		LOGLN(tag);
 		LOG("count: ");
@@ -94,6 +98,8 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("StartSendingSensorDataReceive");
+		LOG("worker_id: ");
+		LOGLN(worker_id);
 		LOG("tag: ");
 		LOGLN(tag);
 		LOG("interval: ");
@@ -108,6 +114,8 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("StartBlutoothReadingReceive");
+		LOG("worker_id: ");
+		LOGLN(worker_id);
 		LOG("tag: ");
 		LOGLN(tag);
 
