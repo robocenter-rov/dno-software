@@ -1,5 +1,6 @@
 #pragma once
 #include "ResourceLocker.h"
+#include "Task.h"
 
 class ReceiveBluetoothMessageTask_t : public Task_t {
 private:
