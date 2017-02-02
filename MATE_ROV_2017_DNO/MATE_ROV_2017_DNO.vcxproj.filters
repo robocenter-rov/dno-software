@@ -241,6 +241,12 @@
     <ClInclude Include="ReceiveBluetoothMessageTask.h">
       <Filter>Task\Tasks</Filter>
     </ClInclude>
+    <ClInclude Include="StartBluetoothReadingMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="GetTaskStateMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
