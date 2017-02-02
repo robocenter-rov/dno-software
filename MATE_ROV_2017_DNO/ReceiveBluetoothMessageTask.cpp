@@ -27,9 +27,10 @@ bool ReceiveBluetoothMessageTask_t::UpdateState(SelfExpandoContainer_t<TaskState
 		if (_bytes_readed == 7) {
 			out_state = BluetoothDataReadedTaskState_t(_id, _worker_id, _message_buffer);
 			return true;
-		} else {
-			out_state = BluetoothWaitingForConnectionTaskState_t(_id, _worker_id);
 		}
 	}
+
+	out_state = BluetoothWaitingForConnectionTaskState_t(_id, _worker_id);
+
 	return false;
 }
