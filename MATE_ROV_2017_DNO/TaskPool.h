@@ -25,7 +25,7 @@ private:
 	static void MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, WorkerQueueNode_t* worker);
 	void RemoveTask(WorkerQueueNode_t* worker);
 public:
-	TaskPool_t(unsigned int worker_id);
+	TaskPool_t(unsigned int pool_size);
 
 	void Update();
 
