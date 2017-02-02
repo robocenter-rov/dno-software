@@ -15,5 +15,5 @@ public:
 	virtual bool LockNeededResources(RESOURCE& out_locked_resource) { return true; }
 	virtual bool UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) = 0;
 	unsigned int GetId() const { return _id; }
-	void SetWorkerId(unsigned int worker_id);
+	void SetWorkerId(int worker_id);
 };

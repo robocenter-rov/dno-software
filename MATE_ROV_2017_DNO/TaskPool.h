@@ -19,7 +19,7 @@ private:
 
 	int _last_added_task_worker_id;
 
-	inline bool check_worker_id(unsigned int worker_id) const;
+	inline bool check_worker_id(int worker_id) const;
 	void UpdateTask(WorkerQueueNode_t* worker);
 
 	static void MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, WorkerQueueNode_t* worker);
@@ -30,9 +30,9 @@ public:
 	void Update();
 
 	int AddTask(Task_t* task);
-	int FreeWorker(unsigned int worker_id);
-	void GetTaskState(unsigned int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const;
-	TaskState_t* GetTaskStatePtr(unsigned int worker_id) const;
+	int FreeWorker(int worker_id);
+	void GetTaskState(int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const;
+	TaskState_t* GetTaskStatePtr(int worker_id) const;
 	void GetLastAddedTaskState(SelfExpandoContainer_t<TaskState_t>& out_state) const;
 	TaskState_t* GetLastAddedTaskStatePtr() const;
 	unsigned int GetLastAddedTaskWorkerId() const;

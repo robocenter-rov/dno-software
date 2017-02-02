@@ -41,7 +41,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager));
 	}, this);
 
-	_communicator->SetOnCancelTaskReceive([](void* data, unsigned int worker_id) -> int {
+	_communicator->SetOnCancelTaskReceive([](void* data, int worker_id) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 #ifdef _DEBUG
@@ -130,7 +130,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return 0;
 	}, this);
 
-	_communicator->SetOnGetTaskStateReceive([](void* data, unsigned int worker_id) -> int {
+	_communicator->SetOnGetTaskStateReceive([](void* data, int worker_id) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 #ifdef _DEBUG
@@ -152,7 +152,7 @@ int StdMain_t::Begin() {
 	return _communicator->Begin();
 }
 
-int StdMain_t::SendTaskState(unsigned int worker_id) const {
+int StdMain_t::SendTaskState(int worker_id) const {
 
 #ifdef _DEBUG
 	Serial.print("Sending state of worker, id: ");

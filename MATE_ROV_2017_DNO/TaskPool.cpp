@@ -1,7 +1,7 @@
 #include "TaskPool.h"
 #include "Exceptions.h"
 
-inline bool TaskPool_t::check_worker_id(unsigned int worker_id) const {
+inline bool TaskPool_t::check_worker_id(int worker_id) const {
 	return worker_id < _pool_size;
 }
 
@@ -167,7 +167,7 @@ int TaskPool_t::AddTask(Task_t* task) {
 	return 0;
 }
 
-int TaskPool_t::FreeWorker(unsigned int worker_id) {
+int TaskPool_t::FreeWorker(int worker_id) {
 	if (!check_worker_id(worker_id)) {
 		ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
 		return 1;
@@ -187,14 +187,14 @@ int TaskPool_t::FreeWorker(unsigned int worker_id) {
 	return 0;
 }
 
-void TaskPool_t::GetTaskState(unsigned int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const {
+void TaskPool_t::GetTaskState(int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const {
 	if (!check_worker_id(worker_id)) {
 		return;
 	}
 	out_state = _worker_nodes[worker_id].state;
 }
 
-TaskState_t* TaskPool_t::GetTaskStatePtr(unsigned int worker_id) const {
+TaskState_t* TaskPool_t::GetTaskStatePtr(int worker_id) const {
 	if (!check_worker_id(worker_id)) {
 		return nullptr;
 	}

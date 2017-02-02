@@ -16,14 +16,14 @@ enum TASK_STATUS {
 struct TaskState_t {
 	virtual ~TaskState_t() {}
 	unsigned int task_id;
-	unsigned int worker_id;
+	int worker_id;
 	TASK_STATUS status;
 	TaskState_t(int task_id, int worker_id, TASK_STATUS status) : task_id(task_id), worker_id(worker_id), status(status) {}
 	virtual ByteArray_t ToByteArray() const {
 #pragma pack(push, 1)
 		struct {
 			unsigned int task_id;
-			unsigned int worker_id;
+			int worker_id;
 			TASK_STATUS status;
 		} buffer;
 #pragma pack(pop)
@@ -40,22 +40,22 @@ struct TaskState_t {
 };
 
 struct OkTaskState_t : public TaskState_t {
-	OkTaskState_t(unsigned int task_id, unsigned int worker_id) : TaskState_t(task_id, worker_id, TS_OK) {}
+	OkTaskState_t(unsigned int task_id, int worker_id) : TaskState_t(task_id, worker_id, TS_OK) {}
 };
 
 struct CancelledTaskState_t : public TaskState_t {
-	CancelledTaskState_t(unsigned int task_id, unsigned int worker_id) : TaskState_t(task_id, worker_id, TS_CANCELLED) {}
+	CancelledTaskState_t(unsigned int task_id, int worker_id) : TaskState_t(task_id, worker_id, TS_CANCELLED) {}
 };
 
 struct BlinkFlashlightTaskState_t : public TaskState_t {
 	unsigned int blinked_count;
-	BlinkFlashlightTaskState_t(unsigned int task_id, unsigned int worker_id, unsigned int blinked_count)
+	BlinkFlashlightTaskState_t(unsigned int task_id, int worker_id, unsigned int blinked_count)
 		: TaskState_t(task_id, worker_id, TS_BLINKING), blinked_count(blinked_count) {}
 	ByteArray_t ToByteArray() const override {
 #pragma pack(push, 1)
 		struct {
 			unsigned int task_id;
-			unsigned int worker_id;
+			int worker_id;
 			TASK_STATUS status;
 			unsigned int blinked_count;
 		} buffer;
@@ -71,17 +71,17 @@ struct BlinkFlashlightTaskState_t : public TaskState_t {
 };
 
 struct SendSensorDataTaskState_t : public TaskState_t {
-	SendSensorDataTaskState_t(unsigned int task_id, unsigned int worker_id) : TaskState_t(task_id, worker_id, TS_BLINKING) {}
+	SendSensorDataTaskState_t(unsigned int task_id, int worker_id) : TaskState_t(task_id, worker_id, TS_BLINKING) {}
 };
 
 struct BluetoothWaitingForConnectionTaskState_t : public TaskState_t {
-	BluetoothWaitingForConnectionTaskState_t(unsigned int task_id, unsigned int worker_id) : TaskState_t(task_id, worker_id, TS_BLUETOOTH_WAITING_FOR_CONNECTION) {}
+	BluetoothWaitingForConnectionTaskState_t(unsigned int task_id, int worker_id) : TaskState_t(task_id, worker_id, TS_BLUETOOTH_WAITING_FOR_CONNECTION) {}
 };
 
 struct BluetoothDataReadedTaskState_t : public TaskState_t {
 	char message[7];
 
-	BluetoothDataReadedTaskState_t(unsigned int task_id, unsigned int worker_id, char* msg) : TaskState_t(task_id, worker_id, TS_OK) {
+	BluetoothDataReadedTaskState_t(unsigned int task_id, int worker_id, char* msg) : TaskState_t(task_id, worker_id, TS_OK) {
 		if (msg) {
 			memcpy(message, msg, 7);
 		}
@@ -91,7 +91,7 @@ struct BluetoothDataReadedTaskState_t : public TaskState_t {
 #pragma pack(push, 1)
 		struct {
 			unsigned int task_id;
-			unsigned int worker_id;
+			int worker_id;
 			TASK_STATUS status;
 			char message[7];
 		} buffer;
