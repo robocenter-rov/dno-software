@@ -1,7 +1,7 @@
 #include "ResourceLocker.h"
 #include "Arduino.h"
 
-int ResourceLocker::_owners[R_MAX_RESOURCE_ID] = {-1};
+int ResourceLocker::_owners[R_MAX_RESOURCE_ID];
 
 ResourceLocker::AutoLocker_t::AutoLocker_t(RESOURCE resource) {
 	_resource = resource;
@@ -20,6 +20,12 @@ int ResourceLocker::AutoLocker_t::RealOwner() const {
 ResourceLocker::AutoLocker_t::~AutoLocker_t() {
 	if (_locking_successfull) {
 		Release(_resource);
+	}
+}
+
+void ResourceLocker::Init() {
+	for (int i = 0; i < R_MAX_RESOURCE_ID; i++) {
+		_owners[i] = -1;
 	}
 }
 

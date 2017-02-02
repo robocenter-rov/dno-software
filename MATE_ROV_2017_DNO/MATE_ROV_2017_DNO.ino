@@ -14,6 +14,7 @@
 Main_t* Main;
 
 void setup() {
+	ResourceLocker::Init();
 	Exceptions::Init();
 	Wire.begin();
 #ifdef _DEBUG

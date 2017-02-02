@@ -24,6 +24,7 @@ public:
 		~AutoLocker_t();
 	};
 
+	static void Init();
 	static bool Lock(RESOURCE resource, int owner);
 	static void Release(RESOURCE resource);
 	static bool IsLocked(RESOURCE resource);
