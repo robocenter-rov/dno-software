@@ -15,7 +15,7 @@ bool SendSensorDataTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_
 	if (millis() - _last_send_time > _interval) {
 		SensorData_t t = _sensor_manager->GetSensorData();
 		_communicator->SendSensorData(&t);
-		out_state = SendSensorDataTaskState_t(_id);
+		out_state = SendSensorDataTaskState_t(_tag);
 		_last_send_time = millis();
 	}
 

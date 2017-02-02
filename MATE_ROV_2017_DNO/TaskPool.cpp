@@ -8,8 +8,8 @@ inline bool TaskPool_t::check_worker_id(int worker_id) const {
 void TaskPool_t::UpdateTask(WorkerQueueNode_t* worker) {
 	Task_t* task = worker->task;
 
-	LOG("Update task_id: ");
-	LOG(task->GetId());
+	LOG("Update task_tag: ");
+	LOG(task->GetTag());
 	LOG(", worker_id: ");
 	LOGLN(worker->id);
 
@@ -62,8 +62,8 @@ void TaskPool_t::MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, Wo
 }
 
 void TaskPool_t::RemoveTask(WorkerQueueNode_t* worker) {
-	LOG("Task removed, id: ");
-	LOG(worker->task->GetId());
+	LOG("Task removed, tag: ");
+	LOG(worker->task->GetTag());
 	LOG(", worker_id: ");
 	LOGLN(worker->id);
 
@@ -119,15 +119,15 @@ TaskPool_t::TaskPool_t(unsigned int pool_size) {
 }
 
 int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
-	LOG("Adding task, id: ");
-	LOGLN(task->GetId());
+	LOG("Adding task, tag: ");
+	LOGLN(task->GetTag());
 
 	WorkerQueueNode_t* current_worker = nullptr;
 
 	if (worker_id < 0) {
 		if (!_free_workers) {
-			LOG("Failed add task: Pool is busy, task_id: ");
-			LOGLN(task->GetId());
+			LOG("Failed add task: Pool is busy, task_tag: ");
+			LOGLN(task->GetTag());
 
 			ThrowException(Exceptions::EC_TP_FULL);
 			return 1;

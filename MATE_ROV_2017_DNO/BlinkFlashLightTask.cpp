@@ -24,12 +24,12 @@ bool BlinkFlashlightTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out
 		_last_change_time = current_time;
 		_change_count++;
 		if (_change_count / 2 >= _blink_count) {
-			out_state = OkTaskState_t(_id);
+			out_state = OkTaskState_t(_tag);
 			return true;
 		}
 	}
 
-	out_state = BlinkFlashlightTaskState_t(_id, _change_count / 2);
+	out_state = BlinkFlashlightTaskState_t(_tag, _change_count / 2);
 
 	return false;
 }

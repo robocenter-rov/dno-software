@@ -17,6 +17,6 @@ bool SetFlashlightStateTask_t::LockNeededResources(RESOURCE& out_locked_resource
 
 bool SetFlashlightStateTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) {
 	_periphery_manager->SetFlashlightState(_flashlight_state);
-	out_state = OkTaskState_t(_id);
+	out_state = OkTaskState_t(_tag);
 	return true;
 }
