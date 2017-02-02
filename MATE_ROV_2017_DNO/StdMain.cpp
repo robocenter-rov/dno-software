@@ -13,7 +13,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_sensor_manager = sensor_manager;
 	_periphery_manager = periphery_manager;
 
-	_communicator->SetOnSetFlashlightStateReceive([](void* data, unsigned int tag, byte state) -> int {
+	_communicator->SetOnSetFlashlightStateReceive([](void* data, int worker_id, unsigned int tag, byte state) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("SetOnSetFlashlightStateReceive");
@@ -22,10 +22,10 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		LOG("state: ");
 		LOGLN(state);
 
-		return main->AddTask(new SetFlashlightStateTask_t(tag, state, main->_periphery_manager));
+		return main->AddTask(new SetFlashlightStateTask_t(tag, state, main->_periphery_manager), worker_id);
 	}, this);
 
-	_communicator->SetOnBlinkFlashlightReceive([](void* data, unsigned int tag, unsigned int count) -> int {
+	_communicator->SetOnBlinkFlashlightReceive([](void* data, int worker_id, unsigned int tag, unsigned int count) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("SetOnBlinkFlashlightReceive");
@@ -34,7 +34,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		LOG("count: ");
 		LOGLN(count);
 
-		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager));
+		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager), worker_id);
 	}, this);
 
 	_communicator->SetOnFreeWorkerReceive([](void* data, int worker_id) -> int {
@@ -90,7 +90,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return 0;
 	}, this);
 
-	_communicator->SetOnStartSendingSensorDataReceive([](void* data, unsigned int tag, unsigned int interval) -> int {
+	_communicator->SetOnStartSendingSensorDataReceive([](void* data, int worker_id, unsigned int tag, unsigned int interval) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("StartSendingSensorDataReceive");
@@ -99,19 +99,19 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		LOG("interval: ");
 		LOGLN(interval);
 
-		main->AddTask(new SendSensorDataTask_t(tag, main->_sensor_manager, main->_communicator, interval));
+		main->AddTask(new SendSensorDataTask_t(tag, main->_sensor_manager, main->_communicator, interval), worker_id);
 
 		return 0;
 	}, this);
 
-	_communicator->SetOnStartBlutoothReadingReceive([](void* data, unsigned int tag) -> int {
+	_communicator->SetOnStartBlutoothReadingReceive([](void* data, int worker_id, unsigned int tag) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("StartBlutoothReadingReceive");
 		LOG("tag: ");
 		LOGLN(tag);
 
-		main->AddTask(new ReceiveBluetoothMessageTask_t(tag));
+		main->AddTask(new ReceiveBluetoothMessageTask_t(tag), worker_id);
 
 		return 0;
 	}, this);
@@ -148,8 +148,8 @@ int StdMain_t::SendWorkerState(int worker_id) const {
 	return _communicator->SendWorkerState(task_state_ptr, worker_id, worker_status);
 }
 
-int StdMain_t::AddTask(Task_t* task) {
-	if (_task_pool.AddTask(task)) {
+int StdMain_t::AddTask(Task_t* task, int worker_id = -1) {
+	if (_task_pool.AddTask(task, worker_id)) {
 		if (_communicator->SendException(Exceptions::GetLastException())) {
 			return 1;
 		}
@@ -157,7 +157,6 @@ int StdMain_t::AddTask(Task_t* task) {
 	} else {
 		TaskState_t* task_state_ptr;
 		WORKER_STATUS worker_status;
-		int worker_id;
 		_task_pool.GetLastAddedWorkerState(task_state_ptr, worker_id, worker_status);
 		return _communicator->SendWorkerState(task_state_ptr, worker_id, worker_status);
 	}
