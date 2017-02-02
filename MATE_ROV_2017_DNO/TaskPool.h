@@ -29,7 +29,7 @@ public:
 
 	void Update();
 
-	int AddTask(Task_t* task);
+	int AddTask(Task_t* task, int worker_id = -1);
 	int FreeWorker(int worker_id);
 	void GetTaskState(int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const;
 	TaskState_t* GetTaskStatePtr(int worker_id) const;

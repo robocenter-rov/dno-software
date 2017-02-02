@@ -115,26 +115,41 @@ TaskPool_t::TaskPool_t(unsigned int pool_size) {
 	_last_added_task_worker_id = 0;
 }
 
-int TaskPool_t::AddTask(Task_t* task) {
+int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
 
 #ifdef _DEBUG
 	Serial.print("Adding task, id: ");
 	Serial.println(task->GetId());
 #endif
 
-	if (!_free_workers) {
+	WorkerQueueNode_t* current_worker = nullptr;
+
+	if (worker_id < 0) {
+		if (!_free_workers) {
 
 #ifdef _DEBUG
-		Serial.print("Failed add task: Pool is busy, task_id: ");
-		Serial.println(task->GetId());
-		delay(200);
+			Serial.print("Failed add task: Pool is busy, task_id: ");
+			Serial.println(task->GetId());
+			delay(200);
 #endif
 
-		ThrowException(Exceptions::EC_TP_FULL);
-		return 1;
-	}
+			ThrowException(Exceptions::EC_TP_FULL);
+			return 1;
+		}
 
-	WorkerQueueNode_t* current_worker = _free_workers;
+		current_worker = _free_workers;
+	} else {
+		if (!check_worker_id(worker_id)) {
+			ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
+			return 1;
+		}
+		if (_worker_nodes[worker_id].task != nullptr) {
+			ThrowException(Exceptions::EC_TP_WORKER_IS_BUSY);
+			return 1;
+		}
+
+		current_worker = &_worker_nodes[worker_id];
+	}
 
 	RESOURCE locked_resource;
 	if (task->LockNeededResources(locked_resource)) {
