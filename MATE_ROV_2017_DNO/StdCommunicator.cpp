@@ -114,6 +114,11 @@ int StdCommunicator_t::SendTaskState(const TaskState_t* task_state) {
 		return 1;
 	}
 
+	if (!task_state) {
+		ThrowException(Exceptions::EC_BAD_ARGS);
+		return 1;
+	}
+
 #ifdef _DEBUG
 
 	Serial.print("Sending task state: ");

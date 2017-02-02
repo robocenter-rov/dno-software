@@ -1,4 +1,5 @@
 reg_except(0, NONE, "Everything is ok")
+reg_except(1, BAD_ARGS, "Bad arguments")
 
 //UDPConnectionProvider
 
