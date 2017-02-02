@@ -37,7 +37,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager));
 	}, this);
 
-	_communicator->SetOnCancelTaskReceive([](void* data, int worker_id) -> int {
+	_communicator->SetOnFreeWorkerReceive([](void* data, int worker_id) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
 		LOGLN("SetOnCancelTaskReceive");
