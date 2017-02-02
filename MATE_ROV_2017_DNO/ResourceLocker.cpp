@@ -1,3 +1,4 @@
+#include "Debug.h"
 #include "ResourceLocker.h"
 #include "Arduino.h"
 

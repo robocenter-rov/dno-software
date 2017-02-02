@@ -1,3 +1,4 @@
+#include "Debug.h"
 #include "PololuMotor.h"
 
 PololuMotor_t::PololuMotor_t(unsigned char INA, unsigned char INB) : _md(INA, INB, 0, 0, 0, 0, 0, 0) {

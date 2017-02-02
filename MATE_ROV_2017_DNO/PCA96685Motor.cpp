@@ -1,3 +1,4 @@
+#include "Debug.h"
 #include "PCA96685Motor.h"
 
 PCA96685Motor_t::PCA96685Motor_t(Adafruit_PWMServoDriver *pwm, unsigned int INAPwmNum, unsigned int INBPwmNum, unsigned int pwmNum)
