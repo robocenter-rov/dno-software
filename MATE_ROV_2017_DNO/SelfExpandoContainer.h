@@ -20,6 +20,7 @@ public:
 		if (_size < sizeof(K) || _size > sizeof(K) * 2) {
 			if (_data) {
 				free(_data);
+				_data = nullptr;
 			}
 
 #ifdef _DEBUG
