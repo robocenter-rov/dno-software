@@ -135,14 +135,14 @@ int StdMain_t::Begin() {
 	return _communicator->Begin();
 }
 
-void StdMain_t::SendTaskState(unsigned int worker_id) const {
+int StdMain_t::SendTaskState(unsigned int worker_id) const {
 
 #ifdef _DEBUG
 	Serial.print("Sending state of worker, id: ");
 	Serial.println(worker_id);
 #endif
 
-	_communicator->SendTaskState(_task_pool.GetTaskStatePtr(worker_id));
+	return _communicator->SendTaskState(_task_pool.GetTaskStatePtr(worker_id));
 }
 
 int StdMain_t::AddTask(Task_t* task) {
