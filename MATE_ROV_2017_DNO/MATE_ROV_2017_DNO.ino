@@ -17,6 +17,7 @@ void setup() {
 	ResourceLocker::Init();
 	Exceptions::Init();
 	Wire.begin();
+	Serial1.begin(115200);
 #ifdef _DEBUG
 	Serial.begin(9600);
 #endif
