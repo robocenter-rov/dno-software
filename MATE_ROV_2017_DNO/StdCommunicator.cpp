@@ -128,7 +128,7 @@ int StdCommunicator_t::SendTaskState(const TaskState_t* task_state) {
 
 	auto task_state_bytes = task_state->ToByteArray();
 	_connection_provider->BeginPacket();
-	_connection_provider->Write(1);
+	_connection_provider->Write(static_cast<char>(1));
 	_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize());
 	_connection_provider->EndPacket();
 	return 0;
@@ -168,7 +168,7 @@ int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
 #pragma pack(pop)
 
 	_connection_provider->BeginPacket();
-	_connection_provider->Write(2);
+	_connection_provider->Write(static_cast<char>(2));
 	_connection_provider->Write(&sendingData, sizeof(sendingData));
 	_connection_provider->EndPacket();
 	return 0;
