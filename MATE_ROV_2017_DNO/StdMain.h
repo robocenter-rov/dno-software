@@ -14,7 +14,7 @@ private:
 	PeripheryManager_t* _periphery_manager;
 	TaskPool_t _task_pool;
 
-	int SendTaskState(int worker_id) const;
+	int SendWorkerState(int worker_id) const;
 	int AddTask(Task_t* task);
 public:
 	StdMain_t(Communicator_t* communicator, Movement_t* movement,

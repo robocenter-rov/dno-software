@@ -139,7 +139,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		Serial.println(worker_id);
 #endif
 
-		if (main->SendTaskState(worker_id)) {
+		if (main->SendWorkerState(worker_id)) {
 			ThrowException(Exceptions::EC_SM_WRONG_WORKER_ID);
 			return 1;
 		}
@@ -152,14 +152,19 @@ int StdMain_t::Begin() {
 	return _communicator->Begin();
 }
 
-int StdMain_t::SendTaskState(int worker_id) const {
+int StdMain_t::SendWorkerState(int worker_id) const {
 
 #ifdef _DEBUG
 	Serial.print("Sending state of worker, id: ");
 	Serial.println(worker_id);
 #endif
 
-	return _communicator->SendTaskState(_task_pool.GetTaskStatePtr(worker_id));
+	WORKER_STATUS worker_status;
+	TaskState_t* task_state_ptr;
+
+	_task_pool.GetWorkerState(worker_id, task_state_ptr, worker_status);
+
+	return _communicator->SendWorkerState(task_state_ptr, worker_id, worker_status);
 }
 
 int StdMain_t::AddTask(Task_t* task) {
@@ -169,9 +174,11 @@ int StdMain_t::AddTask(Task_t* task) {
 		}
 		Exceptions::Release();
 	} else {
-		if (_communicator->SendTaskState(_task_pool.GetLastAddedTaskStatePtr())) {
-			return 1;
-		}
+		TaskState_t* task_state_ptr;
+		WORKER_STATUS worker_status;
+		int worker_id;
+		_task_pool.GetLastAddedWorkerState(task_state_ptr, worker_id, worker_status);
+		return _communicator->SendWorkerState(task_state_ptr, worker_id, worker_status);
 	}
 	return 0;
 }

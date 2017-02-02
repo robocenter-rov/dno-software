@@ -13,6 +13,6 @@ private:
 	unsigned int _last_send_time;
 public:
 	SendSensorDataTask_t(int id, SensorManager_t* sensor_manager, Communicator_t* communicator, unsigned int interval);
-	bool LockNeededResources(RESOURCE& out_locked_resource) override;
+	bool LockNeededResources(RESOURCE& out_locked_resource, int worker_id) override;
 	bool UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) override;
 };

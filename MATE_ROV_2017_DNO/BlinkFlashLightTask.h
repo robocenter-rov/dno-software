@@ -11,7 +11,7 @@ private:
 	ResourceLocker::AutoLocker_t _locker;
 public:
 	BlinkFlashlightTask_t(int id, int blink_count, PeripheryManager_t* periphery_manager);
-	bool LockNeededResources(RESOURCE& out_locked_resource) override;
+	bool LockNeededResources(RESOURCE& out_locked_resource, int worker_id) override;
 	bool UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) override;
 	~BlinkFlashlightTask_t() override;
 };

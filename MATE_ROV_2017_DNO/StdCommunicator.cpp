@@ -108,7 +108,7 @@ int StdCommunicator_t::SendException(const Exceptions::Exception_t* exception) {
 	return 0;
 }
 
-int StdCommunicator_t::SendTaskState(const TaskState_t* task_state) {
+int StdCommunicator_t::SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) {
 	if (!Connected()) {
 		ThrowException(Exceptions::EC_SC_NOT_CONNECTED);
 		return 1;
@@ -129,6 +129,8 @@ int StdCommunicator_t::SendTaskState(const TaskState_t* task_state) {
 	auto task_state_bytes = task_state->ToByteArray();
 	_connection_provider->BeginPacket();
 	_connection_provider->Write(static_cast<char>(1));
+	_connection_provider->Write(worker_id);
+	_connection_provider->Write(worker_status);
 	_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize());
 	_connection_provider->EndPacket();
 	return 0;

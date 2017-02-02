@@ -6,8 +6,8 @@ SetFlashlightStateTask_t::SetFlashlightStateTask_t(int id, bool state, Periphery
 	_flashlight_state = state;
 }
 
-bool SetFlashlightStateTask_t::LockNeededResources(RESOURCE& out_locked_resource) {
-	if (_locker.Lock(_worker_id)) {
+bool SetFlashlightStateTask_t::LockNeededResources(RESOURCE& out_locked_resource, int worker_id) {
+	if (_locker.Lock(worker_id)) {
 		return true;
 	} else {
 		out_locked_resource = R_FLASHLIGHT;
@@ -17,6 +17,6 @@ bool SetFlashlightStateTask_t::LockNeededResources(RESOURCE& out_locked_resource
 
 bool SetFlashlightStateTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) {
 	_periphery_manager->SetFlashlightState(_flashlight_state);
-	out_state = OkTaskState_t(_id, _worker_id);
+	out_state = OkTaskState_t(_id);
 	return true;
 }

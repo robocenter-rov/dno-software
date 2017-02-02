@@ -26,7 +26,7 @@ public:
 	StdCommunicator_t(ConnectionProvider_t* connection_provider);
 
 	int SendException(const Exceptions::Exception_t* exception) override;
-	int SendTaskState(const TaskState_t* task_state) override;
+	int SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) override;
 	int SendSensorData(const SensorData_t* sensor_data) override;
 
 	int Update() override;

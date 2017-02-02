@@ -9,6 +9,13 @@ private:
 public:
 	SelfExpandoContainer_t() : _data(nullptr), _size(0) {}
 
+	template<typename K>
+	SelfExpandoContainer_t(const K& e) {
+		_size = sizeof(K);
+		_data = malloc(_size);
+		memcpy(_data, &e, _size);
+	}
+
 	~SelfExpandoContainer_t() {
 		if (_data) {
 			free(_data);

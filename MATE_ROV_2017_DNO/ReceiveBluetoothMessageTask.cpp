@@ -5,8 +5,8 @@ ReceiveBluetoothMessageTask_t::ReceiveBluetoothMessageTask_t(unsigned tag) : Tas
 	_bytes_readed = 0;
 }
 
-bool ReceiveBluetoothMessageTask_t::LockNeededResources(RESOURCE& out_locked_resource) {
-	if (!_locker.Lock(_worker_id)) {
+bool ReceiveBluetoothMessageTask_t::LockNeededResources(RESOURCE& out_locked_resource, int worker_id) {
+	if (!_locker.Lock(worker_id)) {
 		out_locked_resource = R_BLUETOOTH;
 		return false;
 	}
@@ -25,12 +25,12 @@ bool ReceiveBluetoothMessageTask_t::UpdateState(SelfExpandoContainer_t<TaskState
 		}
 
 		if (_bytes_readed == 7) {
-			out_state = BluetoothDataReadedTaskState_t(_id, _worker_id, _message_buffer);
+			out_state = BluetoothDataReadedTaskState_t(_id, _message_buffer);
 			return true;
 		}
 	}
 
-	out_state = BluetoothWaitingForConnectionTaskState_t(_id, _worker_id);
+	out_state = BluetoothWaitingForConnectionTaskState_t(_id);
 
 	return false;
 }

@@ -16,7 +16,7 @@ void TaskPool_t::UpdateTask(WorkerQueueNode_t* worker) {
 	delay(200);
 #endif
 
-	if (task->UpdateState(worker->state)) {
+	if (task->UpdateState(worker->saved_task_state)) {
 
 #ifdef _DEBUG
 		Serial.println("Task finished, removing task");
@@ -27,7 +27,7 @@ void TaskPool_t::UpdateTask(WorkerQueueNode_t* worker) {
 	}
 }
 
-void TaskPool_t::Update() {
+void TaskPool_t::Update() const {
 	for (WorkerQueueNode_t* node = _busy_workers; node != nullptr; ) {
 		WorkerQueueNode_t* next_node = node->next_node;
 
@@ -95,8 +95,6 @@ void TaskPool_t::RemoveTask(WorkerQueueNode_t* worker) {
 
 	delete worker->task;
 	worker->task = nullptr;
-
-	MoveWorker(_busy_workers, _free_workers, worker);
 }
 
 TaskPool_t::TaskPool_t(unsigned int pool_size) {
@@ -112,6 +110,7 @@ TaskPool_t::TaskPool_t(unsigned int pool_size) {
 
 	_free_workers = _worker_nodes;
 	_busy_workers = nullptr;
+	_awaiting_workers = nullptr;
 	_last_added_task_worker_id = 0;
 }
 
@@ -143,7 +142,7 @@ int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
 			ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
 			return 1;
 		}
-		if (_worker_nodes[worker_id].task != nullptr) {
+		if (current_worker->status == WS_BUSY) {
 			ThrowException(Exceptions::EC_TP_WORKER_IS_BUSY);
 			return 1;
 		}
@@ -152,9 +151,14 @@ int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
 	}
 
 	RESOURCE locked_resource;
-	if (task->LockNeededResources(locked_resource)) {
-		MoveWorker(_free_workers, _busy_workers, _free_workers);
+	if (task->LockNeededResources(locked_resource, current_worker->id)) {
+		if (current_worker->status == WS_FREE) {
+			MoveWorker(_free_workers, _busy_workers, current_worker);
+		} else {
+			MoveWorker(_awaiting_workers, _busy_workers, current_worker);
+		}
 		current_worker->task = task;
+		current_worker->status = WS_BUSY;
 
 #ifdef _DEBUG
 		Serial.print("Successfully add task to worker, id: ");
@@ -188,53 +192,88 @@ int TaskPool_t::FreeWorker(int worker_id) {
 		return 1;
 	}
 
-	if (_worker_nodes[worker_id].task == nullptr) {
+	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];
+
+	if (current_worker->status == WS_FREE) {
 		return 0;
 	}
 
-	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];
-
-	current_worker->state =
-		CancelledTaskState_t(current_worker->task->GetId(), worker_id);
-
 	RemoveTask(current_worker);
+
+	if (current_worker->status == WS_BUSY) {
+		MoveWorker(_busy_workers, _free_workers, current_worker);
+	} else {
+		MoveWorker(_awaiting_workers, _free_workers, current_worker);
+	}
+
+	current_worker->status = WS_FREE;
 
 	return 0;
 }
 
-void TaskPool_t::GetTaskState(int worker_id, SelfExpandoContainer_t<TaskState_t>& out_state) const {
+int TaskPool_t::CancelWorker(int worker_id) {
 	if (!check_worker_id(worker_id)) {
-		return;
+		ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
+		return 1;
 	}
-	out_state = _worker_nodes[worker_id].state;
+
+	WorkerQueueNode_t* current_worker = &_worker_nodes[worker_id];
+
+	if (current_worker->status == WS_FREE || current_worker->status == WS_AWAIT) {
+		return 0;
+	}
+
+	RemoveTask(current_worker);
+
+	MoveWorker(_busy_workers, _awaiting_workers, current_worker);
+
+	return 0;
 }
 
-TaskState_t* TaskPool_t::GetTaskStatePtr(int worker_id) const {
+int TaskPool_t::GetWorkerState(int worker_id, SelfExpandoContainer_t<TaskState_t>& out_task_state, WORKER_STATUS& out_worker_status) const {
 	if (!check_worker_id(worker_id)) {
-		return nullptr;
+		ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
+		return 1;
 	}
-	return _worker_nodes[worker_id].state.Get();
+	out_task_state = _worker_nodes[worker_id].saved_task_state;
+	out_worker_status = _worker_nodes[worker_id].status;
+	return 0;
 }
 
-
-void TaskPool_t::GetLastAddedTaskState(SelfExpandoContainer_t<TaskState_t>& out_state) const {
-#ifdef _DEBUG
-	Serial.print("Getting last added task state, last worker_id: ");
-	Serial.println(_last_added_task_worker_id);
-	delay(200);
-#endif
-	out_state = _worker_nodes[_last_added_task_worker_id].state;
+int TaskPool_t::GetWorkerState(int worker_id, TaskState_t*& out_task_state_ptr, WORKER_STATUS& out_worker_status) const {
+	if (!check_worker_id(worker_id)) {
+		ThrowException(Exceptions::EC_TP_INVALID_WORKER_ID);
+		return 1;
+	}
+	out_task_state_ptr = _worker_nodes[worker_id].saved_task_state.Get();
+	out_worker_status = _worker_nodes[worker_id].status;
+	return 0;
 }
 
-TaskState_t* TaskPool_t::GetLastAddedTaskStatePtr() const {
-#ifdef _DEBUG
-	Serial.print("Getting last added task state, last worker_id: ");
-	Serial.println(_last_added_task_worker_id);
-	delay(200);
-#endif
-	return _worker_nodes[_last_added_task_worker_id].state.Get();
+int TaskPool_t::GetLastAddedWorkerState(SelfExpandoContainer_t<TaskState_t>& out_state, int& worker_id, WORKER_STATUS& out_worker_status) const {
+	if (_last_added_task_worker_id < 0) {
+		ThrowException(Exceptions::EC_TP_NO_ONE_WORKER_IS_USED);
+		return 1;
+	}
+	WorkerQueueNode_t* current_worker = &_worker_nodes[_last_added_task_worker_id];
+	out_state = current_worker->saved_task_state;
+	worker_id = current_worker->id;
+	out_worker_status = current_worker->status;
+	return 0;
 }
 
-unsigned int TaskPool_t::GetLastAddedTaskWorkerId() const {
+int TaskPool_t::GetLastAddedWorkerState(TaskState_t*& out_state_ptr, int& worker_id, WORKER_STATUS& out_worker_status) const {
+	if (_last_added_task_worker_id < 0) {
+		ThrowException(Exceptions::EC_TP_NO_ONE_WORKER_IS_USED);
+		return 1;
+	}
+	WorkerQueueNode_t* current_worker = &_worker_nodes[_last_added_task_worker_id];
+	out_state_ptr = current_worker->saved_task_state.Get();
+	worker_id = current_worker->id;
+	out_worker_status = current_worker->status;
+	return 0;
+}
+
+int TaskPool_t::GetLastAddedTaskWorkerId() const {
 	return _last_added_task_worker_id;
 }

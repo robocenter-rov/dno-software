@@ -20,6 +20,7 @@ reg_except(300, TP_FULL, "Can't add task to pool: pool is full")
 reg_except(301, TP_RESOURCE_LOCKED, "Can't add task to pool: resource locked")
 reg_except(302, TP_INVALID_WORKER_ID, "Invalid worker id")
 reg_except(303, TP_WORKER_IS_BUSY, "Can't set task to worker: worker is busy")
+reg_except(304, TP_NO_ONE_WORKER_IS_USED, "No one worker is used")
 
 //Tasks
 

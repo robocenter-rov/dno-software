@@ -7,7 +7,7 @@ SendSensorDataTask_t::SendSensorDataTask_t(int id, SensorManager_t* sensor_manag
 	_last_send_time = 0;
 }
 
-bool SendSensorDataTask_t::LockNeededResources(RESOURCE& out_locked_resource) {
+bool SendSensorDataTask_t::LockNeededResources(RESOURCE& out_locked_resource, int worker_id) {
 	return true;
 }
 
@@ -15,7 +15,7 @@ bool SendSensorDataTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_
 	if (millis() - _last_send_time > _interval) {
 		SensorData_t t = _sensor_manager->GetSensorData();
 		_communicator->SendSensorData(&t);
-		out_state = SendSensorDataTaskState_t(_id, _worker_id);
+		out_state = SendSensorDataTaskState_t(_id);
 		_last_send_time = millis();
 	}
 
