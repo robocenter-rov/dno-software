@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Arduino.h"
+#include "Debug.h"
 
 class FlashlightPeriphery_t {
 private:
@@ -14,17 +15,17 @@ public:
 	}
 
 	void TurnOn() {
-#ifdef _DEBUG
-		Serial.println("Turning ON flashlight");
-#endif
+
+		LOGLN("Turning ON flashlight");
+
 		digitalWrite(_pin, HIGH);
 		_state = true;
 	}
 
 	void TurnOff() {
-#ifdef _DEBUG
-		Serial.println("Turning OFF flashlight");
-#endif
+
+		LOGLN("Turning OFF flashlight");
+
 		digitalWrite(_pin, LOW);
 		_state = false;
 	}

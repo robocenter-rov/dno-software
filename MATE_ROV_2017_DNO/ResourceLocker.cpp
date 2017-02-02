@@ -30,34 +30,32 @@ void ResourceLocker::Init() {
 }
 
 bool ResourceLocker::Lock(RESOURCE resource, int owner) {
-#ifdef _DEBUG
-	Serial.print("Try lock resource: ");
-	Serial.print(int(resource));
-	Serial.print(", for ");
-	Serial.println(owner);
-#endif
+	LOG("Try lock resource: ");
+	LOG(int(resource));
+	LOG(", for ");
+	LOGLN(owner);
+
 	if (IsLocked(resource)) {
-#ifdef _DEBUG
-		Serial.print("Failed: Resource is locked by: ");
-		Serial.println(_owners[resource]);
-#endif
+
+		LOG("Failed: Resource is locked by: ");
+		LOGLN(_owners[resource]);
+
 		return false;
 	} else {
-#ifdef _DEBUG
-		Serial.println("Successfully locked");
-#endif
+
+		LOGLN("Successfully locked");
+
 		_owners[resource] = owner;
 		return true;
 	}
 }
 
 void ResourceLocker::Release(RESOURCE resource) {
-#ifdef _DEBUG
-	Serial.print("Releasing resource: ");
-	Serial.print(int(resource));
-	Serial.print(", by ");
-	Serial.println(_owners[resource]);
-#endif
+	LOG("Releasing resource: ");
+	LOG(int(resource));
+	LOG(", by ");
+	LOGLN(_owners[resource]);
+
 	_owners[resource] = -1;
 }
 

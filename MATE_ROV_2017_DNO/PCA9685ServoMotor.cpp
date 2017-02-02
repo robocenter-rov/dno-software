@@ -9,12 +9,10 @@ PCA9685ServoMotor_t::PCA9685ServoMotor_t(Adafruit_PWMServoDriver* pwm, unsigned 
 void PCA9685ServoMotor_t::SetAngle(float angle_radians) const {
 	int pwmVal = constrain(angle_radians, 0, PI2) / PI2 * 500;
 
-#ifdef _DEBUG
-	Serial.print("Setting pwmNum ");
-	Serial.print(_pwmNum);
-	Serial.print(" to ");
-	Serial.println(pwmVal);
-#endif
+	LOG("Setting pwmNum ");
+	LOG(_pwmNum);
+	LOG(" to ");
+	LOGLN(pwmVal);
 
 	_pwm->setPWM(_pwmNum, 0, pwmVal);
 }

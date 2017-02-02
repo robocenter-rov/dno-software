@@ -16,13 +16,11 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnSetFlashlightStateReceive([](void* data, unsigned int tag, byte state) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("SetOnSetFlashlightStateReceive");
-		Serial.print("tag: ");
-		Serial.println(tag);
-		Serial.print("state: ");
-		Serial.println(state);
-#endif
+		LOGLN("SetOnSetFlashlightStateReceive");
+		LOG("tag: ");
+		LOGLN(tag);
+		LOG("state: ");
+		LOGLN(state);
 
 		return main->AddTask(new SetFlashlightStateTask_t(tag, state, main->_periphery_manager));
 	}, this);
@@ -30,13 +28,11 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnBlinkFlashlightReceive([](void* data, unsigned int tag, unsigned int count) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("SetOnBlinkFlashlightReceive");
-		Serial.print("tag: ");
-		Serial.println(tag);
-		Serial.print("count: ");
-		Serial.println(count);
-#endif
+		LOGLN("SetOnBlinkFlashlightReceive");
+		LOG("tag: ");
+		LOGLN(tag);
+		LOG("count: ");
+		LOGLN(count);
 
 		return main->AddTask(new BlinkFlashlightTask_t(tag, count, main->_periphery_manager));
 	}, this);
@@ -44,11 +40,9 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnCancelTaskReceive([](void* data, int worker_id) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("SetOnCancelTaskReceive");
-		Serial.print("worker id: ");
-		Serial.println(worker_id);
-#endif
+		LOGLN("SetOnCancelTaskReceive");
+		LOG("worker id: ");
+		LOGLN(worker_id);
 
 		return main->_task_pool.FreeWorker(worker_id);
 	}, this);
@@ -57,21 +51,19 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		int motor4Thrust, int motor5Thrust, int motor6Thrust) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
 		Serial.println("SetMotorsThrustReceive");
-		Serial.print("motor1: ");
-		Serial.println(motor1Thrust);
-		Serial.print("motor2: ");
-		Serial.println(motor2Thrust);
-		Serial.print("motor3: ");
-		Serial.println(motor3Thrust);
-		Serial.print("motor4: ");
-		Serial.println(motor4Thrust);
-		Serial.print("motor5: ");
-		Serial.println(motor5Thrust);
-		Serial.print("motor6: ");
-		Serial.println(motor6Thrust);
-#endif
+		LOG("motor1: ");
+		LOGLN(motor1Thrust);
+		LOG("motor2: ");
+		LOGLN(motor2Thrust);
+		LOG("motor3: ");
+		LOGLN(motor3Thrust);
+		LOG("motor4: ");
+		LOGLN(motor4Thrust);
+		LOG("motor5: ");
+		LOGLN(motor5Thrust);
+		LOG("motor6: ");
+		LOGLN(motor6Thrust);
 
 		main->_movement->SetMotorThrust(0, motor1Thrust / 4096.f);
 		main->_movement->SetMotorThrust(1, motor2Thrust / 4096.f);
@@ -86,13 +78,11 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnSetManipulatorPositionReceive([](void* data, unsigned int handPosition, unsigned int armPosition) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("SetManipulatorPositionReceive");
-		Serial.print("handPosition: ");
-		Serial.println(handPosition);
-		Serial.print("armPosition: ");
-		Serial.println(armPosition);
-#endif
+		LOGLN("SetManipulatorPositionReceive");
+		LOG("handPosition: ");
+		LOGLN(handPosition);
+		LOG("armPosition: ");
+		LOGLN(armPosition);
 
 		main->_periphery_manager->GetManipulator()->SetHandAngle(constrain(handPosition, 0, 4095) / 4095.f * PI2);
 		main->_periphery_manager->GetManipulator()->SetArmAngle(constrain(armPosition, 0, 4095) / 4095.f * PI2);
@@ -103,13 +93,11 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnStartSendingSensorDataReceive([](void* data, unsigned int tag, unsigned int interval) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("StartSendingSensorDataReceive");
-		Serial.print("tag: ");
-		Serial.println(tag);
-		Serial.print("interval: ");
-		Serial.println(interval);
-#endif
+		LOGLN("StartSendingSensorDataReceive");
+		LOG("tag: ");
+		LOGLN(tag);
+		LOG("interval: ");
+		LOGLN(interval);
 
 		main->AddTask(new SendSensorDataTask_t(tag, main->_sensor_manager, main->_communicator, interval));
 
@@ -119,11 +107,9 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnStartBlutoothReadingReceive([](void* data, unsigned int tag) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("StartBlutoothReadingReceive");
-		Serial.print("tag: ");
-		Serial.println(tag);
-#endif
+		LOGLN("StartBlutoothReadingReceive");
+		LOG("tag: ");
+		LOGLN(tag);
 
 		main->AddTask(new ReceiveBluetoothMessageTask_t(tag));
 
@@ -133,11 +119,9 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	_communicator->SetOnGetTaskStateReceive([](void* data, int worker_id) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-#ifdef _DEBUG
-		Serial.println("GetTaskStateReceive");
-		Serial.print("worker id: ");
-		Serial.println(worker_id);
-#endif
+		LOGLN("GetTaskStateReceive");
+		LOG("worker id: ");
+		LOGLN(worker_id);
 
 		if (main->SendWorkerState(worker_id)) {
 			ThrowException(Exceptions::EC_SM_WRONG_WORKER_ID);
@@ -153,11 +137,8 @@ int StdMain_t::Begin() {
 }
 
 int StdMain_t::SendWorkerState(int worker_id) const {
-
-#ifdef _DEBUG
-	Serial.print("Sending state of worker, id: ");
-	Serial.println(worker_id);
-#endif
+	LOG("Sending state of worker, id: ");
+	LOGLN(worker_id);
 
 	WORKER_STATUS worker_status;
 	TaskState_t* task_state_ptr;

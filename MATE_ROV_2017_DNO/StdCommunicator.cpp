@@ -94,12 +94,8 @@ int StdCommunicator_t::SendException(const Exceptions::Exception_t* exception) {
 		return 1;
 	}
 
-#ifdef _DEBUG
-
-	Serial.print("Sending exception: ");
-	Serial.println(exception->GetCode());
-
-#endif
+	LOG("Sending exception: ");
+	LOGLN(exception->GetCode());
 
 	_connection_provider->BeginPacket();
 	_connection_provider->Write(static_cast<char>(100));
@@ -119,12 +115,8 @@ int StdCommunicator_t::SendWorkerState(const TaskState_t* task_state, int worker
 		return 1;
 	}
 
-#ifdef _DEBUG
-
-	Serial.print("Sending task state: ");
-	Serial.println(task_state->status);
-
-#endif
+	LOG("Sending task state: ");
+	LOGLN(task_state->status);
 
 	auto task_state_bytes = task_state->ToByteArray();
 	_connection_provider->BeginPacket();
@@ -142,18 +134,14 @@ int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
 		return 1;
 	}
 
-#ifdef _DEBUG
+	LOGLN("Sending sensor data: ");
 
-	Serial.println("Sending sensor data: ");
-
-	Serial.print("Rotation X");
-	Serial.println(sensor_data->rotationData.RotationX);
-	Serial.print("Rotation Y");
-	Serial.println(sensor_data->rotationData.RotationY);
-	Serial.print("Rotation Z");
-	Serial.println(sensor_data->rotationData.RotationZ);
-
-#endif
+	LOG("Rotation X");
+	LOGLN(sensor_data->rotationData.RotationX);
+	LOG("Rotation Y");
+	LOGLN(sensor_data->rotationData.RotationY);
+	LOG("Rotation Z");
+	LOGLN(sensor_data->rotationData.RotationZ);
 
 #pragma pack(push, 1)
 	struct {

@@ -16,10 +16,10 @@ void Exceptions::Init() {
 }
 
 void Exceptions::Throw(EXCEPTION_CODE exception, unsigned int line, const char* file) {
-#ifdef _DEBUG
-	Serial.print("Throwing exception: ");
-	Serial.println(GetMessage(exception));
-#endif
+
+	LOG("Throwing exception: ");
+	LOGLN(GetMessage(exception));
+
 	_exception_list.PushBack(Exception_t(exception, line, file));
 }
 
@@ -49,9 +49,7 @@ const char* Exceptions::GetMessage(EXCEPTION_CODE exception) {
 
 void Exceptions::Release() {
 
-#ifdef _DEBUG
-	Serial.println("Releasing exceptions");
-#endif
+	LOGLN("Releasing exceptions");
 
 	_exception_list.Clear();
 }

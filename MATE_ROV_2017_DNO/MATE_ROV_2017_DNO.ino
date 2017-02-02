@@ -10,6 +10,7 @@
 #include <Wire.h>
 #include "PCA96685Motor.h"
 #include "MS5803SensorDepth.h"
+#include "Debug.h"
 
 Main_t* Main;
 
@@ -62,10 +63,10 @@ void setup() {
 
 	if (Main->Begin()) {
 #ifdef _DEBUG
-		Serial.println("Fail at the begin");
+		LOGLN("Fail at the begin");
 		auto node = Exceptions::GetList().FrontNode();
 		while (node) {
-			Serial.println(node->GetData().GetFullMessage());
+			LOGLN(node->GetData().GetFullMessage());
 			node = node->GetNext();
 		}
 		Exceptions::Release();
@@ -78,7 +79,7 @@ void loop() {
 	Main->Loop();
 	if(Exceptions::SmthngWrong()) {
 #ifdef _DEBUG
-		Serial.println("Some shit happens");
+		LOGLN("Some shit happens");
 		auto node = Exceptions::GetList().FrontNode();
 		while(node) {
 			Serial.println(node->GetData().GetFullMessage());

@@ -17,10 +17,10 @@ bool ReceiveBluetoothMessageTask_t::UpdateState(SelfExpandoContainer_t<TaskState
 	if (Serial1.available()) {
 		char byte;
 		while (_bytes_readed < 7 && (byte = Serial1.read()) > 0) {
-#ifdef _DEBUG 
-			Serial.print("Byte readed fron bluetooth:");
-			Serial.println(byte);
-#endif
+
+			LOG("Byte readed fron bluetooth:");
+			LOGLN(byte);
+
 			_message_buffer[_bytes_readed++] = byte;
 		}
 

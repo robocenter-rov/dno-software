@@ -8,20 +8,14 @@ inline bool TaskPool_t::check_worker_id(int worker_id) const {
 void TaskPool_t::UpdateTask(WorkerQueueNode_t* worker) {
 	Task_t* task = worker->task;
 
-#ifdef _DEBUG
-	Serial.print("Update task_id: ");
-	Serial.print(task->GetId());
-	Serial.print(", worker_id: ");
-	Serial.println(worker->id);
-	delay(200);
-#endif
+	LOG("Update task_id: ");
+	LOG(task->GetId());
+	LOG(", worker_id: ");
+	LOGLN(worker->id);
 
 	if (task->UpdateState(worker->saved_task_state)) {
 
-#ifdef _DEBUG
-		Serial.println("Task finished, removing task");
-		delay(200);
-#endif
+		LOGLN("Task finished, removing task");
 
 		RemoveTask(worker);
 	}
@@ -38,45 +32,28 @@ void TaskPool_t::Update() const {
 }
 
 void TaskPool_t::MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, WorkerQueueNode_t* worker) {
-
-#ifdef _DEBUG
-	Serial.println("Moving worker");
-	Serial.print("Previous worker: ");
-#endif
+	LOGLN("Moving worker");
+	LOG("Previous worker: ");
 
 	if (worker->prev_node) {
-
-#ifdef _DEBUG
-		Serial.println(worker->prev_node->id);
-#endif
+		LOGLN(worker->prev_node->id);
 
 		worker->prev_node->next_node = worker->next_node;
 	} else {
-
-#ifdef _DEBUG
-		Serial.println("null");
-#endif
+		LOGLN("null");
 
 		from = worker->next_node;
 	}
 
-#ifdef _DEBUG
-	Serial.print("Next worker: ");
-#endif
+	LOG("Next worker: ");
 
 	if (worker->next_node) {
-
-#ifdef _DEBUG
-		Serial.println(worker->next_node->id);
-#endif
+		LOGLN(worker->next_node->id);
 
 		worker->next_node->prev_node = worker->prev_node;
+	} else {
+		LOGLN("null");
 	}
-#ifdef _DEBUG
-	else {
-		Serial.println("null");
-	}
-#endif
 
 	worker->next_node = to;
 	worker->prev_node = nullptr;
@@ -85,13 +62,10 @@ void TaskPool_t::MoveWorker(WorkerQueueNode_t*& from, WorkerQueueNode_t*& to, Wo
 }
 
 void TaskPool_t::RemoveTask(WorkerQueueNode_t* worker) {
-
-#ifdef _DEBUG
-	Serial.print("Task removed, id: ");
-	Serial.print(worker->task->GetId());
-	Serial.print(", worker_id: ");
-	Serial.println(worker->id);
-#endif
+	LOG("Task removed, id: ");
+	LOG(worker->task->GetId());
+	LOG(", worker_id: ");
+	LOGLN(worker->id);
 
 	delete worker->task;
 	worker->task = nullptr;
@@ -115,22 +89,15 @@ TaskPool_t::TaskPool_t(unsigned int pool_size) {
 }
 
 int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
-
-#ifdef _DEBUG
-	Serial.print("Adding task, id: ");
-	Serial.println(task->GetId());
-#endif
+	LOG("Adding task, id: ");
+	LOGLN(task->GetId());
 
 	WorkerQueueNode_t* current_worker = nullptr;
 
 	if (worker_id < 0) {
 		if (!_free_workers) {
-
-#ifdef _DEBUG
-			Serial.print("Failed add task: Pool is busy, task_id: ");
-			Serial.println(task->GetId());
-			delay(200);
-#endif
+			LOG("Failed add task: Pool is busy, task_id: ");
+			LOGLN(task->GetId());
 
 			ThrowException(Exceptions::EC_TP_FULL);
 			return 1;
@@ -160,21 +127,15 @@ int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
 		current_worker->task = task;
 		current_worker->status = WS_BUSY;
 
-#ifdef _DEBUG
-		Serial.print("Successfully add task to worker, id: ");
-		Serial.println(current_worker->id);
-		delay(200);
-#endif
+		LOG("Successfully add task to worker, id: ");
+		LOGLN(current_worker->id);
 
 		UpdateTask(current_worker);
 	} else {
 
-#ifdef _DEBUG
-		Serial.println("Failed add task, resource locked");
-		Serial.print("State saved in worker: ");
-		Serial.println(current_worker->id);
-		delay(200);
-#endif
+		LOGLN("Failed add task, resource locked");
+		LOGLN("State saved in worker: ");
+		LOGLN(current_worker->id);
 
 		ThrowException(Exceptions::EC_TP_RESOURCE_LOCKED);
 

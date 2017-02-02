@@ -11,14 +11,12 @@ PCA96685Motor_t::PCA96685Motor_t(Adafruit_PWMServoDriver *pwm, unsigned int INAP
 PCA96685Motor_t::~PCA96685Motor_t() {
 }
 
-void PCA96685Motor_t::SetThrust(float thrust) 
-{
-#ifdef _DEBUG
-	Serial.print("Setting motor ");
-	Serial.print(_pwmNum);
-	Serial.print(": ");
-	Serial.println(4095 * min(abs(thrust), 1));
-#endif
+void PCA96685Motor_t::SetThrust(float thrust) {
+
+	LOG("Setting motor ");
+	LOG(_pwmNum);
+	LOG(": ");
+	LOGLN(4095 * min(abs(thrust), 1));
 
 	_pwm->setPWM(_pwmNum, 0, 4095 * min(abs(thrust),1));
 

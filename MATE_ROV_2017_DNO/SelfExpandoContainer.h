@@ -1,4 +1,5 @@
 #pragma once
+#include "Debug.h"
 
 template<typename T>
 class SelfExpandoContainer_t {
@@ -30,14 +31,11 @@ public:
 				_data = nullptr;
 			}
 
-#ifdef _DEBUG
-			Serial.print("SelfExpandoContainer: reallocate memory from ");
-			Serial.print(_size); 
-			Serial.print(" bytes, to ");
-			Serial.print(sizeof(K));
-			Serial.println(" bytes");
-			delay(100);
-#endif
+			LOG("SelfExpandoContainer: reallocate memory from ");
+			LOG(_size);
+			LOG(" bytes, to ");
+			LOG(sizeof(K));
+			LOG(" bytes");
 
 			_data = static_cast<T*>(realloc(_data, sizeof(K)));
 			_size = sizeof(K);

@@ -105,10 +105,8 @@ int UdpConnectionProvider_t::Write(void* buffer, unsigned int size) {
 
 int UdpConnectionProvider_t::Write(char c) {
 
-#ifdef _DEBUG
-	Serial.print("Writing byte: ");
-	Serial.println(int(c));
-#endif
+	LOG("Writing byte: ");
+	LOGLN(int(c));
 
 	_udp.write(c);
 	return 0;
@@ -134,10 +132,7 @@ int UdpConnectionProvider_t::Write(int c) {
 }
 
 int UdpConnectionProvider_t::EndPacket() {
-
-#ifdef _DEBUG
-	Serial.println("End packet");
-#endif
+	LOGLN("End packet");
 
 	_udp.endPacket();
 	return 0;
@@ -146,10 +141,10 @@ int UdpConnectionProvider_t::EndPacket() {
 int UdpConnectionProvider_t::Send(void* buffer, unsigned int size) {
 
 #ifdef _DEBUG
-	Serial.print("Sending packet to ");
+	LOG("Sending packet to ");
 	_remote_ip.printTo(Serial);
-	Serial.print(":");
-	Serial.println(_remote_port);
+	LOG(":");
+	LOGLN(_remote_port);
 #endif
 
 	_udp.beginPacket(_remote_ip, _remote_port);

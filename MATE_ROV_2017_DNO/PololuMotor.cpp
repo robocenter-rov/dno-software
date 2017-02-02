@@ -13,11 +13,10 @@ PololuMotor_t::PololuMotor_t(unsigned char INA, unsigned char INB) : _md(INA, IN
 }
 
 void PololuMotor_t::SetThrust(float thrust) {
-#ifdef _DEBUG
-	Serial.print("Set thrust: ");
-	Serial.println(thrust);
-	delay(200);
-#endif
+
+	LOG("Set thrust: ");
+	LOGLN(thrust);
+
 	_md.setM1Speed(400 * thrust);
 }
 
