@@ -5,3 +5,4 @@
 #include "SetManipulatorPositionMessage.h"
 #include "StartSendingSensorDataMessage.h"
 #include "StartBluetoothReadingMessage.h"
+#include "GetTaskStateMessage.h"

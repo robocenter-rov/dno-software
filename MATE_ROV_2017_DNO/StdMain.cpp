@@ -129,6 +129,23 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return 0;
 	}, this);
+
+	_communicator->SetOnGetTaskStateReceive([](void* data, unsigned int worker_id) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+#ifdef _DEBUG
+		Serial.println("GetTaskStateReceive");
+		Serial.print("worker id: ");
+		Serial.println(worker_id);
+#endif
+
+		if (main->SendTaskState(worker_id)) {
+			ThrowException(Exceptions::EC_SM_WRONG_WORKER_ID);
+			return 1;
+		}
+
+		return 0;
+	}, this);
 }
 
 int StdMain_t::Begin() {
