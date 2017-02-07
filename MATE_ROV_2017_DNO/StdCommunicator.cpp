@@ -136,23 +136,28 @@ int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
 
 	LOGLN("Sending sensor data: ");
 
-	LOG("Rotation X");
-	LOGLN(sensor_data->rotationData.RotationX);
-	LOG("Rotation Y");
-	LOGLN(sensor_data->rotationData.RotationY);
-	LOG("Rotation Z");
-	LOGLN(sensor_data->rotationData.RotationZ);
+	LOG("q0");
+	LOGLN(sensor_data->rotationData.q0);
+	LOG("q1");
+	LOGLN(sensor_data->rotationData.q1);
+	LOG("q2");
+	LOGLN(sensor_data->rotationData.q2);
+	LOG("q3");
+	LOGLN(sensor_data->rotationData.q3);
+
 
 #pragma pack(push, 1)
 	struct {
-		int Rx;
-		int Ry;
-		int Rz;
+		int q0;
+		int q1;
+		int q2;
+		int q3;
 		int depth;
 	} sendingData{
-		sensor_data->rotationData.RotationX / PI2 * (1 << 15),
-		sensor_data->rotationData.RotationY / PI2 * (1 << 15),
-		sensor_data->rotationData.RotationZ / PI2 * (1 << 15),
+		sensor_data->rotationData.q0 * (1 << 15),
+		sensor_data->rotationData.q1 * (1 << 15),
+		sensor_data->rotationData.q2 * (1 << 15),
+		sensor_data->rotationData.q3 * (1 << 15),
 		sensor_data->depthData
 	};
 #pragma pack(pop)

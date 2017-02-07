@@ -3,22 +3,19 @@
 class SensorRotation_t {
 public:
 	struct Data_t {
-		float RotationX;
-		float RotationY;
-		float RotationZ;
+		float q0;
+		float q1;
+		float q2;
+		float q3;
 		float AngleVelocityX;
 		float AngleVelocityY;
 		float AngleVelocityZ;
 
 		Data_t() {
-			RotationX = RotationY = RotationZ = AngleVelocityX = AngleVelocityY = AngleVelocityZ = 0;
+			q0 = q1 = q2 = q3 = AngleVelocityX = AngleVelocityY = AngleVelocityZ = 0;
 		}
 
-		Data_t(float r_x, float r_y, float r_z, float v_x, float v_y, float v_z) {
-			RotationX = r_x;
-			RotationY = r_y;
-			RotationZ = r_z;
-
+		Data_t(float q0, float q1, float q2, float q3, float v_x, float v_y, float v_z) : q0(q0), q1(q1), q2(q2), q3(q3) {
 			AngleVelocityX = v_x;
 			AngleVelocityY = v_y;
 			AngleVelocityZ = v_z;
