@@ -10,7 +10,9 @@ enum TASK_STATUS {
 	TS_BLINKING,
 	TS_SENDING,
 
-	TS_BLUETOOTH_WAITING_FOR_CONNECTION
+	TS_BLUETOOTH_WAITING_FOR_CONNECTION,
+
+	TS_I2C_SCANNING,
 };
 
 struct TaskState_t {
@@ -96,5 +98,30 @@ struct BluetoothDataReadedTaskState_t : public TaskState_t {
 		memcpy(buffer.message, message, 7);
 
 		return ByteArray_t(buffer);
+	}
+};
+
+struct I2CScanningTaskState_t : public TaskState_t {
+	I2CScanningTaskState_t(unsigned int task_tag) : TaskState_t(task_tag, TS_I2C_SCANNING) {}
+};
+
+struct I2CScanningDoneTaskState_t : public TaskState_t {
+	char adresses[20];
+	int device_count;
+
+	I2CScanningDoneTaskState_t(unsigned int task_tag, char* adrss, int count) : TaskState_t(task_tag, TS_OK) {
+		memcpy(adresses, adrss, count);
+		device_count = count;
+	}
+
+	ByteArray_t ToByteArray() const override {
+		ByteArray_t res = ByteArray_t(6 + device_count);
+
+		*((int*)(res.Get())) = task_tag;
+		*((int*)(res.Get() + sizeof(int))) = status;
+		*((int*)(res.Get() + sizeof(int) * 2)) = device_count;
+		memcpy(res.Get() + 6, adresses, device_count);
+
+		return res;
 	}
 };

@@ -4,6 +4,7 @@
 #include "SetFlashlightStateTask.h"
 #include "SendSensorDataTask.h"
 #include "ReceiveBluetoothMessageTask.h"
+#include "I2CScanTask.h"
 
 StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 	SensorManager_t* sensor_manager, PeripheryManager_t* periphery_manager)
@@ -135,6 +136,20 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 			ThrowException(Exceptions::EC_SM_WRONG_WORKER_ID);
 			return 1;
 		}
+
+		return 0;
+	}, this);
+
+	_communicator->SetOnI2CScanReceive([](void* data, int worker_id, unsigned int tag) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+		LOGLN("I2CScanReceive");
+		LOG("worker id: ");
+		LOGLN(worker_id);
+		LOG("tag: ");
+		LOGLN(tag);
+
+		main->AddTask(new I2CScanTask_t(tag), worker_id);
 
 		return 0;
 	}, this);
