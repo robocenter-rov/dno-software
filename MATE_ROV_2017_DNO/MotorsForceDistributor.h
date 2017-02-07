@@ -18,7 +18,7 @@ public:
 	void AddGlobalMoveForce(float x, float y, float z) {
 		float local_x, local_y, local_z;
 
-		_coordinate_system_converter.glogal_to_local(x, y, z, local_x, local_y, local_z);
+		_coordinate_system_converter.GlobalToLocal(x, y, z, local_x, local_y, local_z);
 
 		AddLocalMoveForce(local_x, local_y, local_z);
 	}
@@ -26,13 +26,4 @@ public:
 	void AddLocalRotateForce(float y, float z) {
 		_local_force_distrib.AddRotateForce(y, z);
 	}
-
-	/* Будем считать что задавать вращение можно только в локальной системе координат 
-	void AddGlobalRotateForce(float y, float z) {
-		float local_x, local_y, local_z;
-
-		_coordinate_system_converter.glogal_to_local(0, y, z, local_x, local_y, local_z);
-
-		AddLocalRotateForce(local_y, local_z);
-	} */
 };
