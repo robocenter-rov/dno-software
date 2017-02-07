@@ -33,11 +33,14 @@ public:
 	void Update() {
 		SensorRotation_t::Data_t rotation = _sensor_manager->GetRotation();
 
-		_y_pid_input = rotation.RotationY;
+		float y, p, r;
+		quatToYpr(rotation.q0, rotation.q1, rotation.q2, rotation.q3, y, p, r);
+
+		_y_pid_input = p;
 		_y_pid.Compute();
 		_force_distrib->AddLocalRotateForce(_y_pid_output, 0);
 
-		_z_pid_input = rotation.RotationZ;
+		_z_pid_input = y;
 		_z_pid.Compute();
 		_force_distrib->AddLocalRotateForce(0, _z_pid_output);
 	}

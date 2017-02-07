@@ -190,9 +190,6 @@
     <ClInclude Include="CantTakeAdressFromDHCPException.h">
       <Filter>Exceptions\RegisterExceptions</Filter>
     </ClInclude>
-    <ClInclude Include="CancelTaskMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
     <ClInclude Include="BlinkFlashlightMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
@@ -247,6 +244,21 @@
     <ClInclude Include="GetTaskStateMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeWorkerMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternions.h">
+      <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="I2CScanTask.h">
+      <Filter>Task\Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="I2CScanMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -263,9 +275,6 @@
     </ClCompile>
     <ClCompile Include="Movement.cpp">
       <Filter>Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="Task.cpp">
-      <Filter>Task</Filter>
     </ClCompile>
     <ClCompile Include="ResourceLocker.cpp">
       <Filter>ResourceLocker</Filter>
@@ -319,6 +328,9 @@
       <Filter>Sensors</Filter>
     </ClCompile>
     <ClCompile Include="ReceiveBluetoothMessageTask.cpp">
+      <Filter>Task\Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="I2CScanTask.cpp">
       <Filter>Task\Tasks</Filter>
     </ClCompile>
   </ItemGroup>
