@@ -115,7 +115,7 @@ TaskPool_t::TaskPool_t(unsigned int pool_size) {
 	_free_workers = _worker_nodes;
 	_busy_workers = nullptr;
 	_awaiting_workers = nullptr;
-	_last_added_task_worker_id = 0;
+	_last_added_task_worker_id = -1;
 }
 
 int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
