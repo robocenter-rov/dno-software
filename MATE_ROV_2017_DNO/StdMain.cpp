@@ -163,6 +163,29 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return 0;
 	}, this);
+
+	_communicator->SetOnSetLocalForceReceive([](void* data, int move_x, int move_y, int move_z, int rotate_y, int rotate_z) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+		LOGLN("SetLocalForceReceive");
+		LOG("move_x: ");
+		LOGLN(move_x);
+		LOG("move_y: ");
+		LOGLN(move_y);
+		LOG("move_y: ");
+		LOGLN(move_y);
+		LOG("move_z: ");
+		LOGLN(move_z);
+		LOG("rotate_y: ");
+		LOGLN(rotate_y);
+		LOG("rotate_z: ");
+		LOGLN(rotate_z);
+
+		main->_movement->SetLocalMovementForce(move_x / 32768.f, move_y / 32768.f, move_z / 32768.f);
+		main->_movement->SetLocalRotateForce(rotate_y / 32768.f, rotate_z / 32768.f);
+
+		return 0;
+	}, this);
 }
 
 int StdMain_t::Begin() {
