@@ -241,9 +241,6 @@
     <ClInclude Include="StartBluetoothReadingMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
-    <ClInclude Include="GetTaskStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
     <ClInclude Include="Debug.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -257,6 +254,9 @@
       <Filter>Task\Tasks</Filter>
     </ClInclude>
     <ClInclude Include="I2CScanMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="GetWorkerStateMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
   </ItemGroup>

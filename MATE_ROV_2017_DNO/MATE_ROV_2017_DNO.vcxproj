@@ -95,7 +95,7 @@
     <ClInclude Include="CantTakeAdressFromDHCPException.h" />
     <ClInclude Include="ConnectionProvider.h" />
     <ClInclude Include="Debug.h" />
-    <ClInclude Include="GetTaskStateMessage.h" />
+    <ClInclude Include="GetWorkerStateMessage.h" />
     <ClInclude Include="I2CScanMessage.h" />
     <ClInclude Include="I2CScanTask.h" />
     <ClInclude Include="ManipulatorPeriphery.h" />
