@@ -15,6 +15,10 @@ public:
 		_local_force_distrib.AddMoveForce(x, y, z);
 	}
 
+	void SetLocalMoveForce(float x, float y, float z) {
+		_local_force_distrib.SetMoveForce(x, y, z);
+	}
+
 	void AddGlobalMoveForce(float x, float y, float z) {
 		float local_x, local_y, local_z;
 
@@ -23,7 +27,19 @@ public:
 		AddLocalMoveForce(local_x, local_y, local_z);
 	}
 
+	void SetGlobalMoveForce(float x, float y, float z) {
+		float local_x, local_y, local_z;
+
+		_coordinate_system_converter.GlobalToLocal(x, y, z, local_x, local_y, local_z);
+
+		SetLocalMoveForce(local_x, local_y, local_z);
+	}
+
 	void AddLocalRotateForce(float y, float z) {
 		_local_force_distrib.AddRotateForce(y, z);
+	}
+
+	void SetLocalRotateForce(float y, float z) {
+		_local_force_distrib.SetRotateForce(y, z);
 	}
 };
