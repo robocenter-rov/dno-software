@@ -1,7 +1,6 @@
 #include "Movement.h"
 
-Movement_t::Movement_t(SensorManager_t* sensorManager, Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, Regulators_t* regulators) {
-	_sensor_manager = sensorManager;
+Movement_t::Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, Regulators_t* regulators) {
 	_motors = motors;
 	_regulators = regulators;
 	_motors_force_distributor = motors_force_distributor;

@@ -5,7 +5,6 @@
 
 class Movement_t {
 private:
-	SensorManager_t* _sensor_manager;
 	Motors_t* _motors;
 	MotorsForceDistributor_t* _motors_force_distributor;
 
@@ -17,7 +16,7 @@ private:
 		USE_MOTORS
 	} _control_level_state;
 public:
-	Movement_t(SensorManager_t* sensor_manager, Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, Regulators_t* regulators);
+	Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, Regulators_t* regulators);
 
 	void SetMotorThrust(int motorId, float thrust);
 
