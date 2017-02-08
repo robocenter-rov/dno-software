@@ -153,6 +153,16 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return 0;
 	}, this);
+
+	_communicator->SetOnGetLastUsedWorkerStateReceive([](void* data) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+		LOGLN("GetLastUsedWorkerStateReceive");
+
+		main->SendWorkerState(main->_task_pool.GetLastAddedTaskWorkerId());
+
+		return 0;
+	}, this);
 }
 
 int StdMain_t::Begin() {

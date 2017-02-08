@@ -7,3 +7,4 @@
 #include "StartBluetoothReadingMessage.h"
 #include "GetWorkerStateMessage.h"
 #include "I2CScanMessage.h"
+#include "GetLastUsedWorkerStateMessage.h"
