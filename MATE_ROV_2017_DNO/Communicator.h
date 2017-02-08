@@ -7,8 +7,8 @@
 class Communicator_t {
 protected:
 
-#define reg_msg_info(id, name) typedef int(*name##ReceiveFunction_t)
-#define reg_msg_begin_fields_list (void* data,
+#define reg_msg_info(id, name) typedef int(*name##ReceiveFunction_t)(void* data
+#define reg_msg_begin_fields_list ,
 #define reg_msg_field(type, name) type name,
 #define reg_msg_last_field(type, name) type name
 #define reg_msg_end_fields_list );
@@ -35,11 +35,11 @@ public:
 	Communicator_t();
 	virtual ~Communicator_t() {}
 
-#define reg_msg_info(id, name) void SetOn##name##Receive(int(*)
-#define reg_msg_begin_fields_list (void* data,
+#define reg_msg_info(id, name) void SetOn##name##Receive(int(*)(void* data
+#define reg_msg_begin_fields_list ,
 #define reg_msg_field(type, name) type name,
-#define reg_msg_last_field(type, name) type name),
-#define reg_msg_end_fields_list void* data = nullptr);
+#define reg_msg_last_field(type, name) type name
+#define reg_msg_end_fields_list ),void* data = nullptr);
 #include "Messages.h"
 #undef reg_msg_info
 #undef reg_msg_begin_fields_list

@@ -7,8 +7,8 @@
 struct Message_t {
 	byte id;
 };
-#define reg_msg_info(id, name) struct name##Message_t : Message_t
-#define reg_msg_begin_fields_list {
+#define reg_msg_info(id, name) struct name##Message_t : Message_t {
+#define reg_msg_begin_fields_list
 #define reg_msg_field(type, name) type name;
 #define reg_msg_last_field(type, name) type name;
 #define reg_msg_end_fields_list };
@@ -63,7 +63,7 @@ StdCommunicator_t::StdCommunicator_t(ConnectionProvider_t* connection_provider) 
 		ThrowException(Exceptions::EC_SC_RECEIVER_NOT_SETTED); \
 		return 1; \
 	} \
-	return _this->_On##name##Receive.callback(_this->_On##name##Receive.data,
+	return _this->_On##name##Receive.callback(_this->_On##name##Receive.data
 #else
 #define reg_msg_info(id, name) static int StdCommunicator_t::Receive##name##Message(StdCommunicator_t* _this, void* data, unsigned int size) { \
 	if (sizeof(name##Message_t) != size) { \
@@ -77,7 +77,7 @@ StdCommunicator_t::StdCommunicator_t(ConnectionProvider_t* connection_provider) 
 	auto msg = reinterpret_cast<name##Message_t*>(data); \
 	_this->_On##name##Receive.callback(_this->_On##name##Receive.data,
 #endif
-#define reg_msg_begin_fields_list
+#define reg_msg_begin_fields_list ,
 #define reg_msg_field(type, name) msg->name,
 #define reg_msg_last_field(type, name) msg->name
 #define reg_msg_end_fields_list ); }
