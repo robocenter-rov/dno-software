@@ -39,7 +39,14 @@ void setup() {
 	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 4));
 	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 5));
 
-	Movement_t* movement = new Movement_t(nullptr, motors, nullptr);
+	SensorRotation_t* rotation_sensor = new SensorRotation_t();
+	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
+
+	SensorManager_t* sensor_manager = new SensorManager_t(rotation_sensor, depth_sensor);
+
+	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager, motors);
+
+	Movement_t* movement = new Movement_t(sensor_manager, motors, motors_force_distributor, nullptr);
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(13);
 
@@ -49,11 +56,6 @@ void setup() {
 	);
 
 	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery);
-
-	SensorRotation_t* rotation_sensor = new SensorRotation_t();
-	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
-
-	SensorManager_t* sensor_manager = new SensorManager_t(rotation_sensor, depth_sensor);
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 	ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);

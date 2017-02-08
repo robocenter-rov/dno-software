@@ -7,12 +7,17 @@ class Movement_t {
 private:
 	SensorManager_t* _sensor_manager;
 	Motors_t* _motors;
+	MotorsForceDistributor_t* _motors_force_distributor;
 
 	Regulators_t* _regulators;
 
-	bool _use_regulators;
+	enum {
+		USE_REGULATORS,
+		USE_FORCE_DISTRIBUTOR,
+		USE_MOTORS
+	} _control_level_state;
 public:
-	Movement_t(SensorManager_t* sensor_manager, Motors_t* motors, Regulators_t* regulators);
+	Movement_t(SensorManager_t* sensor_manager, Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, Regulators_t* regulators);
 
 	void SetMotorThrust(int motorId, float thrust);
 
@@ -21,6 +26,9 @@ public:
 
 	void SetRotation(float angleY, float angleZ);
 	void SetAngularVelocity(float angularVelocityY, float angularVelocityZ);
+
+	void SetLocalRotateForce(float angleY, float angleZ);
+	void SetLocalMovementForce(float x, float y, float z);
 
 	void Stop();
 
