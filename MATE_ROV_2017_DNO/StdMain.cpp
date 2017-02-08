@@ -202,4 +202,5 @@ void StdMain_t::Loop() {
 		Exceptions::Release();
 	}
 	_task_pool.Update();
+	_movement->Update();
 }
