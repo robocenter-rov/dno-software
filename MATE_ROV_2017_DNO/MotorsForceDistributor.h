@@ -42,4 +42,8 @@ public:
 	void SetLocalRotateForce(float y, float z) {
 		_local_force_distrib.SetRotateForce(y, z);
 	}
+
+	void Update() const {
+		_local_force_distrib.Update();
+	}
 };
