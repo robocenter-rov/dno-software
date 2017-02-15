@@ -75,7 +75,7 @@ StdCommunicator_t::StdCommunicator_t(ConnectionProvider_t* connection_provider) 
 		return 1; \
 	} \
 	auto msg = reinterpret_cast<name##Message_t*>(data); \
-	_this->_On##name##Receive.callback(_this->_On##name##Receive.data,
+	_this->_On##name##Receive.callback(_this->_On##name##Receive.data
 #endif
 #define reg_msg_begin_fields_list ,
 #define reg_msg_field(type, name) msg->name,
