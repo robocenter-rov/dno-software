@@ -259,6 +259,12 @@
     <ClInclude Include="GetWorkerStateMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
+    <ClInclude Include="GetLastUsedWorkerStateMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="SetLocalForceMessage.h">
+      <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">

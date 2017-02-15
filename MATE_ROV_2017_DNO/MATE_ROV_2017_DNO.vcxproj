@@ -63,7 +63,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;C:\Users\JIukaviy\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;D:\Program Files (x86)\Arduino\libraries\MS5803\src;C:\Users\JIukaviy\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\JIukaviy\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;D:\Program Files (x86)\Arduino\libraries\Ethernet\src;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;D:\Program Files (x86)\Arduino\libraries\MS5803\src;C:\Users\JIukaviy\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;D:\Program Files (x86)\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;D:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;D:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO;D:\Program Files (x86)\Arduino\hardware\tools\avr/avr/include/;D:\Program Files (x86)\Arduino\hardware\tools\avr//avr/include/avr/;D:\Program Files (x86)\Arduino\hardware\tools\avr/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>D:\Dropbox\Visual Studio Projects\MATE_ROV_2017_DNO\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -95,6 +95,7 @@
     <ClInclude Include="CantTakeAdressFromDHCPException.h" />
     <ClInclude Include="ConnectionProvider.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="GetLastUsedWorkerStateMessage.h" />
     <ClInclude Include="GetWorkerStateMessage.h" />
     <ClInclude Include="I2CScanMessage.h" />
     <ClInclude Include="I2CScanTask.h" />
@@ -123,6 +124,7 @@
     <ClInclude Include="ResourceLocker.h" />
     <ClInclude Include="RotationRegulator.h" />
     <ClInclude Include="SetFlashlightStateTask.h" />
+    <ClInclude Include="SetLocalForceMessage.h" />
     <ClInclude Include="SetManipulatorPositionMessage.h" />
     <ClInclude Include="SetMotorsThrustMessage.h" />
     <ClInclude Include="StartBluetoothReadingMessage.h" />
