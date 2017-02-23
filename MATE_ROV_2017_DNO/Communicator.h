@@ -50,6 +50,7 @@ public:
 	virtual int SendException(const Exceptions::Exception_t* exception) = 0;
 	virtual int SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) = 0;
 	virtual int SendSensorData(const SensorData_t* sensor_data) = 0;
+	virtual int SendPong() = 0;
 
 	virtual int Begin() = 0;
 	virtual int Connected() = 0;

@@ -28,6 +28,7 @@ public:
 	int SendException(const Exceptions::Exception_t* exception) override;
 	int SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) override;
 	int SendSensorData(const SensorData_t* sensor_data) override;
+	int SendPong() override;
 
 	int Update() override;
 	int Begin() override;

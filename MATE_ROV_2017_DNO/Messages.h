@@ -9,3 +9,4 @@
 #include "I2CScanMessage.h"
 #include "GetLastUsedWorkerStateMessage.h"
 #include "SetLocalForceMessage.h"
+#include "PingMessage.h"

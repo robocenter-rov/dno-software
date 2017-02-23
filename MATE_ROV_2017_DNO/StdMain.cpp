@@ -186,6 +186,14 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		return 0;
 	}, this);
+
+	_communicator->SetOnPingReceive([](void* data) -> int {
+		auto main = static_cast<StdMain_t*>(data);
+
+		LOGLN("PingReceive");
+
+		return main->_communicator->SendPong();
+	}, this);
 }
 
 int StdMain_t::Begin() {
