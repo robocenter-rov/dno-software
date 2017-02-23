@@ -8,6 +8,7 @@ private:
 	SharedPtr_t<byte> _ptr;
 	unsigned int _size;
 public:
+	ByteArray_t() : _ptr(nullptr), _size(0) {}
 	ByteArray_t(unsigned int size) : _ptr(new byte[size]), _size(size) {}
 	ByteArray_t(const void* source, unsigned int size) : _ptr(new byte[size]), _size(size) {
 		memcpy(_ptr.Get(), source, _size);
