@@ -132,6 +132,10 @@ int UdpConnectionProvider_t::Write(int c) {
 	return 0;
 }
 
+int UdpConnectionProvider_t::Write(unsigned int i) {
+	return Write(static_cast<int>(i));
+}
+
 int UdpConnectionProvider_t::EndPacket() {
 	LOGLN("End packet");
 
