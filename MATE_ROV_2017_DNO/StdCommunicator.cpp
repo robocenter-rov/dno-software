@@ -118,12 +118,14 @@ int StdCommunicator_t::SendWorkerState(const TaskState_t* task_state, int worker
 	LOG("Sending task state: ");
 	LOGLN(task_state->status);
 
-	auto task_state_bytes = task_state->ToByteArray();
+	auto task_state_bytes = task_state->GetAdditionalData();
 	_connection_provider->BeginPacket();
-	_connection_provider->Write(static_cast<char>(1));
-	_connection_provider->Write(worker_id);
-	_connection_provider->Write(worker_status);
-	_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize());
+	_connection_provider->Write(static_cast<char>(1)); //0
+	_connection_provider->Write(worker_id);            //1
+	_connection_provider->Write(worker_status);        //3
+	_connection_provider->Write(task_state->task_tag); //5
+	_connection_provider->Write(task_state->status);   //7
+	_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize()); //9
 	_connection_provider->EndPacket();
 	return 0;
 }

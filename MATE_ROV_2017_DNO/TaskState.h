@@ -20,17 +20,8 @@ struct TaskState_t {
 	unsigned int task_tag;
 	TASK_STATUS status;
 	TaskState_t(int task_tag, TASK_STATUS status) : task_tag(task_tag), status(status) {}
-	virtual ByteArray_t ToByteArray() const {
-#pragma pack(push, 1)
-		struct {
-			unsigned int task_tag;
-			TASK_STATUS status;
-		} buffer;
-#pragma pack(pop)
-		buffer.task_tag = task_tag;
-		buffer.status = status;
-
-		return ByteArray_t(buffer);
+	virtual ByteArray_t GetAdditionalData() const {
+		return ByteArray_t();
 	}
 
 	void *operator new(unsigned int size, void *ptr) {
@@ -50,20 +41,8 @@ struct BlinkFlashlightTaskState_t : public TaskState_t {
 	unsigned int blinked_count;
 	BlinkFlashlightTaskState_t(unsigned int task_tag, unsigned int blinked_count)
 		: TaskState_t(task_tag, TS_BLINKING), blinked_count(blinked_count) {}
-	ByteArray_t ToByteArray() const override {
-#pragma pack(push, 1)
-		struct {
-			unsigned int task_tag;
-			TASK_STATUS status;
-			unsigned int blinked_count;
-		} buffer;
-#pragma pack(pop)
-
-		buffer.task_tag = task_tag;
-		buffer.status = status;
-		buffer.blinked_count = blinked_count;
-
-		return ByteArray_t(buffer);
+	ByteArray_t GetAdditionalData() const override {
+		return ByteArray_t(blinked_count);
 	}
 };
 
@@ -84,20 +63,8 @@ struct BluetoothDataReadedTaskState_t : public TaskState_t {
 		}
 	}
 
-	ByteArray_t ToByteArray() const override {
-#pragma pack(push, 1)
-		struct {
-			unsigned int task_tag;
-			TASK_STATUS status;
-			char message[7];
-		} buffer;
-#pragma pack(pop)
-
-		buffer.task_tag = task_tag;
-		buffer.status = status;
-		memcpy(buffer.message, message, 7);
-
-		return ByteArray_t(buffer);
+	ByteArray_t GetAdditionalData() const override {
+		return ByteArray_t(message, 7);
 	}
 };
 
@@ -114,13 +81,11 @@ struct I2CScanningDoneTaskState_t : public TaskState_t {
 		device_count = count;
 	}
 
-	ByteArray_t ToByteArray() const override {
-		ByteArray_t res = ByteArray_t(6 + device_count);
+	ByteArray_t GetAdditionalData() const override {
+		ByteArray_t res = ByteArray_t(sizeof(int) + sizeof(int) * device_count);
 
-		*((int*)(res.Get())) = task_tag;
-		*((int*)(res.Get() + sizeof(int))) = status;
-		*((int*)(res.Get() + sizeof(int) * 2)) = device_count;
-		memcpy(res.Get() + 6, adresses, device_count);
+		*reinterpret_cast<int*>(res.Get()) = device_count;
+		memcpy(res.Get() + sizeof(int), adresses, device_count);
 
 		return res;
 	}
