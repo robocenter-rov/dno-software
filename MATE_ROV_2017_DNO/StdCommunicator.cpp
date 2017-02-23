@@ -171,6 +171,14 @@ int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
 	return 0;
 }
 
+int StdCommunicator_t::SendPong() {
+	_connection_provider->BeginPacket();
+	_connection_provider->Write(static_cast<char>(20));
+	_connection_provider->EndPacket();
+
+	return 0;
+}
+
 int StdCommunicator_t::Update() {
 	unsigned int readed_bytes = 0;
 
