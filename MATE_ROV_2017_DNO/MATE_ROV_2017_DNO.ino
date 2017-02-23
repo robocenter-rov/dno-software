@@ -46,7 +46,7 @@ void setup() {
 
 	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager, motors);
 
-	Movement_t* movement = new Movement_t(sensor_manager, motors, motors_force_distributor, nullptr);
+	Movement_t* movement = new Movement_t(motors, motors_force_distributor, nullptr);
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(13);
 
