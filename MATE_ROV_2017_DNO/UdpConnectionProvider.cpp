@@ -90,6 +90,9 @@ int UdpConnectionProvider_t::BeginPacket() {
 }
 
 int UdpConnectionProvider_t::Write(void* buffer, unsigned int size) {
+	if (!buffer || size == 0) {
+		return 0;
+	}
 
 #ifdef _DEBUG
 	Serial.print("Writing bytes: ");
@@ -114,7 +117,6 @@ int UdpConnectionProvider_t::Write(char c) {
 }
 
 int UdpConnectionProvider_t::Write(int c) {
-
 	auto t = reinterpret_cast<char*>(&c);
 
 #ifdef _DEBUG
@@ -126,10 +128,13 @@ int UdpConnectionProvider_t::Write(int c) {
 	Serial.println();
 #endif
 
-	for (int i = 0; i < sizeof(int); i++) {
-		_udp.write(t[i]);
-	}
+	_udp.write(t, sizeof(int));
+
 	return 0;
+}
+
+int UdpConnectionProvider_t::Write(unsigned int c) {
+	return Write(static_cast<int>(c));
 }
 
 int UdpConnectionProvider_t::EndPacket() {
