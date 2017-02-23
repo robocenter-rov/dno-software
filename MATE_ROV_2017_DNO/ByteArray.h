@@ -9,7 +9,7 @@ private:
 	unsigned int _size;
 public:
 	ByteArray_t(unsigned int size) : _ptr(new byte[size]), _size(size) {}
-	ByteArray_t(void* source, unsigned int size) : _ptr(new byte[size]), _size(size) {
+	ByteArray_t(const void* source, unsigned int size) : _ptr(new byte[size]), _size(size) {
 		memcpy(_ptr.Get(), source, _size);
 	}
 	template<typename T>
