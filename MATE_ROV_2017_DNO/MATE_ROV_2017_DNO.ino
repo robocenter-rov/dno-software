@@ -32,12 +32,12 @@ void setup() {
 	pwm2->setPWMFreq(60);
 	
 	Motors_t* motors = new Motors_t(6);
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 13, 14, 15));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 12, 12, 1));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 12, 12, 2));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 3));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 4));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 12, 12, 5));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 14, 13, 15));
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 12));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 2, 1, 0));
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3));
 
 	SensorRotation_t* rotation_sensor = new SensorRotation_t();
 	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
@@ -51,8 +51,10 @@ void setup() {
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(13);
 
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
-		new PCA9685ServoMotor_t(pwm1, 7),
-		new PCA9685ServoMotor_t(pwm2, 15)
+		new PCA9685ServoMotor_t(pwm1, 0),
+		new PCA9685ServoMotor_t(pwm1, 1)
+		//new PCA96685Motor_t(pwm2, 12, 11, 13)
+		//new PCA96685Motor_t(pwm2, 10, 9, 8)
 	);
 
 	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery);
