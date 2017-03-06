@@ -1,15 +1,9 @@
-/*
- Name:		MATE_ROV_2017_DNO.ino
- Created:	16.11.2016 22:23:19
- Author:	JIukaviy
-*/
-
-#include "StdMain.h"
-#include "StdCommunicator.h"
+#include "Main\StdMain.h"
+#include "Communication\Communicators\StdCommunicator.h"
 #include "UdpConnectionProvider.h"
 #include <Wire.h>
 #include "PCA96685Motor.h"
-#include "MS5803SensorDepth.h"
+#include <SparkFun_MS5803_I2C.h>
 #include "Debug.h"
 
 Main_t* Main;
@@ -40,8 +34,9 @@ void setup() {
 	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3));
 
 	SensorRotation_t* rotation_sensor = new SensorRotation_t();
-	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
-
+	
+	//MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
+	
 	SensorManager_t* sensor_manager = new SensorManager_t(rotation_sensor, depth_sensor);
 
 	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager, motors);
