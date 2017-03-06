@@ -14,13 +14,12 @@ bool ReceiveBluetoothMessageTask_t::LockNeededResources(RESOURCE& out_locked_res
 }
 
 bool ReceiveBluetoothMessageTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) {
-	if (Serial1.available()) {
+	if (Serial2.available()) {
 		char byte;
-		while (_bytes_readed < 7 && (byte = Serial1.read()) > 0) {
+		while (_bytes_readed < 7 && (byte = Serial2.read()) > 0) {
 
 			LOG("Byte readed fron bluetooth:");
 			LOGLN(byte);
-
 			_message_buffer[_bytes_readed++] = byte;
 		}
 
