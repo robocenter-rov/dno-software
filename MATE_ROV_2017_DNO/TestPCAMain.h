@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Main\Main.h"
-#include "Periphery\PeripheryManager.h"
-#include "Movement\Movement.h"
+#include "Main.h"
+#include "PeripheryManager.h"
+#include "Movement.h"
 
 class TestPCAMain_t : public Main_t {
 private:
