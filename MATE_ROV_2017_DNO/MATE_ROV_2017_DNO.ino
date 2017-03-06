@@ -1,10 +1,10 @@
-#include "Main\StdMain.h"
-#include "Communication\Communicators\StdCommunicator.h"
-#include "UdpConnectionProvider.h"
+#include "Main/Main.h"
+#include "Communication/Communicators/StdCommunicator.h"
+#include "Communication/ConnectionProviders/UdpConnectionProvider.h"
 #include <Wire.h>
-#include "PCA96685Motor.h"
+#include "Movement/Motors/PCA96685Motor.h"
 #include <SparkFun_MS5803_I2C.h>
-#include "Debug.h"
+#include "Utils/Debug.h"
 
 Main_t* Main;
 

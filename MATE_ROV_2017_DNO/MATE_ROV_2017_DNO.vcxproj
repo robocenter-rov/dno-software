@@ -63,8 +63,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src;C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src;C:\Program Files (x86)\Arduino\libraries\MS5803\src;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master\utility;C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master\utility;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master\utility;C:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;C:\Program Files (x86)\Arduino\libraries\MS5803\src\utility;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src\utility;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src\utility;C:\Program Files (x86)\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries;C:\Users\Veiber\Documents\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\cores\arduino;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\variants\mega;C:\Users\Veiber\Source\Repos\dno-software\MATE_ROV_2017_DNO;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\cores\arduino;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\variants\mega;C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src;C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src;C:\Program Files (x86)\Arduino\libraries\MS5803\src;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;C:\Program Files (x86)\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\uqtbicgz.hvx\Micro Platforms\default\debuggers;C:\Users\Veiber\Documents\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2/avr/include/;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2//avr/include/avr/;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>C:\Users\Veiber\Source\Repos\dno-software\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries\MS5803\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;C:\Users\JIukaviy\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;C:\Users\JIukaviy\Documents\Arduino\libraries\br3ttb-Arduino-PID-Library-fb095d8;C:\Users\JIukaviy\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -81,103 +81,120 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="libs\Adafruit_PWNServoDriver\examples\pwmtest\pwmtest.ino" />
+    <None Include="libs\Adafruit_PWNServoDriver\examples\servo\servo.ino" />
+    <None Include="libs\DualVNH5019MotorShield\examples\Demo\Demo.ino" />
+    <None Include="libs\MS5803\examples\SparkFun_MS5803_Demo\SparkFun_MS5803_Demo.ino" />
+    <None Include="libs\PID_v1\examples\PID_AdaptiveTunings\PID_AdaptiveTunings.ino" />
+    <None Include="libs\PID_v1\examples\PID_Basic\PID_Basic.ino" />
+    <None Include="libs\PID_v1\examples\PID_RelayOutput\PID_RelayOutput.ino" />
     <None Include="MATE_ROV_2017_DNO.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AngularVelocityRegulator.h" />
-    <ClInclude Include="BlinkFlashlightMessage.h" />
-    <ClInclude Include="BlinkFlashLightTask.h" />
-    <ClInclude Include="ByteArray.h" />
-    <ClInclude Include="CameraPeriphery.h" />
-    <ClInclude Include="FreeWorkerMessage.h" />
-    <ClInclude Include="CantTakeAdressFromDHCPException.h" />
-    <ClInclude Include="ConnectionProvider.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="GetLastUsedWorkerStateMessage.h" />
-    <ClInclude Include="GetWorkerStateMessage.h" />
-    <ClInclude Include="I2CScanMessage.h" />
-    <ClInclude Include="I2CScanTask.h" />
-    <ClInclude Include="ManipulatorPeriphery.h" />
-    <ClInclude Include="MathConstants.h" />
-    <ClInclude Include="DebugMotorsMain.h" />
-    <ClInclude Include="DepthRegulator.h" />
-    <ClInclude Include="CourseRegulator.h" />
-    <ClInclude Include="Exceptions.h" />
-    <ClInclude Include="FlashlightPeriphery.h" />
-    <ClInclude Include="List.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="Messages.h" />
-    <ClInclude Include="MS5803SensorDepth.h" />
-    <ClInclude Include="PCA96685Motor.h" />
-    <ClInclude Include="PCA9685ServoMotor.h" />
-    <ClInclude Include="PololuMotor.h" />
-    <ClInclude Include="Quaternions.h" />
-    <ClInclude Include="ReceiveBluetoothMessageTask.h" />
-    <ClInclude Include="SelfExpandoContainer.h" />
-    <ClInclude Include="SendSensorDataTask.h" />
-    <ClInclude Include="SensorData.h" />
-    <ClInclude Include="SetFlashlightStateMessage.h" />
-    <ClInclude Include="PositionRegulator.h" />
-    <ClInclude Include="RegisterExceptions.h" />
-    <ClInclude Include="ResourceLocker.h" />
-    <ClInclude Include="RotationRegulator.h" />
-    <ClInclude Include="SetFlashlightStateTask.h" />
-    <ClInclude Include="SetLocalForceMessage.h" />
-    <ClInclude Include="SetManipulatorPositionMessage.h" />
-    <ClInclude Include="SetMotorsThrustMessage.h" />
-    <ClInclude Include="StartBluetoothReadingMessage.h" />
-    <ClInclude Include="StartSendingSensorDataMessage.h" />
-    <ClInclude Include="StdCommunicator.h" />
-    <ClInclude Include="StdMain.h" />
-    <ClInclude Include="Task.h" />
-    <ClInclude Include="TaskPool.h" />
-    <ClInclude Include="TaskState.h" />
-    <ClInclude Include="UdpConnectionProvider.h" />
-    <ClInclude Include="SharedPtr.h" />
-    <ClInclude Include="VelocityRegulator.h" />
-    <ClInclude Include="Communicator.h" />
-    <ClInclude Include="CoordinateSystemConverter.h" />
-    <ClInclude Include="LocalMotorsForceDistributor.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="Motor.h" />
-    <ClInclude Include="Motors.h" />
-    <ClInclude Include="MotorsForceDistributor.h" />
-    <ClInclude Include="Movement.h" />
-    <ClInclude Include="PeripheryManager.h" />
-    <ClInclude Include="PidCoefficients.h" />
-    <ClInclude Include="Regulators.h" />
-    <ClInclude Include="SensorDepth.h" />
-    <ClInclude Include="SensorManager.h" />
-    <ClInclude Include="SensorRotation.h" />
+    <ClInclude Include="Communication\Communicators\Communicator.h" />
+    <ClInclude Include="Communication\Communicators\StdCommunicator.h" />
+    <ClInclude Include="Communication\ConnectionProviders\ConnectionProvider.h" />
+    <ClInclude Include="Communication\ConnectionProviders\UdpConnectionProvider.h" />
+    <ClInclude Include="Communication\Message.h" />
+    <ClInclude Include="Communication\RegisterMessages\BlinkFlashlightMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\FreeWorkerMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\GetLastUsedWorkerStateMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\GetWorkerStateMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\I2CScanMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\SetFlashlightStateMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\SetLocalForceMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\SetManipulatorPositionMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\SetMotorsThrustMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\StartBluetoothReadingMessage.h" />
+    <ClInclude Include="Communication\RegisterMessages\StartSendingSensorDataMessage.h" />
+    <ClInclude Include="Exceptions\Exceptions.h" />
+    <ClInclude Include="Exceptions\RegisterException\RegisterExceptions.h" />
+    <ClInclude Include="HeaderFiles\PidCoefficients.h" />
+    <ClInclude Include="libs\Adafruit_PWNServoDriver\Adafruit_PWMServoDriver.h" />
+    <ClInclude Include="libs\DualVNH5019MotorShield\DualVNH5019MotorShield.h" />
+    <ClInclude Include="libs\MS5803\src\SparkFun_MS5803_I2C.h" />
+    <ClInclude Include="libs\PID_v1\PID_v1.h" />
+    <ClInclude Include="Main\DebugMotorsMain.h" />
+    <ClInclude Include="Main\Main.h" />
+    <ClInclude Include="Main\StdMain.h" />
+    <ClInclude Include="Movement\LocalMotorsForceDistributor.h" />
+    <ClInclude Include="Movement\Motor.h" />
+    <ClInclude Include="Movement\Motors.h" />
+    <ClInclude Include="Movement\MotorsForceDistributor.h" />
+    <ClInclude Include="Movement\Motors\PCA96685Motor.h" />
+    <ClInclude Include="Movement\Motors\PololuMotor.h" />
+    <ClInclude Include="Movement\Movement.h" />
+    <ClInclude Include="Periphery\Camera\CameraPeriphery.h" />
+    <ClInclude Include="Periphery\FlashlightPeriphery.h" />
+    <ClInclude Include="Periphery\Manipulator\ManipulatorPeriphery.h" />
+    <ClInclude Include="Periphery\PCA9685ServoMotor.h" />
+    <ClInclude Include="Periphery\PeripheryManager.h" />
+    <ClInclude Include="PingMessage.h" />
+    <ClInclude Include="Regulators\AngularVelocityRegulator.h" />
+    <ClInclude Include="Regulators\CourseRegulator.h" />
+    <ClInclude Include="Regulators\DepthRegulator.h" />
+    <ClInclude Include="Regulators\PositionRegulator.h" />
+    <ClInclude Include="Regulators\Regulators.h" />
+    <ClInclude Include="Regulators\RotationRegulator.h" />
+    <ClInclude Include="Regulators\VelocityRegulator.h" />
+    <ClInclude Include="ResourceLocker\ResourceLocker.h" />
+    <ClInclude Include="Sensors\MS5803SensorDepth.h" />
+    <ClInclude Include="Sensors\SensorData.h" />
+    <ClInclude Include="Sensors\SensorDepth.h" />
+    <ClInclude Include="Sensors\SensorManager.h" />
+    <ClInclude Include="Sensors\SensorRotation.h" />
+    <ClInclude Include="Task\Task.h" />
+    <ClInclude Include="Task\TaskPool.h" />
+    <ClInclude Include="Task\TaskState.h" />
+    <ClInclude Include="Task\Tasks\BlinkFlashLightTask.h" />
+    <ClInclude Include="Task\Tasks\I2CScanTask.h" />
+    <ClInclude Include="Task\Tasks\ReceiveBluetoothMessageTask.h" />
+    <ClInclude Include="Task\Tasks\SendSensorDataTask.h" />
+    <ClInclude Include="Task\Tasks\SetFlashlightStateTask.h" />
+    <ClInclude Include="TestPCAMain.h" />
+    <ClInclude Include="Utils\ByteArray.h" />
+    <ClInclude Include="Utils\Debug.h" />
+    <ClInclude Include="Utils\List.h" />
+    <ClInclude Include="Utils\Map.h" />
+    <ClInclude Include="Utils\Math\CoordinateSystemConverter.h" />
+    <ClInclude Include="Utils\Math\MathConstants.h" />
+    <ClInclude Include="Utils\Math\Quaternions.h" />
+    <ClInclude Include="Utils\SelfExpandoContainer.h" />
+    <ClInclude Include="Utils\SharedPtr.h" />
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BlinkFlashLightTask.cpp" />
-    <ClCompile Include="Communicator.cpp" />
-    <ClCompile Include="ConnectionProvider.cpp" />
-    <ClCompile Include="DebugMotorsMain.cpp" />
-    <ClCompile Include="Exceptions.cpp" />
-    <ClCompile Include="I2CScanTask.cpp" />
-    <ClCompile Include="ManipulatorPeriphery.cpp" />
-    <ClCompile Include="Motor.cpp" />
-    <ClCompile Include="Movement.cpp" />
-    <ClCompile Include="MS5803SensorDepth.cpp" />
-    <ClCompile Include="PCA96685Motor.cpp" />
-    <ClCompile Include="PCA9685ServoMotor.cpp" />
-    <ClCompile Include="PololuMotor.cpp" />
-    <ClCompile Include="ReceiveBluetoothMessageTask.cpp" />
-    <ClCompile Include="ResourceLocker.cpp" />
-    <ClCompile Include="SendSensorDataTask.cpp" />
-    <ClCompile Include="SensorDepth.cpp" />
-    <ClCompile Include="SensorManager.cpp" />
-    <ClCompile Include="SensorRotation.cpp" />
-    <ClCompile Include="SetFlashLightStateTask.cpp" />
-    <ClCompile Include="StdCommunicator.cpp" />
-    <ClCompile Include="StdMain.cpp" />
-    <ClCompile Include="TaskPool.cpp" />
-    <ClCompile Include="UdpConnectionProvider.cpp" />
+    <ClCompile Include="Communication\Communicators\Communicator.cpp" />
+    <ClCompile Include="Communication\Communicators\StdCommunicator.cpp" />
+    <ClCompile Include="Communication\ConnectionProviders\ConnectionProvider.cpp" />
+    <ClCompile Include="Communication\ConnectionProviders\UdpConnectionProvider.cpp" />
+    <ClCompile Include="Exceptions\Exceptions.cpp" />
+    <ClCompile Include="libs\Adafruit_PWNServoDriver\Adafruit_PWMServoDriver.cpp" />
+    <ClCompile Include="libs\DualVNH5019MotorShield\DualVNH5019MotorShield.cpp" />
+    <ClCompile Include="libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
+    <ClCompile Include="libs\PID_v1\PID_v1.cpp" />
+    <ClCompile Include="Main\DebugMotorsMain.cpp" />
+    <ClCompile Include="Main\StdMain.cpp" />
+    <ClCompile Include="Movement\Motor.cpp" />
+    <ClCompile Include="Movement\Motors\PCA96685Motor.cpp" />
+    <ClCompile Include="Movement\Motors\PololuMotor.cpp" />
+    <ClCompile Include="Movement\Movement.cpp" />
+    <ClCompile Include="Periphery\Manipulator\ManipulatorPeriphery.cpp" />
+    <ClCompile Include="Periphery\PCA9685ServoMotor.cpp" />
+    <ClCompile Include="ResourceLocker\ResourceLocker.cpp" />
+    <ClCompile Include="Sensors\MS5803SensorDepth.cpp" />
+    <ClCompile Include="Sensors\SensorDepth.cpp" />
+    <ClCompile Include="Sensors\SensorManager.cpp" />
+    <ClCompile Include="Sensors\SensorRotation.cpp" />
+    <ClCompile Include="Task\TaskPool.cpp" />
+    <ClCompile Include="Task\Tasks\BlinkFlashLightTask.cpp" />
+    <ClCompile Include="Task\Tasks\I2CScanTask.cpp" />
+    <ClCompile Include="Task\Tasks\ReceiveBluetoothMessageTask.cpp" />
+    <ClCompile Include="Task\Tasks\SendSensorDataTask.cpp" />
+    <ClCompile Include="Task\Tasks\SetFlashLightStateTask.cpp" />
+    <ClCompile Include="TestPCAMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

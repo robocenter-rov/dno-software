@@ -65,279 +65,258 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MATE_ROV_2017_DNO.ino" />
+    <None Include="libs\Adafruit_PWNServoDriver\examples\pwmtest\pwmtest.ino" />
+    <None Include="libs\Adafruit_PWNServoDriver\examples\servo\servo.ino" />
+    <None Include="libs\DualVNH5019MotorShield\examples\Demo\Demo.ino" />
+    <None Include="libs\MS5803\examples\SparkFun_MS5803_Demo\SparkFun_MS5803_Demo.ino" />
+    <None Include="libs\PID_v1\examples\PID_AdaptiveTunings\PID_AdaptiveTunings.ino" />
+    <None Include="libs\PID_v1\examples\PID_Basic\PID_Basic.ino" />
+    <None Include="libs\PID_v1\examples\PID_RelayOutput\PID_RelayOutput.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PidCoefficients.h">
+    <ClInclude Include="Communication\Communicators\Communicator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PeripheryManager.h">
-      <Filter>Periphery</Filter>
+    <ClInclude Include="Communication\Communicators\StdCommunicator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FlashlightPeriphery.h">
-      <Filter>Periphery</Filter>
+    <ClInclude Include="Communication\ConnectionProviders\ConnectionProvider.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AngularVelocityRegulator.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\ConnectionProviders\UdpConnectionProvider.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CourseRegulator.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\RegisterMessages\BlinkFlashlightMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DepthRegulator.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\RegisterMessages\FreeWorkerMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RotationRegulator.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\RegisterMessages\GetLastUsedWorkerStateMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PositionRegulator.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\RegisterMessages\GetWorkerStateMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VelocityRegulator.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\RegisterMessages\I2CScanMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorRotation.h">
-      <Filter>Sensors</Filter>
+    <ClInclude Include="Communication\RegisterMessages\SetFlashlightStateMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorManager.h">
-      <Filter>Sensors</Filter>
+    <ClInclude Include="Communication\RegisterMessages\SetLocalForceMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorDepth.h">
-      <Filter>Sensors</Filter>
+    <ClInclude Include="Communication\RegisterMessages\SetManipulatorPositionMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Regulators.h">
-      <Filter>Regulators</Filter>
+    <ClInclude Include="Communication\RegisterMessages\SetMotorsThrustMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MotorsForceDistributor.h">
-      <Filter>Movement</Filter>
+    <ClInclude Include="Communication\RegisterMessages\StartBluetoothReadingMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Motors.h">
-      <Filter>Movement</Filter>
+    <ClInclude Include="Communication\RegisterMessages\StartSendingSensorDataMessage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Motor.h">
-      <Filter>Movement</Filter>
+    <ClInclude Include="Communication\Message.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>Movement</Filter>
+    <ClInclude Include="Exceptions\RegisterException\RegisterExceptions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LocalMotorsForceDistributor.h">
-      <Filter>Movement</Filter>
+    <ClInclude Include="Exceptions\Exceptions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CoordinateSystemConverter.h">
-      <Filter>Utils\Math</Filter>
+    <ClInclude Include="HeaderFiles\PidCoefficients.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLocker.h">
-      <Filter>ResourceLocker</Filter>
+    <ClInclude Include="libs\Adafruit_PWNServoDriver\Adafruit_PWMServoDriver.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
-      <Filter>Task</Filter>
+    <ClInclude Include="libs\DualVNH5019MotorShield\DualVNH5019MotorShield.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaskPool.h">
-      <Filter>Task</Filter>
+    <ClInclude Include="libs\MS5803\src\SparkFun_MS5803_I2C.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaskState.h">
-      <Filter>Task</Filter>
+    <ClInclude Include="libs\PID_v1\PID_v1.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConnectionProvider.h">
-      <Filter>Communication\ConnectionProviders</Filter>
+    <ClInclude Include="Main\DebugMotorsMain.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UdpConnectionProvider.h">
-      <Filter>Communication\ConnectionProviders</Filter>
+    <ClInclude Include="Main\Main.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Exceptions.h">
-      <Filter>Exceptions</Filter>
+    <ClInclude Include="Main\StdMain.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="Movement\Motors\PCA96685Motor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetFlashlightStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Movement\Motors\PololuMotor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Messages.h">
-      <Filter>Communication</Filter>
+    <ClInclude Include="Movement\LocalMotorsForceDistributor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Communicator.h">
-      <Filter>Communication\Communicators</Filter>
+    <ClInclude Include="Movement\Motor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StdCommunicator.h">
-      <Filter>Communication\Communicators</Filter>
+    <ClInclude Include="Movement\Motors.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="Movement\MotorsForceDistributor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SharedPtr.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="Movement\Movement.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ByteArray.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="Periphery\Camera\CameraPeriphery.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SelfExpandoContainer.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="Periphery\Manipulator\ManipulatorPeriphery.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DebugMotorsMain.h">
-      <Filter>Main</Filter>
+    <ClInclude Include="Periphery\FlashlightPeriphery.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StdMain.h">
-      <Filter>Main</Filter>
+    <ClInclude Include="Periphery\PCA9685ServoMotor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>Main</Filter>
+    <ClInclude Include="Periphery\PeripheryManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RegisterExceptions.h">
-      <Filter>Exceptions\RegisterExceptions</Filter>
+    <ClInclude Include="Regulators\AngularVelocityRegulator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CantTakeAdressFromDHCPException.h">
-      <Filter>Exceptions\RegisterExceptions</Filter>
+    <ClInclude Include="Regulators\CourseRegulator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlinkFlashlightMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Regulators\DepthRegulator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetMotorsThrustMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Regulators\PositionRegulator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathConstants.h">
-      <Filter>Utils\Math</Filter>
+    <ClInclude Include="Regulators\Regulators.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetManipulatorPositionMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Regulators\RotationRegulator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ManipulatorPeriphery.h">
-      <Filter>Periphery\Manipulator</Filter>
+    <ClInclude Include="Regulators\VelocityRegulator.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PCA9685ServoMotor.h">
-      <Filter>Periphery</Filter>
+    <ClInclude Include="ResourceLocker\ResourceLocker.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CameraPeriphery.h">
-      <Filter>Periphery\Camera</Filter>
+    <ClInclude Include="Sensors\MS5803SensorDepth.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetFlashlightStateTask.h">
-      <Filter>Task\Tasks</Filter>
+    <ClInclude Include="Sensors\SensorData.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlinkFlashLightTask.h">
-      <Filter>Task\Tasks</Filter>
+    <ClInclude Include="Sensors\SensorDepth.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SendSensorDataTask.h">
-      <Filter>Task\Tasks</Filter>
+    <ClInclude Include="Sensors\SensorManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorData.h">
-      <Filter>Sensors</Filter>
+    <ClInclude Include="Sensors\SensorRotation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StartSendingSensorDataMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Task\Tasks\BlinkFlashLightTask.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PololuMotor.h">
-      <Filter>Movement\Motors</Filter>
+    <ClInclude Include="Task\Tasks\I2CScanTask.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PCA96685Motor.h">
-      <Filter>Movement\Motors</Filter>
+    <ClInclude Include="Task\Tasks\ReceiveBluetoothMessageTask.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MS5803SensorDepth.h">
-      <Filter>Sensors</Filter>
+    <ClInclude Include="Task\Tasks\SendSensorDataTask.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ReceiveBluetoothMessageTask.h">
-      <Filter>Task\Tasks</Filter>
+    <ClInclude Include="Task\Tasks\SetFlashlightStateTask.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StartBluetoothReadingMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Task\Task.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Utils</Filter>
+    <ClInclude Include="Task\TaskPool.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FreeWorkerMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Task\TaskState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Quaternions.h">
-      <Filter>Utils\Math</Filter>
+    <ClInclude Include="Utils\Math\CoordinateSystemConverter.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="I2CScanTask.h">
-      <Filter>Task\Tasks</Filter>
+    <ClInclude Include="Utils\Math\MathConstants.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="I2CScanMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Utils\Math\Quaternions.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GetWorkerStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Utils\ByteArray.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GetLastUsedWorkerStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Utils\Debug.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SetLocalForceMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
+    <ClInclude Include="Utils\List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SelfExpandoContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SharedPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PingMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPCAMain.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SensorManager.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="SensorRotation.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="SensorDepth.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="Motor.cpp">
-      <Filter>Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="Movement.cpp">
-      <Filter>Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceLocker.cpp">
-      <Filter>ResourceLocker</Filter>
-    </ClCompile>
-    <ClCompile Include="TaskPool.cpp">
-      <Filter>Task</Filter>
-    </ClCompile>
-    <ClCompile Include="UdpConnectionProvider.cpp">
-      <Filter>Communication\ConnectionProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="Exceptions.cpp">
-      <Filter>Exceptions</Filter>
-    </ClCompile>
-    <ClCompile Include="ConnectionProvider.cpp">
-      <Filter>Communication\ConnectionProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="Communicator.cpp">
-      <Filter>Communication\Communicators</Filter>
-    </ClCompile>
-    <ClCompile Include="StdCommunicator.cpp">
-      <Filter>Communication\Communicators</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugMotorsMain.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="StdMain.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ManipulatorPeriphery.cpp">
-      <Filter>Periphery\Manipulator</Filter>
-    </ClCompile>
-    <ClCompile Include="PCA9685ServoMotor.cpp">
-      <Filter>Periphery</Filter>
-    </ClCompile>
-    <ClCompile Include="SetFlashLightStateTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="BlinkFlashLightTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="SendSensorDataTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="PCA96685Motor.cpp">
-      <Filter>Movement\Motors</Filter>
-    </ClCompile>
-    <ClCompile Include="PololuMotor.cpp">
-      <Filter>Movement\Motors</Filter>
-    </ClCompile>
-    <ClCompile Include="MS5803SensorDepth.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="ReceiveBluetoothMessageTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="I2CScanTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
+    <ClCompile Include="Communication\Communicators\Communicator.cpp" />
+    <ClCompile Include="Communication\Communicators\StdCommunicator.cpp" />
+    <ClCompile Include="Communication\ConnectionProviders\ConnectionProvider.cpp" />
+    <ClCompile Include="Communication\ConnectionProviders\UdpConnectionProvider.cpp" />
+    <ClCompile Include="Exceptions\Exceptions.cpp" />
+    <ClCompile Include="libs\Adafruit_PWNServoDriver\Adafruit_PWMServoDriver.cpp" />
+    <ClCompile Include="libs\DualVNH5019MotorShield\DualVNH5019MotorShield.cpp" />
+    <ClCompile Include="libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
+    <ClCompile Include="libs\PID_v1\PID_v1.cpp" />
+    <ClCompile Include="Main\DebugMotorsMain.cpp" />
+    <ClCompile Include="Main\StdMain.cpp" />
+    <ClCompile Include="Movement\Motors\PCA96685Motor.cpp" />
+    <ClCompile Include="Movement\Motors\PololuMotor.cpp" />
+    <ClCompile Include="Movement\Motor.cpp" />
+    <ClCompile Include="Movement\Movement.cpp" />
+    <ClCompile Include="Periphery\Manipulator\ManipulatorPeriphery.cpp" />
+    <ClCompile Include="Periphery\PCA9685ServoMotor.cpp" />
+    <ClCompile Include="ResourceLocker\ResourceLocker.cpp" />
+    <ClCompile Include="Sensors\MS5803SensorDepth.cpp" />
+    <ClCompile Include="Sensors\SensorDepth.cpp" />
+    <ClCompile Include="Sensors\SensorManager.cpp" />
+    <ClCompile Include="Sensors\SensorRotation.cpp" />
+    <ClCompile Include="Task\Tasks\BlinkFlashLightTask.cpp" />
+    <ClCompile Include="Task\Tasks\I2CScanTask.cpp" />
+    <ClCompile Include="Task\Tasks\ReceiveBluetoothMessageTask.cpp" />
+    <ClCompile Include="Task\Tasks\SendSensorDataTask.cpp" />
+    <ClCompile Include="Task\Tasks\SetFlashLightStateTask.cpp" />
+    <ClCompile Include="Task\TaskPool.cpp" />
+    <ClCompile Include="TestPCAMain.cpp" />
   </ItemGroup>
 </Project>
