@@ -9,7 +9,8 @@ private:
 	int _bytes_readed;
 public:
 	ReceiveBluetoothMessageTask_t(unsigned int tag);
-
+	bool Awake();
+	bool Destroy();
 	bool LockNeededResources(RESOURCE& out_locked_resource, int worker_id) override;
 	bool UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) override;
 };
