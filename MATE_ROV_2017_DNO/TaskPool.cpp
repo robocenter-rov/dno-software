@@ -66,7 +66,7 @@ void TaskPool_t::RemoveTask(WorkerQueueNode_t* worker) {
 	LOG(worker->task->GetTag());
 	LOG(", worker_id: ");
 	LOGLN(worker->id);
-
+	worker->task->Destroy();
 	delete worker->task;
 	worker->task = nullptr;
 }
@@ -159,7 +159,7 @@ int TaskPool_t::AddTask(Task_t* task, int worker_id = -1) {
 
 		LOG("Successfully add task to worker, id: ");
 		LOGLN(current_worker->id);
-
+		task->Awake();
 		UpdateTask(current_worker);
 	} else {
 
