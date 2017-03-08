@@ -11,6 +11,7 @@
 #include "PCA96685Motor.h"
 #include "MS5803SensorDepth.h"
 #include "Debug.h"
+#include "Adafruit-PWM-Servo-Driver-Library-master\Adafruit_PWMServoDriver.h"
 
 Main_t* Main;
 
