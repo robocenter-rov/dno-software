@@ -1,9 +1,3 @@
-/*
- Name:		MATE_ROV_2017_DNO.ino
- Created:	16.11.2016 22:23:19
- Author:	JIukaviy
-*/
-
 #include "StdMain.h"
 #include "StdCommunicator.h"
 #include "UdpConnectionProvider.h"
