@@ -3,7 +3,7 @@
 class ConnectionProvider_t {
 protected:
 	unsigned int _buffer_size;
-	void* _buffer;
+	char* _buffer;
 public:
 	ConnectionProvider_t(unsigned int buffer_size);
 	virtual ~ConnectionProvider_t();
