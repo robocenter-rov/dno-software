@@ -226,9 +226,6 @@
     <ClInclude Include="StartSendingSensorDataMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
-    <ClInclude Include="PololuMotor.h">
-      <Filter>Movement\Motors</Filter>
-    </ClInclude>
     <ClInclude Include="PCA96685Motor.h">
       <Filter>Movement\Motors</Filter>
     </ClInclude>
@@ -264,6 +261,18 @@
     </ClInclude>
     <ClInclude Include="SetLocalForceMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
+    </ClInclude>
+    <ClInclude Include="UARTConnectionProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\PID\PID_v1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\MS5803\src\SparkFun_MS5803_I2C.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,9 +336,6 @@
     <ClCompile Include="PCA96685Motor.cpp">
       <Filter>Movement\Motors</Filter>
     </ClCompile>
-    <ClCompile Include="PololuMotor.cpp">
-      <Filter>Movement\Motors</Filter>
-    </ClCompile>
     <ClCompile Include="MS5803SensorDepth.cpp">
       <Filter>Sensors</Filter>
     </ClCompile>
@@ -339,5 +345,9 @@
     <ClCompile Include="I2CScanTask.cpp">
       <Filter>Task\Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="UARTConnectionProvider.cpp" />
+    <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
+    <ClCompile Include="Libs\PID\PID_v1.cpp" />
+    <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 #pragma once
-#include <Adafruit_PWMServoDriver.h>
+#include "Libs/Adafruit_PWMServoDriver/Adafruit_PWMServoDriver.h"
 
 class PCA9685ServoMotor_t {
 private:

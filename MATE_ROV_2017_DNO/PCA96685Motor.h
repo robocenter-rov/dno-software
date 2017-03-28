@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Motor.h"
-#include <Adafruit_PWMServoDriver.h>
+#include "Libs/Adafruit_PWMServoDriver/Adafruit_PWMServoDriver.h"
 
 class PCA96685Motor_t : public Motor_t {
 private:

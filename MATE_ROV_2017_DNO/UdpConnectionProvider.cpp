@@ -1,6 +1,7 @@
 #include "Debug.h"
 #include "UdpConnectionProvider.h"
 #include "Exceptions.h"
+#include <HardwareSerial.h>
 
 UdpConnectionProvider_t::UdpConnectionProvider_t(
 	unsigned int buffer_size, byte mac[6], IPAddress ip, unsigned int port, unsigned long time_out

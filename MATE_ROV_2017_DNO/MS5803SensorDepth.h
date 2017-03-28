@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SensorDepth.h"
-#include <SparkFun_MS5803_I2C.h>
+#include "Libs/MS5803/src/SparkFun_MS5803_I2C.h"
 
 class MS5803SensorDepth_t : public SensorDepth_t {
 private:
