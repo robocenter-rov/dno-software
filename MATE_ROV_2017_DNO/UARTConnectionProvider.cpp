@@ -41,17 +41,17 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 	while (size--) {
 		switch (*buff) {
 			case END:
-				Serial.write(ESC);
-				Serial.write(ESC_END);
+				_serial->write(ESC);
+				_serial->write(ESC_END);
 				_msg += ESC + ESC_END;
 				break;
 			case ESC:
-				Serial.write(ESC);
-				Serial.write(ESC_ESC);
+				_serial->write(ESC);
+				_serial->write(ESC_ESC);
 				_msg += ESC + ESC_ESC;
 				break;
 			default:
-				Serial.write(*buff);
+				_serial->write(*buff);
 				_msg += *buff;
 		}
 		buff++;
@@ -63,13 +63,14 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 int UARTConnectionProvider::Write(char c) {
 
 	Serial.write(c);
+	_serial->write(c);
 	return 0;
 }
 
 int UARTConnectionProvider::Write(int i) {
 
 	auto t = reinterpret_cast<char*>(&i);
-	Serial.write(t, sizeof(int));
+	_serial->write(t, sizeof(int));
 	return 0;
 }
 
@@ -80,7 +81,7 @@ int UARTConnectionProvider::Write(unsigned int i) {
 
 int UARTConnectionProvider::EndPacket() {
 
-	Serial.write(END);
+	_serial->write(END);
 	return 0;
 }
 
