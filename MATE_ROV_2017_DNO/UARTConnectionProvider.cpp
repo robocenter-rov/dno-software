@@ -90,9 +90,12 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 
 		switch (c) {
 		case END:
-			char* buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
-			uint32_t buffHash = *reinterpret_cast<uint32_t*>(buff);
-			uint32_t msgToHash = 0;
+			char* buff;
+			buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
+			uint32_t buffHash;
+			buffHash = *reinterpret_cast<uint32_t*>(buff);
+			uint32_t msgToHash;
+			msgToHash = 0;
 			for (; _buffer != buff; _buffer++) {
 				msgToHash = HashLy(*_buffer, msgToHash);
 			}
