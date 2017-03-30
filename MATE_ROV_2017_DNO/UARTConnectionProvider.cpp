@@ -23,7 +23,7 @@ UARTConnectionProvider::~UARTConnectionProvider()
 
 int UARTConnectionProvider::Begin() {
 #if _DEBUG
-	Serial.println("UART connection begin");
+	_serial->println("UART connection begin");
 #endif
 
 	return 0;
@@ -86,7 +86,7 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 	char c;
 	int received = 0;
 
-	while ((c = Serial.read()) > 0) {
+	while ((c = _serial->read()) > 0) {
 
 		switch (c) {
 		case END:
@@ -116,7 +116,7 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			}
 			break;
 		case ESC:
-			c = Serial.read();
+			c = _serial->read();
 			switch (c) {
 			case ESC_END:
 				c = END;
