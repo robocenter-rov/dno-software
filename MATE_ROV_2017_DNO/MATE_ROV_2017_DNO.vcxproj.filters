@@ -187,9 +187,6 @@
     <ClInclude Include="RegisterExceptions.h">
       <Filter>Exceptions\RegisterExceptions</Filter>
     </ClInclude>
-    <ClInclude Include="CantTakeAdressFromDHCPException.h">
-      <Filter>Exceptions\RegisterExceptions</Filter>
-    </ClInclude>
     <ClInclude Include="BlinkFlashlightMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
