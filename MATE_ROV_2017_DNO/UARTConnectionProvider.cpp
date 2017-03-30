@@ -57,8 +57,8 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 }
 
 int UARTConnectionProvider::Write(char c) {
-
-	Serial.write(c);
+	char* buff = &c;
+	_current_hash = HashLy(*buff, _current_hash);
 	_serial->write(c);
 	return 0;
 }
