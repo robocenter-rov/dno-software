@@ -159,7 +159,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 
 		LOGLN("GetLastUsedWorkerStateReceive");
 
-		main->SendWorkerState(main->_task_pool.GetLastAddedTaskWorkerId());
+		main->SendLastUsedWorkerState();
 
 		return 0;
 	}, this);
@@ -210,6 +210,19 @@ int StdMain_t::SendWorkerState(int worker_id) const {
 	_task_pool.GetWorkerState(worker_id, task_state_ptr, worker_status);
 
 	return _communicator->SendWorkerState(task_state_ptr, worker_id, worker_status);
+}
+
+int StdMain_t::SendLastUsedWorkerState() const {
+	LOG("Sending state of last used worker, id: ");
+	LOGLN(_task_pool.GetLastAddedTaskWorkerId());
+
+	WORKER_STATUS worker_status;
+	TaskState_t* task_state_ptr;
+	int worker_id;
+
+	_task_pool.GetLastAddedWorkerState(task_state_ptr, worker_id, worker_status);
+
+	return _communicator->SendLastUsedWorkerState(task_state_ptr, worker_id, worker_status);
 }
 
 int StdMain_t::AddTask(Task_t* task, int worker_id = -1) {

@@ -22,11 +22,14 @@ private:
 	ConnectionProvider_t* _connection_provider;
 
 	Map_t<unsigned int, ReceiveMessageFunction_t> _message_receivers;
+
+	void _SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) const;
 public:
 	StdCommunicator_t(ConnectionProvider_t* connection_provider);
 
 	int SendException(const Exceptions::Exception_t* exception) override;
 	int SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) override;
+	int SendLastUsedWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) override;
 	int SendSensorData(const SensorData_t* sensor_data) override;
 	int SendPong() override;
 
