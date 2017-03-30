@@ -11,7 +11,7 @@
 class UARTConnectionProvider : public ConnectionProvider_t {
 private:
 	const char* _msg = "";
-	static uint32_t HashFAQ6(const char* str);
+	uint32_t HashLy(char byte, uint32_t hash);
 
 public:
 	UARTConnectionProvider();

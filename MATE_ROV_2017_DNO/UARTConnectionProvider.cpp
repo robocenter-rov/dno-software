@@ -1,19 +1,16 @@
 #include "UARTConnectionProvider.h"
 
-uint32_t UARTConnectionProvider::HashFAQ6(const char* str) {
+//uint32_t UARTConnectionProvider::HashLy(const char* str) {
+//	uint32_t hash = 0;
+//	for (; *str; str++)
+//		hash = (hash * 1664525) + static_cast<unsigned char>(*str) + 1013904223;
+//	return hash;
+//}
 
-	uint32_t hash = 0;
-	for (; *str; str++)
-	{
-		hash += static_cast<unsigned char>(*str);
-		hash += (hash << 10);
-		hash ^= (hash >> 6);
-	}
-	hash += (hash << 3);
-	hash ^= (hash >> 11);
-	hash += (hash << 15);
+uint32_t UARTConnectionProvider::HashLy(char byte, uint32_t hash) {
+	return (hash * 1664525) + byte + 1013904223;
+}
 
-	return hash;
 }
 
 UARTConnectionProvider::~UARTConnectionProvider()
