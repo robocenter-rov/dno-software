@@ -2,9 +2,10 @@
 #include "PCA9685ServoMotor.h"
 #include "MathConstants.h"
 
-PCA9685ServoMotor_t::PCA9685ServoMotor_t(Adafruit_PWMServoDriver* pwm, unsigned int pwmNum) {
+PCA9685ServoMotor_t::PCA9685ServoMotor_t(Adafruit_PWMServoDriver* pwm, unsigned int pwmNum, unsigned int maxPwmVal) {
 	_pwm = pwm;
 	_pwmNum = pwmNum;
+	_maxPwmVal = maxPwmVal;
 }
 
 void PCA9685ServoMotor_t::SetAngle(float angle_radians) const {
