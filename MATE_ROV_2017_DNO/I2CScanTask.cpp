@@ -1,7 +1,7 @@
 #include "I2CScanTask.h"
 #include "Wire.h"
 
-I2CScanTask_t::I2CScanTask_t(int tag) : Task_t(tag) {
+I2CScanTask_t::I2CScanTask_t(int tag) : Task_t(tag, TI_I2C_SCAN) {
 	_current_adress = 1;
 	_device_count = 0;
 }

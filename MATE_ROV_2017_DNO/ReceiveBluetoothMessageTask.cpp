@@ -1,7 +1,7 @@
 #include "ReceiveBluetoothMessageTask.h"
 
 
-ReceiveBluetoothMessageTask_t::ReceiveBluetoothMessageTask_t(unsigned tag) : Task_t(tag), _locker(R_BLUETOOTH) {
+ReceiveBluetoothMessageTask_t::ReceiveBluetoothMessageTask_t(unsigned tag) : Task_t(tag, TI_RECEIVE_BLUETOOTH_MESSAGE), _locker(R_BLUETOOTH) {
 	_bytes_readed = 0;
 }
 
