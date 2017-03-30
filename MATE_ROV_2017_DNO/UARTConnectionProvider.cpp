@@ -35,7 +35,6 @@ int UARTConnectionProvider::BeginPacket() {
 }
 
 int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
-
 	char* buff = static_cast<char*>(buffer);
 	int receivebytes = 0;
 	while (size--) {
@@ -43,20 +42,17 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 			case END:
 				_serial->write(ESC);
 				_serial->write(ESC_END);
-				_msg += ESC + ESC_END;
 				break;
 			case ESC:
 				_serial->write(ESC);
 				_serial->write(ESC_ESC);
-				_msg += ESC + ESC_ESC;
 				break;
 			default:
 				_serial->write(*buff);
-				_msg += *buff;
+				_current_hash = HashLy(*buff, _current_hash);
 		}
 		buff++;
 	}
-	Serial.write(HashFAQ6(_msg));
 	return 0;
 }
 
