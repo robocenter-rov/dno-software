@@ -64,25 +64,18 @@ int UARTConnectionProvider::Write(char c) {
 }
 
 int UARTConnectionProvider::Write(int i) {
-
 	auto t = reinterpret_cast<char*>(&i);
 	_serial->write(t, sizeof(int));
 	return 0;
 }
 
-int UARTConnectionProvider::Write(unsigned int i) {
-
-	return Write(static_cast<int>(i));
-}
-
 int UARTConnectionProvider::EndPacket() {
-
+	_serial->write(_current_hash);
 	_serial->write(END);
 	return 0;
 }
 
 int UARTConnectionProvider::Send(void* buffer, unsigned int size) {
-
 	BeginPacket();
 	Write(buffer, size);
 	EndPacket();
@@ -94,14 +87,32 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 	char c;
 	int received = 0;
 
-	while (true) {
-
-		c = Serial.read();
+	while ((c = Serial.read()) > 0) {
 
 		switch (c) {
 		case END:
-			if (received) return received;
-			else break;
+			char* buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
+			uint32_t buffHash = *reinterpret_cast<uint32_t*>(buff);
+			uint32_t msgToHash = 0;
+			for (; _buffer != buff; _buffer++) {
+				msgToHash = HashLy(*_buffer, msgToHash);
+			}
+			if (msgToHash == buffHash && received <= _buffer_size) {
+				readed_bytes = received - sizeof(uint32_t);
+				received = 0;
+				return 0;
+			}
+			else {
+				if (received > _buffer_size) {
+					ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
+					return 1;
+				}
+				else {
+					received = 0;
+					return  1;
+				}
+			}
+			break;
 		case ESC:
 			c = Serial.read();
 			switch (c) {
@@ -114,25 +125,9 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			}
 			break;
 		default:
-			if (received < readed_bytes) {
+			if (received < _buffer_size) {
 				_buffer[received++] = c;
-			} else {
-				char* buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
-				uint32_t* buffHash = reinterpret_cast<uint32_t*>(buff);
-				uint32_t receivedMsg = HashFAQ6(_buffer);
-
-				if (receivedMsg == *buffHash && received <= readed_bytes) {
-					return 0;
-				} else {
-					if (received > _buffer_size) {
-						ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
-						return 1;
-					} else {
-						received = 0;
-						return  1;
-					}
-				}
-			}
+			} 
 			break;
 		}
 	}
