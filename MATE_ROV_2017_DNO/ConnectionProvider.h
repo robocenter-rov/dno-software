@@ -4,6 +4,7 @@ class ConnectionProvider_t {
 protected:
 	unsigned int _buffer_size;
 	char* _buffer;
+
 public:
 	ConnectionProvider_t(unsigned int buffer_size);
 	virtual ~ConnectionProvider_t();
@@ -14,7 +15,7 @@ public:
 	virtual int Write(void* buffer, unsigned int size) = 0;
 	virtual int Write(char c) = 0;
 	virtual int Write(int i) = 0;
-	virtual int Write(unsigned int i) = 0;
+	virtual int Write(unsigned int i);
 	virtual int EndPacket() = 0;
 	virtual int Send(void* buffer, unsigned int size) = 0;
 	virtual int Receive(unsigned int& readed_bytes) = 0;

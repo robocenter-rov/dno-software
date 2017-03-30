@@ -9,6 +9,10 @@ ConnectionProvider_t::~ConnectionProvider_t() {
 	delete[] _buffer;
 }
 
+int ConnectionProvider_t::Write(unsigned int i) {
+	return Write(static_cast<int>(i));
+}
+
 void* ConnectionProvider_t::Buffer() const {
 	return _buffer;
 }
