@@ -30,7 +30,7 @@ int UARTConnectionProvider::Begin() {
 }
 
 int UARTConnectionProvider::BeginPacket() {
-	Serial.write(END);
+	_current_hash = 0;
 	return 0;
 }
 
