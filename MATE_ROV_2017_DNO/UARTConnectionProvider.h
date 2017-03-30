@@ -12,9 +12,11 @@ class UARTConnectionProvider : public ConnectionProvider_t {
 private:
 	const char* _msg = "";
 	uint32_t HashLy(char byte, uint32_t hash);
+	Stream* _serial;
+	uint32_t _current_hash;
 
 public:
-	UARTConnectionProvider();
+	UARTConnectionProvider(Stream* serial, unsigned int buffer_size);
 	~UARTConnectionProvider();
 	int Begin() override;
 	void Reset() override;

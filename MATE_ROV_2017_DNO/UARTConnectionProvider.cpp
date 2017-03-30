@@ -11,6 +11,10 @@ uint32_t UARTConnectionProvider::HashLy(char byte, uint32_t hash) {
 	return (hash * 1664525) + byte + 1013904223;
 }
 
+UARTConnectionProvider::UARTConnectionProvider(Stream* serial, unsigned int buffer_size): ConnectionProvider_t(buffer_size)
+{
+	_serial = serial;
+	_current_hash = 0;
 }
 
 UARTConnectionProvider::~UARTConnectionProvider()
