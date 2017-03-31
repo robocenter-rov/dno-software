@@ -36,6 +36,15 @@ int UARTConnectionProvider::Begin() {
 	return 0;
 }
 
+void UARTConnectionProvider::Reset() {
+	_current_hash = 0;
+	_received = 0;
+}
+
+int UARTConnectionProvider::Connected() {
+	return 1;
+}
+
 int UARTConnectionProvider::BeginPacket() {
 	_current_hash = 0;
 	return 0;
