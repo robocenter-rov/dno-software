@@ -83,7 +83,7 @@ int UARTConnectionProvider::Send(void* buffer, unsigned int size) {
 
 int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 
-	char c;
+	int c;
 	int received = 0;
 
 	while ((c = _serial->read()) > 0) {
