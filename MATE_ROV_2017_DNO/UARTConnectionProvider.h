@@ -13,6 +13,7 @@ private:
 	Stream* _serial;
 	uint32_t _current_hash;
 
+	unsigned int _received;
 public:
 	UARTConnectionProvider(Stream* serial, unsigned int buffer_size);
 	~UARTConnectionProvider();

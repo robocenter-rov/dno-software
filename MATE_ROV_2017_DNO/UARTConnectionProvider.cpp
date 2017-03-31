@@ -15,6 +15,7 @@ UARTConnectionProvider::UARTConnectionProvider(Stream* serial, unsigned int buff
 {
 	_serial = serial;
 	_current_hash = 0;
+	_received = 0;
 }
 
 UARTConnectionProvider::~UARTConnectionProvider()
@@ -84,14 +85,13 @@ int UARTConnectionProvider::Send(void* buffer, unsigned int size) {
 int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 
 	int c;
-	int received = 0;
 
 	while ((c = _serial->read()) > 0) {
 
 		switch (c) {
 		case END:
 			char* buff;
-			buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
+			buff = _buffer + _received * sizeof(uint8_t) - sizeof(uint32_t);
 			uint32_t buffHash;
 			buffHash = *reinterpret_cast<uint32_t*>(buff);
 			uint32_t msgToHash;
@@ -100,8 +100,8 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 				msgToHash = HashLy(*p, msgToHash);
 			}
 			if (msgToHash == buffHash) {
-				readed_bytes = received - sizeof(uint32_t);
-				received = 0;
+				readed_bytes = _received - sizeof(uint32_t);
+				_received = 0;
 				return 0;
 			}
 			break;
@@ -117,10 +117,10 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			}
 			break;
 		default:
-			if (received < _buffer_size) {
-				_buffer[received++] = c;
+			if (_received < _buffer_size) {
+				_buffer[_received++] = c;
 			} else {
-				received = 0;
+				_received = 0;
 				ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
 				return 1;
 			}
