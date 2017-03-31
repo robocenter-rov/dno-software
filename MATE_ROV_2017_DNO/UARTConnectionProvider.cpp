@@ -11,11 +11,12 @@ uint32_t HashLy(char byte, uint32_t hash) {
 	return (hash * 1664525) + byte + 1013904223;
 }
 
-UARTConnectionProvider::UARTConnectionProvider(Stream* serial, unsigned int buffer_size): ConnectionProvider_t(buffer_size)
+UARTConnectionProvider::UARTConnectionProvider(Stream* serial, unsigned int buffer_size) : ConnectionProvider_t(buffer_size)
 {
 	_serial = serial;
 	_current_hash = 0;
 	_received = 0;
+	_in_esc = false;
 }
 
 UARTConnectionProvider::~UARTConnectionProvider()
@@ -83,31 +84,15 @@ int UARTConnectionProvider::Send(void* buffer, unsigned int size) {
 }
 
 int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
-
 	int c;
 
 	while ((c = _serial->read()) > 0) {
+		if (c == ESC) {
+			_in_esc = true;
+			continue;
+		}
 
-		switch (c) {
-		case END:
-			char* buff;
-			buff = _buffer + _received * sizeof(uint8_t) - sizeof(uint32_t);
-			uint32_t buffHash;
-			buffHash = *reinterpret_cast<uint32_t*>(buff);
-			uint32_t msgToHash;
-			msgToHash = 0;
-			for (char* p = _buffer; p != buff; p++) {
-				msgToHash = HashLy(*p, msgToHash);
-			}
-			if (msgToHash == buffHash) {
-				readed_bytes = _received - sizeof(uint32_t);
-				_received = 0;
-				return 0;
-			}
-			_received = 0;
-			break;
-		case ESC:
-			c = _serial->read();
+		if (_in_esc) {
 			switch (c) {
 			case ESC_END:
 				c = END;
@@ -116,16 +101,30 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 				c = ESC;
 				break;
 			}
-			break;
-		default:
-			if (_received < _buffer_size) {
-				_buffer[_received++] = c;
-			} else {
-				_received = 0;
-				ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
-				return 1;
+			_in_esc = false;
+		} else if (c == END) {
+			char* hash_ptr = _buffer + _received - sizeof(uint32_t);
+			uint32_t msg_hash = 0;
+
+			for (char *p = _buffer; p != hash_ptr; p++) {
+				msg_hash = HashLy(*p, msg_hash);
 			}
-			break;
+
+			if (msg_hash == *reinterpret_cast<uint32_t*>(hash_ptr)) {
+				readed_bytes = _received - sizeof(uint32_t);
+			}
+
+			_received = 0;
+			return 0;
+		}
+
+		if (_received < _buffer_size) {
+			_buffer[_received++] = c;
+		}
+		else {
+			_received = 0;
+			ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
+			return 1;
 		}
 	}
 }

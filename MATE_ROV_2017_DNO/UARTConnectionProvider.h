@@ -14,6 +14,8 @@ private:
 	uint32_t _current_hash;
 
 	unsigned int _received;
+
+	bool _in_esc;
 public:
 	UARTConnectionProvider(Stream* serial, unsigned int buffer_size);
 	~UARTConnectionProvider();
