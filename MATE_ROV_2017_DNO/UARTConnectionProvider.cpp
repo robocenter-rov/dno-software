@@ -104,6 +104,7 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 				_received = 0;
 				return 0;
 			}
+			_received = 0;
 			break;
 		case ESC:
 			c = _serial->read();
