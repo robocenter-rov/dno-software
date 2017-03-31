@@ -90,26 +90,19 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 
 		switch (c) {
 		case END:
-			if (received > _buffer_size) {
-				received = 0;
-				ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
-				return 1;
+			char* buff;
+			buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
+			uint32_t buffHash;
+			buffHash = *reinterpret_cast<uint32_t*>(buff);
+			uint32_t msgToHash;
+			msgToHash = 0;
+			for (char* p = _buffer; p != buff; p++) {
+				msgToHash = HashLy(*p, msgToHash);
 			}
-			else {
-				char* buff;
-				buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
-				uint32_t buffHash;
-				buffHash = *reinterpret_cast<uint32_t*>(buff);
-				uint32_t msgToHash;
-				msgToHash = 0;
-				for (char* p = _buffer; p != buff; p++) {
-					msgToHash = HashLy(*p, msgToHash);
-				}
-				if (msgToHash == buffHash) {
-					readed_bytes = received - sizeof(uint32_t);
-					received = 0;
-					return 0;
-				}
+			if (msgToHash == buffHash) {
+				readed_bytes = received - sizeof(uint32_t);
+				received = 0;
+				return 0;
 			}
 			break;
 		case ESC:
@@ -126,7 +119,11 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 		default:
 			if (received < _buffer_size) {
 				_buffer[received++] = c;
-			} 
+			} else {
+				received = 0;
+				ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
+				return 1;
+			}
 			break;
 		}
 	}
