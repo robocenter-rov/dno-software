@@ -90,28 +90,25 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 
 		switch (c) {
 		case END:
-			char* buff;
-			buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
-			uint32_t buffHash;
-			buffHash = *reinterpret_cast<uint32_t*>(buff);
-			uint32_t msgToHash;
-			msgToHash = 0;
-			for (; _buffer != buff; _buffer++) {
-				msgToHash = HashLy(*_buffer, msgToHash);
-			}
-			if (msgToHash == buffHash && received <= _buffer_size) {
-				readed_bytes = received - sizeof(uint32_t);
+			if (received > _buffer_size) {
 				received = 0;
-				return 0;
+				ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
+				return 1;
 			}
 			else {
-				if (received > _buffer_size) {
-					ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
-					return 1;
+				char* buff;
+				buff = _buffer + received * sizeof(uint8_t) - sizeof(uint32_t);
+				uint32_t buffHash;
+				buffHash = *reinterpret_cast<uint32_t*>(buff);
+				uint32_t msgToHash;
+				msgToHash = 0;
+				for (; _buffer != buff; _buffer++) {
+					msgToHash = HashLy(*_buffer, msgToHash);
 				}
-				else {
+				if (msgToHash == buffHash) {
+					readed_bytes = received - sizeof(uint32_t);
 					received = 0;
-					return  1;
+					return 0;
 				}
 			}
 			break;
