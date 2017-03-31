@@ -7,7 +7,7 @@
 //	return hash;
 //}
 
-uint32_t UARTConnectionProvider::HashLy(char byte, uint32_t hash) {
+uint32_t HashLy(char byte, uint32_t hash) {
 	return (hash * 1664525) + byte + 1013904223;
 }
 
