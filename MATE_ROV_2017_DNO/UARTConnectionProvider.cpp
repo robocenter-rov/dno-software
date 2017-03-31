@@ -102,8 +102,8 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 				buffHash = *reinterpret_cast<uint32_t*>(buff);
 				uint32_t msgToHash;
 				msgToHash = 0;
-				for (; _buffer != buff; _buffer++) {
-					msgToHash = HashLy(*_buffer, msgToHash);
+				for (char* p = _buffer; p != buff; p++) {
+					msgToHash = HashLy(*p, msgToHash);
 				}
 				if (msgToHash == buffHash) {
 					readed_bytes = received - sizeof(uint32_t);
