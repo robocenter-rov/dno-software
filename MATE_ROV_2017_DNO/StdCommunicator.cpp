@@ -180,9 +180,8 @@ int StdCommunicator_t::SendPong() {
 }
 
 int StdCommunicator_t::Update() {
-	unsigned int readed_bytes = 0;
-
 	while(true) {
+		unsigned int readed_bytes = 0;
 		if (_connection_provider->Receive(readed_bytes)) {
 			return 1;
 		}
