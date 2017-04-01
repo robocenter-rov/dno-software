@@ -84,7 +84,8 @@ int UARTConnectionProvider::Write(int i) {
 }
 
 int UARTConnectionProvider::EndPacket() {
-	_serial->write(_current_hash);
+	uint32_t hash = _current_hash;
+	UARTConnectionProvider::Write(&hash, sizeof(uint32_t));
 	_serial->write(END);
 	return 0;
 }
