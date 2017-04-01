@@ -51,7 +51,6 @@ int UARTConnectionProvider::BeginPacket() {
 
 int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 	char* buff = static_cast<char*>(buffer);
-	int receivebytes = 0;
 	while (size--) {
 		switch (*buff) {
 			case END:
