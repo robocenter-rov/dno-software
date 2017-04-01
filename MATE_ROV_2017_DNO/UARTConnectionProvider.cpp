@@ -145,4 +145,6 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			return 1;
 		}
 	}
+
+	return 0;
 }
