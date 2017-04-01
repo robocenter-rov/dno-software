@@ -1,4 +1,5 @@
 #include "UARTConnectionProvider.h"
+#include "Debug.h"
 
 //uint32_t UARTConnectionProvider::HashLy(const char* str) {
 //	uint32_t hash = 0;
@@ -29,9 +30,7 @@ UARTConnectionProvider::~UARTConnectionProvider()
 }
 
 int UARTConnectionProvider::Begin() {
-#if _DEBUG
-	_serial->println("UART connection begin");
-#endif
+	LOGLN("UART connection begin");
 
 	return 0;
 }
