@@ -1,7 +1,7 @@
 #include "BlinkFlashLightTask.h"
 
 BlinkFlashlightTask_t::BlinkFlashlightTask_t(int id, int blink_count, PeripheryManager_t* periphery_manager)
-	: Task_t(id), _locker(R_FLASHLIGHT) {
+	: Task_t(id, TI_BLINK_FLASHLIGHT), _locker(R_FLASHLIGHT) {
 	_periphery_manager = periphery_manager;
 	_blink_count = blink_count;
 	_change_count = 0;
@@ -24,7 +24,7 @@ bool BlinkFlashlightTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out
 		_last_change_time = current_time;
 		_change_count++;
 		if (_change_count / 2 >= _blink_count) {
-			out_state = OkTaskState_t(_tag);
+			out_state = OkTaskState_t(TI_BLINK_FLASHLIGHT, _tag);
 			return true;
 		}
 	}

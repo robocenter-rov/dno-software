@@ -1,6 +1,7 @@
 #include "SendSensorDataTask.h"
 
-SendSensorDataTask_t::SendSensorDataTask_t(int id, SensorManager_t* sensor_manager, Communicator_t* communicator, unsigned int interval) : Task_t(id) {
+SendSensorDataTask_t::SendSensorDataTask_t(int id, SensorManager_t* sensor_manager, Communicator_t* communicator, unsigned int interval) 
+	: Task_t(id, TI_SEND_SENSOR_DATA) {
 	_sensor_manager = sensor_manager;
 	_communicator = communicator;
 	_interval = interval;

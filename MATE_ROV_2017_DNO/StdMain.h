@@ -15,6 +15,7 @@ private:
 	TaskPool_t _task_pool;
 
 	int SendWorkerState(int worker_id) const;
+	int SendLastUsedWorkerState() const;
 	int AddTask(Task_t* task, int worker_id = -1);
 public:
 	StdMain_t(Communicator_t* communicator, Movement_t* movement,
