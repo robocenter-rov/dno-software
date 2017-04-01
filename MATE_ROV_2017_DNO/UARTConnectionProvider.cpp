@@ -117,6 +117,10 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			}
 			_in_esc = false;
 		} else if (c == END) {
+			if (_received < 5) {
+				_received = 0;
+				return 0;
+			}
 			char* hash_ptr = _buffer + _received - sizeof(uint32_t);
 			uint32_t msg_hash = 0;
 
