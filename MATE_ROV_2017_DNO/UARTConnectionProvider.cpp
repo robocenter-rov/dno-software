@@ -72,14 +72,14 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 }
 
 int UARTConnectionProvider::Write(char c) {
-	_current_hash = HashLy(c, _current_hash);
-	_serial->write(c);
+	Write(&c, 1);
+
 	return 0;
 }
 
 int UARTConnectionProvider::Write(int i) {
 	auto t = reinterpret_cast<char*>(&i);
-	_serial->write(t, sizeof(int));
+	Write(t, sizeof(int));
 	return 0;
 }
 
