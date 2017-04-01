@@ -100,7 +100,7 @@ int UARTConnectionProvider::Send(void* buffer, unsigned int size) {
 int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 	int c;
 
-	while ((c = _serial->read()) > 0) {
+	while ((c = _serial->read()) >= 0) {
 		if (c == ESC) {
 			_in_esc = true;
 			continue;
