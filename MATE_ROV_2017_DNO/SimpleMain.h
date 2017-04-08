@@ -2,7 +2,9 @@
 
 #include "Main.h"
 #include "SimpleCommunicator.h"
-
+#include "Movement.h"
+#include "SensorManager.h"
+#include "PeripheryManager.h"
 
 class SimpleMain_t : public Main_t
 {
