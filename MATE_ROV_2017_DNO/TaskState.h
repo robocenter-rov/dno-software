@@ -5,6 +5,7 @@
 #include "TaskId.h"
 
 enum TASK_STATUS {
+	TS_NONE,
 	TS_OK,
 	TS_CANCELLED,
 

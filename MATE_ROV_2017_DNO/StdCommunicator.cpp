@@ -22,13 +22,15 @@ struct Message_t {
 #pragma pack(pop)
 
 void StdCommunicator_t::_SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) const {
-	auto task_state_bytes = task_state->GetAdditionalData();
 	_connection_provider->Write(worker_id);            //1
 	_connection_provider->Write(worker_status);        //3
 	_connection_provider->Write(task_state->task_id);  //5
 	_connection_provider->Write(task_state->task_tag); //7
 	_connection_provider->Write(task_state->status);   //9
-	_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize()); //11
+	if (task_state) {
+		auto task_state_bytes = task_state->GetAdditionalData();
+		_connection_provider->Write(task_state_bytes.Get(), task_state_bytes.GetSize()); //11
+	}
 }
 
 StdCommunicator_t::StdCommunicator_t(ConnectionProvider_t* connection_provider) : _connection_provider(connection_provider) {
@@ -138,11 +140,6 @@ int StdCommunicator_t::SendWorkerState(const TaskState_t* task_state, int worker
 int StdCommunicator_t::SendLastUsedWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) {
 	if (!Connected()) {
 		ThrowException(Exceptions::EC_SC_NOT_CONNECTED);
-		return 1;
-	}
-
-	if (!task_state) {
-		ThrowException(Exceptions::EC_BAD_ARGS);
 		return 1;
 	}
 

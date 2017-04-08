@@ -220,7 +220,13 @@ int StdMain_t::SendLastUsedWorkerState() const {
 	TaskState_t* task_state_ptr;
 	int worker_id;
 
-	_task_pool.GetLastAddedWorkerState(task_state_ptr, worker_id, worker_status);
+	if (_task_pool.GetLastAddedWorkerState(task_state_ptr, worker_id, worker_status)) {
+		if (Exceptions::GetLastCode() == Exceptions::EC_TP_NO_ONE_WORKER_IS_USED) {
+			Exceptions::Release();
+			return _communicator->SendLastUsedWorkerState(nullptr, -1, WS_BUSY);
+		}
+		return 1;
+	}
 
 	return _communicator->SendLastUsedWorkerState(task_state_ptr, worker_id, worker_status);
 }
@@ -232,10 +238,7 @@ int StdMain_t::AddTask(Task_t* task, int worker_id = -1) {
 		}
 		Exceptions::Release();
 	} else {
-		TaskState_t* task_state_ptr;
-		WORKER_STATUS worker_status;
-		_task_pool.GetLastAddedWorkerState(task_state_ptr, worker_id, worker_status);
-		return _communicator->SendWorkerState(task_state_ptr, worker_id, worker_status);
+		SendLastUsedWorkerState();
 	}
 	return 0;
 }

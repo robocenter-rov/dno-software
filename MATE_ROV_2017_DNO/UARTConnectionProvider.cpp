@@ -13,10 +13,6 @@
 #define ESC_END         0334    /* ESC ESC_END means END data byte */
 #define ESC_ESC         0335    /* ESC ESC_ESC means ESC data byte */
 
-uint32_t HashLy(char byte, uint32_t hash) {
-	return (hash * 1664525) + byte + 1013904223;
-}
-
 UARTConnectionProvider::UARTConnectionProvider(Stream* serial, unsigned int buffer_size) : ConnectionProvider_t(buffer_size)
 {
 	_serial = serial;
@@ -50,20 +46,25 @@ int UARTConnectionProvider::BeginPacket() {
 }
 
 int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
-	char* buff = static_cast<char*>(buffer);
+	uint8_t* buff = static_cast<uint8_t*>(buffer);
 	while (size--) {
 		switch (*buff) {
 			case END:
 				_serial->write(ESC);
 				_serial->write(ESC_END);
+				LOGLN("Write ESC, ESC_END");
 				break;
 			case ESC:
 				_serial->write(ESC);
 				_serial->write(ESC_ESC);
+				LOGLN("Write ESC, ESC_ESC");
 				break;
 			default:
 				_serial->write(*buff);
 				_current_hash = HashLy(*buff, _current_hash);
+				LOG("Write: ");
+				LOGHEX(uint8_t(*buff));
+				LOGLN();
 		}
 		buff++;
 	}
@@ -72,18 +73,24 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 
 int UARTConnectionProvider::Write(char c) {
 	Write(&c, 1);
-
 	return 0;
 }
 
 int UARTConnectionProvider::Write(int i) {
-	auto t = reinterpret_cast<char*>(&i);
-	Write(t, sizeof(int));
+	Write(&i, sizeof(int));
 	return 0;
 }
 
 int UARTConnectionProvider::EndPacket() {
 	uint32_t hash = _current_hash;
+
+	LOGLN("End Packet, hash: ");
+	for (uint8_t* p = (uint8_t*)&hash; (uint32_t*)p != &hash + 1; p++) {
+		LOGHEX(*p);
+		LOG(' ');
+	}
+	LOGLN();
+
 	UARTConnectionProvider::Write(&hash, sizeof(uint32_t));
 	_serial->write(END);
 	return 0;
@@ -100,6 +107,10 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 	int c;
 
 	while ((c = _serial->read()) >= 0) {
+		LOG(_received);
+		LOG(": ");
+		LOGHEX(uint8_t(c));
+		LOGLN();
 		if (c == ESC) {
 			_in_esc = true;
 			continue;
@@ -116,6 +127,7 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			}
 			_in_esc = false;
 		} else if (c == END) {
+			LOGLN("End of packet received");
 			if (_received < 5) {
 				_received = 0;
 				return 0;
@@ -129,6 +141,8 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 
 			if (msg_hash == *reinterpret_cast<uint32_t*>(hash_ptr)) {
 				readed_bytes = _received - sizeof(uint32_t);
+			} else {
+				LOGLN("Broken message");
 			}
 
 			_received = 0;

@@ -271,6 +271,9 @@
     <ClInclude Include="Libs\MS5803\src\SparkFun_MS5803_I2C.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestPCAMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -346,5 +349,6 @@
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
     <ClCompile Include="Libs\PID\PID_v1.cpp" />
     <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
+    <ClCompile Include="TestPCAMain.cpp" />
   </ItemGroup>
 </Project>

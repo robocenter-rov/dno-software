@@ -6,5 +6,6 @@
 #define LOGLN(str) Serial.println(str); delay(50);
 #else
 #define LOG(str)
+#define LOGHEX(str);
 #define LOGLN(str)
 #endif

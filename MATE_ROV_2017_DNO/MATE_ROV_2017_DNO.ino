@@ -5,6 +5,8 @@
 #include "PCA96685Motor.h"
 #include "MS5803SensorDepth.h"
 #include "Debug.h"
+#include "UARTConnectionProvider.h"
+#include "TestPCAMain.h"
 
 Main_t* Main;
 
@@ -54,10 +56,12 @@ void setup() {
 	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery);
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-	ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
+	//ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
+	Serial3.begin(9600);
+	ConnectionProvider_t* connection_provider = new UARTConnectionProvider(&Serial3, 30);
 	Communicator_t* communicator = new StdCommunicator_t(connection_provider);
 
-	Main = new StdMain_t(communicator, movement, sensor_manager, periphery_manager);
+	Main = new TestPCAMain_t(periphery_manager, movement);
 
 	if (Main->Begin()) {
 #ifdef _DEBUG

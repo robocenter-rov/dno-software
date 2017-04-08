@@ -14,6 +14,15 @@ void TestPCAMain_t::Loop() {
 	_periphery_manager->GetManipulator()->SetHandAngle(abs(sin(millis() / 1000.f * PI + PI / 2)));
 
 	for (int i = 0; i < 6; i++) {
-		_movement->SetMotorThrust(i, sin(millis() / 1000.f * PI + PI / 6 * i));
+		_movement->SetMotorThrust(i, -1);
 	}
+
+	delay(1000);
+
+	for (int i = 0; i < 6; i++) {
+		_movement->SetMotorThrust(i, 1);
+	}
+
+	delay(1000);
+
 }

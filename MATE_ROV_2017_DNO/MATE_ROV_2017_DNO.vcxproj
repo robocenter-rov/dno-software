@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SPI\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\2r25oje5.2cf\Micro Platforms\visualmicro\ide\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries;$(ProjectDir)..\..\Documents\Arduino\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\avr\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_DEBUG=1;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -63,8 +63,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src;C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src;C:\Program Files (x86)\Arduino\libraries\MS5803\src;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master\utility;C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master\utility;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master\utility;C:\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;C:\Program Files (x86)\Arduino\libraries\MS5803\src\utility;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src\utility;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src\utility;C:\Program Files (x86)\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries;C:\Users\Veiber\Documents\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\cores\arduino;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\variants\mega;C:\Users\Veiber\Source\Repos\dno-software\MATE_ROV_2017_DNO;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\cores\arduino;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\variants\mega;C:\Users\Veiber\Documents\Arduino\libraries\Adafruit-PWM-Servo-Driver-Library-master;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\Wire\src;C:\Users\Veiber\Documents\Arduino\libraries\Arduino-PID-Library-master;C:\Program Files (x86)\Arduino\libraries\Ethernet\src;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries\SPI\src;C:\Program Files (x86)\Arduino\libraries\MS5803\src;C:\Users\Veiber\Documents\Arduino\libraries\dual-vnh5019-motor-shield-master;C:\Program Files (x86)\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.15\libraries;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\Extensions\uqtbicgz.hvx\Micro Platforms\default\debuggers;C:\Users\Veiber\Documents\Arduino\libraries;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2/avr/include/;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2//avr/include/avr/;C:\Users\Veiber\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2/lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>C:\Users\Veiber\Source\Repos\dno-software\MATE_ROV_2017_DNO\__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -135,6 +135,7 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskPool.h" />
     <ClInclude Include="TaskState.h" />
+    <ClInclude Include="TestPCAMain.h" />
     <ClInclude Include="UARTConnectionProvider.h" />
     <ClInclude Include="UdpConnectionProvider.h" />
     <ClInclude Include="SharedPtr.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="StdCommunicator.cpp" />
     <ClCompile Include="StdMain.cpp" />
     <ClCompile Include="TaskPool.cpp" />
+    <ClCompile Include="TestPCAMain.cpp" />
     <ClCompile Include="UARTConnectionProvider.cpp" />
     <ClCompile Include="UdpConnectionProvider.cpp" />
   </ItemGroup>
@@ -189,7 +191,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM3" />
+      <UserProperties arduino.upload.port="COM15" debug.local.portspeed="9600" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
