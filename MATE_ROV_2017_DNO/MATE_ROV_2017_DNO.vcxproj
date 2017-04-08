@@ -129,6 +129,8 @@
     <ClInclude Include="SetLocalForceMessage.h" />
     <ClInclude Include="SetManipulatorPositionMessage.h" />
     <ClInclude Include="SetMotorsThrustMessage.h" />
+    <ClInclude Include="SimpleCommunicator.h" />
+    <ClInclude Include="SimpleMain.h" />
     <ClInclude Include="StartBluetoothReadingMessage.h" />
     <ClInclude Include="StartSendingSensorDataMessage.h" />
     <ClInclude Include="StdCommunicator.h" />
@@ -181,6 +183,8 @@
     <ClCompile Include="SensorManager.cpp" />
     <ClCompile Include="SensorRotation.cpp" />
     <ClCompile Include="SetFlashLightStateTask.cpp" />
+    <ClCompile Include="SimpleCommunicator.cpp" />
+    <ClCompile Include="SimpleMain.cpp" />
     <ClCompile Include="StdCommunicator.cpp" />
     <ClCompile Include="StdMain.cpp" />
     <ClCompile Include="TaskPool.cpp" />
