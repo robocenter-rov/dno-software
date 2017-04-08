@@ -1,5 +1,6 @@
 #include "UARTConnectionProvider.h"
 #include "Debug.h"
+#include "Hash.h"
 
 //uint32_t UARTConnectionProvider::HashLy(const char* str) {
 //	uint32_t hash = 0;
@@ -68,16 +69,6 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 		}
 		buff++;
 	}
-	return 0;
-}
-
-int UARTConnectionProvider::Write(char c) {
-	Write(&c, 1);
-	return 0;
-}
-
-int UARTConnectionProvider::Write(int i) {
-	Write(&i, sizeof(int));
 	return 0;
 }
 

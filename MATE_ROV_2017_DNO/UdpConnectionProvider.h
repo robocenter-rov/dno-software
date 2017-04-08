@@ -23,9 +23,6 @@ public:
 	int Connected() override;
 	int BeginPacket() override;
 	int Write(void* buffer, unsigned int size) override;
-	int Write(char c) override;
-	int Write(int c) override;
-	int Write(unsigned int c) override;
 	int EndPacket() override;
 	int Send(void* buffer, unsigned int size) override;
 	int Receive(unsigned int& readed_bytes) override;

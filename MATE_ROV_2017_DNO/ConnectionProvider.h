@@ -13,9 +13,10 @@ public:
 	virtual int Connected() = 0;
 	virtual int BeginPacket() = 0;
 	virtual int Write(void* buffer, unsigned int size) = 0;
-	virtual int Write(char c) = 0;
-	virtual int Write(int i) = 0;
-	virtual int Write(unsigned int i);
+	template <typename T>
+	int Write(T val) {
+		return Write(&val, sizeof(T));
+	}
 	virtual int EndPacket() = 0;
 	virtual int Send(void* buffer, unsigned int size) = 0;
 	virtual int Receive(unsigned int& readed_bytes) = 0;

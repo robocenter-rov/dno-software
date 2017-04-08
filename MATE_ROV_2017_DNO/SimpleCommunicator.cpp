@@ -2,21 +2,21 @@
 #include "DataReader.h"
 
 enum SEND_BLOCK_IDS {
-	RBI_STATE = 0,
-	RBI_ORIENTATION = 1,
-	RBI_RAW_SENSOR_DATA = 2,
-	RBI_CALIBRATED_SENSOR_DATA = 3,
-	RBI_BLUETOOTH_MSG_RECEIVE = 4,
-	RBI_MOTORS_STATE_RECEIVE = 5,
-	RBI_PID_STATE_RECEIVE = 6,
+	SBI_STATE = 0,
+	SBI_SENSOR_DATA = 1,
+	SBI_RAW_SENSOR_DATA = 2,
+	SBI_CALIBRATED_SENSOR_DATA = 3,
+	SBI_BLUETOOTH_MSG_RECEIVE = 4,
+	SBI_MOTORS_STATE_RECEIVE = 5,
+	SBI_PID_STATE_RECEIVE = 6,
 };
 
 enum RECEIVE_BLOCK_IDS {
-	SBI_STATE = 0,
-	SBI_DEVICES_STATE = 1,
-	SBI_MOTORS_STATE = 2,
-	SBI_MOVEMENT = 3,
-	SBI_PID = 4,
+	RBI_STATE = 0,
+	RBI_DEVICES_STATE = 1,
+	RBI_MOTORS_STATE = 2,
+	RBI_MOVEMENT = 3,
+	RBI_PID = 4,
 };
 
 SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_provider) {
@@ -71,7 +71,7 @@ int SimpleCommunicator_t::Update() {
 						state.state.send_motors_state, 
 						state.last_i2c_scan);
 				break;
-				case SBI_DEVICES_STATE:
+				case RBI_DEVICES_STATE:
 					struct {
 						float ArmPos;
 						float HandPos;
@@ -90,7 +90,7 @@ int SimpleCommunicator_t::Update() {
 						devices_state.Cam2Pos
 					);
 				break;
-				case SBI_MOTORS_STATE:
+				case RBI_MOTORS_STATE:
 					struct {
 						float M1;
 						float M2;
@@ -109,7 +109,7 @@ int SimpleCommunicator_t::Update() {
 						motors_state.M6
 					);
 				break;
-				case SBI_MOVEMENT:
+				case RBI_MOVEMENT:
 					struct {
 						struct {
 							int auto_depth : 1;
@@ -135,7 +135,7 @@ int SimpleCommunicator_t::Update() {
 						movement.pitch
 					);
 				break;
-				case SBI_PID:
+				case RBI_PID:
 					Pids_t pids;
 					dr.Read(pids);
 					_on_pid_receive.callback(_on_pid_receive.data,
@@ -155,24 +155,51 @@ int SimpleCommunicator_t::Update() {
 				default: ;
 			}
 		}
+	}
 
+	if (millis() - _last_msg_send_time < _send_frequency) {
+		_connection_provider->BeginPacket();
+		_connection_provider->Write(_last_sended_msg_id);
 
+		_connection_provider->Write(SBI_STATE);
+		_connection_provider->Write(_all_state);
+		_connection_provider->Write(_scanned_i2c_devices);
+		_connection_provider->Write(_last_i2c_scan_token);
+
+		_connection_provider->Write(SBI_SENSOR_DATA);
+		_connection_provider->Write(_sensor_data);
+
+		if (_all_state.send_raw_sensor_data) {
+			_connection_provider->Write(SBI_RAW_SENSOR_DATA);
+			_connection_provider->Write(_raw_sensor_data);
+		}
+
+		if (_all_state.send_calibrated_sensor_data) {
+			_connection_provider->Write(SBI_CALIBRATED_SENSOR_DATA);
+			_connection_provider->Write(_calibrated_sensor_data);
+		}
+
+		if (_all_state.send_pid_state) {
+			_connection_provider->Write(SBI_PID_STATE_RECEIVE);
+			_connection_provider->Write(_pids_state);
+		}
+
+		if (_all_state.send_motors_state) {
+			_connection_provider->Write(SBI_MOTORS_STATE_RECEIVE);
+			_connection_provider->Write(_motors_state);
+		}
+
+		if (_all_state.read_bluetooth) {
+			_connection_provider->Write(SBI_BLUETOOTH_MSG_RECEIVE);
+			_connection_provider->Write(_bluetooth_message, 7);
+		}
 	}
 
 	return 0;
 }
 
-void SimpleCommunicator_t::SetState(bool flashlight_state, bool read_bluetooth, uint8_t last_i2c_scan_token, bool pca1, bool pca2, bool hmc58x3, bool itg3200, bool adxl345, bool bmp085, bool ms5803) {
-	_all_state.state.flashlight_state = flashlight_state;
-	_all_state.state.read_bluetooth = read_bluetooth;
-	_all_state.last_i2c_scan_token = last_i2c_scan_token;
-	_all_state.scanned_devices.pca1 = pca1;
-	_all_state.scanned_devices.pca2 = pca2;
-	_all_state.scanned_devices.hmc58x3 = hmc58x3;
-	_all_state.scanned_devices.itg3200 = itg3200;
-	_all_state.scanned_devices.adxl345 = adxl345;
-	_all_state.scanned_devices.bmp085 = bmp085;
-	_all_state.scanned_devices.ms5803 = ms5803;
+void SimpleCommunicator_t::SetState(bool flashlight_state) {
+	_all_state.flashlight_state = flashlight_state;
 }
 
 void SimpleCommunicator_t::SetSensorData(float q1, float q2, float q3, float q4, float depth) {
@@ -183,7 +210,7 @@ void SimpleCommunicator_t::SetSensorData(float q1, float q2, float q3, float q4,
 	_sensor_data.depth = depth;
 }
 
-void SimpleCommunicator_t::SetRawSensorData(int ax, int ay, int az, int gx, int gy, int gz, int mx, int my, int mz) {
+void SimpleCommunicator_t::SetRawSensorData(int ax, int ay, int az, int gx, int gy, int gz, int mx, int my, int mz, float depth) {
 	_raw_sensor_data.ax = ax;
 	_raw_sensor_data.ay = ay;
 	_raw_sensor_data.az = az;
@@ -195,6 +222,8 @@ void SimpleCommunicator_t::SetRawSensorData(int ax, int ay, int az, int gx, int 
 	_raw_sensor_data.mx = mx;
 	_raw_sensor_data.my = my;
 	_raw_sensor_data.mz = mz;
+
+	_raw_sensor_data.depth = depth;
 }
 
 void SimpleCommunicator_t::SetCalibratedSensorData(float ax, float ay, float az, float gx, float gy, float gz, float mx, float my, float mz) {
@@ -236,6 +265,18 @@ void SimpleCommunicator_t::SetMotorsState(float m1, float m2, float m3, float m4
 	_motors_state.m4 = m4;
 	_motors_state.m5 = m5;
 	_motors_state.m6 = m6;
+}
+
+void SimpleCommunicator_t::SetScannedI2CDevices(bool pca1, bool pca2, bool hmc58x3, bool itg3200, bool adxl345, bool bmp085, bool ms5803) {
+	_scanned_i2c_devices.pca1 = pca1;
+	_scanned_i2c_devices.pca2 = pca2;
+	_scanned_i2c_devices.hmc58x3 = hmc58x3;
+	_scanned_i2c_devices.itg3200 = itg3200;
+	_scanned_i2c_devices.adxl345 = adxl345;
+	_scanned_i2c_devices.bmp085 = bmp085;
+	_scanned_i2c_devices.ms5803 = ms5803;
+
+	_last_i2c_scan_token = _last_received_i2c_scan_token;
 }
 
 void SimpleCommunicator_t::OnStateReceive(void(* callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token), void* data) {
