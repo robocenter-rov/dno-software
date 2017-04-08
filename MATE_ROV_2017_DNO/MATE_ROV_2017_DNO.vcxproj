@@ -89,6 +89,7 @@
     <ClInclude Include="AngularVelocityRegulator.h" />
     <ClInclude Include="BlinkFlashlightMessage.h" />
     <ClInclude Include="BlinkFlashLightTask.h" />
+    <ClInclude Include="BluetoothPeriphery.h" />
     <ClInclude Include="ByteArray.h" />
     <ClInclude Include="CameraPeriphery.h" />
     <ClInclude Include="FreeWorkerMessage.h" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlinkFlashLightTask.cpp" />
+    <ClCompile Include="BluetoothPeriphery.cpp" />
     <ClCompile Include="Communicator.cpp" />
     <ClCompile Include="ConnectionProvider.cpp" />
     <ClCompile Include="DebugMotorsMain.cpp" />
