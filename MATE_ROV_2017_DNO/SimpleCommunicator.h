@@ -88,7 +88,7 @@ private:
 	ConnectionProvider_t* _connection_provider;
 public:
 	SimpleCommunicator_t(ConnectionProvider_t* connection_provider);
-	void Begin();
+	int Begin();
 	void Stop();
 	bool Connected() const;
 

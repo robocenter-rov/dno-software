@@ -34,8 +34,8 @@ SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_prov
 	_receive_packets_leak = 0;
 }
 
-void SimpleCommunicator_t::Begin() {
-	
+int SimpleCommunicator_t::Begin() {
+	return 0;
 }
 
 void SimpleCommunicator_t::Stop() {
