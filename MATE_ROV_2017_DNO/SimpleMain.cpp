@@ -8,6 +8,85 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 	_sensor_manager = sensor_manager;
 	_periphery_manager = periphery_manager;
 
+	_communicator->OnStateNeed([](void* data, bool& flashlight_state)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+
+		flashlight_state = main->_periphery_manager->GetFlashlightState();
+	}, this);
+
+	_communicator->OnBluetoothMessageNeed([](void* data, char*& msg)
+	{
+		msg = "1234567";
+	}, this);
+
+	_communicator->OnSensorDataNeed([](void* data, float& q1, float& q2, float& q3, float& q4, float& depth)
+	{
+		q1 = 1;
+		q2 = 0;
+		q3 = 0;
+		q4 = 0;
+
+		depth = 10;
+	}, this);
+
+	_communicator->OnRawSensorDataNeed([](void* data, int& ax, int& ay, int& az, int& gx, int& gy, int& gz, int& mx, int& my, int& mz, float& depth)
+	{
+		ax = 1;
+		ay = 0;
+		az = 0;
+
+		gx = 0;
+		gy = 0;
+		gz = 0;
+
+		mx = 0;
+		my = 0;
+		mz = 0;
+
+		depth = 11;
+	}, this);
+
+	_communicator->OnCalibratedSensorDataNeed([](void* data, float& ax, float& ay, float& az, float& gx, float& gy, float& gz, float& mx, float& my, float& mz, float& depth)
+	{
+		ax = 1;
+		ay = 0;
+		az = 0;
+
+		gx = 0;
+		gy = 0;
+		gz = 0;
+
+		mx = 0;
+		my = 0;
+		mz = 0;
+
+		depth = 12;
+	}, this);
+
+	_communicator->OnMotorsStateNeed([](void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+
+		m1 = main->_movement->GetMotorThrust(0);
+		m2 = main->_movement->GetMotorThrust(1);
+		m3 = main->_movement->GetMotorThrust(2);
+		m4 = main->_movement->GetMotorThrust(3);
+		m5 = main->_movement->GetMotorThrust(4);
+		m6 = main->_movement->GetMotorThrust(5);
+	}, this);
+
+	_communicator->OnScannedI2CDevicesNeed([](void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803)
+	{
+		scanned = true;
+		pca1 = true;
+		pca2 = false;
+		hmc58x3 = true;
+		itg3200 = true;
+		adxl345 = true;
+		bmp085 = true;
+		ms5803 = true;
+	}, this);
 
 	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos) -> void {
 		auto main = static_cast<SimpleMain_t*>(data);
