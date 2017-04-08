@@ -95,8 +95,10 @@ SimpleMain_t::~SimpleMain_t()
 
 int SimpleMain_t::Begin()
 {
+	return _communicator->Begin();
 }
 
 void SimpleMain_t::Loop()
 {
+	_communicator->Update();
 }
