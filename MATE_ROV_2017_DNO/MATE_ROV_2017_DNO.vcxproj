@@ -92,11 +92,13 @@
     <ClInclude Include="BluetoothPeriphery.h" />
     <ClInclude Include="ByteArray.h" />
     <ClInclude Include="CameraPeriphery.h" />
+    <ClInclude Include="DataReader.h" />
     <ClInclude Include="FreeWorkerMessage.h" />
     <ClInclude Include="ConnectionProvider.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="GetLastUsedWorkerStateMessage.h" />
     <ClInclude Include="GetWorkerStateMessage.h" />
+    <ClInclude Include="Hash.h" />
     <ClInclude Include="I2CScanMessage.h" />
     <ClInclude Include="I2CScanTask.h" />
     <ClInclude Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.h" />

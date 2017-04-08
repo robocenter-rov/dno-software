@@ -283,6 +283,12 @@
     <ClInclude Include="BluetoothPeriphery.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DataReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -359,8 +365,10 @@
     <ClCompile Include="Libs\PID\PID_v1.cpp" />
     <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
     <ClCompile Include="TestPCAMain.cpp" />
-    <ClCompile Include="SimpleCommunicator.cpp" />
     <ClCompile Include="SimpleMain.cpp" />
     <ClCompile Include="BluetoothPeriphery.cpp" />
+    <ClCompile Include="SimpleCommunicator.cpp">
+      <Filter>Communication\Communicators</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
