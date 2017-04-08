@@ -22,6 +22,16 @@ enum RECEIVE_BLOCK_IDS {
 
 SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_provider) {
 	_connection_provider = connection_provider;
+	_last_i2c_scan_token = 0;
+	_last_received_i2c_scan_token = 0;
+	_pids_hash = 0;
+	_last_msg_receive_time = 0;
+	_last_msg_send_time = 0;
+	_send_frequency = 50;
+	_receive_time_out = 1000;
+	_last_received_msg_id = 0;
+	_last_sended_msg_id = 0;
+	_receive_packets_leak = 0;
 }
 
 void SimpleCommunicator_t::Begin() {
