@@ -158,7 +158,8 @@ int SimpleCommunicator_t::Update() {
 					} pids;
 					dr.Read(pids);
 
-					uint32_t pids_hash = HashLy(pids);
+					uint32_t pids_hash;
+					pids_hash = HashLy(pids);
 					if (_pids_hash != pids_hash) {
 						_on_pid_receive.callback(_on_pid_receive.data,
 							pids.depth_p,

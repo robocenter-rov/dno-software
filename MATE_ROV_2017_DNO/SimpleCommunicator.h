@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Arduino.h"
+#include "ConnectionProvider.h"
+
 class SimpleCommunicator_t {
 private:
 	struct BaseCallback_t {
