@@ -12,6 +12,10 @@ void Movement_t::SetMotorThrust(int motorId, float thrust) {
 	_control_level_state = USE_MOTORS;
 }
 
+float Movement_t::GetMotorThrust(int motorId) const {
+	return _motors->GetMotorThrust(motorId);
+}
+
 void Movement_t::SetDepth(float depth) {
 	_regulators->SetTargetDepth(depth);
 	_control_level_state = USE_REGULATORS;

@@ -19,6 +19,7 @@ public:
 	Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, Regulators_t* regulators);
 
 	void SetMotorThrust(int motorId, float thrust);
+	float GetMotorThrust(int motorId) const;
 
 	void SetDepth(float depth);
 	void SetVelocity(float velocityX, float velocityY, float velocityZ);
