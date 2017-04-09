@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Debug.h"
+
 class DataReader_t {
 private:
 	void* _buffer;
@@ -13,8 +15,10 @@ public:
 		if (_buffer_size - _readed < sizeof(T)) {
 			return -1;
 		}
-		out = *reinterpret_cast<T*>(_buffer);
+		out = *reinterpret_cast<T*>(_buffer + _readed);
 		_readed += sizeof(T);
+		LOG("Reader, read: ");
+		LOGLN(sizeof(T));
 		return sizeof(T);
 	}
 
