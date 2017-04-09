@@ -365,6 +365,8 @@ int SimpleCommunicator_t::Update() {
 
 			_connection_provider->Write(bluetooth_message, 7);
 		}
+
+		_connection_provider->EndPacket();
 	}
 
 	return 0;
