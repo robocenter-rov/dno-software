@@ -236,6 +236,7 @@ int SimpleCommunicator_t::Update() {
 
 		_connection_provider->Write(_last_i2c_scan_token);
 		_connection_provider->Write(scanned_i2c_devices);
+		_connection_provider->Write(_pids_hash);
 
 		_connection_provider->Write(SBI_SENSOR_DATA);
 
