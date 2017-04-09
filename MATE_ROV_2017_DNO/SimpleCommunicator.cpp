@@ -238,7 +238,7 @@ int SimpleCommunicator_t::Update() {
 		_connection_provider->Write(scanned_i2c_devices);
 		_connection_provider->Write(_pids_hash);
 
-		_connection_provider->Write(SBI_SENSOR_DATA);
+		_connection_provider->Write(static_cast<uint8_t>(SBI_SENSOR_DATA));
 
 		struct {
 			float q1;
@@ -254,7 +254,7 @@ int SimpleCommunicator_t::Update() {
 		_connection_provider->Write(sensor_data);
 
 		if (_all_state.send_raw_sensor_data) {
-			_connection_provider->Write(SBI_RAW_SENSOR_DATA);
+			_connection_provider->Write(static_cast<uint8_t>(SBI_RAW_SENSOR_DATA));
 
 			struct {
 				int ax;
@@ -283,7 +283,7 @@ int SimpleCommunicator_t::Update() {
 		}
 
 		if (_all_state.send_calibrated_sensor_data) {
-			_connection_provider->Write(SBI_CALIBRATED_SENSOR_DATA);
+			_connection_provider->Write(static_cast<uint8_t>(SBI_CALIBRATED_SENSOR_DATA));
 
 			struct {
 				float ax;
@@ -312,7 +312,7 @@ int SimpleCommunicator_t::Update() {
 		}
 
 		if (_all_state.send_pid_state) {
-			_connection_provider->Write(SBI_PID_STATE_RECEIVE);
+			_connection_provider->Write(static_cast<uint8_t>(SBI_PID_STATE_RECEIVE));
 
 			struct {
 				float depth_in;
@@ -338,7 +338,7 @@ int SimpleCommunicator_t::Update() {
 		}
 
 		if (_all_state.send_motors_state) {
-			_connection_provider->Write(SBI_MOTORS_STATE_RECEIVE);
+			_connection_provider->Write(static_cast<uint8_t>(SBI_MOTORS_STATE_RECEIVE));
 
 			struct {
 				float m1;
@@ -357,7 +357,7 @@ int SimpleCommunicator_t::Update() {
 		}
 
 		if (_all_state.read_bluetooth) {
-			_connection_provider->Write(SBI_BLUETOOTH_MSG_RECEIVE);
+			_connection_provider->Write(static_cast<uint8_t>(SBI_BLUETOOTH_MSG_RECEIVE));
 
 			char* bluetooth_message;
 
