@@ -55,8 +55,14 @@ int SimpleCommunicator_t::Update() {
 	if (readed_bytes) {
 		DataReader_t dr(_connection_provider->Buffer(), readed_bytes);
 
+
+#define READ(val) if (dr.Read(val) < 0) { return 0; }
+
 		uint32_t msg_id;
-		dr.Read(msg_id);
+		READ(msg_id);
+
+		LOG("Receive msg: ");
+		LOGLN(msg_id);
 
 		if (msg_id > _last_received_msg_id) {
 			_receive_packets_leak += msg_id - _last_received_msg_id - 1;
@@ -66,8 +72,11 @@ int SimpleCommunicator_t::Update() {
 
 		while (dr.Available()) {
 			uint8_t t;
-			dr.Read(t);
+			READ(t);
 			auto block_id = static_cast<RECEIVE_BLOCK_IDS>(t);
+
+			LOG("Receive block: ");
+			LOGLN(block_id);
 
 			switch (block_id) {
 				case SBI_STATE:
@@ -75,7 +84,7 @@ int SimpleCommunicator_t::Update() {
 						State_t state;
 						uint8_t last_i2c_scan;
 					} state;
-					dr.Read(state);
+					READ(state);
 					_all_state = state.state;
 					_last_received_i2c_scan_token = state.last_i2c_scan;
 					_on_state_receive.callback(
@@ -97,7 +106,7 @@ int SimpleCommunicator_t::Update() {
 						float Cam1Pos;
 						float Cam2Pos;
 					} devices_state;
-					dr.Read(devices_state);
+					READ(devices_state);
 					_on_devices_state_receive.callback(_on_devices_state_receive.data, 
 						devices_state.ArmPos,
 						devices_state.HandPos,
@@ -116,7 +125,7 @@ int SimpleCommunicator_t::Update() {
 						float M5;
 						float M6;
 					} motors_state;
-					dr.Read(motors_state);
+					READ(motors_state);
 					_on_motors_state_receive.callback(_on_motors_state_receive.data,
 						motors_state.M1,
 						motors_state.M2,
@@ -140,7 +149,7 @@ int SimpleCommunicator_t::Update() {
 						float yaw;
 						float pitch;
 					} movement;
-					dr.Read(movement);
+					READ(movement);
 					_on_movement_receive.callback(_on_movement_receive.data,
 						movement.control_type.auto_depth,
 						movement.control_type.auto_yaw,
@@ -166,7 +175,7 @@ int SimpleCommunicator_t::Update() {
 						float pitch_i;
 						float pitch_d;
 					} pids;
-					dr.Read(pids);
+					READ(pids);
 
 					uint32_t pids_hash;
 					pids_hash = HashLy(pids);
