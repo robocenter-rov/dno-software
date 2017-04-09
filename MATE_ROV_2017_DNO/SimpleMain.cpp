@@ -147,8 +147,28 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token)->void{
 		auto main = static_cast<SimpleMain_t*>(data);
 
+		LOG("Flashlight state: ");
+		LOGLN(flashlight_state);
+
+		LOG("Read bluetooth: ");
+		LOGLN(read_bluetooth);
+
+		LOG("Send raw sensor data: ");
+		LOGLN(send_raw_sensor_data);
+
+		LOG("Send calibrated sensor data: ");
+		LOGLN(send_calibrated_sensor_data);
+
+		LOG("Send pid state: ");
+		LOGLN(send_pid_state);
+
+		LOG("Send motors state: ");
+		LOGLN(send_motors_state);
+
+		LOG("I2C scan token: ");
+		LOGLN(i2c_scan_token);
+
 		main->_periphery_manager->SetFlashlightState(flashlight_state);
-		main->_periphery_manager->ReceiveBluetoothMessage(read_bluetooth);
 		if (send_raw_sensor_data)
 		{
 			
