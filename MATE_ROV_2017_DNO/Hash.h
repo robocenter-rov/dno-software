@@ -1,11 +1,11 @@
 #pragma once
 
-inline uint32_t HashLy(char byte, uint32_t hash = 0) {
+inline uint32_t HashLy(uint8_t byte, uint32_t hash = 0) {
 	return (hash * 1664525) + byte + 1013904223;
 }
 
 inline uint32_t HashLy(void* buffer, int size, uint32_t hash = 0) {
-	auto b = reinterpret_cast<char*>(buffer);
+	auto b = reinterpret_cast<uint8_t*>(buffer);
 
 	for (int i = 0; i < size; i++) {
 		hash = HashLy(b[i], hash);
