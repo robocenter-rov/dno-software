@@ -1,6 +1,7 @@
 #include "SimpleCommunicator.h"
 #include "DataReader.h"
 #include "Hash.h"
+#include "Debug.h"
 
 enum SEND_BLOCK_IDS {
 	SBI_STATE = 0,
@@ -27,15 +28,19 @@ SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_prov
 	_pids_hash = 0;
 	_last_msg_receive_time = 0;
 	_last_msg_send_time = 0;
-	_send_frequency = 50;
-	_receive_time_out = 1000;
+	_send_frequency = 30;
+	_receive_time_out = 100;
 	_last_received_msg_id = 0;
 	_last_sended_msg_id = 0;
 	_receive_packets_leak = 0;
+	_all_state.send_calibrated_sensor_data = false;
+	_all_state.send_raw_sensor_data = false;
+	_all_state.send_motors_state = false;
+	_all_state.send_pid_state = false;
 }
 
 int SimpleCommunicator_t::Begin() {
-	return 0;
+	return _connection_provider->Begin();
 }
 
 void SimpleCommunicator_t::Stop() {
@@ -200,21 +205,30 @@ int SimpleCommunicator_t::Update() {
 				default: ;
 			}
 		}
+
+		_last_msg_receive_time = millis();
 	}
 
-	if (millis() - _last_msg_send_time < _send_frequency) {
+	if (millis() - _last_msg_send_time > _send_frequency && millis() - _last_msg_receive_time < _receive_time_out) {
 		_connection_provider->BeginPacket();
-		_connection_provider->Write(_last_sended_msg_id);
+		_connection_provider->Write(++_last_sended_msg_id);
+		_connection_provider->Write(_receive_packets_leak);
 
-		_connection_provider->Write(SBI_STATE);
+		_connection_provider->Write(static_cast<uint8_t>(SBI_STATE));
 
 		bool flashlight_state;
 		_on_state_need.callback(_on_state_need.data, flashlight_state);
 		struct {
 			int flashlight_state : 1;
+			int rest : 7;
 		} state {flashlight_state};
 
 		_connection_provider->Write(state);
+
+
+
+		LOG("size ");
+		LOGLN(sizeof state);
 
 		bool scanned; bool pca1; bool pca2; bool hmc58x3; bool itg3200; bool adxl345; bool bmp085; bool ms5803;
 		_on_scanned_i2c_devices_need.callback(_on_scanned_i2c_devices_need.data,
@@ -228,6 +242,7 @@ int SimpleCommunicator_t::Update() {
 			int adxl345 : 1;
 			int bmp085 : 1;
 			int ms5803 : 1;
+			int rest : 1;
 		} scanned_i2c_devices{ pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803 };
 
 		if (scanned) {
@@ -367,6 +382,8 @@ int SimpleCommunicator_t::Update() {
 		}
 
 		_connection_provider->EndPacket();
+
+		_last_msg_send_time = millis();
 	}
 
 	return 0;
