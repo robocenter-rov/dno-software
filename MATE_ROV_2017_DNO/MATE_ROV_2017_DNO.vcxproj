@@ -47,10 +47,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SPI\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\2r25oje5.2cf\Micro Platforms\visualmicro\ide\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries;$(ProjectDir)..\..\Documents\Arduino\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\avr\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;_DEBUG=1;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -102,6 +102,17 @@
     <ClInclude Include="I2CScanMessage.h" />
     <ClInclude Include="I2CScanTask.h" />
     <ClInclude Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.h" />
+    <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h" />
+    <ClInclude Include="Libs\bma180\bma180.h" />
+    <ClInclude Include="Libs\DebugUtils\DebugUtils.h" />
+    <ClInclude Include="Libs\FreeIMU\calibration.h" />
+    <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h" />
+    <ClInclude Include="Libs\FreeIMU\FreeIMU.h" />
+    <ClInclude Include="Libs\HMC58X3\HMC58X3.h" />
+    <ClInclude Include="Libs\I2Cdev\I2Cdev.h" />
+    <ClInclude Include="Libs\ITG3200_library\ITG3200.h" />
+    <ClInclude Include="Libs\MPU60X0\MPU60X0.h" />
+    <ClInclude Include="Libs\MS561101BA\MS561101BA.h" />
     <ClInclude Include="Libs\MS5803\src\SparkFun_MS5803_I2C.h" />
     <ClInclude Include="Libs\PID\PID_v1.h" />
     <ClInclude Include="ManipulatorPeriphery.h" />
@@ -170,6 +181,15 @@
     <ClCompile Include="Exceptions.cpp" />
     <ClCompile Include="I2CScanTask.cpp" />
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
+    <ClCompile Include="Libs\ADXL345_library\ADXL345_library.cpp" />
+    <ClCompile Include="Libs\bma180\bma180.cpp" />
+    <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
+    <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
+    <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
+    <ClCompile Include="Libs\I2Cdev\I2Cdev.cpp" />
+    <ClCompile Include="Libs\ITG3200_library\ITG3200.cpp" />
+    <ClCompile Include="Libs\MPU60X0\MPU60X0.cpp" />
+    <ClCompile Include="Libs\MS561101BA\MS561101BA.cpp" />
     <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
     <ClCompile Include="Libs\PID\PID_v1.cpp" />
     <ClCompile Include="ManipulatorPeriphery.cpp" />
@@ -199,7 +219,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM15" debug.local.portspeed="9600" />
+      <UserProperties arduino.build.auto_discover_includes="1" arduino.upload.port="COM15" debug.local.portspeed="9600" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

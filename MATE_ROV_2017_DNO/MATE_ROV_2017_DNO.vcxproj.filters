@@ -289,6 +289,39 @@
     <ClInclude Include="Hash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\bma180\bma180.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\HMC58X3\HMC58X3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\I2Cdev\I2Cdev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\ITG3200_library\ITG3200.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\MPU60X0\MPU60X0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\MS561101BA\MS561101BA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\DebugUtils\DebugUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\FreeIMU\FreeIMU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\FreeIMU\calibration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -370,5 +403,14 @@
     <ClCompile Include="SimpleCommunicator.cpp">
       <Filter>Communication\Communicators</Filter>
     </ClCompile>
+    <ClCompile Include="Libs\ADXL345_library\ADXL345_library.cpp" />
+    <ClCompile Include="Libs\bma180\bma180.cpp" />
+    <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
+    <ClCompile Include="Libs\I2Cdev\I2Cdev.cpp" />
+    <ClCompile Include="Libs\ITG3200_library\ITG3200.cpp" />
+    <ClCompile Include="Libs\MPU60X0\MPU60X0.cpp" />
+    <ClCompile Include="Libs\MS561101BA\MS561101BA.cpp" />
+    <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
+    <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
   </ItemGroup>
 </Project>

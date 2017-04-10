@@ -111,8 +111,8 @@ void MS5803::getMeasurements(precision _precision)
 	int32_t dT;
 		
 	//Now that we have a raw temperature, let's compute our actual.
-	dT = temperature_raw - ((int32_t)coefficient[5] << 8);
-	temp_calc = (((int64_t)dT * coefficient[6]) >> 23) + 2000;
+	dT = temperature_raw - (static_cast<int32_t>(coefficient[5]) << 8);
+	temp_calc = ((static_cast<int64_t>(dT) * coefficient[6]) >> 23) + 2000;
 	
 	// TODO TESTING  _temperature_actual = temp_calc;
 	
@@ -122,7 +122,7 @@ void MS5803::getMeasurements(precision _precision)
 	if (temp_calc < 2000) 
 	// If temp_calc is below 20.0C
 	{	
-		T2 = 3 * (((int64_t)dT * dT) >> 33);
+		T2 = 3 * ((static_cast<int64_t>(dT) * dT) >> 33);
 		OFF2 = 3 * ((temp_calc - 2000) * (temp_calc - 2000)) / 2;
 		SENS2 = 5 * ((temp_calc - 2000) * (temp_calc - 2000)) / 8;
 		
@@ -136,15 +136,15 @@ void MS5803::getMeasurements(precision _precision)
 	else
 	// If temp_calc is above 20.0C
 	{ 
-		T2 = 7 * ((uint64_t)dT * dT)/pow(2,37);
+		T2 = 7 * (static_cast<uint64_t>(dT) * dT)/pow(2,37);
 		OFF2 = ((temp_calc - 2000) * (temp_calc - 2000)) / 16;
 		SENS2 = 0;
 	}
 	
 	// Now bring it all together to apply offsets 
 	
-	OFF = ((int64_t)coefficient[2] << 16) + (((coefficient[4] * (int64_t)dT)) >> 7);
-	SENS = ((int64_t)coefficient[1] << 15) + (((coefficient[3] * (int64_t)dT)) >> 8);
+	OFF = (static_cast<int64_t>(coefficient[2]) << 16) + (((coefficient[4] * static_cast<int64_t>(dT))) >> 7);
+	SENS = (static_cast<int64_t>(coefficient[1]) << 15) + (((coefficient[3] * static_cast<int64_t>(dT))) >> 8);
 	
 	temp_calc = temp_calc - T2;
 	OFF = OFF - OFF2;
@@ -190,7 +190,7 @@ uint32_t MS5803::getADCconversion(measurement _measurement, precision _precision
 		lowByte = Wire.read();	
 	}
 	
-	result = ((uint32_t)highByte << 16) + ((uint32_t)midByte << 8) + lowByte;
+	result = (static_cast<uint32_t>(highByte) << 16) + (static_cast<uint32_t>(midByte) << 8) + lowByte;
 
 	return result;
 
