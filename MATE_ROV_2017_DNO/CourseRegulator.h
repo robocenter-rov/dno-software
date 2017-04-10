@@ -31,10 +31,11 @@ public:
 	}
 
 	void Update() {
-		SensorRotation_t::Data_t rotation = _sensor_manager->GetRotation();
+		float q0, q1, q2, q3;
+		_sensor_manager->GetRotation(q0, q1, q2, q3);
 
 		float y, p, r;
-		quatToYpr(rotation.q0, rotation.q1, rotation.q2, rotation.q3, y, p, r);
+		quatToYpr(q0, q1, q2, q3, y, p, r);
 
 		_y_pid_input = p;
 		_y_pid.Compute();

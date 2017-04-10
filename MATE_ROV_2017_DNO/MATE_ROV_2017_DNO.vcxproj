@@ -133,7 +133,6 @@
     <ClInclude Include="ReceiveBluetoothMessageTask.h" />
     <ClInclude Include="SelfExpandoContainer.h" />
     <ClInclude Include="SendSensorDataTask.h" />
-    <ClInclude Include="SensorData.h" />
     <ClInclude Include="SetFlashlightStateMessage.h" />
     <ClInclude Include="PositionRegulator.h" />
     <ClInclude Include="RegisterExceptions.h" />

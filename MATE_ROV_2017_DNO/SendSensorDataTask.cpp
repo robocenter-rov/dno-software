@@ -14,8 +14,10 @@ bool SendSensorDataTask_t::LockNeededResources(RESOURCE& out_locked_resource, in
 
 bool SendSensorDataTask_t::UpdateState(SelfExpandoContainer_t<TaskState_t>& out_state) {
 	if (millis() - _last_send_time > _interval) {
-		SensorData_t t = _sensor_manager->GetSensorData();
-		_communicator->SendSensorData(&t);
+		float q0, q1, q2, q3, depth;
+		_sensor_manager->GetRotation(q0, q1, q2, q3);
+		depth = _sensor_manager->GetDepth();
+		_communicator->SendSensorData(q0, q1, q2, q3, depth);
 		out_state = SendSensorDataTaskState_t(_tag);
 		_last_send_time = millis();
 	}

@@ -1,5 +1,4 @@
 #pragma once
-#include "SensorData.h"
 #include "SensorDepth.h"
 #include "SensorRotation.h"
 
@@ -10,10 +9,12 @@ private:
 public:
 	SensorManager_t(SensorRotation_t* sensor_rotation, SensorDepth_t* sensor_depth);
 
-	float GetDepth() const;
-	SensorRotation_t::Data_t GetRotation() const;
+	void GetRotation(float& q1, float& q2, float& q3, float& q4);
+	void GetRawRotation(int* raw_data);
+	void GetCalibratedRotation(float* calibrated_data);
 
-	SensorData_t GetSensorData() const;
+	float GetDepth();
+	float GetRawDepth();
 
 	void Update();
 };

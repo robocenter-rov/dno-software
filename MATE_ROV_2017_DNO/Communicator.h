@@ -1,7 +1,6 @@
 #pragma once
 #include "TaskState.h"
 #include "Exceptions.h"
-#include "SensorData.h"
 #include "TaskPool.h"
 
 class Communicator_t {
@@ -50,7 +49,7 @@ public:
 	virtual int SendException(const Exceptions::Exception_t* exception) = 0;
 	virtual int SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) = 0;
 	virtual int SendLastUsedWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) = 0;
-	virtual int SendSensorData(const SensorData_t* sensor_data) = 0;
+	virtual int SendSensorData(float q0, float q1, float q2, float q3, float depth) = 0;
 	virtual int SendPong() = 0;
 
 	virtual int Begin() = 0;

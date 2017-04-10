@@ -31,13 +31,15 @@ public:
 	}
 
 	void Update() {
-		SensorRotation_t::Data_t rotation = _sensor_manager->GetRotation();
+		float calibrated_data[9];
 
-		_y_pid_input = rotation.AngleVelocityY;
+		_sensor_manager->GetCalibratedRotation(calibrated_data);
+
+		_y_pid_input = calibrated_data[5];
 		_y_pid.Compute();
 		_force_distrib->AddLocalRotateForce(_y_pid_output, 0);
 
-		_z_pid_input = rotation.AngleVelocityZ;
+		_z_pid_input = calibrated_data[6];
 		_z_pid.Compute();
 		_force_distrib->AddLocalRotateForce(0, _z_pid_output);
 	}

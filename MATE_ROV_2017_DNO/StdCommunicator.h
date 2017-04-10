@@ -30,7 +30,7 @@ public:
 	int SendException(const Exceptions::Exception_t* exception) override;
 	int SendWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) override;
 	int SendLastUsedWorkerState(const TaskState_t* task_state, int worker_id, WORKER_STATUS worker_status) override;
-	int SendSensorData(const SensorData_t* sensor_data) override;
+	int SendSensorData(float q0, float q1, float q2, float q3, float depth) override;
 	int SendPong() override;
 
 	int Update() override;

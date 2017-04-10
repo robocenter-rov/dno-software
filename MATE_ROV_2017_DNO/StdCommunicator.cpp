@@ -153,7 +153,7 @@ int StdCommunicator_t::SendLastUsedWorkerState(const TaskState_t* task_state, in
 	return 0;
 }
 
-int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
+int StdCommunicator_t::SendSensorData(float q0, float q1, float q2, float q3, float depth) {
 	if (!Connected()) {
 		ThrowException(Exceptions::EC_SC_NOT_CONNECTED);
 		return 1;
@@ -162,13 +162,13 @@ int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
 	LOGLN("Sending sensor data: ");
 
 	LOG("q0");
-	LOGLN(sensor_data->rotationData.q0);
+	LOGLN(q0);
 	LOG("q1");
-	LOGLN(sensor_data->rotationData.q1);
+	LOGLN(q1);
 	LOG("q2");
-	LOGLN(sensor_data->rotationData.q2);
+	LOGLN(q2);
 	LOG("q3");
-	LOGLN(sensor_data->rotationData.q3);
+	LOGLN(q3);
 
 
 #pragma pack(push, 1)
@@ -179,11 +179,11 @@ int StdCommunicator_t::SendSensorData(const SensorData_t* sensor_data) {
 		int q3;
 		int depth;
 	} sendingData{
-		sensor_data->rotationData.q0 * (1 << 15),
-		sensor_data->rotationData.q1 * (1 << 15),
-		sensor_data->rotationData.q2 * (1 << 15),
-		sensor_data->rotationData.q3 * (1 << 15),
-		sensor_data->depthData
+		q0 * (1 << 15),
+		q1 * (1 << 15),
+		q2 * (1 << 15),
+		q3 * (1 << 15),
+		depth
 	};
 #pragma pack(pop)
 
