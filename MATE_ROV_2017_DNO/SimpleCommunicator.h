@@ -61,13 +61,13 @@ private:
 	} _on_scanned_i2c_devices_need;
 
 	struct State_t {
-		int flashlight_state : 1;
-		int read_bluetooth : 1;
-		int send_raw_sensor_data : 1;
-		int send_calibrated_sensor_data : 1;
-		int send_pid_state : 1;
-		int send_motors_state : 1;
-		int rest : 2;
+		bool flashlight_state : 1;
+		bool read_bluetooth : 1;
+		bool send_raw_sensor_data : 1;
+		bool send_calibrated_sensor_data : 1;
+		bool send_pid_state : 1;
+		bool send_motors_state : 1;
+		bool rest : 2;
 	} _all_state;
 
 	uint8_t _last_i2c_scan_token;
