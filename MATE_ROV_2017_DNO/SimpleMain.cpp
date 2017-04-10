@@ -97,7 +97,7 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 	_communicator->OnMotorsStateReceive([](void* data, float m1, float m2, float m3, float m4, float m5, float m6)->void {
 		auto main = static_cast<SimpleMain_t*>(data);
 
-		Serial.println("OnMotorsStateReceive");
+		LOGLN("OnMotorsStateReceive");
 		LOG("motor1: ");
 		LOGLN(m1);
 		LOG("motor2: ");
