@@ -1,6 +1,9 @@
 #pragma once
+#include "Libs/FreeIMU/FreeIMU.h"
 
 class SensorRotation_t {
+private:
+	FreeIMU _nineDOF;
 public:
 	SensorRotation_t();
 
