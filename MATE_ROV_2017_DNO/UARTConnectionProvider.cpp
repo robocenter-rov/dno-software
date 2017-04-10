@@ -62,11 +62,11 @@ int UARTConnectionProvider::Write(void* buffer, unsigned int size) {
 				break;
 			default:
 				_serial->write(*buff);
-				_current_hash = HashLy(*buff, _current_hash);
 				LOG("Write: ");
 				LOGHEX(uint8_t(*buff));
 				LOGLN();
 		}
+		_current_hash = HashLy(*buff, _current_hash);
 		buff++;
 	}
 	return 0;
