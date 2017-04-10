@@ -144,7 +144,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #if HAS_ITG3200()
-  #include "../itg3200filv05/ITG3200.h"
+  #include "../ITG3200_library/ITG3200.h"
 #endif
 
 #if HAS_HMC5883L()
