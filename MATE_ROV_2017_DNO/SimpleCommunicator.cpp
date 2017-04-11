@@ -219,8 +219,7 @@ int SimpleCommunicator_t::Update() {
 		bool flashlight_state;
 		_on_state_need.callback(_on_state_need.data, flashlight_state);
 		struct {
-			int flashlight_state : 1;
-			int rest : 7;
+			bool flashlight_state : 1;
 		} state {flashlight_state};
 
 		_connection_provider->Write(state);
