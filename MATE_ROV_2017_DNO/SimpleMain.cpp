@@ -32,19 +32,24 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	_communicator->OnRawSensorDataNeed([](void* data, int& ax, int& ay, int& az, int& gx, int& gy, int& gz, int& mx, int& my, int& mz, float& depth)
 	{
-		ax = 1;
-		ay = 0;
-		az = 0;
+		auto main = static_cast<SimpleMain_t*>(data);
 
-		gx = 0;
-		gy = 0;
-		gz = 0;
+		int raw_sensor_data[10];
+		main->_sensor_manager->GetRawRotation(raw_sensor_data);
 
-		mx = 0;
-		my = 0;
-		mz = 0;
+		ax = raw_sensor_data[0];
+		ay = raw_sensor_data[1];
+		az = raw_sensor_data[2];
 
-		depth = 11;
+		gx = raw_sensor_data[3];
+		gy = raw_sensor_data[4];
+		gz = raw_sensor_data[5];
+
+		mx = raw_sensor_data[6];
+		my = raw_sensor_data[7];
+		mz = raw_sensor_data[8];
+
+		depth = raw_sensor_data[9];
 	}, this);
 
 	_communicator->OnCalibratedSensorDataNeed([](void* data, float& ax, float& ay, float& az, float& gx, float& gy, float& gz, float& mx, float& my, float& mz, float& depth)
