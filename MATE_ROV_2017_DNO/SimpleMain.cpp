@@ -54,19 +54,24 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	_communicator->OnCalibratedSensorDataNeed([](void* data, float& ax, float& ay, float& az, float& gx, float& gy, float& gz, float& mx, float& my, float& mz, float& depth)
 	{
-		ax = 1;
-		ay = 0;
-		az = 0;
+		auto main = static_cast<SimpleMain_t*>(data);
 
-		gx = 0;
-		gy = 0;
-		gz = 0;
+		float sensor_data[10];
+		main->_sensor_manager->GetCalibratedRotation(sensor_data);
 
-		mx = 0;
-		my = 0;
-		mz = 0;
+		ax = sensor_data[0];
+		ay = sensor_data[1];
+		az = sensor_data[2];
 
-		depth = 12;
+		gx = sensor_data[3];
+		gy = sensor_data[4];
+		gz = sensor_data[5];
+
+		mx = sensor_data[6];
+		my = sensor_data[7];
+		mz = sensor_data[8];
+
+		depth = main->_sensor_manager->GetDepth();
 	}, this);
 
 	_communicator->OnMotorsStateNeed([](void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6)
