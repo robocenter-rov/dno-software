@@ -235,14 +235,13 @@ int SimpleCommunicator_t::Update() {
 			scanned, pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803);
 
 		struct {
-			int pca1 : 1;
-			int pca2 : 1;
-			int hmc58x3 : 1;
-			int itg3200 : 1;
-			int adxl345 : 1;
-			int bmp085 : 1;
-			int ms5803 : 1;
-			int rest : 1;
+			bool pca1 : 1;
+			bool pca2 : 1;
+			bool hmc58x3 : 1;
+			bool itg3200 : 1;
+			bool adxl345 : 1;
+			bool bmp085 : 1;
+			bool ms5803 : 1;
 		} scanned_i2c_devices{ pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803 };
 
 		if (scanned) {
