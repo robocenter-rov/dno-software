@@ -88,14 +88,30 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	_communicator->OnScannedI2CDevicesNeed([](void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803)
 	{
-		scanned = true;
-		pca1 = true;
-		pca2 = false;
-		hmc58x3 = true;
-		itg3200 = true;
-		adxl345 = true;
-		bmp085 = true;
-		ms5803 = true;
+		uint8_t adresses[] = {
+			0x40, // PCA1
+			0x41, // PCA2
+			0x1E, // HMC58X3
+			0x53, // ADXL345
+			0x68, // ITG3200
+			0x77, // BMP085
+			0x76, // MS5803
+		};
+
+		bool s[sizeof(adresses)];
+
+		for (int i = 0; i < sizeof(adresses); i++) {
+			Wire.beginTransmission(adresses[i]);
+			s[i] = Wire.endTransmission() == 0;
+		}
+
+		pca1 = s[0];
+		pca2 = s[1];
+		hmc58x3 = s[2];
+		itg3200 = s[3];
+		adxl345 = s[4];
+		bmp085 = s[5];
+		ms5803 = s[6];
 	}, this);
 
 	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos) -> void {
