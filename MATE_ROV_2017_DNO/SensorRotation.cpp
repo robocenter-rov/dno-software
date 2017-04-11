@@ -22,7 +22,7 @@ void SensorRotation_t::GetRawData(int* raw_data) {
 }
 
 void SensorRotation_t::GetCalibratedData(float* calibrated_data) {
-	memset(calibrated_data, 0, sizeof(float) * 9);
+	_nineDOF.getValues(calibrated_data);
 }
 
 SensorRotation_t::~SensorRotation_t() {}
