@@ -127,18 +127,6 @@
     <ClInclude Include="CoordinateSystemConverter.h">
       <Filter>Utils\Math</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceLocker.h">
-      <Filter>ResourceLocker</Filter>
-    </ClInclude>
-    <ClInclude Include="Task.h">
-      <Filter>Task</Filter>
-    </ClInclude>
-    <ClInclude Include="TaskPool.h">
-      <Filter>Task</Filter>
-    </ClInclude>
-    <ClInclude Include="TaskState.h">
-      <Filter>Task</Filter>
-    </ClInclude>
     <ClInclude Include="ConnectionProvider.h">
       <Filter>Communication\ConnectionProviders</Filter>
     </ClInclude>
@@ -150,18 +138,6 @@
     </ClInclude>
     <ClInclude Include="List.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="SetFlashlightStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="Messages.h">
-      <Filter>Communication</Filter>
-    </ClInclude>
-    <ClInclude Include="Communicator.h">
-      <Filter>Communication\Communicators</Filter>
-    </ClInclude>
-    <ClInclude Include="StdCommunicator.h">
-      <Filter>Communication\Communicators</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Utils</Filter>
@@ -184,17 +160,8 @@
     <ClInclude Include="RegisterExceptions.h">
       <Filter>Exceptions\RegisterExceptions</Filter>
     </ClInclude>
-    <ClInclude Include="BlinkFlashlightMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="SetMotorsThrustMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
     <ClInclude Include="MathConstants.h">
       <Filter>Utils\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="SetManipulatorPositionMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
     <ClInclude Include="ManipulatorPeriphery.h">
       <Filter>Periphery\Manipulator</Filter>
@@ -205,53 +172,17 @@
     <ClInclude Include="CameraPeriphery.h">
       <Filter>Periphery\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="SetFlashlightStateTask.h">
-      <Filter>Task\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="BlinkFlashLightTask.h">
-      <Filter>Task\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="SendSensorDataTask.h">
-      <Filter>Task\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="StartSendingSensorDataMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
     <ClInclude Include="PCA96685Motor.h">
       <Filter>Movement\Motors</Filter>
     </ClInclude>
     <ClInclude Include="MS5803SensorDepth.h">
       <Filter>Sensors</Filter>
     </ClInclude>
-    <ClInclude Include="ReceiveBluetoothMessageTask.h">
-      <Filter>Task\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="StartBluetoothReadingMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
     <ClInclude Include="Debug.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="FreeWorkerMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
     <ClInclude Include="Quaternions.h">
       <Filter>Utils\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="I2CScanTask.h">
-      <Filter>Task\Tasks</Filter>
-    </ClInclude>
-    <ClInclude Include="I2CScanMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="GetWorkerStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="GetLastUsedWorkerStateMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
-    </ClInclude>
-    <ClInclude Include="SetLocalForceMessage.h">
-      <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
     <ClInclude Include="UARTConnectionProvider.h">
       <Filter>Header Files</Filter>
@@ -336,12 +267,6 @@
     <ClCompile Include="Movement.cpp">
       <Filter>Movement</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceLocker.cpp">
-      <Filter>ResourceLocker</Filter>
-    </ClCompile>
-    <ClCompile Include="TaskPool.cpp">
-      <Filter>Task</Filter>
-    </ClCompile>
     <ClCompile Include="UdpConnectionProvider.cpp">
       <Filter>Communication\ConnectionProviders</Filter>
     </ClCompile>
@@ -350,12 +275,6 @@
     </ClCompile>
     <ClCompile Include="ConnectionProvider.cpp">
       <Filter>Communication\ConnectionProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="Communicator.cpp">
-      <Filter>Communication\Communicators</Filter>
-    </ClCompile>
-    <ClCompile Include="StdCommunicator.cpp">
-      <Filter>Communication\Communicators</Filter>
     </ClCompile>
     <ClCompile Include="DebugMotorsMain.cpp">
       <Filter>Main</Filter>
@@ -366,26 +285,11 @@
     <ClCompile Include="PCA9685ServoMotor.cpp">
       <Filter>Periphery</Filter>
     </ClCompile>
-    <ClCompile Include="SetFlashLightStateTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="BlinkFlashLightTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="SendSensorDataTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
     <ClCompile Include="PCA96685Motor.cpp">
       <Filter>Movement\Motors</Filter>
     </ClCompile>
     <ClCompile Include="MS5803SensorDepth.cpp">
       <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="ReceiveBluetoothMessageTask.cpp">
-      <Filter>Task\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="I2CScanTask.cpp">
-      <Filter>Task\Tasks</Filter>
     </ClCompile>
     <ClCompile Include="UARTConnectionProvider.cpp" />
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
