@@ -10,8 +10,8 @@ int TestPCAMain_t::Begin() { return 0; }
 void TestPCAMain_t::Loop() {
 	float angle = millis() / 1000.f * PI;
 
-	_periphery_manager->GetManipulator()->SetArmAngle(abs(sin(millis() / 1000.f * PI)));
-	_periphery_manager->GetManipulator()->SetHandAngle(abs(sin(millis() / 1000.f * PI + PI / 2)));
+	_periphery_manager->GetManipulator()->SetArmThrust(abs(sin(millis() / 1000.f * PI)));
+	_periphery_manager->GetManipulator()->SetHandThrust(abs(sin(millis() / 1000.f * PI + PI / 2)));
 
 	for (int i = 0; i < 6; i++) {
 		_movement->SetMotorThrust(i, -1);
