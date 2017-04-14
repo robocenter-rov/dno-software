@@ -178,9 +178,6 @@
     <ClInclude Include="DebugMotorsMain.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="StdMain.h">
-      <Filter>Main</Filter>
-    </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>Main</Filter>
     </ClInclude>
@@ -266,9 +263,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Libs\MS5803\src\SparkFun_MS5803_I2C.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPCAMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimpleCommunicator.h">
@@ -363,9 +357,6 @@
     <ClCompile Include="DebugMotorsMain.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="StdMain.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="ManipulatorPeriphery.cpp">
       <Filter>Periphery\Manipulator</Filter>
     </ClCompile>
@@ -397,7 +388,6 @@
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
     <ClCompile Include="Libs\PID\PID_v1.cpp" />
     <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
-    <ClCompile Include="TestPCAMain.cpp" />
     <ClCompile Include="SimpleMain.cpp" />
     <ClCompile Include="BluetoothPeriphery.cpp" />
     <ClCompile Include="SimpleCommunicator.cpp">
