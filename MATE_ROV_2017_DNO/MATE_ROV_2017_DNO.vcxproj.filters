@@ -316,6 +316,9 @@
     <ClInclude Include="Libs\adxl345driver\ADXL345.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestPCAMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -402,5 +405,6 @@
     <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
     <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
     <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
+    <ClCompile Include="TestPCAMain.cpp" />
   </ItemGroup>
 </Project>

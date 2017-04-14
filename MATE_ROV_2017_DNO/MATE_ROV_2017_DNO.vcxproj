@@ -150,6 +150,7 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskPool.h" />
     <ClInclude Include="TaskState.h" />
+    <ClInclude Include="TestPCAMain.h" />
     <ClInclude Include="UARTConnectionProvider.h" />
     <ClInclude Include="UdpConnectionProvider.h" />
     <ClInclude Include="SharedPtr.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="SimpleMain.cpp" />
     <ClCompile Include="StdCommunicator.cpp" />
     <ClCompile Include="TaskPool.cpp" />
+    <ClCompile Include="TestPCAMain.cpp" />
     <ClCompile Include="UARTConnectionProvider.cpp" />
     <ClCompile Include="UdpConnectionProvider.cpp" />
   </ItemGroup>
