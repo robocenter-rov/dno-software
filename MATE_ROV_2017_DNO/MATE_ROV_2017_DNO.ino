@@ -7,6 +7,7 @@
 #include "Debug.h"
 #include "UARTConnectionProvider.h"
 #include "TestPCAMain.h"
+#include "SimpleMain.h"
 
 Main_t* Main;
 
@@ -14,7 +15,7 @@ void setup() {
 	ResourceLocker::Init();
 	Exceptions::Init();
 	Wire.begin();
-	Serial2.begin(9600);
+	Serial1.begin(115200);
 #ifdef _DEBUG
 	Serial.begin(9600);
 #endif
@@ -46,6 +47,8 @@ void setup() {
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(13);
 
+	flashlight_periphery->TurnOn();
+
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
 		new PCA9685ServoMotor_t(pwm1, 0),
 		new PCA9685ServoMotor_t(pwm1, 1)
@@ -57,11 +60,11 @@ void setup() {
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 	//ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
-	Serial3.begin(9600);
-	ConnectionProvider_t* connection_provider = new UARTConnectionProvider(&Serial3, 30);
-	Communicator_t* communicator = new StdCommunicator_t(connection_provider);
+	Serial3.begin(115200);
+	ConnectionProvider_t* connection_provider = new UARTConnectionProvider(&Serial1, 300);
+	auto communicator = new SimpleCommunicator_t(connection_provider);
 
-	Main = new TestPCAMain_t(periphery_manager, movement);
+	Main = new SimpleMain_t(communicator, movement, sensor_manager, periphery_manager);
 
 	if (Main->Begin()) {
 #ifdef _DEBUG
