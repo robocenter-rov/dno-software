@@ -49,10 +49,10 @@ void setup() {
 	flashlight_periphery->TurnOn();
 
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
-		new PCA9685ServoMotor_t(pwm1, 0),
-		new PCA9685ServoMotor_t(pwm1, 1)
-		//new PCA96685Motor_t(pwm2, 12, 11, 13)
-		//new PCA96685Motor_t(pwm2, 10, 9, 8)
+		/*new PCA9685ServoMotor_t(pwm1, 0),
+		new PCA9685ServoMotor_t(pwm1, 1)*/
+		new PCA96685Motor_t(pwm2, 12, 11, 13),
+		new PCA96685Motor_t(pwm2, 10, 9, 8)
 	);
 
 	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery);
