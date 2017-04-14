@@ -169,9 +169,6 @@
     <ClInclude Include="PCA9685ServoMotor.h">
       <Filter>Periphery</Filter>
     </ClInclude>
-    <ClInclude Include="CameraPeriphery.h">
-      <Filter>Periphery\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="PCA96685Motor.h">
       <Filter>Movement\Motors</Filter>
     </ClInclude>

@@ -89,7 +89,6 @@
     <ClInclude Include="AngularVelocityRegulator.h" />
     <ClInclude Include="BluetoothPeriphery.h" />
     <ClInclude Include="ByteArray.h" />
-    <ClInclude Include="CameraPeriphery.h" />
     <ClInclude Include="DataReader.h" />
     <ClInclude Include="ConnectionProvider.h" />
     <ClInclude Include="Debug.h" />
