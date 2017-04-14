@@ -217,9 +217,6 @@
     <ClInclude Include="SendSensorDataTask.h">
       <Filter>Task\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="SensorData.h">
-      <Filter>Sensors</Filter>
-    </ClInclude>
     <ClInclude Include="StartSendingSensorDataMessage.h">
       <Filter>Communication\RegisterMessages</Filter>
     </ClInclude>
@@ -322,6 +319,9 @@
     <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Libs\adxl345driver\ADXL345.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -403,7 +403,6 @@
     <ClCompile Include="SimpleCommunicator.cpp">
       <Filter>Communication\Communicators</Filter>
     </ClCompile>
-    <ClCompile Include="Libs\ADXL345_library\ADXL345_library.cpp" />
     <ClCompile Include="Libs\bma180\bma180.cpp" />
     <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
     <ClCompile Include="Libs\I2Cdev\I2Cdev.cpp" />
@@ -412,5 +411,6 @@
     <ClCompile Include="Libs\MS561101BA\MS561101BA.cpp" />
     <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
     <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
+    <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
   </ItemGroup>
 </Project>
