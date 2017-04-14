@@ -45,8 +45,15 @@ void setup() {
 	Movement_t* movement = new Movement_t(motors, motors_force_distributor, nullptr);
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(13);
-
 	flashlight_periphery->TurnOn();
+	
+	BluetoothPeriphery_t* bluetooth_periphery = new BluetoothPeriphery_t(&Serial2);
+
+	PCA9685ServoMotor_t* camera1_periphery = new PCA9685ServoMotor_t(pwm2, 0, 2000);
+	PCA9685ServoMotor_t* camera2_periphery = new PCA9685ServoMotor_t(pwm2, 1, 2000);
+
+	PCA9685ServoMotor_t* servo1_periphery = new PCA9685ServoMotor_t(pwm2, 3, 2000);
+	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(pwm2, 4, 2000);
 
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
 		/*new PCA9685ServoMotor_t(pwm1, 0),
@@ -55,7 +62,8 @@ void setup() {
 		new PCA96685Motor_t(pwm2, 10, 9, 8, 2000)
 	);
 
-	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery);
+	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery, bluetooth_periphery, 
+		camera1_periphery, camera2_periphery, servo1_periphery, servo2_periphery);
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 	//ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
