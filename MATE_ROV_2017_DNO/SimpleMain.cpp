@@ -114,10 +114,20 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		ms5803 = s[6];
 	}, this);
 
-	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos) -> void {
+	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, 
+											float m2_pos, float cam1_pos, float cam2_pos) -> void {
+		
 		auto main = static_cast<SimpleMain_t*>(data);
 
-		//main->_movement->
+		main->_periphery_manager->GetManipulator()->SetArmThrust(arm_pos);
+		main->_periphery_manager->GetManipulator()->SetHandThrust(hand_pos);
+
+		main->_periphery_manager->SetAngleM1(m1_pos);
+		main->_periphery_manager->SetAngleM2(m2_pos);
+
+		main->_periphery_manager->SetAngleCamera1(cam1_pos);
+		main->_periphery_manager->SetAngleCamera2(cam2_pos);
+
 	}, this);
 
 	_communicator->OnMotorsStateReceive([](void* data, float m1, float m2, float m3, float m4, float m5, float m6)->void {
