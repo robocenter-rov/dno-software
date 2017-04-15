@@ -56,7 +56,7 @@ StdMain_t::StdMain_t(Communicator_t* communicator, Movement_t* movement,
 		int motor4Thrust, int motor5Thrust, int motor6Thrust) -> int {
 		auto main = static_cast<StdMain_t*>(data);
 
-		Serial.println("SetMotorsThrustReceive");
+		LOGLN("SetMotorsThrustReceive");
 		LOG("motor1: ");
 		LOGLN(motor1Thrust);
 		LOG("motor2: ");
