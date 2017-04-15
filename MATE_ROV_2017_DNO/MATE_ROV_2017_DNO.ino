@@ -49,17 +49,15 @@ void setup() {
 	
 	BluetoothPeriphery_t* bluetooth_periphery = new BluetoothPeriphery_t(&Serial2);
 
-	PCA9685ServoMotor_t* camera1_periphery = new PCA9685ServoMotor_t(pwm2, 0, 2000);
-	PCA9685ServoMotor_t* camera2_periphery = new PCA9685ServoMotor_t(pwm2, 1, 2000);
+	PCA9685ServoMotor_t* camera1_periphery = new PCA9685ServoMotor_t(pwm2, 14);
+	PCA9685ServoMotor_t* camera2_periphery = new PCA9685ServoMotor_t(pwm2, 15);
 
-	PCA9685ServoMotor_t* servo1_periphery = new PCA9685ServoMotor_t(pwm2, 3, 2000);
-	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(pwm2, 4, 2000);
+	PCA9685ServoMotor_t* servo1_periphery = new PCA9685ServoMotor_t(pwm1, 0);
+	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(pwm1, 1);
 
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
-		/*new PCA9685ServoMotor_t(pwm1, 0),
-		new PCA9685ServoMotor_t(pwm1, 1)*/
-		new PCA96685Motor_t(pwm2, 12, 11, 13, 2000),
-		new PCA96685Motor_t(pwm2, 10, 9, 8, 2000)
+		new PCA96685Motor_t(pwm2, 8, 9, 10, 2000),
+		new PCA96685Motor_t(pwm2, 13, 12, 11, 2000)
 	);
 
 	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery, bluetooth_periphery, 
