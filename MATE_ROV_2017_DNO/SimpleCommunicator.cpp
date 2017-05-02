@@ -372,7 +372,7 @@ int SimpleCommunicator_t::Update() {
 		if (_all_state.read_bluetooth) {
 			_connection_provider->Write(static_cast<uint8_t>(SBI_BLUETOOTH_MSG_RECEIVE));
 
-			char* bluetooth_message;
+			char bluetooth_message[20];
 
 			_on_bluetooth_msg_need.callback(_on_bluetooth_msg_need.data, bluetooth_message);
 
@@ -407,7 +407,7 @@ void SimpleCommunicator_t::OnCalibratedSensorDataNeed(void(* callback)(void* dat
 	_on_calibrated_sensor_data_need.data = data;
 }
 
-void SimpleCommunicator_t::OnBluetoothMessageNeed(void(* callback)(void* data, char*& bluetooth_message), void* data) {
+void SimpleCommunicator_t::OnBluetoothMessageNeed(void(* callback)(void* data, char* bluetooth_message), void* data) {
 	_on_bluetooth_msg_need.callback = callback;
 	_on_bluetooth_msg_need.data = data;
 }

@@ -45,7 +45,7 @@ private:
 	} _on_calibrated_sensor_data_need;
 
 	struct :BaseCallback_t {
-		void(*callback)(void* data, char*& bluetooth_message);
+		void(*callback)(void* data, char* bluetooth_message);
 	} _on_bluetooth_msg_need;
 
 	struct :BaseCallback_t {
@@ -98,7 +98,7 @@ public:
 	void OnSensorDataNeed(void(*callback)(void* data, float& q1, float& q2, float& q3, float& q4, float& depth), void* data);
 	void OnRawSensorDataNeed(void(*callback)(void* data, int& ax, int& ay, int& az, int& gx, int& gy, int& gz, int& mx, int& my, int& mz, float& depth), void* data);
 	void OnCalibratedSensorDataNeed(void(*callback)(void* data, float& ax, float& ay, float& az, float& gx, float& gy, float& gz, float& mx, float& my, float& mz, float& depth), void* data);
-	void OnBluetoothMessageNeed(void(*callback)(void* data, char*& bluetooth_message), void* data);
+	void OnBluetoothMessageNeed(void(*callback)(void* data, char* bluetooth_message), void* data);
 	void OnPidsStateNeed(void(*callback)(void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_out, float& pitch_target), void* data);
 	void OnMotorsStateNeed(void(*callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6), void* data);
 	void OnScannedI2CDevicesNeed(void(*callback)(void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803), void* data);

@@ -15,9 +15,9 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		flashlight_state = main->_periphery_manager->GetFlashlightState();
 	}, this);
 
-	_communicator->OnBluetoothMessageNeed([](void* data, char*& msg)
+	_communicator->OnBluetoothMessageNeed([](void* data, char* msg)
 	{
-		msg = "1234567";
+		memcpy(msg, "1234567", 7);
 	}, this);
 
 	_communicator->OnSensorDataNeed([](void* data, float& q1, float& q2, float& q3, float& q4, float& depth)
