@@ -99,6 +99,7 @@
     <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h" />
     <ClInclude Include="Libs\bma180\bma180.h" />
     <ClInclude Include="Libs\DebugUtils\DebugUtils.h" />
+    <ClInclude Include="Libs\FastLED\FastLED.h" />
     <ClInclude Include="Libs\FreeIMU\calibration.h" />
     <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h" />
     <ClInclude Include="Libs\FreeIMU\FreeIMU.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
     <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
     <ClCompile Include="Libs\bma180\bma180.cpp" />
+    <ClCompile Include="Libs\FastLED\FastLED.cpp" />
     <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
     <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
     <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
