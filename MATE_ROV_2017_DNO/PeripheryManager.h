@@ -40,9 +40,9 @@ public:
 		_flashlight->SetState(state);
 	}
 
-	void ReceiveBluetoothMessage(bool state) const
+	void ReceiveBluetoothMessage(char* input_buffer) const
 	{
-		_bluetooth->ReceiveBluetoothMessage();
+		_bluetooth->ReceiveBluetoothMessage(input_buffer);
 	}
 
 	bool GetFlashlightState() const {

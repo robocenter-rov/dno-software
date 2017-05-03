@@ -17,7 +17,13 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	_communicator->OnBluetoothMessageNeed([](void* data, char* msg)
 	{
-		memcpy(msg, "1234567", 7);
+		//memcpy(msg, "1234567", 7);
+
+		//msg = "1234567";
+		//char* buffer_for_bluetooth[7];
+		auto main = static_cast<SimpleMain_t*>(data);
+		main->_periphery_manager->ReceiveBluetoothMessage(msg);
+		//msg = *buffer_for_bluetooth;
 	}, this);
 
 	_communicator->OnSensorDataNeed([](void* data, float& q1, float& q2, float& q3, float& q4, float& depth)

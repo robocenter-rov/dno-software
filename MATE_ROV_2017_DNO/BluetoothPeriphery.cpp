@@ -11,7 +11,7 @@ BluetoothPeriphery_t::BluetoothPeriphery_t(Stream* serial)
 
 BluetoothPeriphery_t::~BluetoothPeriphery_t() {}
 
-bool BluetoothPeriphery_t::ReceiveBluetoothMessage()
+void BluetoothPeriphery_t::ReceiveBluetoothMessage(char* buff)
 {
 	if (_serial->available()) {
 		char byte;
@@ -19,13 +19,8 @@ bool BluetoothPeriphery_t::ReceiveBluetoothMessage()
 
 			LOG("Byte readed from bluetooth:");
 			LOGLN(byte);
-			_message_buffer[_bytes_readed++] = byte;
-		}
-
-		if (_bytes_readed == 7) {
-			return true;
+			//_message_buffer[_bytes_readed++] = byte;
+			buff[_bytes_readed++] = byte;
 		}
 	}
-
-	return false;
 }

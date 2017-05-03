@@ -13,6 +13,6 @@ private:
 public:
 	BluetoothPeriphery_t(Stream* serial);
 	~BluetoothPeriphery_t();
-	bool ReceiveBluetoothMessage();
+	void ReceiveBluetoothMessage(char* buff);
 };
 
