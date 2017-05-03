@@ -250,9 +250,6 @@
     <ClInclude Include="LEDStripLightPeriphery_t.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Libs\FastLED\FastLED.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -314,6 +311,5 @@
     <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
     <ClCompile Include="TestPCAMain.cpp" />
     <ClCompile Include="LEDStripLightPeriphery_t.cpp" />
-    <ClCompile Include="Libs\FastLED\FastLED.cpp" />
   </ItemGroup>
 </Project>

@@ -63,7 +63,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\EEPROM\src;$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SPI\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\2r25oje5.2cf\Micro Platforms\visualmicro\ide\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries;$(ProjectDir)..\..\Documents\Arduino\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\avr\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\EEPROM\src;$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SPI\src;$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src\utility;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\2r25oje5.2cf\Micro Platforms\visualmicro\ide\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries;$(ProjectDir)..\..\Documents\Arduino\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\avr\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -99,7 +99,6 @@
     <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h" />
     <ClInclude Include="Libs\bma180\bma180.h" />
     <ClInclude Include="Libs\DebugUtils\DebugUtils.h" />
-    <ClInclude Include="Libs\FastLED\FastLED.h" />
     <ClInclude Include="Libs\FreeIMU\calibration.h" />
     <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h" />
     <ClInclude Include="Libs\FreeIMU\FreeIMU.h" />
@@ -158,7 +157,6 @@
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
     <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
     <ClCompile Include="Libs\bma180\bma180.cpp" />
-    <ClCompile Include="Libs\FastLED\FastLED.cpp" />
     <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
     <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
     <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
