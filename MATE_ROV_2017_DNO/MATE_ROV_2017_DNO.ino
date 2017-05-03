@@ -56,8 +56,8 @@ void setup() {
 	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(pwm1, 1);
 
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
-		new PCA96685Motor_t(pwm2, 8, 9, 10, 2000),
-		new PCA96685Motor_t(pwm2, 13, 12, 11, 2000)
+		new PCA96685Motor_t(pwm2, 9, 10, 8, 2000),
+		new PCA96685Motor_t(pwm2, 12, 11, 13, 2000)
 	);
 
 	PeripheryManager_t* periphery_manager = new PeripheryManager_t(flashlight_periphery, manipulator_periphery, bluetooth_periphery, 
