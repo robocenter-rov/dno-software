@@ -23,12 +23,11 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	_communicator->OnSensorDataNeed([](void* data, float& q1, float& q2, float& q3, float& q4, float& depth)
 	{
-		q1 = 1;
-		q2 = 0;
-		q3 = 0;
-		q4 = 0;
+		auto main = static_cast<SimpleMain_t*>(data);
 
-		depth = 10;
+		main->_sensor_manager->GetRotation(q1, q2, q3, q4);
+
+		depth = main->_sensor_manager->GetDepth();
 	}, this);
 
 	_communicator->OnRawSensorDataNeed([](void* data, int& ax, int& ay, int& az, int& gx, int& gy, int& gz, int& mx, int& my, int& mz, float& depth)
@@ -174,6 +173,8 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 			
 		}
 
+		main->_movement->
+
 	}, this);
 
 	_communicator->OnPidReceive([](void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d)-> void {
@@ -236,5 +237,6 @@ int SimpleMain_t::Begin()
 
 void SimpleMain_t::Loop()
 {
+	_sensor_manager->Update();
 	_communicator->Update();
 }
