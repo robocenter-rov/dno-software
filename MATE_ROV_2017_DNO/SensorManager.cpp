@@ -24,3 +24,7 @@ float SensorManager_t::GetDepth() {
 float SensorManager_t::GetRawDepth() {
 	return _sensorDepth->GetRawData();
 }
+
+void SensorManager_t::Update() const {
+	_sensorRotation->Update();
+}

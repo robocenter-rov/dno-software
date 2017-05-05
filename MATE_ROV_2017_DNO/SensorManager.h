@@ -16,5 +16,5 @@ public:
 	float GetDepth();
 	float GetRawDepth();
 
-	void Update();
+	void Update() const;
 };
