@@ -61,7 +61,7 @@ int SimpleCommunicator_t::Update() {
 		DataReader_t dr(_connection_provider->Buffer(), readed_bytes);
 
 
-#define READ(val) if (dr.Read(val) < 0) { return 0; }
+#define READ(val) if (dr.Read(val) < 0) { LOGLN("Too short buffer"); return 0; }
 
 		uint32_t msg_id;
 		READ(msg_id);
@@ -223,11 +223,6 @@ int SimpleCommunicator_t::Update() {
 		} state {flashlight_state};
 
 		_connection_provider->Write(state);
-
-
-
-		LOG("size ");
-		LOGLN(sizeof state);
 
 		bool scanned; bool pca1; bool pca2; bool hmc58x3; bool itg3200; bool adxl345; bool bmp085; bool ms5803;
 		_on_scanned_i2c_devices_need.callback(_on_scanned_i2c_devices_need.data,
