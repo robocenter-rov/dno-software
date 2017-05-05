@@ -29,7 +29,7 @@ SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_prov
 	_last_msg_receive_time = 0;
 	_last_msg_send_time = 0;
 	_send_frequency = 30;
-	_receive_time_out = 100;
+	_receive_time_out = 1000;
 	_last_received_msg_id = 0;
 	_last_sended_msg_id = 0;
 	_receive_packets_leak = 0;
