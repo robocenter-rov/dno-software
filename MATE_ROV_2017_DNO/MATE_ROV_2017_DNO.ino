@@ -66,9 +66,12 @@ void setup() {
 
 	SensorManager_t* sensor_manager = new SensorManager_t(rotation_sensor, depth_sensor);
 
-	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager, motors);
+	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager);
 
-	Movement_t* movement = new Movement_t(motors, motors_force_distributor, nullptr);
+	AutoYaw_t* auto_yaw = new AutoYaw_t(sensor_manager);
+	AutoDepth_t* auto_depth = new AutoDepth_t(sensor_manager);
+
+	Movement_t* movement = new Movement_t(motors, motors_force_distributor, auto_yaw, auto_depth);
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(8);
 	

@@ -5,8 +5,6 @@
 
 class LocalMotorsForceDistributor_t {
 private:
-	Motors_t* _motors;
-
 	float _x_move_force;
 	float _y_move_force;
 	float _z_move_force;
@@ -14,9 +12,7 @@ private:
 	float _y_rotate_force;
 	float _z_rotate_force;
 public:
-	LocalMotorsForceDistributor_t(Motors_t* motors) {
-		_motors = motors;
-
+	LocalMotorsForceDistributor_t() {
 		_x_move_force = _y_move_force = _z_move_force = 0;
 		_y_rotate_force = _z_rotate_force = 0;
 	}
@@ -32,6 +28,18 @@ public:
 		_z_rotate_force += z;
 	}
 
+	void SetXMoveForce(float x) {
+		_x_move_force = x;
+	}
+
+	void SetYMoveForce(float y) {
+		_y_move_force = y;
+	}
+
+	void SetZMoveForce(float z) {
+		_z_move_force = z;
+	}
+
 	void SetMoveForce(float x, float y, float z) {
 		_x_move_force = x;
 		_y_move_force = y;
@@ -43,12 +51,20 @@ public:
 		_z_rotate_force = z;
 	}
 
+	void SetYRotateForce(float y) {
+		_y_rotate_force = y;
+	}
+
+	void SetZRotateForce(float z) {
+		_z_rotate_force = z;
+	}
+
 	void ClearForces() {
 		_x_move_force = _y_move_force = _z_move_force = 0;
 		_y_rotate_force = _z_rotate_force = 0;
 	}
 
-	void Update() const {
+	void Update(Motors_t* motors) const {
 		float frontLeftMotorThrust =
 			(_x_move_force / 4) * SQRT2 +
 			(_y_move_force / 4) * SQRT2 - _z_rotate_force;
@@ -91,6 +107,6 @@ public:
 			}
 		}
 
-		_motors->SetMotorsThrust(motorsThrust);
+		motors->SetMotorsThrust(motorsThrust);
 	}
 };

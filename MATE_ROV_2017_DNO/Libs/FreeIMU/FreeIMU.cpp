@@ -237,11 +237,15 @@ void FreeIMU::calLoad() {
   }
   else {
 	acc_off_x = 6.4322;
-	acc_off_y = 6.7379;
+	acc_off_y = 17;
 	acc_off_z = 28.5567;
 	acc_scale_x = 253.999;
 	acc_scale_y = 254.304;
 	acc_scale_z = 249.271;
+
+	gyro_off_x = 22.89;
+	gyro_off_y = 24.32;
+	gyro_off_z = -4.99;
 
     magn_off_x = 0;
     magn_off_y = 0;
@@ -291,6 +295,10 @@ void FreeIMU::getValues(float * values) {
     values[1] = (float) accval[1];
     values[2] = (float) accval[2];
     gyro.readGyro(&values[3]);
+
+	values[3] -= gyro_off_x;
+	values[4] -= gyro_off_y;
+	values[5] -= gyro_off_z;
   #else // MPU6050
     int16_t accgyroval[6];
     accgyro.getMotion6(&accgyroval[0], &accgyroval[1], &accgyroval[2], &accgyroval[3], &accgyroval[4], &accgyroval[5]);

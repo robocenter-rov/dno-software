@@ -8,8 +8,7 @@ private:
 	LocalMotorsForceDistributor_t _local_force_distrib;
 	CoordinateSystemConverter_t _coordinate_system_converter;
 public:
-	MotorsForceDistributor_t(SensorManager_t* sensor_manager, Motors_t* motors) :
-	_local_force_distrib(motors), _coordinate_system_converter(sensor_manager) {}
+	MotorsForceDistributor_t(SensorManager_t* sensor_manager) :_coordinate_system_converter(sensor_manager) {}
 
 	void AddLocalMoveForce(float x, float y, float z) {
 		_local_force_distrib.AddMoveForce(x, y, z);
@@ -17,6 +16,18 @@ public:
 
 	void SetLocalMoveForce(float x, float y, float z) {
 		_local_force_distrib.SetMoveForce(x, y, z);
+	}
+
+	void SetLocalXMoveForce(float x) {
+		_local_force_distrib.SetXMoveForce(x);
+	}
+
+	void SetLocalYMoveForce(float y) {
+		_local_force_distrib.SetYMoveForce(y);
+	}
+
+	void SetLocalZMoveForce(float z) {
+		_local_force_distrib.SetZMoveForce(z);
 	}
 
 	void AddGlobalMoveForce(float x, float y, float z) {
@@ -43,7 +54,11 @@ public:
 		_local_force_distrib.SetRotateForce(y, z);
 	}
 
-	void Update() const {
-		_local_force_distrib.Update();
+	void Update(Motors_t* motors) const {
+		_local_force_distrib.Update(motors);
+	}
+
+	void ClearForces() {
+		_local_force_distrib.ClearForces();
 	}
 };

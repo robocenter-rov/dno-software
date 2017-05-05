@@ -79,22 +79,7 @@
     <ClInclude Include="FlashlightPeriphery.h">
       <Filter>Periphery</Filter>
     </ClInclude>
-    <ClInclude Include="AngularVelocityRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="CourseRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
     <ClInclude Include="DepthRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="RotationRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="PositionRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="VelocityRegulator.h">
       <Filter>Regulators</Filter>
     </ClInclude>
     <ClInclude Include="SensorRotation.h">
@@ -247,6 +232,12 @@
     <ClInclude Include="TestPCAMain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AutoYaw.h">
+      <Filter>Regulators</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementRegulator.h">
+      <Filter>Regulators</Filter>
+    </ClInclude>
     <ClInclude Include="LEDStripLightPeriphery_t.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -311,5 +302,8 @@
     <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
     <ClCompile Include="TestPCAMain.cpp" />
     <ClCompile Include="LEDStripLightPeriphery_t.cpp" />
+    <ClCompile Include="AutoYaw.cpp">
+      <Filter>Regulators</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
