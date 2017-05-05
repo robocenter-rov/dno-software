@@ -15,6 +15,6 @@ public:
 	void SetHandAngle(float angle_radians) const;
 	void SetArmAngle(float ange_radians) const;*/
 
-	void SetHandThrust(unsigned int thrust) const;
-	void SetArmThrust(unsigned int thrust) const;
+	void SetHandThrust(float thrust) const;
+	void SetArmThrust(float thrust) const;
 };

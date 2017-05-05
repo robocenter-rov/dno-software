@@ -20,12 +20,12 @@ ManipulatorPeriphery_t::ManipulatorPeriphery_t(PCA96685Motor_t* hand, PCA96685Mo
 	_arm = arm;
 }
 
-void ManipulatorPeriphery_t::SetHandThrust(unsigned int thrust) const
+void ManipulatorPeriphery_t::SetHandThrust(float thrust) const
 {
 	_hand->SetThrust(thrust);
 }
 
-void ManipulatorPeriphery_t::SetArmThrust(unsigned int thrust) const
+void ManipulatorPeriphery_t::SetArmThrust(float thrust) const
 {
 	_arm->SetThrust(thrust);
 }
