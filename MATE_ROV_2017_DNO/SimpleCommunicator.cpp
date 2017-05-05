@@ -141,12 +141,12 @@ int SimpleCommunicator_t::Update() {
 					);
 				break;
 				case RBI_MOVEMENT:
+					#pragma pack(1)
 					struct {
 						struct {
-							int auto_depth : 1;
-							int auto_yaw : 1;
-							int auto_pitch : 1;
-							int rest : 5;
+							bool auto_depth : 1;
+							bool auto_yaw : 1;
+							bool auto_pitch : 1;
 						} control_type;
 						float x;
 						float y;
@@ -154,6 +154,7 @@ int SimpleCommunicator_t::Update() {
 						float yaw;
 						float pitch;
 					} movement;
+					#pragma pack(pop)
 					READ(movement);
 					_on_movement_receive.callback(_on_movement_receive.data,
 						movement.control_type.auto_depth,
