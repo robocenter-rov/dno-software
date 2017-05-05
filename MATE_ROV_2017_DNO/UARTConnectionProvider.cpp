@@ -42,6 +42,8 @@ int UARTConnectionProvider::Connected() {
 }
 
 int UARTConnectionProvider::BeginPacket() {
+	LOGLN("Begin packet");
+
 	_current_hash = 0;
 	return 0;
 }
@@ -133,7 +135,7 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 			if (msg_hash == *reinterpret_cast<uint32_t*>(hash_ptr)) {
 				readed_bytes = _received - sizeof(uint32_t);
 			} else {
-				LOGLN("Broken message");
+				LOGLN("Broken message: ");
 			}
 
 			_received = 0;
