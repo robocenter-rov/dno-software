@@ -8,6 +8,7 @@
 #include "UARTConnectionProvider.h"
 #include "TestPCAMain.h"
 #include "SimpleMain.h"
+#include "LedDebigMotor.h"
 
 Main_t* Main;
 
@@ -21,6 +22,7 @@ void setup() {
 #ifdef _DEBUG
 	Serial.begin(9600);
 #endif
+	Serial.begin(9600);
 	auto pwm1 = new Adafruit_PWMServoDriver(0x40);
 	auto pwm2 = new Adafruit_PWMServoDriver(0x41);
 
@@ -31,13 +33,20 @@ void setup() {
 	pwm2->setPWMFreq(60);
 	
 	Motors_t* motors = new Motors_t(6);
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 14, 13, 15));
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 12));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 2, 1, 0));
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3));
-
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 2, 1, 0)); // 4
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2)); // 1
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 14, 13, 15)); // 2
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3)); // 5
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 12)); // 3
+	/*
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2)); // 1 
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 14, 13, 15)); // 2
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 12)); // 3
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 2, 1, 0)); // 4
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3)); // 5
+	*/
 	SensorRotation_t* rotation_sensor = new SensorRotation_t();
 	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
 
@@ -69,9 +78,10 @@ void setup() {
 	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager);
 
 	AutoYaw_t* auto_yaw = new AutoYaw_t(sensor_manager);
+	AutoPitch_t* auto_pitch = new AutoPitch_t(sensor_manager);
 	AutoDepth_t* auto_depth = new AutoDepth_t(sensor_manager);
 
-	Movement_t* movement = new Movement_t(motors, motors_force_distributor, auto_yaw, auto_depth);
+	Movement_t* movement = new Movement_t(motors, motors_force_distributor, auto_yaw, auto_pitch, auto_depth);
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(8);
 	
@@ -113,18 +123,19 @@ void setup() {
 	}
 }
 
+bool g = false;
+
 void loop() {
+	digitalWrite(13, g = !g);
 	Main->Loop();
 	if(Exceptions::SmthngWrong()) {
-#ifdef _DEBUG
-		LOGLN("Some shit happens");
+		Serial.println("Some shit happens");
 		auto node = Exceptions::GetList().FrontNode();
 		while(node) {
 			Serial.println(node->GetData().GetFullMessage());
 			node = node->GetNext();
 		}
 		Exceptions::Release();
-#endif
 		while (true) {
 			digitalWrite(13, HIGH);
 			delay(1000);
