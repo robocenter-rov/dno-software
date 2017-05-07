@@ -8,6 +8,18 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 	_sensor_manager = sensor_manager;
 	_periphery_manager = periphery_manager;
 
+	_communicator->OnConnect([](void* data)
+	{
+
+	}, this);
+
+	_communicator->OnDisconnect([](void* data)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+		
+		main->_movement->Stop();
+		main->_periphery_manager->GetManipulator()->Stop();
+	}, this);
 	_communicator->OnStateNeed([](void* data, bool& flashlight_state)
 	{
 		auto main = static_cast<SimpleMain_t*>(data);
