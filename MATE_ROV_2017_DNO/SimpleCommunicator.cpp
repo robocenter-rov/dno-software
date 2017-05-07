@@ -237,26 +237,19 @@ int SimpleCommunicator_t::Update() {
 
 		_connection_provider->Write(state);
 
-		bool scanned; bool pca1; bool pca2; bool hmc58x3; bool itg3200; bool adxl345; bool bmp085; bool ms5803;
-		_on_scanned_i2c_devices_need.callback(_on_scanned_i2c_devices_need.data,
-			scanned, pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803);
+		if (_last_i2c_scan_token != _last_received_i2c_scan_token) {
+			bool scanned; bool pca1; bool pca2; bool hmc58x3; bool itg3200; bool adxl345; bool bmp085; bool ms5803;
+			_on_scanned_i2c_devices_need.callback(_on_scanned_i2c_devices_need.data,
+				scanned, pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803);
 
-		struct {
-			bool pca1 : 1;
-			bool pca2 : 1;
-			bool hmc58x3 : 1;
-			bool itg3200 : 1;
-			bool adxl345 : 1;
-			bool bmp085 : 1;
-			bool ms5803 : 1;
-		} scanned_i2c_devices{ pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803 };
-
-		if (scanned) {
-			_last_i2c_scan_token = _last_received_i2c_scan_token;
+			if (scanned) {
+				_last_i2c_scan_token = _last_received_i2c_scan_token;
+				_last_scanned_i2c_devices = { pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803 };
+			}
 		}
 
 		_connection_provider->Write(_last_i2c_scan_token);
-		_connection_provider->Write(scanned_i2c_devices);
+		_connection_provider->Write(_last_scanned_i2c_devices);
 		_connection_provider->Write(_pids_hash);
 
 		_connection_provider->Write(static_cast<uint8_t>(SBI_SENSOR_DATA));

@@ -77,6 +77,16 @@ private:
 		bool rest : 2;
 	} _all_state;
 
+	struct ScannedI2CDevices_t {
+		bool pca1 : 1;
+		bool pca2 : 1;
+		bool hmc58x3 : 1;
+		bool itg3200 : 1;
+		bool adxl345 : 1;
+		bool bmp085 : 1;
+		bool ms5803 : 1;
+	} _last_scanned_i2c_devices;
+
 	uint8_t _last_i2c_scan_token;
 	uint8_t _last_received_i2c_scan_token;
 
