@@ -126,6 +126,15 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		ms5803 = s[6];
 	}, this);
 
+	_communicator->OnPidsStateNeed([](void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_target, float& pitch_out)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+
+		main->_movement->GetDepthPidState(depth_in, depth_target, depth_out);
+		main->_movement->GetYawPidState(yaw_in, yaw_target, yaw_out);
+		main->_movement->GetPitchPidState(pitch_in, pitch_target,pitch_out);
+	}, this);
+
 	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, 
 											float m2_pos, float cam1_pos, float cam2_pos) -> void {
 		
