@@ -33,6 +33,7 @@ SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_prov
 	_last_received_msg_id = 0;
 	_last_sended_msg_id = 0;
 	_receive_packets_leak = 0;
+	_connected = false;
 	_all_state.send_calibrated_sensor_data = false;
 	_all_state.send_raw_sensor_data = false;
 	_all_state.send_motors_state = false;
@@ -58,6 +59,11 @@ int SimpleCommunicator_t::Update() {
 	}
 
 	if (readed_bytes) {
+		if (!_connected) {
+			_connected = true;
+			_on_connect.callback(_on_connect.data);
+		}
+
 		DataReader_t dr(_connection_provider->Buffer(), readed_bytes);
 
 
@@ -210,7 +216,13 @@ int SimpleCommunicator_t::Update() {
 		_last_msg_receive_time = millis();
 	}
 
-	if (millis() - _last_msg_send_time > _send_frequency && millis() - _last_msg_receive_time < _receive_time_out) {
+	unsigned long now = millis();
+	
+	if (now - _last_msg_receive_time >= _receive_time_out && _connected) {
+		_on_disconnect.callback(_on_disconnect.data);
+	}
+
+	if (now - _last_msg_send_time > _send_frequency && now - _last_msg_receive_time < _receive_time_out) {
 		_connection_provider->BeginPacket();
 		_connection_provider->Write(++_last_sended_msg_id);
 		_connection_provider->Write(_receive_packets_leak);
@@ -426,6 +438,15 @@ void SimpleCommunicator_t::OnScannedI2CDevicesNeed(void(* callback)(void* data, 
 	_on_scanned_i2c_devices_need.data = data;
 }
 
+void SimpleCommunicator_t::OnConnect(void(* callback)(void* data), void* data) {
+	_on_connect.callback = callback;
+	_on_connect.data = data;
+}
+
+void SimpleCommunicator_t::OnDisconnect(void(* callback)(void* data), void* data) {
+	_on_disconnect.callback = callback;
+	_on_disconnect.data = data;
+}
 void SimpleCommunicator_t::OnStateReceive(void(* callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token), void* data) {
 	_on_state_receive.callback = callback;
 	_on_state_receive.data = data;

@@ -9,6 +9,13 @@ private:
 		void* data;
 	};
 	struct :BaseCallback_t {
+		void(*callback)(void* data);
+	} _on_connect;
+
+	struct :BaseCallback_t {
+		void(*callback)(void* data);
+	} _on_disconnect;
+	struct :BaseCallback_t {
 		void(*callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token);
 	} _on_state_receive;
 
@@ -85,6 +92,8 @@ private:
 	uint32_t _last_sended_msg_id;
 	uint16_t _receive_packets_leak;
 
+	bool _connected;
+
 	ConnectionProvider_t* _connection_provider;
 public:
 	SimpleCommunicator_t(ConnectionProvider_t* connection_provider);
@@ -103,6 +112,8 @@ public:
 	void OnMotorsStateNeed(void(*callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6), void* data);
 	void OnScannedI2CDevicesNeed(void(*callback)(void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803), void* data);
 
+	void OnConnect(void(*callback)(void* data), void* data);
+	void OnDisconnect(void(*callback)(void* data), void* data);
 	void OnStateReceive(void(*callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token), void* data);
 	void OnDevicesStateReceive(void(*callback)(void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos), void* data);
 	void OnMotorsStateReceive(void(*callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6), void* data);
