@@ -22,6 +22,17 @@ public:
 		return sizeof(T);
 	}
 
+	int ReadInt8AsFloat(float& f, float min, float max) {
+		char v;
+		int r = Read(v);
+		//Serial.print("Read: ");
+		//Serial.println(int(v));
+		//Serial.print("That is: ");
+		f = (v + 128) / 255.f * (max - min) + min;
+		//Serial.println(f);
+		return 1;
+	}
+
 	unsigned int Available() const {
 		return _buffer_size - _readed;
 	}

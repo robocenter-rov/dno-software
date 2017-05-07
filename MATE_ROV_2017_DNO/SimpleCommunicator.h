@@ -8,6 +8,7 @@ private:
 	struct BaseCallback_t {
 		void* data;
 	};
+
 	struct :BaseCallback_t {
 		void(*callback)(void* data);
 	} _on_connect;
@@ -15,6 +16,7 @@ private:
 	struct :BaseCallback_t {
 		void(*callback)(void* data);
 	} _on_disconnect;
+
 	struct :BaseCallback_t {
 		void(*callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token);
 	} _on_state_receive;

@@ -2,6 +2,7 @@
 #include "DataReader.h"
 #include "Hash.h"
 #include "Debug.h"
+#include "MathConstants.h"
 
 enum SEND_BLOCK_IDS {
 	SBI_STATE = 0,
@@ -28,7 +29,7 @@ SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_prov
 	_pids_hash = 0;
 	_last_msg_receive_time = 0;
 	_last_msg_send_time = 0;
-	_send_frequency = 30;
+	_send_frequency = 50;
 	_receive_time_out = 1000;
 	_last_received_msg_id = 0;
 	_last_sended_msg_id = 0;
@@ -108,71 +109,93 @@ int SimpleCommunicator_t::Update() {
 						state.state.send_motors_state, 
 						state.last_i2c_scan);
 				break;
-				case RBI_DEVICES_STATE:
-					struct {
-						float ArmPos;
-						float HandPos;
-						float M1;
-						float M2;
-						float Cam1Pos;
-						float Cam2Pos;
-					} devices_state;
-					READ(devices_state);
-					_on_devices_state_receive.callback(_on_devices_state_receive.data, 
-						devices_state.ArmPos,
-						devices_state.HandPos,
-						devices_state.M1,
-						devices_state.M2,
-						devices_state.Cam1Pos,
-						devices_state.Cam2Pos
+				case RBI_DEVICES_STATE: {
+					float ArmPos;
+					float HandPos;
+					float M1;
+					float M2;
+					float Cam1Pos;
+					float Cam2Pos;
+					dr.ReadInt8AsFloat(ArmPos, -1, 1);
+					dr.ReadInt8AsFloat(HandPos, -1, 1);
+					dr.ReadInt8AsFloat(M1, 0, PI2);
+					dr.ReadInt8AsFloat(M2, 0, PI2);
+					dr.ReadInt8AsFloat(Cam1Pos, 0, PI2);
+					dr.ReadInt8AsFloat(Cam2Pos, 0, PI2);
+					_on_devices_state_receive.callback(_on_devices_state_receive.data,
+						ArmPos,
+						HandPos,
+						M1,
+						M2,
+						Cam1Pos,
+						Cam2Pos
 					);
-				break;
-				case RBI_MOTORS_STATE:
-					struct {
-						float M1;
-						float M2;
-						float M3;
-						float M4;
-						float M5;
-						float M6;
-					} motors_state;
-					READ(motors_state);
+				} break;
+				case RBI_MOTORS_STATE: {
+					float M1;
+					float M2;
+					float M3;
+					float M4;
+					float M5;
+					float M6;
+					dr.ReadInt8AsFloat(M1, -1, 1);
+					dr.ReadInt8AsFloat(M2, -1, 1);
+					dr.ReadInt8AsFloat(M3, -1, 1);
+					dr.ReadInt8AsFloat(M4, -1, 1);
+					dr.ReadInt8AsFloat(M5, -1, 1);
+					dr.ReadInt8AsFloat(M6, -1, 1);
 					_on_motors_state_receive.callback(_on_motors_state_receive.data,
-						motors_state.M1,
-						motors_state.M2,
-						motors_state.M3,
-						motors_state.M4,
-						motors_state.M5,
-						motors_state.M6
+						M1,
+						M2,
+						M3,
+						M4,
+						M5,
+						M6
 					);
-				break;
-				case RBI_MOVEMENT:
+				} break;
+				case RBI_MOVEMENT: {
 					#pragma pack(1)
 					struct {
-						struct {
-							bool auto_depth : 1;
-							bool auto_yaw : 1;
-							bool auto_pitch : 1;
-						} control_type;
-						float x;
-						float y;
-						float depth;
-						float yaw;
-						float pitch;
-					} movement;
+						bool auto_depth : 1;
+						bool auto_yaw : 1;
+						bool auto_pitch : 1;
+					} control_type;
 					#pragma pack(pop)
-					READ(movement);
+
+					float x;
+					float y;
+					float depth;
+					float yaw;
+					float pitch;
+
+					dr.Read(control_type);
+					dr.ReadInt8AsFloat(x, -2, 2);
+					dr.ReadInt8AsFloat(y, -2, 2);
+					dr.Read(depth);
+
+					if (control_type.auto_yaw) {
+						dr.ReadInt8AsFloat(yaw, -PI, PI);
+					} else {
+						dr.ReadInt8AsFloat(yaw, -1, 1);
+					}
+
+					if (control_type.auto_pitch) {
+						dr.ReadInt8AsFloat(pitch, -PI, PI);
+					} else {
+						dr.ReadInt8AsFloat(pitch, -1, 1);
+					}
+
 					_on_movement_receive.callback(_on_movement_receive.data,
-						movement.control_type.auto_depth,
-						movement.control_type.auto_yaw,
-						movement.control_type.auto_pitch,
-						movement.x,
-						movement.y,
-						movement.depth,
-						movement.yaw,
-						movement.pitch
+						control_type.auto_depth,
+						control_type.auto_yaw,
+						control_type.auto_pitch,
+						x,
+						y,
+						depth,
+						yaw,
+						pitch
 					);
-				break;
+				} break;
 				case RBI_PID:
 					struct {
 						float depth_p;
@@ -440,6 +463,7 @@ void SimpleCommunicator_t::OnDisconnect(void(* callback)(void* data), void* data
 	_on_disconnect.callback = callback;
 	_on_disconnect.data = data;
 }
+
 void SimpleCommunicator_t::OnStateReceive(void(* callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token), void* data) {
 	_on_state_receive.callback = callback;
 	_on_state_receive.data = data;
