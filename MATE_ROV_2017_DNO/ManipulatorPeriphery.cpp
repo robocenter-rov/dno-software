@@ -29,3 +29,8 @@ void ManipulatorPeriphery_t::SetArmThrust(float thrust) const
 {
 	_arm->SetThrust(thrust);
 }
+
+void ManipulatorPeriphery_t::Stop() const {
+	_arm->SetThrust(0);
+	_hand->SetThrust(0);
+}

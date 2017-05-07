@@ -17,4 +17,5 @@ public:
 
 	void SetHandThrust(float thrust) const;
 	void SetArmThrust(float thrust) const;
+	void Stop() const;
 };
