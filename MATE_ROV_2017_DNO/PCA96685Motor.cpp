@@ -14,15 +14,16 @@ PCA96685Motor_t::~PCA96685Motor_t() {
 }
 
 void PCA96685Motor_t::SetThrust(float thrust) {
+	_thrust = thrust * _mul;
 
 	LOG("Setting motor ");
 	LOG(_pwmNum);
 	LOG(": ");
-	LOGLN(_maxPwmVal * min(abs(thrust), 1));
+	LOGLN(_maxPwmVal * min(abs(_thrust), 1));
 
-	_pwm->setPWM(_pwmNum, 0, _maxPwmVal * min(abs(thrust), 1));
+	_pwm->setPWM(_pwmNum, 0, _maxPwmVal * min(abs(_thrust), 1));
 
-	if (thrust > 0) {
+	if (_thrust > 0) {
 		_pwm->setPWM(_INAPwmNum, 0, 4095);
 		_pwm->setPWM(_INBPwnNum, 0, 0);
 	} else {

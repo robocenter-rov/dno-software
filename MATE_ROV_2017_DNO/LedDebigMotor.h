@@ -13,6 +13,6 @@ public:
 	}
 
 	void SetThrust(float thrust) override {
-		analogWrite(_pin, round(constrain(abs(thrust), 0, 1) * 255));
+		analogWrite(_pin, round(constrain(abs(thrust * _mul), 0, 1) * 255));
 	}
 };

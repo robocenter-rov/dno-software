@@ -25,6 +25,8 @@ private:
 public:
 	Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, AutoYaw_t* yaw_regulator, AutoPitch_t* pitch_regulator, AutoDepth_t* depth_regulator);
 
+	Motors_t* Motors() const;
+
 	void SetMotorThrust(int motorId, float thrust);
 	float GetMotorThrust(int motorId) const;
 

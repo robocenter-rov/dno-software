@@ -12,6 +12,10 @@ Movement_t::Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_
 	_local_yaw = _local_pitch = 0;
 }
 
+Motors_t* Movement_t::Motors() const {
+	return _motors;
+}
+
 void Movement_t::SetMotorThrust(int motorId, float thrust) {
 	_motors->SetMotorThrust(motorId, thrust);
 	_use_auto_depth = _use_auto_pitch = _use_auto_yaw = false;
