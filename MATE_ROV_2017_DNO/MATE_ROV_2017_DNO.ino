@@ -33,12 +33,13 @@ void setup() {
 	pwm2->setPWMFreq(60);
 	
 	Motors_t* motors = new Motors_t(6);
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 2, 1, 0)); // 4
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2)); // 1
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 14, 13, 15)); // 2
-	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3)); // 5
-	motors->AddMotor(new PCA96685Motor_t(pwm1, 10, 11, 12)); // 3
+	motors->AddMotor(new LedDebugMotor_t(13)); // 0
+	//motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 1, 2, 0)); // 1
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 3, 4, 2)); // 2
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 13, 14, 15)); // 3
+	motors->AddMotor(new PCA96685Motor_t(pwm2, 4, 5, 3)); // 4
+	motors->AddMotor(new PCA96685Motor_t(pwm1, 11, 10, 12)); // 5
 	/*
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2)); // 1 
