@@ -147,8 +147,7 @@ int UARTConnectionProvider::Receive(unsigned int& readed_bytes) {
 		}
 		else {
 			_received = 0;
-			ThrowException(Exceptions::EC_CP_MESSAGE_TOO_LARGE);
-			return 1;
+			return 0;
 		}
 	}
 
