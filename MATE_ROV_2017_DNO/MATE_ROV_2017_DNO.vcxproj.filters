@@ -241,6 +241,9 @@
     <ClInclude Include="LEDStripLightPeriphery_t.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AutoPitch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SensorManager.cpp">
@@ -305,5 +308,6 @@
     <ClCompile Include="AutoYaw.cpp">
       <Filter>Regulators</Filter>
     </ClCompile>
+    <ClCompile Include="AutoPitch.cpp" />
   </ItemGroup>
 </Project>
