@@ -252,6 +252,14 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 			//main->_communicator->SetMotorsState()
 		}
 	}, this);
+
+	_communicator->OnMotorsConfigReceive([](void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+
+		main->_movement->Motors()->SetMotorsPositions(m1pos, m2pos, m3pos, m4pos, m5pos, m6pos);
+		main->_movement->Motors()->SetMotorsMultipliers(m1mul, m2mul, m3mul, m4mul, m5mul, m6mul);
+	}, this);
 }
 
 SimpleMain_t::~SimpleMain_t()

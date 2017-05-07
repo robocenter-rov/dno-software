@@ -20,6 +20,7 @@ enum RECEIVE_BLOCK_IDS {
 	RBI_MOTORS_STATE = 2,
 	RBI_MOVEMENT = 3,
 	RBI_PID = 4,
+	RBI_MOTORS_CONFIG = 5,
 };
 
 SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_provider) {
@@ -27,6 +28,7 @@ SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_prov
 	_last_i2c_scan_token = 0;
 	_last_received_i2c_scan_token = 0;
 	_pids_hash = 0;
+	_motors_config_hash = 0;
 	_last_msg_receive_time = 0;
 	_last_msg_send_time = 0;
 	_send_frequency = 50;
@@ -232,6 +234,52 @@ int SimpleCommunicator_t::Update() {
 
 					_pids_hash = pids_hash;
 				break;
+				case RBI_MOTORS_CONFIG: {
+					#pragma pack(1)
+					struct {
+						struct {
+							uint8_t M1Pos : 3;
+							uint8_t M2Pos : 3;
+							uint8_t M3Pos : 3;
+							uint8_t M4Pos : 3;
+							uint8_t M5Pos : 3;
+							uint8_t M6Pos : 3;
+						} MPositions;
+						struct {
+							float M1mul;
+							float M2mul;
+							float M3mul;
+							float M4mul;
+							float M5mul;
+							float M6mul;
+						} MMultipliers;
+					} motors_config;
+					#pragma pack(pop)
+					READ(motors_config);
+
+					uint32_t motors_config_hash;
+					motors_config_hash = HashLy(motors_config);
+
+					if (_motors_config_hash != motors_config_hash) {
+						_on_motors_config_receive.callback(_on_motors_config_receive.data,
+							motors_config.MPositions.M1Pos,
+							motors_config.MPositions.M2Pos,
+							motors_config.MPositions.M3Pos,
+							motors_config.MPositions.M4Pos,
+							motors_config.MPositions.M5Pos,
+							motors_config.MPositions.M6Pos,
+
+							motors_config.MMultipliers.M1mul,
+							motors_config.MMultipliers.M2mul,
+							motors_config.MMultipliers.M3mul,
+							motors_config.MMultipliers.M4mul,
+							motors_config.MMultipliers.M5mul,
+							motors_config.MMultipliers.M6mul
+						);
+
+						_motors_config_hash = motors_config_hash;
+					}
+				}
 				default: ;
 			}
 		}
@@ -274,6 +322,7 @@ int SimpleCommunicator_t::Update() {
 		_connection_provider->Write(_last_i2c_scan_token);
 		_connection_provider->Write(_last_scanned_i2c_devices);
 		_connection_provider->Write(_pids_hash);
+		_connection_provider->Write(_motors_config_hash);
 
 		_connection_provider->Write(static_cast<uint8_t>(SBI_SENSOR_DATA));
 
@@ -394,7 +443,6 @@ int SimpleCommunicator_t::Update() {
 		}
 
 		if (_all_state.read_bluetooth) {
-
 			char bluetooth_message[20];
 			bool readed;
 			_on_bluetooth_msg_need.callback(_on_bluetooth_msg_need.data, bluetooth_message, readed);
@@ -403,7 +451,6 @@ int SimpleCommunicator_t::Update() {
 				_connection_provider->Write(static_cast<uint8_t>(SBI_BLUETOOTH_MSG_RECEIVE));
 				_connection_provider->Write(bluetooth_message, 7);
 			}
-
 		}
 
 		_connection_provider->EndPacket();
@@ -477,6 +524,11 @@ void SimpleCommunicator_t::OnDevicesStateReceive(void(* callback)(void* data, fl
 void SimpleCommunicator_t::OnMotorsStateReceive(void(* callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6), void* data) {
 	_on_motors_state_receive.callback = callback;
 	_on_motors_state_receive.data = data;
+}
+
+void SimpleCommunicator_t::OnMotorsConfigReceive(void(* callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul), void* data) {
+	_on_motors_config_receive.callback = callback;
+	_on_motors_config_receive.data = data;
 }
 
 void SimpleCommunicator_t::OnMovementReceive(void(* callback)(void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch), void* data) {
