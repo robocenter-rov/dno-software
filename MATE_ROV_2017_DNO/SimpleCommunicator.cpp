@@ -327,6 +327,7 @@ int SimpleCommunicator_t::Update() {
 		_connection_provider->Write(_last_scanned_i2c_devices);
 		_connection_provider->Write(_pids_hash);
 		_connection_provider->Write(_motors_config_hash);
+		_connection_provider->Write<uint16_t>(now - _last_update_time);
 
 		_connection_provider->Write(static_cast<uint8_t>(SBI_SENSOR_DATA));
 
@@ -461,6 +462,8 @@ int SimpleCommunicator_t::Update() {
 
 		_last_msg_send_time = millis();
 	}
+
+	_last_update_time = millis();
 
 	return 0;
 }

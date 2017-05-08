@@ -105,6 +105,8 @@ private:
 	unsigned int _send_frequency;
 	unsigned int _receive_time_out;
 
+	unsigned long _last_update_time;
+
 	uint32_t _last_received_msg_id;
 	uint32_t _last_sended_msg_id;
 	uint16_t _receive_packets_leak;
