@@ -97,10 +97,14 @@ int SimpleCommunicator_t::Update() {
 					struct {
 						State_t state;
 						uint8_t last_i2c_scan;
+						uint16_t send_frequency;
+						uint16_t receive_timeout;
 					} state;
 					READ(state);
 					_all_state = state.state;
 					_last_received_i2c_scan_token = state.last_i2c_scan;
+					_send_frequency = state.send_frequency;
+					_receive_time_out = state.receive_timeout;
 					_on_state_receive.callback(
 						_on_state_receive.data, 
 						state.state.flashlight_state, 
