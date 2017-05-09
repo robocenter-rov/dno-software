@@ -261,19 +261,6 @@ int SimpleCommunicator_t::Update() {
 					#pragma pack(pop)
 					READ(motors_config);
 
-					Serial.print(motors_config.MMultipliers.M1mul);
-					Serial.print(' ');
-					Serial.print(motors_config.MMultipliers.M2mul);
-					Serial.print(' ');
-					Serial.print(motors_config.MMultipliers.M3mul);
-					Serial.print(' ');
-					Serial.print(motors_config.MMultipliers.M4mul);
-					Serial.print(' ');
-					Serial.print(motors_config.MMultipliers.M5mul);
-					Serial.print(' ');
-					Serial.print(motors_config.MMultipliers.M6mul);
-					Serial.println();
-
 					uint32_t motors_config_hash;
 					motors_config_hash = HashLy(motors_config);
 
