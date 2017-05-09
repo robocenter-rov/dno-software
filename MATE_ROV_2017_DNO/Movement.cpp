@@ -99,7 +99,7 @@ void Movement_t::GetPitchPidState(float& in, float& target, float& out) const {
 }
 
 void Movement_t::GetDepthPidState(float& in, float& target, float& out) const {
-	_depth_regulator->GetPidState(in, out, target);
+	_depth_regulator->GetPidState(in, target, out);
 }
 
 void Movement_t::Stop() {
