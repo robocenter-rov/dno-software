@@ -297,7 +297,7 @@ int SimpleCommunicator_t::Update() {
 		_on_disconnect.callback(_on_disconnect.data);
 	}
 
-	if (now - _last_msg_send_time > _send_frequency && now - _last_msg_receive_time < _receive_time_out) {
+	if (now - _last_msg_send_time > _send_frequency) {
 		_connection_provider->BeginPacket();
 		_connection_provider->Write(++_last_sended_msg_id);
 		_connection_provider->Write(_receive_packets_leak);
