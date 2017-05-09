@@ -6,7 +6,9 @@
 
 class AutoDepth_t : public MovementRegulator_t {
 public:
-	using MovementRegulator_t::MovementRegulator_t;
+	AutoDepth_t(SensorManager_t* sensor_manager, float p = 0, float i = 0, float d = 0) : MovementRegulator_t(sensor_manager, p, i, d) {
+		_pid.SetOutputLimits(-2, 2);
+	}
 
 	void Update(MotorsForceDistributor_t* motors_force_distributor) {
 		_input = _sensor_manager->GetDepth();
