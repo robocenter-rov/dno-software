@@ -207,7 +207,7 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 	_communicator->OnPidReceive([](void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d)-> void {
 		auto main = static_cast<SimpleMain_t*>(data);
 
-		main->_movement->SetDepthPid(depth_d, depth_i, depth_d);
+		main->_movement->SetDepthPid(depth_p, depth_i, depth_d);
 		main->_movement->SetYawPid(yaw_p, yaw_i, yaw_d);
 		main->_movement->SetPitchPid(pitch_p, pitch_i, pitch_d);
 	}, this);
