@@ -20,6 +20,7 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_movement->Stop();
 		main->_periphery_manager->GetManipulator()->Stop();
 	}, this);
+
 	_communicator->OnStateNeed([](void* data, bool& flashlight_state)
 	{
 		auto main = static_cast<SimpleMain_t*>(data);
@@ -235,22 +236,6 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		LOGLN(i2c_scan_token);
 
 		main->_periphery_manager->SetFlashlightState(flashlight_state);
-		if (send_raw_sensor_data)
-		{
-			
-		}
-		if (send_calibrated_sensor_data)
-		{
-			
-		}
-		if (send_pid_state)
-		{
-			
-		}
-		if (send_motors_state)
-		{
-			//main->_communicator->SetMotorsState()
-		}
 	}, this);
 
 	_communicator->OnMotorsConfigReceive([](void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul)

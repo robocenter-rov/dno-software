@@ -39,8 +39,8 @@ void setup() {
 		new PCA96685Motor_t(pwm2, 1, 2, 0),
 		new PCA96685Motor_t(pwm1, 3, 4, 2), // 2
 		new PCA96685Motor_t(pwm1, 13, 14, 15), // 3
-		new PCA96685Motor_t(pwm2, 4, 5, 3), // 4
-		new PCA96685Motor_t(pwm1, 11, 10, 12)
+		new PCA96685Motor_t(pwm2, 5, 4, 3), // 4
+		new PCA96685Motor_t(pwm1, 10, 11, 12)
 	); // 5
 	/*
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
@@ -53,15 +53,16 @@ void setup() {
 	SensorRotation_t* rotation_sensor = new SensorRotation_t();
 	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
 
-	/*float acc_bias[] = { 2.01769, -2.51933, -5.07049 };
+	float acc_bias[] = { 2.01769, -2.51933, -5.07049 };
 	float acc_scale[] = { 257.626, 257.65, 247.943 };
 	float gyro_bias[] = { 5.60526, 30.625, -17.5811 };
-	float gyro_scale = 1000;*/
+	float gyro_scale = 1000;
 
+	/*
 	float acc_bias[] = { -6.4322, -6.7379, -28.5567 };
 	float acc_scale[] = { 253.999, 254.304, 249.271 };
 	float gyro_bias[] = { 23.750677, 24.255642, -5.145686 };
-	float gyro_scale = 950;
+	float gyro_scale = 950;*/
 
 	float magn_cal_matrix[3][3] =
 	{
@@ -129,7 +130,7 @@ void setup() {
 bool g = false;
 
 void loop() {
-	digitalWrite(13, g = !g);
+	//digitalWrite(13, g = !g);
 	Main->Loop();
 	if(Exceptions::SmthngWrong()) {
 		Serial.println("Some shit happens");

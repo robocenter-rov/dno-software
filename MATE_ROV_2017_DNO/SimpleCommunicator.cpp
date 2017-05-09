@@ -69,7 +69,6 @@ int SimpleCommunicator_t::Update() {
 
 		DataReader_t dr(_connection_provider->Buffer(), readed_bytes);
 
-
 #define READ(val) if (dr.Read(val) < 0) { LOGLN("Too short buffer"); return 0; }
 
 		uint32_t msg_id;
@@ -128,6 +127,7 @@ int SimpleCommunicator_t::Update() {
 					dr.ReadInt8AsFloat(M2, 0, PI2);
 					dr.ReadInt8AsFloat(Cam1Pos, 0, PI2);
 					dr.ReadInt8AsFloat(Cam2Pos, 0, PI2);
+
 					_on_devices_state_receive.callback(_on_devices_state_receive.data,
 						ArmPos,
 						HandPos,
@@ -160,7 +160,7 @@ int SimpleCommunicator_t::Update() {
 					);
 				} break;
 				case RBI_MOVEMENT: {
-					#pragma pack(1)
+					#pragma pack(push, 1)
 					struct {
 						bool auto_depth : 1;
 						bool auto_yaw : 1;
@@ -239,15 +239,15 @@ int SimpleCommunicator_t::Update() {
 					_pids_hash = pids_hash;
 				break;
 				case RBI_MOTORS_CONFIG: {
-					#pragma pack(1)
+					#pragma pack(push, 1)
 					struct {
 						struct {
-							uint8_t M1Pos : 3;
-							uint8_t M2Pos : 3;
-							uint8_t M3Pos : 3;
-							uint8_t M4Pos : 3;
-							uint8_t M5Pos : 3;
-							uint8_t M6Pos : 3;
+							uint8_t M1Pos;
+							uint8_t M2Pos;
+							uint8_t M3Pos;
+							uint8_t M4Pos;
+							uint8_t M5Pos;
+							uint8_t M6Pos;
 						} MPositions;
 						struct {
 							float M1mul;
@@ -260,6 +260,19 @@ int SimpleCommunicator_t::Update() {
 					} motors_config;
 					#pragma pack(pop)
 					READ(motors_config);
+
+					Serial.print(motors_config.MMultipliers.M1mul);
+					Serial.print(' ');
+					Serial.print(motors_config.MMultipliers.M2mul);
+					Serial.print(' ');
+					Serial.print(motors_config.MMultipliers.M3mul);
+					Serial.print(' ');
+					Serial.print(motors_config.MMultipliers.M4mul);
+					Serial.print(' ');
+					Serial.print(motors_config.MMultipliers.M5mul);
+					Serial.print(' ');
+					Serial.print(motors_config.MMultipliers.M6mul);
+					Serial.println();
 
 					uint32_t motors_config_hash;
 					motors_config_hash = HashLy(motors_config);
@@ -329,7 +342,7 @@ int SimpleCommunicator_t::Update() {
 		_connection_provider->Write(_motors_config_hash);
 		_connection_provider->Write<uint16_t>(now - _last_update_time);
 
-		_connection_provider->Write(static_cast<uint8_t>(SBI_SENSOR_DATA));
+		_connection_provider->Write<uint8_t>(SBI_SENSOR_DATA);
 
 		struct {
 			float q1;
