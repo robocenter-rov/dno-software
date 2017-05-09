@@ -15,7 +15,7 @@ Main_t* Main;
 void setup() {
 	Exceptions::Init();
 	Wire.begin();
-	Serial3.begin(115200);
+	Serial3.begin(19200);
 
 	pinMode(13, OUTPUT);
 
