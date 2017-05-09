@@ -43,12 +43,12 @@ public:
 	}
 
 	void SetMotorsMultipliers(float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul) {
-		_motors[0]->SetMultiplier(m1mul);
-		_motors[1]->SetMultiplier(m2mul);
-		_motors[2]->SetMultiplier(m3mul);
-		_motors[3]->SetMultiplier(m4mul);
-		_motors[4]->SetMultiplier(m5mul);
-		_motors[5]->SetMultiplier(m6mul);
+		_motors[_pos[0]]->SetMultiplier(m1mul);
+		_motors[_pos[1]]->SetMultiplier(m2mul);
+		_motors[_pos[2]]->SetMultiplier(m3mul);
+		_motors[_pos[3]]->SetMultiplier(m4mul);
+		_motors[_pos[4]]->SetMultiplier(m5mul);
+		_motors[_pos[5]]->SetMultiplier(m6mul);
 	}
 
 	void SetFrontMotorThrust(float thrust) const {
