@@ -125,6 +125,8 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		adxl345 = s[4];
 		bmp085 = s[5];
 		ms5803 = s[6];
+
+		scanned = true;
 	}, this);
 
 	_communicator->OnPidsStateNeed([](void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_target, float& pitch_out)
