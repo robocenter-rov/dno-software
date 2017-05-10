@@ -242,6 +242,7 @@ int SimpleCommunicator_t::Update() {
 							float camera2_offset;
 						} Camera_offsets;
 					} config;
+#pragma pack(pop)
 					READ(config);
 
 					uint32_t config_hash;
@@ -284,6 +285,8 @@ int SimpleCommunicator_t::Update() {
 							config.Camera_directions.camera2_direction,
 							config.Camera_offsets.camera1_offset,
 							config.Camera_offsets.camera2_offset);
+
+						_config_hash = config_hash;
 					} 
 					} break;
 				default: ;
