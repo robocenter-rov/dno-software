@@ -27,6 +27,14 @@ private:
 
 	float _beta = 0.02f;
 
+	float _pitch;
+	float _roll;
+	float _yaw;
+
+	bool _pitch_updated;
+	bool _roll_updated;
+	bool _yaw_updated;
+
 	unsigned long int _lastUpdate = 0;
 	
 	void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az);
@@ -43,6 +51,10 @@ public:
 		const float accel_bias[3], const float accel_scale[3], const float magn_cal_matrix[3][3], const float magn_bias[3]);
 
 	void Update();
+
+	float GetPithch();
+	float GetRoll();
+	float GetYaw();
 
 	~SensorRotation_t();
 };

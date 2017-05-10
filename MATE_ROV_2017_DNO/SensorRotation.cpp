@@ -263,6 +263,10 @@ SensorRotation_t::SensorRotation_t()
 	_gyro.init(ITG3200_ADDR_AD0_LOW);
 
 	_magn.init(true);
+
+	_roll_updated = false;
+	_pitch_updated = false;
+	_yaw_updated = false;
 }
 
 void SensorRotation_t::GetRotation(float& q0, float& q1, float& q2, float& q3) const {
@@ -320,9 +324,49 @@ void SensorRotation_t::Update() {
 	_sampleFreq = 1.0 / ((now - _lastUpdate) / 1000000.0);
 	_lastUpdate = now;
 
+	_yaw_updated = false;
+	_roll_updated = false;
+	_pitch_updated = false;
+
 	float data[9];
 	GetCalibratedData(data);
 	MadgwickAHRSupdateIMU(data[3], data[4], data[5], data[0], data[1], data[2]);
+}
+
+float SensorRotation_t::GetPithch()
+{
+	if (!_pitch_updated)
+	{
+		float q1, q2, q3, q4;
+		GetRotation(q1, q2, q3, q4);
+		_pitch = atan2(2 * q3 * q4 - 2 * q1 * q2, 2 * q1 * q1 + 2 * q4 * q4 - 1);
+		_pitch_updated = true;
+	}
+	return  _pitch;
+}
+
+float SensorRotation_t::GetRoll()
+{
+	if (!_roll_updated)
+	{
+		float q1, q2, q3, q4;
+		GetRotation(q1, q2, q3, q4);
+		_roll = -asin(2 * q2 * q4 + 2 * q1 * q3);
+		_roll_updated = true;
+	}
+	return _roll;
+}
+
+float SensorRotation_t::GetYaw()
+{
+	if (!_yaw_updated)
+	{
+		float q1, q2, q3, q4;
+		GetRotation(q1, q2, q3, q4);
+		_yaw = atan2(2 * q2 * q3 - 2 * q1 * q4, 2 * q1 * q1 + 2 * q2 * q2 - 1);
+		_yaw_updated = true;
+	}
+	return _yaw;
 }
 
 SensorRotation_t::~SensorRotation_t() {}
