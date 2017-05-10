@@ -180,13 +180,13 @@ int SimpleCommunicator_t::Update() {
 					if (control_type.auto_yaw) {
 						dr.ReadInt8AsFloat(yaw, -PI, PI);
 					} else {
-						dr.ReadInt8AsFloat(yaw, -1, 1);
+						dr.ReadInt8AsFloat(yaw, -2, 2);
 					}
 
 					if (control_type.auto_pitch) {
 						dr.ReadInt8AsFloat(pitch, -PI, PI);
 					} else {
-						dr.ReadInt8AsFloat(pitch, -1, 1);
+						dr.ReadInt8AsFloat(pitch, -2, 2);
 					}
 
 					_on_movement_receive.callback(_on_movement_receive.data,
