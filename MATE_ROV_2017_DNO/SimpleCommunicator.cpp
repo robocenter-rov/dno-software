@@ -121,10 +121,10 @@ int SimpleCommunicator_t::Update() {
 					float Cam2Pos;
 					dr.ReadInt8AsFloat(ArmPos, -1, 1);
 					dr.ReadInt8AsFloat(HandPos, -1, 1);
-					dr.ReadInt8AsFloat(M1, 0, PI2);
-					dr.ReadInt8AsFloat(M2, 0, PI2);
-					dr.ReadInt8AsFloat(Cam1Pos, 0, PI2);
-					dr.ReadInt8AsFloat(Cam2Pos, 0, PI2);
+					dr.ReadInt8AsFloat(M1, -PI/2, PI/2);
+					dr.ReadInt8AsFloat(M2, -PI / 2, PI / 2);
+					dr.ReadInt8AsFloat(Cam1Pos, -PI / 2, PI / 2);
+					dr.ReadInt8AsFloat(Cam2Pos, -PI / 2, PI / 2);
 
 					_on_devices_state_receive.callback(_on_devices_state_receive.data,
 						ArmPos,
