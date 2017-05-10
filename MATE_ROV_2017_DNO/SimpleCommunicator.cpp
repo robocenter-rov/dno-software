@@ -548,3 +548,9 @@ void SimpleCommunicator_t::OnPidReceive(void(* callback)(void* data, float depth
 	_on_pid_receive.callback = callback;
 	_on_pid_receive.data = data;
 }
+
+void SimpleCommunicator_t::OnCamerasState(void(* callback)(void* data, bool camera1_direction, bool camera2_direction, float camera1_offset, float camera2_offset), void* data)
+{
+	_on_cameras_state.callback= callback;
+	_on_cameras_state.data = data;
+}

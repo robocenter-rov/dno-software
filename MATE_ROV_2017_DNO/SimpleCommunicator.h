@@ -142,4 +142,5 @@ public:
 	void OnMotorsConfigReceive(void(*callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul), void* data);
 	void OnMovementReceive(void(*callback)(void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch), void* data);
 	void OnPidReceive(void(*callback)(void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d), void* data);
+	void OnCamerasState(void(*callback)(void* data, bool camera1_direction, bool camera2_direction, float camera1_offset, float camera2_offset), void* data);
 };
