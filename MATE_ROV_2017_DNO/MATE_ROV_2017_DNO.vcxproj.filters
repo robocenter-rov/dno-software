@@ -1,313 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Periphery">
-      <UniqueIdentifier>{c8e4112a-5db0-4bfc-b96d-b0da924f97d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Regulators">
-      <UniqueIdentifier>{24ca3dc1-c97e-4636-9035-b9a662611b25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sensors">
-      <UniqueIdentifier>{3496ba20-6c35-434a-b13b-66bba29a881b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Movement">
-      <UniqueIdentifier>{4a2b8717-7772-4044-a52c-91813aba7f7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ResourceLocker">
-      <UniqueIdentifier>{14aefdb1-f72b-4bc1-abc0-f32d91fdb41c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Task">
-      <UniqueIdentifier>{429393ce-64a5-464c-b1c7-56e73652b0ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Exceptions">
-      <UniqueIdentifier>{11b3a400-1d23-48aa-b5a4-8b5c894580f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Communication">
-      <UniqueIdentifier>{9a6d2af5-e41f-4529-a634-21b71baea0f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Communication\ConnectionProviders">
-      <UniqueIdentifier>{6ab8fb40-4187-4b2a-bd61-db97cbc32c9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Communication\Communicators">
-      <UniqueIdentifier>{ebb643b3-9417-40fa-8d5e-bdc6680c6d18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{8184dbe4-b7e0-40c9-a558-a42539889d69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils\Math">
-      <UniqueIdentifier>{6b9ac58c-23c7-4df8-a7c1-e1d4f386db03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main">
-      <UniqueIdentifier>{7b3ff783-a8cd-4f20-afec-28d529e3f64b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Exceptions\RegisterExceptions">
-      <UniqueIdentifier>{1e85c45b-43d3-4bdd-93fb-be2db0210e7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Communication\RegisterMessages">
-      <UniqueIdentifier>{a45f4c0e-8ca1-43c3-b683-db386f548d5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Periphery\Manipulator">
-      <UniqueIdentifier>{18a62e95-75ab-4b98-b570-2401208d5b9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Periphery\Camera">
-      <UniqueIdentifier>{7c8390b9-01aa-4a85-b17e-05d9ec040e5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Task\Tasks">
-      <UniqueIdentifier>{687622c0-4872-4b44-9e76-b1af83b3b04f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Movement\Motors">
-      <UniqueIdentifier>{584a5188-cd97-4608-a6f2-99878b049328}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MATE_ROV_2017_DNO.ino" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PidCoefficients.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PeripheryManager.h">
-      <Filter>Periphery</Filter>
-    </ClInclude>
-    <ClInclude Include="FlashlightPeriphery.h">
-      <Filter>Periphery</Filter>
-    </ClInclude>
-    <ClInclude Include="DepthRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="SensorRotation.h">
-      <Filter>Sensors</Filter>
-    </ClInclude>
-    <ClInclude Include="SensorManager.h">
-      <Filter>Sensors</Filter>
-    </ClInclude>
-    <ClInclude Include="SensorDepth.h">
-      <Filter>Sensors</Filter>
-    </ClInclude>
-    <ClInclude Include="Regulators.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="MotorsForceDistributor.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="Motors.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="Motor.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="Movement.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="LocalMotorsForceDistributor.h">
-      <Filter>Movement</Filter>
-    </ClInclude>
-    <ClInclude Include="CoordinateSystemConverter.h">
-      <Filter>Utils\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="ConnectionProvider.h">
-      <Filter>Communication\ConnectionProviders</Filter>
-    </ClInclude>
-    <ClInclude Include="UdpConnectionProvider.h">
-      <Filter>Communication\ConnectionProviders</Filter>
-    </ClInclude>
-    <ClInclude Include="Exceptions.h">
-      <Filter>Exceptions</Filter>
-    </ClInclude>
-    <ClInclude Include="List.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="SharedPtr.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="ByteArray.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="SelfExpandoContainer.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugMotorsMain.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Main.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisterExceptions.h">
-      <Filter>Exceptions\RegisterExceptions</Filter>
-    </ClInclude>
-    <ClInclude Include="MathConstants.h">
-      <Filter>Utils\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="ManipulatorPeriphery.h">
-      <Filter>Periphery\Manipulator</Filter>
-    </ClInclude>
-    <ClInclude Include="PCA9685ServoMotor.h">
-      <Filter>Periphery</Filter>
-    </ClInclude>
-    <ClInclude Include="PCA96685Motor.h">
-      <Filter>Movement\Motors</Filter>
-    </ClInclude>
-    <ClInclude Include="MS5803SensorDepth.h">
-      <Filter>Sensors</Filter>
-    </ClInclude>
-    <ClInclude Include="Debug.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Quaternions.h">
-      <Filter>Utils\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="UARTConnectionProvider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\PID\PID_v1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\MS5803\src\SparkFun_MS5803_I2C.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleCommunicator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleMain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BluetoothPeriphery.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DataReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hash.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\bma180\bma180.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\HMC58X3\HMC58X3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\I2Cdev\I2Cdev.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\ITG3200_library\ITG3200.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\MPU60X0\MPU60X0.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\MS561101BA\MS561101BA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\DebugUtils\DebugUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\FreeIMU\FreeIMU.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\FreeIMU\calibration.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\adxl345driver\ADXL345.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPCAMain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AutoYaw.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementRegulator.h">
-      <Filter>Regulators</Filter>
-    </ClInclude>
-    <ClInclude Include="LEDStripLightPeriphery_t.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AutoPitch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="SensorManager.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="SensorRotation.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="SensorDepth.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="Motor.cpp">
-      <Filter>Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="Movement.cpp">
-      <Filter>Movement</Filter>
-    </ClCompile>
-    <ClCompile Include="UdpConnectionProvider.cpp">
-      <Filter>Communication\ConnectionProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="Exceptions.cpp">
-      <Filter>Exceptions</Filter>
-    </ClCompile>
-    <ClCompile Include="ConnectionProvider.cpp">
-      <Filter>Communication\ConnectionProviders</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugMotorsMain.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="ManipulatorPeriphery.cpp">
-      <Filter>Periphery\Manipulator</Filter>
-    </ClCompile>
-    <ClCompile Include="PCA9685ServoMotor.cpp">
-      <Filter>Periphery</Filter>
-    </ClCompile>
-    <ClCompile Include="PCA96685Motor.cpp">
-      <Filter>Movement\Motors</Filter>
-    </ClCompile>
-    <ClCompile Include="MS5803SensorDepth.cpp">
-      <Filter>Sensors</Filter>
-    </ClCompile>
-    <ClCompile Include="UARTConnectionProvider.cpp" />
-    <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
-    <ClCompile Include="Libs\PID\PID_v1.cpp" />
-    <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
-    <ClCompile Include="SimpleMain.cpp" />
+    <ClCompile Include="AutoPitch.cpp" />
+    <ClCompile Include="AutoYaw.cpp" />
     <ClCompile Include="BluetoothPeriphery.cpp" />
-    <ClCompile Include="SimpleCommunicator.cpp">
-      <Filter>Communication\Communicators</Filter>
-    </ClCompile>
+    <ClCompile Include="ConnectionProvider.cpp" />
+    <ClCompile Include="DebugMotorsMain.cpp" />
+    <ClCompile Include="Exceptions.cpp" />
+    <ClCompile Include="LEDStripLightPeriphery_t.cpp" />
+    <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
+    <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
     <ClCompile Include="Libs\bma180\bma180.cpp" />
+    <ClCompile Include="Libs\FastLED\bitswap.cpp" />
+    <ClCompile Include="Libs\FastLED\colorpalettes.cpp" />
+    <ClCompile Include="Libs\FastLED\colorutils.cpp" />
+    <ClCompile Include="Libs\FastLED\FastLED.cpp" />
+    <ClCompile Include="Libs\FastLED\hsv2rgb.cpp" />
+    <ClCompile Include="Libs\FastLED\lib8tion.cpp" />
+    <ClCompile Include="Libs\FastLED\noise.cpp" />
+    <ClCompile Include="Libs\FastLED\power_mgt.cpp" />
+    <ClCompile Include="Libs\FastLED\wiring.cpp" />
+    <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
+    <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
     <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
     <ClCompile Include="Libs\I2Cdev\I2Cdev.cpp" />
     <ClCompile Include="Libs\ITG3200_library\ITG3200.cpp" />
     <ClCompile Include="Libs\MPU60X0\MPU60X0.cpp" />
     <ClCompile Include="Libs\MS561101BA\MS561101BA.cpp" />
-    <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
-    <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
-    <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
+    <ClCompile Include="Libs\MS5803\src\SparkFun_MS5803_I2C.cpp" />
+    <ClCompile Include="Libs\PID\PID_v1.cpp" />
+    <ClCompile Include="ManipulatorPeriphery.cpp" />
+    <ClCompile Include="Motor.cpp" />
+    <ClCompile Include="Movement.cpp" />
+    <ClCompile Include="MS5803SensorDepth.cpp" />
+    <ClCompile Include="PCA96685Motor.cpp" />
+    <ClCompile Include="PCA9685ServoMotor.cpp" />
+    <ClCompile Include="SensorDepth.cpp" />
+    <ClCompile Include="SensorManager.cpp" />
+    <ClCompile Include="SensorRotation.cpp" />
+    <ClCompile Include="SimpleCommunicator.cpp" />
+    <ClCompile Include="SimpleMain.cpp" />
     <ClCompile Include="TestPCAMain.cpp" />
-    <ClCompile Include="LEDStripLightPeriphery_t.cpp" />
-    <ClCompile Include="AutoYaw.cpp">
-      <Filter>Regulators</Filter>
-    </ClCompile>
-    <ClCompile Include="AutoPitch.cpp" />
+    <ClCompile Include="UARTConnectionProvider.cpp" />
+    <ClCompile Include="UdpConnectionProvider.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AutoPitch.h" />
+    <ClInclude Include="AutoYaw.h" />
+    <ClInclude Include="BluetoothPeriphery.h" />
+    <ClInclude Include="ByteArray.h" />
+    <ClInclude Include="DataReader.h" />
+    <ClInclude Include="ConnectionProvider.h" />
+    <ClInclude Include="Debug.h" />
+    <ClInclude Include="Hash.h" />
+    <ClInclude Include="LEDStripLightPeriphery_t.h" />
+    <ClInclude Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.h" />
+    <ClInclude Include="Libs\adxl345driver\ADXL345.h" />
+    <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h" />
+    <ClInclude Include="Libs\bma180\bma180.h" />
+    <ClInclude Include="Libs\DebugUtils\DebugUtils.h" />
+    <ClInclude Include="Libs\FastLED\bitswap.h" />
+    <ClInclude Include="Libs\FastLED\chipsets.h" />
+    <ClInclude Include="Libs\FastLED\color.h" />
+    <ClInclude Include="Libs\FastLED\colorpalettes.h" />
+    <ClInclude Include="Libs\FastLED\colorutils.h" />
+    <ClInclude Include="Libs\FastLED\controller.h" />
+    <ClInclude Include="Libs\FastLED\cpp_compat.h" />
+    <ClInclude Include="Libs\FastLED\dmx.h" />
+    <ClInclude Include="Libs\FastLED\FastLED.h" />
+    <ClInclude Include="Libs\FastLED\fastled_config.h" />
+    <ClInclude Include="Libs\FastLED\fastled_delay.h" />
+    <ClInclude Include="Libs\FastLED\fastled_progmem.h" />
+    <ClInclude Include="Libs\FastLED\fastpin.h" />
+    <ClInclude Include="Libs\FastLED\fastspi.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_bitbang.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_dma.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_nop.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_ref.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_types.h" />
+    <ClInclude Include="Libs\FastLED\hsv2rgb.h" />
+    <ClInclude Include="Libs\FastLED\led_sysdefs.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\math8.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\random8.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\scale8.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\trig8.h" />
+    <ClInclude Include="Libs\FastLED\noise.h" />
+    <ClInclude Include="Libs\FastLED\pixelset.h" />
+    <ClInclude Include="Libs\FastLED\pixeltypes.h" />
+    <ClInclude Include="Libs\FastLED\platforms.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\common\m0clockless.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\clockless_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\fastled_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\fastpin_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\led_sysdefs_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\clockless_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\clockless_block_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\fastled_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\fastpin_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\fastspi_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\led_sysdefs_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\octows2811_controller.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\smartmatrix_t3.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\clockless_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\clockless_block_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\fastled_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\fastpin_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\fastspi_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\led_sysdefs_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\clockless_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\fastled_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\fastpin_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\fastspi_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\led_sysdefs_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\clockless_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\fastled_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\fastpin_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\fastspi_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\led_sysdefs_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\clockless_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\clockless_block_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\fastled_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\fastpin_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\fastspi_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\led_sysdefs_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\clockless_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\fastled_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\fastpin_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\led_sysdefs_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\clockless_trinket.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\fastled_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\fastpin_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\fastspi_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\led_sysdefs_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\clockless_block_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\clockless_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\fastled_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\fastpin_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\led_sysdefs_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\power_mgt.h" />
+    <ClInclude Include="Libs\FreeIMU\calibration.h" />
+    <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h" />
+    <ClInclude Include="Libs\FreeIMU\FreeIMU.h" />
+    <ClInclude Include="Libs\HMC58X3\HMC58X3.h" />
+    <ClInclude Include="Libs\I2Cdev\I2Cdev.h" />
+    <ClInclude Include="Libs\ITG3200_library\ITG3200.h" />
+    <ClInclude Include="Libs\MPU60X0\MPU60X0.h" />
+    <ClInclude Include="Libs\MS561101BA\MS561101BA.h" />
+    <ClInclude Include="Libs\MS5803\src\SparkFun_MS5803_I2C.h" />
+    <ClInclude Include="Libs\PID\PID_v1.h" />
+    <ClInclude Include="ManipulatorPeriphery.h" />
+    <ClInclude Include="MathConstants.h" />
+    <ClInclude Include="DebugMotorsMain.h" />
+    <ClInclude Include="DepthRegulator.h" />
+    <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="FlashlightPeriphery.h" />
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MovementRegulator.h" />
+    <ClInclude Include="MS5803SensorDepth.h" />
+    <ClInclude Include="PCA96685Motor.h" />
+    <ClInclude Include="PCA9685ServoMotor.h" />
+    <ClInclude Include="Quaternions.h" />
+    <ClInclude Include="SelfExpandoContainer.h" />
+    <ClInclude Include="RegisterExceptions.h" />
+    <ClInclude Include="SimpleCommunicator.h" />
+    <ClInclude Include="SimpleMain.h" />
+    <ClInclude Include="TestPCAMain.h" />
+    <ClInclude Include="UARTConnectionProvider.h" />
+    <ClInclude Include="UdpConnectionProvider.h" />
+    <ClInclude Include="SharedPtr.h" />
+    <ClInclude Include="CoordinateSystemConverter.h" />
+    <ClInclude Include="LocalMotorsForceDistributor.h" />
+    <ClInclude Include="Main.h" />
+    <ClInclude Include="Motor.h" />
+    <ClInclude Include="Motors.h" />
+    <ClInclude Include="MotorsForceDistributor.h" />
+    <ClInclude Include="Movement.h" />
+    <ClInclude Include="PeripheryManager.h" />
+    <ClInclude Include="PidCoefficients.h" />
+    <ClInclude Include="Regulators.h" />
+    <ClInclude Include="SensorDepth.h" />
+    <ClInclude Include="SensorManager.h" />
+    <ClInclude Include="SensorRotation.h" />
+    <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MATE_ROV_2017_DNO.ino" />
   </ItemGroup>
 </Project>

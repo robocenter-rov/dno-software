@@ -63,10 +63,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\EEPROM\src;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries\Ethernet\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;C:\Users\JIukaviy\Documents\Arduino\libraries;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr\;$(ProjectDir)..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src;$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\SPI\src;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\EEPROM\src;$(ProjectDir)..\..\Documents\Arduino\libraries\Ethernet\src\utility;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries\Wire\src\utility;$(ProjectDir)..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\Extensions\2r25oje5.2cf\Micro Platforms\visualmicro\ide\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\libraries;$(ProjectDir)..\..\Documents\Arduino\libraries;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\cores\arduino;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\hardware\avr\1.6.17\variants\mega;$(ProjectDir)..\MATE_ROV_2017_DNO;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\avr\include\avr\;$(ProjectDir)..\..\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\4.9.2-atmel3.5.3-arduino2\lib\gcc\avr\4.8.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.MATE_ROV_2017_DNO.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=106012;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=10801;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;__cplusplus=201103L;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -100,6 +100,86 @@
     <ClInclude Include="Libs\ADXL345_library\ADXL345_library.h" />
     <ClInclude Include="Libs\bma180\bma180.h" />
     <ClInclude Include="Libs\DebugUtils\DebugUtils.h" />
+    <ClInclude Include="Libs\FastLED\bitswap.h" />
+    <ClInclude Include="Libs\FastLED\chipsets.h" />
+    <ClInclude Include="Libs\FastLED\color.h" />
+    <ClInclude Include="Libs\FastLED\colorpalettes.h" />
+    <ClInclude Include="Libs\FastLED\colorutils.h" />
+    <ClInclude Include="Libs\FastLED\controller.h" />
+    <ClInclude Include="Libs\FastLED\cpp_compat.h" />
+    <ClInclude Include="Libs\FastLED\dmx.h" />
+    <ClInclude Include="Libs\FastLED\FastLED.h" />
+    <ClInclude Include="Libs\FastLED\fastled_config.h" />
+    <ClInclude Include="Libs\FastLED\fastled_delay.h" />
+    <ClInclude Include="Libs\FastLED\fastled_progmem.h" />
+    <ClInclude Include="Libs\FastLED\fastpin.h" />
+    <ClInclude Include="Libs\FastLED\fastspi.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_bitbang.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_dma.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_nop.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_ref.h" />
+    <ClInclude Include="Libs\FastLED\fastspi_types.h" />
+    <ClInclude Include="Libs\FastLED\hsv2rgb.h" />
+    <ClInclude Include="Libs\FastLED\led_sysdefs.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\math8.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\random8.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\scale8.h" />
+    <ClInclude Include="Libs\FastLED\lib8tion\trig8.h" />
+    <ClInclude Include="Libs\FastLED\noise.h" />
+    <ClInclude Include="Libs\FastLED\pixelset.h" />
+    <ClInclude Include="Libs\FastLED\pixeltypes.h" />
+    <ClInclude Include="Libs\FastLED\platforms.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\common\m0clockless.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\clockless_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\fastled_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\fastpin_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\d21\led_sysdefs_arm_d21.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\clockless_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\clockless_block_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\fastled_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\fastpin_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\fastspi_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\led_sysdefs_arm_k20.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\octows2811_controller.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k20\smartmatrix_t3.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\clockless_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\clockless_block_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\fastled_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\fastpin_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\fastspi_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\k66\led_sysdefs_arm_k66.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\clockless_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\fastled_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\fastpin_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\fastspi_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\kl26\led_sysdefs_arm_kl26.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\clockless_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\fastled_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\fastpin_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\fastspi_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\nrf51\led_sysdefs_arm_nrf51.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\clockless_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\clockless_block_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\fastled_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\fastpin_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\fastspi_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\sam\led_sysdefs_arm_sam.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\clockless_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\fastled_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\fastpin_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\arm\stm32\led_sysdefs_arm_stm32.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\clockless_trinket.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\fastled_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\fastpin_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\fastspi_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\avr\led_sysdefs_avr.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\clockless_block_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\clockless_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\fastled_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\fastpin_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\platforms\esp\8266\led_sysdefs_esp8266.h" />
+    <ClInclude Include="Libs\FastLED\power_mgt.h" />
     <ClInclude Include="Libs\FreeIMU\calibration.h" />
     <ClInclude Include="Libs\FreeIMU\CommunicationUtils.h" />
     <ClInclude Include="Libs\FreeIMU\FreeIMU.h" />
@@ -157,6 +237,15 @@
     <ClCompile Include="Libs\Adafruit_PWMServoDriver\Adafruit_PWMServoDriver.cpp" />
     <ClCompile Include="Libs\adxl345driver\ADXL345.cpp" />
     <ClCompile Include="Libs\bma180\bma180.cpp" />
+    <ClCompile Include="Libs\FastLED\bitswap.cpp" />
+    <ClCompile Include="Libs\FastLED\colorpalettes.cpp" />
+    <ClCompile Include="Libs\FastLED\colorutils.cpp" />
+    <ClCompile Include="Libs\FastLED\FastLED.cpp" />
+    <ClCompile Include="Libs\FastLED\hsv2rgb.cpp" />
+    <ClCompile Include="Libs\FastLED\lib8tion.cpp" />
+    <ClCompile Include="Libs\FastLED\noise.cpp" />
+    <ClCompile Include="Libs\FastLED\power_mgt.cpp" />
+    <ClCompile Include="Libs\FastLED\wiring.cpp" />
     <ClCompile Include="Libs\FreeIMU\CommunicationUtils.cpp" />
     <ClCompile Include="Libs\FreeIMU\FreeIMU.cpp" />
     <ClCompile Include="Libs\HMC58X3\HMC58X3.cpp" />
