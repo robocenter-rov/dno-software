@@ -72,4 +72,14 @@ public:
 	{
 		_m2->SetAngle(angle_radians);
 	}
+
+	void SetOffsetCamera1(float offset) const { _camera1->SetOffset(offset); }
+
+	void SetOffsetCamera2(float offset) const { _camera2->SetOffset(offset); }
+
+	void SetDirectionCamera1(bool direction) const { _camera1->SetDirection(direction); }
+	void SetDirectionCamera2(bool direction) const { _camera2->SetDirection(direction); }
+
+	float GetAngleCamera1() const { return _camera1->GetAngle(); }
+	float GetAngleCamera2() const { return _camera2->GetAngle(); }
 };
