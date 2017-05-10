@@ -96,8 +96,7 @@ private:
 	uint8_t _last_i2c_scan_token;
 	uint8_t _last_received_i2c_scan_token;
 
-	uint32_t _pids_hash;
-	uint32_t _motors_config_hash;
+	uint32_t _config_hash;
 
 	unsigned long _last_msg_receive_time;
 	unsigned long _last_msg_send_time;

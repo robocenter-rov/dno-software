@@ -19,16 +19,14 @@ enum RECEIVE_BLOCK_IDS {
 	RBI_DEVICES_STATE = 1,
 	RBI_MOTORS_STATE = 2,
 	RBI_MOVEMENT = 3,
-	RBI_PID = 4,
-	RBI_MOTORS_CONFIG = 5,
+	RBI_CONFIG = 4
 };
 
 SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_provider) {
 	_connection_provider = connection_provider;
 	_last_i2c_scan_token = 0;
 	_last_received_i2c_scan_token = 0;
-	_pids_hash = 0;
-	_motors_config_hash = 0;
+	_config_hash = 0;
 	_last_msg_receive_time = 0;
 	_last_msg_send_time = 0;
 	_send_frequency = 50;
@@ -202,45 +200,22 @@ int SimpleCommunicator_t::Update() {
 						pitch
 					);
 				} break;
-				case RBI_PID:
-					struct {
-						float depth_p;
-						float depth_i;
-						float depth_d;
-
-						float yaw_p;
-						float yaw_i;
-						float yaw_d;
-
-						float pitch_p;
-						float pitch_i;
-						float pitch_d;
-					} pids;
-					READ(pids);
-
-					uint32_t pids_hash;
-					pids_hash = HashLy(pids);
-					if (_pids_hash != pids_hash) {
-						_on_pid_receive.callback(_on_pid_receive.data,
-							pids.depth_p,
-							pids.depth_i,
-							pids.depth_d,
-
-							pids.yaw_p,
-							pids.yaw_i,
-							pids.yaw_d,
-
-							pids.pitch_p,
-							pids.pitch_i,
-							pids.pitch_d
-						);
-					}
-
-					_pids_hash = pids_hash;
-				break;
-				case RBI_MOTORS_CONFIG: {
+				case RBI_CONFIG:
 					#pragma pack(push, 1)
 					struct {
+						struct {
+							float depth_p;
+							float depth_i;
+							float depth_d;
+
+							float yaw_p;
+							float yaw_i;
+							float yaw_d;
+
+							float pitch_p;
+							float pitch_i;
+							float pitch_d;
+						} pids;
 						struct {
 							uint8_t M1Pos;
 							uint8_t M2Pos;
@@ -257,33 +232,45 @@ int SimpleCommunicator_t::Update() {
 							float M5mul;
 							float M6mul;
 						} MMultipliers;
-					} motors_config;
-					#pragma pack(pop)
-					READ(motors_config);
+					} config;
+					READ(config);
 
-					uint32_t motors_config_hash;
-					motors_config_hash = HashLy(motors_config);
+					uint32_t config_hash;
+					config_hash = HashLy(config);
 
-					if (_motors_config_hash != motors_config_hash) {
-						_on_motors_config_receive.callback(_on_motors_config_receive.data,
-							motors_config.MPositions.M1Pos,
-							motors_config.MPositions.M2Pos,
-							motors_config.MPositions.M3Pos,
-							motors_config.MPositions.M4Pos,
-							motors_config.MPositions.M5Pos,
-							motors_config.MPositions.M6Pos,
+					if (_config_hash != config_hash)
+					{
+						_on_pid_receive.callback(_on_pid_receive.data,
+							config.pids.depth_p,
+							config.pids.depth_i,
+							config.pids.depth_d,
 
-							motors_config.MMultipliers.M1mul,
-							motors_config.MMultipliers.M2mul,
-							motors_config.MMultipliers.M3mul,
-							motors_config.MMultipliers.M4mul,
-							motors_config.MMultipliers.M5mul,
-							motors_config.MMultipliers.M6mul
+							config.pids.yaw_p,
+							config.pids.yaw_i,
+							config.pids.yaw_d,
+
+							config.pids.pitch_p,
+							config.pids.pitch_i,
+							config.pids.pitch_d
 						);
 
-						_motors_config_hash = motors_config_hash;
+						_on_motors_config_receive.callback(_on_motors_config_receive.data,
+							config.MPositions.M1Pos,
+							config.MPositions.M2Pos,
+							config.MPositions.M3Pos,
+							config.MPositions.M4Pos,
+							config.MPositions.M5Pos,
+							config.MPositions.M6Pos,
+
+							config.MMultipliers.M1mul,
+							config.MMultipliers.M2mul,
+							config.MMultipliers.M3mul,
+							config.MMultipliers.M4mul,
+							config.MMultipliers.M5mul,
+							config.MMultipliers.M6mul
+						);
 					}
-				}
+					break;
 				default: ;
 			}
 		}
@@ -325,8 +312,7 @@ int SimpleCommunicator_t::Update() {
 
 		_connection_provider->Write(_last_i2c_scan_token);
 		_connection_provider->Write(_last_scanned_i2c_devices);
-		_connection_provider->Write(_pids_hash);
-		_connection_provider->Write(_motors_config_hash);
+		_connection_provider->Write(_config_hash);
 		_connection_provider->Write<uint16_t>(now - _last_update_time);
 
 		_connection_provider->Write<uint8_t>(SBI_SENSOR_DATA);
