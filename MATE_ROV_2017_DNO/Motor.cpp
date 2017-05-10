@@ -5,7 +5,10 @@ Motor_t::Motor_t() {
 	_mul = 1;
 }
 
-void Motor_t::SetThrust(float thrust) {}
+void Motor_t::SetThrust(float thrust) {
+	_thrust = thrust;
+	_SetThrust();
+}
 
 float Motor_t::GetThrust() const {
 	return _thrust;

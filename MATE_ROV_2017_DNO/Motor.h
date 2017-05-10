@@ -4,10 +4,12 @@ class Motor_t {
 protected:
 	float _thrust;
 	float _mul;
+	
+	virtual void _SetThrust() = 0;
 public:
 	Motor_t();
 	
-	virtual void SetThrust(float thrust);
+	void SetThrust(float thrust);
 	float GetThrust() const;
 	void SetMultiplier(float mul);
 
