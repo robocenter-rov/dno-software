@@ -201,7 +201,7 @@ int SimpleCommunicator_t::Update() {
 					);
 				} break;
 				case RBI_CONFIG: {
-#pragma pack(push, 1)
+					#pragma pack(push, 1)
 					struct {
 						struct {
 							float depth_p;
@@ -232,6 +232,15 @@ int SimpleCommunicator_t::Update() {
 							float M5mul;
 							float M6mul;
 						} MMultipliers;
+						struct {
+							bool camera1_direction : 1;
+							bool camera2_direction : 1;
+						} Camera_directions;
+						struct
+						{
+							float camera1_offset;
+							float camera2_offset;
+						} Camera_offsets;
 					} config;
 					READ(config);
 
@@ -269,6 +278,12 @@ int SimpleCommunicator_t::Update() {
 							config.MMultipliers.M5mul,
 							config.MMultipliers.M6mul
 						);
+
+						_on_cameras_state.callback(_on_cameras_state.data,
+							config.Camera_directions.camera1_direction,
+							config.Camera_directions.camera2_direction,
+							config.Camera_offsets.camera1_offset,
+							config.Camera_offsets.camera2_offset);
 					} 
 					} break;
 				default: ;

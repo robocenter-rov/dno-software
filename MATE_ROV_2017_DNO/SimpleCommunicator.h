@@ -73,6 +73,10 @@ private:
 		void(*callback)(void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803);
 	} _on_scanned_i2c_devices_need;
 
+	struct :BaseCallback_t {
+		void(*callback)(void* data, bool camera1_direction, bool camera2_direction, float camera1_offset, float camera2_offset);
+	} _on_cameras_state;
+
 	struct State_t {
 		bool flashlight_state : 1;
 		bool read_bluetooth : 1;
