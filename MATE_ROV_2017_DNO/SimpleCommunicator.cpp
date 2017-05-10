@@ -19,7 +19,7 @@ enum RECEIVE_BLOCK_IDS {
 	RBI_DEVICES_STATE = 1,
 	RBI_MOTORS_STATE = 2,
 	RBI_MOVEMENT = 3,
-	RBI_CONFIG = 4
+	RBI_CONFIG = 4,
 };
 
 SimpleCommunicator_t::SimpleCommunicator_t(ConnectionProvider_t* connection_provider) {
@@ -200,8 +200,8 @@ int SimpleCommunicator_t::Update() {
 						pitch
 					);
 				} break;
-				case RBI_CONFIG:
-					#pragma pack(push, 1)
+				case RBI_CONFIG: {
+#pragma pack(push, 1)
 					struct {
 						struct {
 							float depth_p;
@@ -269,8 +269,8 @@ int SimpleCommunicator_t::Update() {
 							config.MMultipliers.M5mul,
 							config.MMultipliers.M6mul
 						);
-					}
-					break;
+					} 
+					} break;
 				default: ;
 			}
 		}
