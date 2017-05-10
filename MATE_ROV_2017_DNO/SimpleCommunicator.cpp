@@ -173,8 +173,8 @@ int SimpleCommunicator_t::Update() {
 					float pitch;
 
 					dr.Read(control_type);
-					dr.ReadInt8AsFloat(x, -2, 2);
-					dr.ReadInt8AsFloat(y, -2, 2);
+					dr.ReadInt8AsFloat(x, -4, 4);
+					dr.ReadInt8AsFloat(y, -4, 4);
 					dr.Read(depth);
 
 					if (control_type.auto_yaw) {
