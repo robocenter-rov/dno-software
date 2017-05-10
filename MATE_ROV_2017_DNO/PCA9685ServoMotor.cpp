@@ -15,13 +15,8 @@ PCA9685ServoMotor_t::PCA9685ServoMotor_t(Adafruit_PWMServoDriver* pwm, unsigned 
 void PCA9685ServoMotor_t::SetAngle(float angle_radians) {
 	int pwmVal;
 	_angle = angle_radians;
-	if (_direction)
-	{
-		pwmVal = (constrain(angle_radians, -PI, PI) + PI) / PI2 * 500;
-	} else
-	{
-		pwmVal = (constrain((angle_radians + _offset) * _direction? 1 : (-1) , -PI, PI) + PI) / PI2 * 500;
-	}
+
+	pwmVal = 150 + (constrain((angle_radians + _offset) * (_direction ? (-1.f) : (1.f)), -PI/2, PI/2) + PI/2) / PI * 450;
 
 	LOG("Setting pwmNum ");
 	LOG(_pwmNum);
