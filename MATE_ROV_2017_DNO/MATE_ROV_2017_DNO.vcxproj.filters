@@ -43,6 +43,7 @@
     <ClCompile Include="TestPCAMain.cpp" />
     <ClCompile Include="UARTConnectionProvider.cpp" />
     <ClCompile Include="UdpConnectionProvider.cpp" />
+    <ClCompile Include="ArduinoServoMotor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoPitch.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="SensorManager.h" />
     <ClInclude Include="SensorRotation.h" />
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h" />
+    <ClInclude Include="ArduinoServoMotor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MATE_ROV_2017_DNO.ino" />

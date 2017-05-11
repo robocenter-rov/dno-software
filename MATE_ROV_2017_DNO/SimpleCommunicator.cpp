@@ -234,14 +234,11 @@ int SimpleCommunicator_t::Update() {
 							float M6mul;
 						} MMultipliers;
 						struct {
-							bool camera1_direction : 1;
-							bool camera2_direction : 1;
-						} Camera_directions;
-						struct
-						{
-							float camera1_offset;
-							float camera2_offset;
-						} Camera_offsets;
+							float camera1_minVal;
+							float camera1_maxVal;
+							float camera2_minVal;
+							float camera2_maxVal;
+						} CamerasConfig;
 					} config;
 #pragma pack(pop)
 					READ(config);
@@ -281,14 +278,14 @@ int SimpleCommunicator_t::Update() {
 							config.MMultipliers.M6mul
 						);
 
-						_on_cameras_state.callback(_on_cameras_state.data,
-							config.Camera_directions.camera1_direction,
-							config.Camera_directions.camera2_direction,
-							config.Camera_offsets.camera1_offset,
-							config.Camera_offsets.camera2_offset);
-
+						_on_cameras_config_receive.callback(_on_cameras_config_receive.data,
+							config.CamerasConfig.camera1_maxVal,
+							config.CamerasConfig.camera1_minVal,
+							config.CamerasConfig.camera2_maxVal,
+							config.CamerasConfig.camera2_minVal);
 						_config_hash = config_hash;
-					} 
+					}
+					
 					} break;
 				default: ;
 			}
@@ -553,8 +550,9 @@ void SimpleCommunicator_t::OnPidReceive(void(* callback)(void* data, float depth
 	_on_pid_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnCamerasState(void(* callback)(void* data, bool camera1_direction, bool camera2_direction, float camera1_offset, float camera2_offset), void* data)
+void SimpleCommunicator_t::OnCamerasConfigReceive(void (* callback)(void* data, float camera1_maxVal, float camera1_minVal, float camera2_maxVal, float camera2_minVal), void* data)
 {
-	_on_cameras_state.callback= callback;
-	_on_cameras_state.data = data;
+	_on_cameras_config_receive.callback = callback;
+	_on_cameras_config_receive.data = data;
 }
+
