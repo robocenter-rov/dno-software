@@ -28,7 +28,7 @@ void PCA9685ServoMotor_t::SetAngle(float angle_radians) {
 
 void PCA9685ServoMotor_t::SetOffset(float offset)
 {
-	_offset = constrain(offset, -PI, PI);
+	_offset = constrain(offset, -PI/2, PI/2);
 }
 
 void PCA9685ServoMotor_t::SetDirection(bool direction)
