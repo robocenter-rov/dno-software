@@ -54,14 +54,24 @@ public:
 		return _manipulator;
 	}
 
-	void SetAngleCamera1(float angle_radians) const
+	void SetLocalAngleCamera1(float angle_radians) const
 	{
-		_camera1->SetAngle(angle_radians);
+		_camera1->SetLocalAngle(angle_radians);
 	}
 
-	void SetAngleCamera2(float angle_radians) const
+	void SetLocalAngleCamera2(float angle_radians) const
 	{
-		_camera2->SetAngle(angle_radians);
+		_camera2->SetLocalAngle(angle_radians);
+	}
+
+	void SetGlobalAngleCamera2(float angle_radians) const
+	{
+		_camera2->SetGlobalAngle(angle_radians);
+	}
+
+	void SetGlobalAngleCamera1(float angle_radians) const
+	{
+		_camera1->SetGlobalAngle(angle_radians);
 	}
 
 	void SetAngleM1(float angle_radians) const

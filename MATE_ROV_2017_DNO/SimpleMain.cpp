@@ -139,7 +139,7 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 	}, this);
 
 	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, 
-											float m2_pos, float cam1_pos, float cam2_pos) -> void {
+											float m2_pos, float cam1_pos, float cam2_pos, bool cam1local, bool cam2local) -> void {
 		
 		auto main = static_cast<SimpleMain_t*>(data);
 
@@ -149,8 +149,11 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_periphery_manager->SetAngleM1(m1_pos);
 		main->_periphery_manager->SetAngleM2(m2_pos);
 
-		main->_periphery_manager->SetAngleCamera1(cam1_pos);
-		main->_periphery_manager->SetAngleCamera2(cam2_pos);
+		if (cam1local) main->_periphery_manager->SetLocalAngleCamera1(cam1_pos);
+		else main->_periphery_manager->SetGlobalAngleCamera1(cam1_pos);
+
+		if (cam2local) main->_periphery_manager->SetLocalAngleCamera2(cam2_pos);
+		else main->_periphery_manager->SetGlobalAngleCamera2(cam2_pos);
 
 	}, this);
 

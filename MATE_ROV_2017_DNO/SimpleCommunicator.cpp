@@ -120,12 +120,18 @@ int SimpleCommunicator_t::Update() {
 					float M2;
 					float Cam1Pos;
 					float Cam2Pos;
+					struct
+					{
+						bool cam1Local : 1;
+						bool cam2Local : 1;
+					} camCoordSystems;
 					READASFLOAT(ArmPos, -1, 1);
 					READASFLOAT(HandPos, -1, 1);
 					READASFLOAT(M1, -PI/2, PI/2);
 					READASFLOAT(M2, -PI / 2, PI / 2);
 					READASFLOAT(Cam1Pos, -PI / 2, PI / 2);
 					READASFLOAT(Cam2Pos, -PI / 2, PI / 2);
+					READ(camCoordSystems);
 
 					_on_devices_state_receive.callback(_on_devices_state_receive.data,
 						ArmPos,
@@ -133,7 +139,9 @@ int SimpleCommunicator_t::Update() {
 						M1,
 						M2,
 						Cam1Pos,
-						Cam2Pos
+						Cam2Pos,
+						camCoordSystems.cam1Local,
+						camCoordSystems.cam2Local
 					);
 				} break;
 				case RBI_MOTORS_STATE: {
@@ -525,7 +533,7 @@ void SimpleCommunicator_t::OnStateReceive(void(* callback)(void* data, bool flas
 	_on_state_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnDevicesStateReceive(void(* callback)(void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos), void* data) {
+void SimpleCommunicator_t::OnDevicesStateReceive(void(* callback)(void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos, bool cam1local, bool cam2local), void* data) {
 	_on_devices_state_receive.callback = callback;
 	_on_devices_state_receive.data = data;
 }
