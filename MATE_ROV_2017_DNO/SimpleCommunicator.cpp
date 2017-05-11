@@ -67,7 +67,8 @@ int SimpleCommunicator_t::Update() {
 
 		DataReader_t dr(_connection_provider->Buffer(), readed_bytes);
 
-#define READ(val) if (dr.Read(val) < 0) { LOGLN("Too short buffer"); return 0; }
+#define READ(val) if (dr.Read(val) < 0) { Serial.println("Too short buffer"); return 0; }
+#define READASFLOAT(val, min, max) if (dr.ReadInt8AsFloat(val, min, max) < 0) { Serial.println("Too short buffer"); return 0; }
 
 		uint32_t msg_id;
 		READ(msg_id);
@@ -119,12 +120,12 @@ int SimpleCommunicator_t::Update() {
 					float M2;
 					float Cam1Pos;
 					float Cam2Pos;
-					dr.ReadInt8AsFloat(ArmPos, -1, 1);
-					dr.ReadInt8AsFloat(HandPos, -1, 1);
-					dr.ReadInt8AsFloat(M1, -PI/2, PI/2);
-					dr.ReadInt8AsFloat(M2, -PI / 2, PI / 2);
-					dr.ReadInt8AsFloat(Cam1Pos, -PI / 2, PI / 2);
-					dr.ReadInt8AsFloat(Cam2Pos, -PI / 2, PI / 2);
+					READASFLOAT(ArmPos, -1, 1);
+					READASFLOAT(HandPos, -1, 1);
+					READASFLOAT(M1, -PI/2, PI/2);
+					READASFLOAT(M2, -PI / 2, PI / 2);
+					READASFLOAT(Cam1Pos, -PI / 2, PI / 2);
+					READASFLOAT(Cam2Pos, -PI / 2, PI / 2);
 
 					_on_devices_state_receive.callback(_on_devices_state_receive.data,
 						ArmPos,
@@ -142,12 +143,12 @@ int SimpleCommunicator_t::Update() {
 					float M4;
 					float M5;
 					float M6;
-					dr.ReadInt8AsFloat(M1, -1, 1);
-					dr.ReadInt8AsFloat(M2, -1, 1);
-					dr.ReadInt8AsFloat(M3, -1, 1);
-					dr.ReadInt8AsFloat(M4, -1, 1);
-					dr.ReadInt8AsFloat(M5, -1, 1);
-					dr.ReadInt8AsFloat(M6, -1, 1);
+					READASFLOAT(M1, -1, 1);
+					READASFLOAT(M2, -1, 1);
+					READASFLOAT(M3, -1, 1);
+					READASFLOAT(M4, -1, 1);
+					READASFLOAT(M5, -1, 1);
+					READASFLOAT(M6, -1, 1);
 					_on_motors_state_receive.callback(_on_motors_state_receive.data,
 						M1,
 						M2,
@@ -172,10 +173,10 @@ int SimpleCommunicator_t::Update() {
 					float yaw;
 					float pitch;
 
-					dr.Read(control_type);
-					dr.ReadInt8AsFloat(x, -4, 4);
-					dr.ReadInt8AsFloat(y, -4, 4);
-					dr.Read(depth);
+					READ(control_type);
+					READASFLOAT(x, -4, 4);
+					READASFLOAT(y, -4, 4);
+					READ(depth);
 
 					if (control_type.auto_yaw) {
 						dr.ReadInt8AsFloat(yaw, -PI, PI);

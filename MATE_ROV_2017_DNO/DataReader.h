@@ -25,6 +25,9 @@ public:
 	int ReadInt8AsFloat(float& f, float min, float max) {
 		char v;
 		int r = Read(v);
+		if (r < 0) {
+			return -1;
+		}
 		//Serial.print("Read: ");
 		//Serial.println(int(v));
 		//Serial.print("That is: ");
