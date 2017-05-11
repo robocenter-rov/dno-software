@@ -247,6 +247,16 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_movement->Motors()->SetMotorsPositions(m1pos, m2pos, m3pos, m4pos, m5pos, m6pos);
 		main->_movement->Motors()->SetMotorsMultipliers(m1mul, m2mul, m3mul, m4mul, m5mul, m6mul);
 	}, this);
+
+	_communicator->OnCamerasConfigReceive([](void* data, float cam1MaxVal, float cam1MinVal, float cam2MaxVal, float cam2MinVal)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+
+		main->_periphery_manager->SetCam1MaxVal(cam1MaxVal);
+		main->_periphery_manager->SetCam1MinVal(cam1MinVal);
+		main->_periphery_manager->SetCam2MaxVal(cam1MaxVal);
+		main->_periphery_manager->SetCam2MinVal(cam1MinVal);
+	}, this);
 }
 
 SimpleMain_t::~SimpleMain_t()

@@ -4,20 +4,21 @@
 #include "ManipulatorPeriphery.h"
 #include "BluetoothPeriphery.h"
 #include "PCA9685ServoMotor.h"
+#include "ArduinoServoMotor.h"
 
 class PeripheryManager_t {
 private:
 	FlashlightPeriphery_t* _flashlight;
 	ManipulatorPeriphery_t* _manipulator;
 	BluetoothPeriphery_t* _bluetooth;
-	PCA9685ServoMotor_t* _camera1;
-	PCA9685ServoMotor_t* _camera2;
+	ArduinoServoMotor_t* _camera1;
+	ArduinoServoMotor_t* _camera2;
 	PCA9685ServoMotor_t* _m1;
 	PCA9685ServoMotor_t* _m2;
 
 public:
 	PeripheryManager_t(FlashlightPeriphery_t* flashlight, ManipulatorPeriphery_t* manipulator,
-		BluetoothPeriphery_t* bluetooth, PCA9685ServoMotor_t* camera1, PCA9685ServoMotor_t* camera2,
+		BluetoothPeriphery_t* bluetooth, ArduinoServoMotor_t* camera1, ArduinoServoMotor_t* camera2,
 		PCA9685ServoMotor_t* m1, PCA9685ServoMotor_t* m2) {
 		_flashlight = flashlight;
 		_manipulator = manipulator;
@@ -73,12 +74,10 @@ public:
 		_m2->SetAngle(angle_radians);
 	}
 
-	void SetOffsetCamera1(float offset) const { _camera1->SetOffset(offset); }
-
-	void SetOffsetCamera2(float offset) const { _camera2->SetOffset(offset); }
-
-	void SetDirectionCamera1(bool direction) const { _camera1->SetDirection(direction); }
-	void SetDirectionCamera2(bool direction) const { _camera2->SetDirection(direction); }
+	void SetCam1MinVal(float val) const { _camera1->SetMinVal(val); }
+	void SetCam1MaxVal(float val) const { _camera1->SetMaxVal(val); }
+	void SetCam2MinVal(float val) const { _camera2->SetMinVal(val); }
+	void SetCam2MaxVal(float val) const { _camera2->SetMaxVal(val); }
 
 	float GetAngleCamera1() const { return _camera1->GetAngle(); }
 	float GetAngleCamera2() const { return _camera2->GetAngle(); }

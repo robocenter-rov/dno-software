@@ -92,8 +92,8 @@ void setup() {
 	Serial1.begin(9600);
 	BluetoothPeriphery_t* bluetooth_periphery = new BluetoothPeriphery_t(&Serial1);
 
-	PCA9685ServoMotor_t* camera1_periphery = new PCA9685ServoMotor_t(pwm2, 14);
-	PCA9685ServoMotor_t* camera2_periphery = new PCA9685ServoMotor_t(pwm2, 15);
+	ArduinoServoMotor_t* camera1_periphery = new ArduinoServoMotor_t(3);
+	ArduinoServoMotor_t* camera2_periphery = new ArduinoServoMotor_t(5);
 
 	PCA9685ServoMotor_t* servo1_periphery = new PCA9685ServoMotor_t(pwm1, 0);
 	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(pwm1, 1);

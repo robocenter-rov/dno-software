@@ -5,8 +5,9 @@ ArduinoServoMotor_t::~ArduinoServoMotor_t()
 {
 }
 
-ArduinoServoMotor_t::ArduinoServoMotor_t(int pin, unsigned pwnNum, float offset, bool direction, float angle)
-{
+ArduinoServoMotor_t::ArduinoServoMotor_t(int pin, float minVal, float maxVal) {
+	_minVal = minVal;
+	_maxVal = maxVal;
 	_myservo.attach(pin);
 }
 
@@ -26,6 +27,10 @@ void ArduinoServoMotor_t::SetMinVal(float minVal)
 void ArduinoServoMotor_t::SetMaxVal(float maxVal)
 {
 	_maxVal = maxVal;
+}
+
+float ArduinoServoMotor_t::GetAngle() const {
+	return _angle;
 }
 
 
