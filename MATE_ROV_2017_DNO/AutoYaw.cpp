@@ -7,7 +7,7 @@ void AutoYaw_t::Update(MotorsForceDistributor_t* motors_force_distributor) {
 	//_input = atan2(2 * q1 * q2 - 2 * q0 * q3, 2 * q0 * q0 + 2 * q1 * q1 - 1); Roll
 	_input = -asin(2 * q1 * q3 + 2 * 0 * q2);
 
-	_pid.Compute();
+	_pid.ComputeYaw();
 
 	motors_force_distributor->AddLocalRotateForce(0, _output);
 }
