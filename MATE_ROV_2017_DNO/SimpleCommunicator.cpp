@@ -240,13 +240,13 @@ int SimpleCommunicator_t::Update() {
 							float M4mul;
 							float M5mul;
 							float M6mul;
-						} MMultipliers;
+						} MMultipliers;/*
 						struct {
-							float camera1_minVal;
 							float camera1_maxVal;
-							float camera2_minVal;
+							float camera1_minVal;
 							float camera2_maxVal;
-						} CamerasConfig;
+							float camera2_minVal;
+						} CamerasConfig;*/
 					} config;
 #pragma pack(pop)
 					READ(config);
@@ -287,10 +287,8 @@ int SimpleCommunicator_t::Update() {
 						);
 
 						_on_cameras_config_receive.callback(_on_cameras_config_receive.data,
-							config.CamerasConfig.camera1_maxVal,
-							config.CamerasConfig.camera1_minVal,
-							config.CamerasConfig.camera2_maxVal,
-							config.CamerasConfig.camera2_minVal);
+							180, 0, 180, 0);
+
 						_config_hash = config_hash;
 					}
 					
