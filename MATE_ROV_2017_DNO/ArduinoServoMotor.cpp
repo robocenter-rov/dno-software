@@ -15,7 +15,7 @@ ArduinoServoMotor_t::ArduinoServoMotor_t(SensorRotation_t* sensor_rotation, int 
 
 void ArduinoServoMotor_t::_SetAngle(float angle_radians)
 {
-	float degreesAngle;
+	int degreesAngle;
 	degreesAngle = (angle_radians + (PI / 2)) * ((_maxVal - _minVal) / PI) + _minVal;
 	_myservo.write(degreesAngle);
 }
