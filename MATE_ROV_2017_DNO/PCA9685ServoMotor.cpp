@@ -50,7 +50,7 @@ void PCA9685ServoMotor_t::SetGlobalAngle(float globalAngle)
 void PCA9685ServoMotor_t::SetLocalAngle(float localAngle)
 {
 	_angle = localAngle;
-	_local - true;
+	_local = true;
 }
 
 void PCA9685ServoMotor_t::Update()
