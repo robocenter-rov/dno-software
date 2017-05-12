@@ -91,4 +91,9 @@ public:
 
 	float GetAngleCamera1() const { return _camera1->GetAngle(); }
 	float GetAngleCamera2() const { return _camera2->GetAngle(); }
+
+	void Update() const {
+		_camera1->Update();
+		_camera2->Update();
+	};
 };

@@ -276,4 +276,5 @@ void SimpleMain_t::Loop()
 	_sensor_manager->Update();
 	_communicator->Update();
 	_movement->Update();
+	_periphery_manager->Update();
 }

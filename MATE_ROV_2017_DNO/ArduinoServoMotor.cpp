@@ -43,7 +43,8 @@ void ArduinoServoMotor_t::SetGlobalAngle(float globalAngle)
 void ArduinoServoMotor_t::SetLocalAngle(float localAngle)
 {
 	_angle = localAngle;
-	_local - true;
+	_SetAngle(_angle);
+	_local = true;
 }
 
 void ArduinoServoMotor_t::Update()
