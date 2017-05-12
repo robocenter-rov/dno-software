@@ -257,8 +257,8 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 		main->_periphery_manager->SetCam1MaxVal(cam1MaxVal);
 		main->_periphery_manager->SetCam1MinVal(cam1MinVal);
-		main->_periphery_manager->SetCam2MaxVal(cam1MaxVal);
-		main->_periphery_manager->SetCam2MinVal(cam1MinVal);
+		main->_periphery_manager->SetCam2MaxVal(cam2MaxVal);
+		main->_periphery_manager->SetCam2MinVal(cam2MinVal);
 	}, this);
 }
 
