@@ -11,14 +11,14 @@ private:
 	FlashlightPeriphery_t* _flashlight;
 	ManipulatorPeriphery_t* _manipulator;
 	BluetoothPeriphery_t* _bluetooth;
-	PCA9685ServoMotor_t* _camera1;
-	PCA9685ServoMotor_t* _camera2;
+	ArduinoServoMotor_t* _camera1;
+	ArduinoServoMotor_t* _camera2;
 	PCA9685ServoMotor_t* _m1;
 	PCA9685ServoMotor_t* _m2;
 
 public:
 	PeripheryManager_t(FlashlightPeriphery_t* flashlight, ManipulatorPeriphery_t* manipulator,
-		BluetoothPeriphery_t* bluetooth, PCA9685ServoMotor_t* camera1, PCA9685ServoMotor_t* camera2,
+		BluetoothPeriphery_t* bluetooth, ArduinoServoMotor_t* camera1, ArduinoServoMotor_t* camera2,
 		PCA9685ServoMotor_t* m1, PCA9685ServoMotor_t* m2) {
 		_flashlight = flashlight;
 		_manipulator = manipulator;
