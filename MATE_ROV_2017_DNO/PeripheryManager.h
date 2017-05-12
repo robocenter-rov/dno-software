@@ -11,14 +11,14 @@ private:
 	FlashlightPeriphery_t* _flashlight;
 	ManipulatorPeriphery_t* _manipulator;
 	BluetoothPeriphery_t* _bluetooth;
-	ArduinoServoMotor_t* _camera1;
-	ArduinoServoMotor_t* _camera2;
+	PCA9685ServoMotor_t* _camera1;
+	PCA9685ServoMotor_t* _camera2;
 	PCA9685ServoMotor_t* _m1;
 	PCA9685ServoMotor_t* _m2;
 
 public:
 	PeripheryManager_t(FlashlightPeriphery_t* flashlight, ManipulatorPeriphery_t* manipulator,
-		BluetoothPeriphery_t* bluetooth, ArduinoServoMotor_t* camera1, ArduinoServoMotor_t* camera2,
+		BluetoothPeriphery_t* bluetooth, PCA9685ServoMotor_t* camera1, PCA9685ServoMotor_t* camera2,
 		PCA9685ServoMotor_t* m1, PCA9685ServoMotor_t* m2) {
 		_flashlight = flashlight;
 		_manipulator = manipulator;
@@ -76,12 +76,12 @@ public:
 
 	void SetAngleM1(float angle_radians) const
 	{
-		_m1->SetAngle(angle_radians);
+		_m1->SetLocalAngle(angle_radians);
 	}
 
 	void SetAngleM2(float angle_radians) const
 	{
-		_m2->SetAngle(angle_radians);
+		_m2->SetLocalAngle(angle_radians);
 	}
 
 	void SetCam1MinVal(float val) const { _camera1->SetMinVal(val); }
