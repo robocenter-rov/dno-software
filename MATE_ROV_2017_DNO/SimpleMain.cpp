@@ -260,6 +260,19 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_periphery_manager->SetCam2MaxVal(cam2MaxVal);
 		main->_periphery_manager->SetCam2MinVal(cam2MinVal);
 	}, this);
+
+	_communicator->OnIMUConfigReceive([](void* data, float acc_x_bias, float acc_y_bias, float acc_z_bias, float acc_x_scale, float acc_y_scale, float acc_z_scale, float gyro_x_bias, float gyro_y_bias, float gyro_z_bias, float gyro_scale)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+
+		float acc_bias[] = { acc_x_bias, acc_y_bias, acc_z_bias };
+		float acc_scale[] = { acc_x_scale, acc_y_scale, acc_z_scale };
+		float gyro_bias[] = { gyro_x_bias, gyro_y_bias, gyro_z_bias };
+		float magn_matrix[3][3] = { 0 };
+		float magn_bias[3] = { 0 };
+
+		main->_sensor_manager->SetCalibrationValues(gyro_bias, gyro_scale, acc_bias, acc_scale, magn_matrix, magn_bias);
+	}, this);
 }
 
 SimpleMain_t::~SimpleMain_t()

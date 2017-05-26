@@ -5,6 +5,10 @@ SensorManager_t::SensorManager_t(SensorRotation_t* sensor_rotation, SensorDepth_
 	_sensorDepth = sensor_depth;
 }
 
+void SensorManager_t::SetCalibrationValues(const float gyro_bias[3], const float gyro_scale, const float accel_bias[3], const float accel_scale[3], const float magn_cal_matrix[3][3], const float magn_bias[3]) {
+	_sensorRotation->SetCalibrationValues(gyro_bias, gyro_scale, accel_bias, accel_scale, magn_cal_matrix, magn_bias);
+}
+
 void SensorManager_t::GetRotation(float& q1, float& q2, float& q3, float& q4) {
 	_sensorRotation->GetRotation(q1, q2, q3, q4);
 }

@@ -127,10 +127,10 @@ int SimpleCommunicator_t::Update() {
 					} camCoordSystems;
 					READASFLOAT(ArmPos, -1, 1);
 					READASFLOAT(HandPos, -1, 1);
-					READASFLOAT(M1, -PI/2, PI/2);
+					READASFLOAT(M1, -PI / 2, PI / 2);
 					READASFLOAT(M2, -PI / 2, PI / 2);
-					READASFLOAT(Cam1Pos, -PI / 2, PI / 2);
-					READASFLOAT(Cam2Pos, -PI / 2, PI / 2);
+					READASFLOAT(Cam1Pos, -PI, PI);
+					READASFLOAT(Cam2Pos, -PI, PI);
 					READ(camCoordSystems);
 
 					_on_devices_state_receive.callback(_on_devices_state_receive.data,
@@ -240,13 +240,28 @@ int SimpleCommunicator_t::Update() {
 							float M4mul;
 							float M5mul;
 							float M6mul;
-						} MMultipliers;/*
+						} MMultipliers;
 						struct {
 							float camera1_maxVal;
 							float camera1_minVal;
 							float camera2_maxVal;
 							float camera2_minVal;
-						} CamerasConfig;*/
+						} CamerasConfig;
+						struct {
+							float acc_x_bias;
+							float acc_y_bias;
+							float acc_z_bias;
+
+							float acc_x_scale;
+							float acc_y_scale;
+							float acc_z_scale;
+
+							float gyro_x_bias;
+							float gyro_y_bias;
+							float gyro_z_bias;
+							
+							float gyro_scale;
+						} IMUConfig;
 					} config;
 #pragma pack(pop)
 					READ(config);
@@ -254,8 +269,11 @@ int SimpleCommunicator_t::Update() {
 					uint32_t config_hash;
 					config_hash = HashLy(config);
 
+					Serial.println("Received config");
+
 					if (_config_hash != config_hash)
 					{
+						Serial.println("Received new config");
 						_on_pid_receive.callback(_on_pid_receive.data,
 							config.pids.depth_p,
 							config.pids.depth_i,
@@ -287,7 +305,27 @@ int SimpleCommunicator_t::Update() {
 						);
 
 						_on_cameras_config_receive.callback(_on_cameras_config_receive.data,
-							180, 0, 180, 0);
+							config.CamerasConfig.camera1_maxVal, 
+							config.CamerasConfig.camera1_minVal,
+							config.CamerasConfig.camera2_maxVal,
+							config.CamerasConfig.camera2_minVal
+						);
+
+						_on_imu_config_receive.callback(_on_imu_config_receive.data,
+							config.IMUConfig.acc_x_bias,
+							config.IMUConfig.acc_y_bias,
+							config.IMUConfig.acc_z_bias,
+
+							config.IMUConfig.acc_x_scale,
+							config.IMUConfig.acc_y_scale,
+							config.IMUConfig.acc_z_scale,
+
+							config.IMUConfig.gyro_x_bias,
+							config.IMUConfig.gyro_y_bias,
+							config.IMUConfig.gyro_z_bias,
+
+							config.IMUConfig.gyro_scale
+						);
 
 						_config_hash = config_hash;
 					}
@@ -560,5 +598,10 @@ void SimpleCommunicator_t::OnCamerasConfigReceive(void (* callback)(void* data, 
 {
 	_on_cameras_config_receive.callback = callback;
 	_on_cameras_config_receive.data = data;
+}
+
+void SimpleCommunicator_t::OnIMUConfigReceive(void(* callback)(void* data, float acc_x_bias, float acc_y_bias, float acc_z_bias, float acc_x_scale, float acc_y_scale, float acc_z_scale, float gyro_x_bias, float gyro_y_bias, float gyro_z_bias, float gyro_scale), void* data) {
+	_on_imu_config_receive.callback = callback;
+	_on_imu_config_receive.data = data;
 }
 

@@ -77,6 +77,10 @@ private:
 		void(*callback)(void* data, float camera1_maxVal, float camera1_minVal, float camera2_maxVal, float camera2_minVal);
 	} _on_cameras_config_receive;
 
+	struct :BaseCallback_t {
+		void(*callback)(void* data, float acc_x_bias, float acc_y_bias, float acc_z_bias, float acc_x_scale, float acc_y_scale, float acc_z_scale, float gyro_x_bias, float gyro_y_bias, float gyro_z_bias, float gyro_scale);
+	} _on_imu_config_receive;
+
 	struct State_t {
 		bool flashlight_state : 1;
 		bool read_bluetooth : 1;
@@ -143,4 +147,5 @@ public:
 	void OnMovementReceive(void(*callback)(void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch), void* data);
 	void OnPidReceive(void(*callback)(void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d), void* data);
 	void OnCamerasConfigReceive(void(*callback)(void* data, float camera1_maxVal, float camera1_minVal, float camera2_maxVal, float camera2_minVal), void* data);
+	void OnIMUConfigReceive(void(*callback)(void* data, float acc_x_bias, float acc_y_bias, float acc_z_bias, float acc_x_scale, float acc_y_scale, float acc_z_scale, float gyro_x_bias, float gyro_y_bias, float gyro_z_bias, float gyro_scale), void* data);
 };
