@@ -87,6 +87,8 @@ bool PID::ComputeYaw()
 		if (error > PI)
 		{
 			error -= 2 * PI;
+		} else if (error < PI) {
+			error += 2 * PI;
 		}
 		ITerm += (ki * error);
 		if (ITerm > outMax) ITerm = outMax;
