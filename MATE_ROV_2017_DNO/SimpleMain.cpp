@@ -183,15 +183,24 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	}, this);
 
-	_communicator->OnMovementReceive([](void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch)->void {
+	_communicator->OnMovementReceive([](void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch)->void {
 		auto main = static_cast<SimpleMain_t*>(data);
 
 		main->_movement->SetLocalForce(x, y, 0);
 
-		if (auto_depth) {
-			main->_movement->SetDepth(depth);
-		} else {
-			main->_movement->SetDepthForce(depth);
+		float global_x = x_control ? x : 0;
+		float global_y = y_control ? y : 0;
+		float global_z = z_control == 1 ? z : 0;
+
+		float local_x = !x_control ? x : 0;
+		float local_y = !y_control ? y : 0;
+		float local_z = !z_control ? z : 0;
+
+		main->_movement->SetGlobalMoveForce(global_x, global_y, global_z);
+		main->_movement->SetLocalForce(local_x, local_y, local_z);
+
+		if (z_control == 2) {
+			main->_movement->SetDepth(z);
 		}
 
 		if (auto_yaw) {

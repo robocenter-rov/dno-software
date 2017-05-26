@@ -169,27 +169,29 @@ int SimpleCommunicator_t::Update() {
 				case RBI_MOVEMENT: {
 					#pragma pack(push, 1)
 					struct {
-						bool auto_depth : 1;
 						bool auto_yaw : 1;
 						bool auto_pitch : 1;
+						bool x_control : 1;
+						bool y_control : 1;
+						bool z_control : 2;
 					} control_type;
 					#pragma pack(pop)
 
 					float x;
 					float y;
-					float depth;
+					float z;
 					float yaw;
 					float pitch;
 
 					READ(control_type);
 					READASFLOAT(x, -4, 4);
 					READASFLOAT(y, -4, 4);
-					READ(depth);
+					READ(z);
 
 					if (control_type.auto_yaw) {
 						dr.ReadInt8AsFloat(yaw, -PI, PI);
 					} else {
-						dr.ReadInt8AsFloat(yaw, -2, 2);
+						dr.ReadInt8AsFloat(yaw, -4, 4);
 					}
 
 					if (control_type.auto_pitch) {
@@ -199,12 +201,14 @@ int SimpleCommunicator_t::Update() {
 					}
 
 					_on_movement_receive.callback(_on_movement_receive.data,
-						control_type.auto_depth,
 						control_type.auto_yaw,
 						control_type.auto_pitch,
+						control_type.x_control,
+						control_type.y_control,
+						control_type.z_control,
 						x,
 						y,
-						depth,
+						z,
 						yaw,
 						pitch
 					);
@@ -584,7 +588,7 @@ void SimpleCommunicator_t::OnMotorsConfigReceive(void(* callback)(void* data, in
 	_on_motors_config_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnMovementReceive(void(* callback)(void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch), void* data) {
+void SimpleCommunicator_t::OnMovementReceive(void(* callback)(void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch), void* data) {
 	_on_movement_receive.callback = callback;
 	_on_movement_receive.data = data;
 }

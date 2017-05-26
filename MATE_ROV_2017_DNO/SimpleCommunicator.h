@@ -30,7 +30,7 @@ private:
 	} _on_motors_state_receive;
 
 	struct :BaseCallback_t {
-		void(*callback)(void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch);
+		void(*callback)(void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch);
 	} _on_movement_receive;
 
 	struct :BaseCallback_t {
@@ -144,7 +144,7 @@ public:
 	void OnDevicesStateReceive(void(*callback)(void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos, bool cam1local, bool cam2local), void* data);
 	void OnMotorsStateReceive(void(*callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6), void* data);
 	void OnMotorsConfigReceive(void(*callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul), void* data);
-	void OnMovementReceive(void(*callback)(void* data, bool auto_depth, bool auto_yaw, bool auto_pitch, float x, float y, float depth, float yaw, float pitch), void* data);
+	void OnMovementReceive(void(*callback)(void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch), void* data);
 	void OnPidReceive(void(*callback)(void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d), void* data);
 	void OnCamerasConfigReceive(void(*callback)(void* data, float camera1_maxVal, float camera1_minVal, float camera2_maxVal, float camera2_minVal), void* data);
 	void OnIMUConfigReceive(void(*callback)(void* data, float acc_x_bias, float acc_y_bias, float acc_z_bias, float acc_x_scale, float acc_y_scale, float acc_z_scale, float gyro_x_bias, float gyro_y_bias, float gyro_z_bias, float gyro_scale), void* data);
