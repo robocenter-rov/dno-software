@@ -44,6 +44,7 @@
     <ClCompile Include="UARTConnectionProvider.cpp" />
     <ClCompile Include="UdpConnectionProvider.cpp" />
     <ClCompile Include="ArduinoServoMotor.cpp" />
+    <ClCompile Include="PCA9685BrushlessMotor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoPitch.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="SensorRotation.h" />
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h" />
     <ClInclude Include="ArduinoServoMotor.h" />
+    <ClInclude Include="PCA9685BrushlessMotor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MATE_ROV_2017_DNO.ino" />
