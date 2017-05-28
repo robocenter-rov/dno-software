@@ -8,6 +8,7 @@
 #include "UARTConnectionProvider.h"
 #include "TestPCAMain.h"
 #include "SimpleMain.h"
+#include "PCA9685BrushlessMotor.h"
 #include "LedDebigMotor.h"
 
 Main_t* Main;
@@ -25,12 +26,15 @@ void setup() {
 	Serial.begin(9600);
 	auto pwm1 = new Adafruit_PWMServoDriver(0x40);
 	auto pwm2 = new Adafruit_PWMServoDriver(0x41);
+	auto pwm3 = new Adafruit_PWMServoDriver(0x43);
 
 	pwm1->begin();
 	pwm1->setPWMFreq(60);
 
 	pwm2->begin();
 	pwm2->setPWMFreq(60);
+	pwm3->begin();
+	pwm3->setPWMFreq(500);
 	
 	//motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
 	Motors_t* motors = new Motors_t(
