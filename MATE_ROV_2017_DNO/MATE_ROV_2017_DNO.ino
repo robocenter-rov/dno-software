@@ -1,5 +1,3 @@
-#include "StdMain.h"
-#include "StdCommunicator.h"
 #include "UdpConnectionProvider.h"
 #include <Wire.h>
 #include "PCA96685Motor.h"
@@ -9,7 +7,6 @@
 #include "TestPCAMain.h"
 #include "SimpleMain.h"
 #include "PCA9685BrushlessMotor.h"
-#include "LedDebigMotor.h"
 
 Main_t* Main;
 
@@ -30,22 +27,22 @@ void setup() {
 
 	pwm1->begin();
 	pwm1->setPWMFreq(60);
-
 	pwm2->begin();
 	pwm2->setPWMFreq(60);
 	pwm3->begin();
 	pwm3->setPWMFreq(500);
-	
+
 	//motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
 	Motors_t* motors = new Motors_t(
 		//new LedDebugMotor_t(13), // 0
-		new PCA96685Motor_t(pwm1, 6, 5, 7),
-		new PCA96685Motor_t(pwm2, 1, 2, 0),
-		new PCA96685Motor_t(pwm1, 3, 4, 2), // 2
-		new PCA96685Motor_t(pwm1, 13, 14, 15), // 3
-		new PCA96685Motor_t(pwm2, 5, 4, 3), // 4
-		new PCA96685Motor_t(pwm1, 10, 11, 12)
+		new PCA9685BrushlessMotor(pwm3, 6, 2022, 3308),
+		new PCA9685BrushlessMotor(pwm3, 1, 2022, 3308),
+		new PCA9685BrushlessMotor(pwm3, 3, 2022, 3308), // 2
+		new PCA9685BrushlessMotor(pwm3, 13, 2022, 3308), // 3
+		new PCA9685BrushlessMotor(pwm3, 5, 2022, 3308), // 4
+		new PCA9685BrushlessMotor(pwm3, 10, 2022, 3308)
 	); // 5
+	motors->StopMotors();
 	/*
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
 	motors->AddMotor(new PCA96685Motor_t(pwm1, 4, 3, 2)); // 1 
