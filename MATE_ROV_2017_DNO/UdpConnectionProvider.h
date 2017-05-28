@@ -1,14 +1,14 @@
 #pragma once
 #include "ConnectionProvider.h"
-#include <Ethernet.h>
-#include "EthernetUdp.h"
+#include "Libs/Ethernet2/src/Ethernet2.h"
+#include "Libs/Ethernet2/src/EthernetUdp2.h"
 
 class UdpConnectionProvider_t : public ConnectionProvider_t {
 	byte _mac[6];
 	IPAddress _local_ip;
 	unsigned int _local_port;
 
-	IPAddress _remote_ip;
+	IPAddress _remote_ip; 
 	unsigned int _remote_port;
 
 	EthernetUDP _udp;

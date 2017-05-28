@@ -45,6 +45,15 @@
     <ClCompile Include="UdpConnectionProvider.cpp" />
     <ClCompile Include="ArduinoServoMotor.cpp" />
     <ClCompile Include="PCA9685BrushlessMotor.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\utility\socket.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\utility\w5500.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\Dhcp.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\Dns.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\Ethernet2.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\EthernetClient.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\EthernetServer.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\EthernetUdp2.cpp" />
+    <ClCompile Include="Libs\Ethernet2\src\Twitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AutoPitch.h" />
@@ -188,6 +197,17 @@
     <ClInclude Include="__vm\.MATE_ROV_2017_DNO.vsarduino.h" />
     <ClInclude Include="ArduinoServoMotor.h" />
     <ClInclude Include="PCA9685BrushlessMotor.h" />
+    <ClInclude Include="Libs\Ethernet2\src\utility\socket.h" />
+    <ClInclude Include="Libs\Ethernet2\src\utility\util.h" />
+    <ClInclude Include="Libs\Ethernet2\src\utility\w5500.h" />
+    <ClInclude Include="Libs\Ethernet2\src\Dhcp.h" />
+    <ClInclude Include="Libs\Ethernet2\src\Dns.h" />
+    <ClInclude Include="Libs\Ethernet2\src\Ethernet2.h" />
+    <ClInclude Include="Libs\Ethernet2\src\EthernetClient.h" />
+    <ClInclude Include="Libs\Ethernet2\src\EthernetServer.h" />
+    <ClInclude Include="Libs\Ethernet2\src\EthernetUdp2.h" />
+    <ClInclude Include="Libs\Ethernet2\src\Twitter.h" />
+    <ClInclude Include="Libs\Ethernet2\src\util.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MATE_ROV_2017_DNO.ino" />
