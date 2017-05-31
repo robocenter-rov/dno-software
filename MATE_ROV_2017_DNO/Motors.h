@@ -3,18 +3,20 @@
 
 class Motors_t {
 private:
-	Motor_t* _motors[6];
-	int _pos[6];
+	Motor_t* _motors[8];
+	int _pos[8];
 public:
-	Motors_t(Motor_t* front_left_motor, Motor_t* front_right_motor, Motor_t* back_left_motor, Motor_t* back_right_motor, Motor_t* front_motor, Motor_t* back_motor) {
+	Motors_t(Motor_t* front_left_motor, Motor_t* front_right_motor, Motor_t* back_left_motor, Motor_t* back_right_motor, Motor_t* front_motor, Motor_t* back_motor, Motor_t* right_motor, Motor_t* left_motor) {
 		_motors[0] = front_left_motor;
 		_motors[1] = front_right_motor;
 		_motors[2] = back_left_motor;
 		_motors[3] = back_right_motor;
 		_motors[4] = front_motor;
 		_motors[5] = back_motor;
+		_motors[6] = right_motor;
+		_motors[7] = left_motor;
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 8; i++) {
 			_pos[i] = i;
 		}
 	}

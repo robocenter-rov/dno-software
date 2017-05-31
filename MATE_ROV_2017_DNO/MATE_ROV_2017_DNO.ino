@@ -35,12 +35,14 @@ void setup() {
 	//motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
 	Motors_t* motors = new Motors_t(
 		//new LedDebugMotor_t(13), // 0
-		new PCA9685BrushlessMotor(pwm3, 6, 2022, 3308),
-		new PCA9685BrushlessMotor(pwm3, 1, 2022, 3308),
-		new PCA9685BrushlessMotor(pwm3, 3, 2022, 3308), // 2
-		new PCA9685BrushlessMotor(pwm3, 13, 2022, 3308), // 3
-		new PCA9685BrushlessMotor(pwm3, 5, 2022, 3308), // 4
-		new PCA9685BrushlessMotor(pwm3, 10, 2022, 3308)
+		new PCA9685BrushlessMotor(pwm3, 0, 2022, 3308),
+		new PCA9685BrushlessMotor(pwm3, 4, 2022, 3308),
+		new PCA9685BrushlessMotor(pwm3, 5, 2022, 3308), // 2
+		new PCA9685BrushlessMotor(pwm3, 8, 2022, 3308), // 3
+		new PCA9685BrushlessMotor(pwm3, 9, 2022, 3308), // 4
+		new PCA9685BrushlessMotor(pwm3, 10, 2022, 3308),
+		new PCA9685BrushlessMotor(pwm3, 11, 2022, 3308),
+		new PCA9685BrushlessMotor(pwm3, 12, 2022, 3308)
 	); // 5
 	motors->StopMotors();
 	/*
@@ -108,8 +110,8 @@ void setup() {
 		camera1_periphery, camera2_periphery, servo1_periphery, servo2_periphery);
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-	ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
-	//ConnectionProvider_t* connection_provider = new UARTConnectionProvider(&Serial3, 300);
+	//ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
+	ConnectionProvider_t* connection_provider = new UARTConnectionProvider(&Serial3, 300);
 	auto communicator = new SimpleCommunicator_t(connection_provider);
 
 	Main = new SimpleMain_t(communicator, movement, sensor_manager, periphery_manager);
