@@ -26,7 +26,7 @@ private:
 	} _on_devices_state_receive;
 
 	struct :BaseCallback_t {
-		void(*callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6);
+		void(*callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8);
 	} _on_motors_state_receive;
 
 	struct :BaseCallback_t {
@@ -34,7 +34,7 @@ private:
 	} _on_movement_receive;
 
 	struct :BaseCallback_t {
-		void(*callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul);
+		void(*callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, int m7pos, int m8pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul, float m7mul, float m8mul);
 	} _on_motors_config_receive;
 
 	struct :BaseCallback_t {
@@ -66,7 +66,7 @@ private:
 	} _on_pids_state_need;
 
 	struct :BaseCallback_t {
-		void(*callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6);
+		void(*callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6, float& m7, float& m8);
 	} _on_motors_state_need;
 
 	struct :BaseCallback_t {
@@ -135,15 +135,15 @@ public:
 	void OnCalibratedSensorDataNeed(void(*callback)(void* data, float& ax, float& ay, float& az, float& gx, float& gy, float& gz, float& mx, float& my, float& mz, float& depth), void* data);
 	void OnBluetoothMessageNeed(void(*callback)(void* data, char* bluetooth_message, bool& readed), void* data);
 	void OnPidsStateNeed(void(*callback)(void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_out, float& pitch_target), void* data);
-	void OnMotorsStateNeed(void(*callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6), void* data);
+	void OnMotorsStateNeed(void(*callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6, float& m7, float& m8), void* data);
 	void OnScannedI2CDevicesNeed(void(*callback)(void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803), void* data);
 
 	void OnConnect(void(*callback)(void* data), void* data);
 	void OnDisconnect(void(*callback)(void* data), void* data);
 	void OnStateReceive(void(*callback)(void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, bool send_calibrated_sensor_data, bool send_pid_state, bool send_motors_state, uint8_t i2c_scan_token), void* data);
 	void OnDevicesStateReceive(void(*callback)(void* data, float arm_pos, float hand_pos, float m1_pos, float m2_pos, float cam1_pos, float cam2_pos, bool cam1local, bool cam2local), void* data);
-	void OnMotorsStateReceive(void(*callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6), void* data);
-	void OnMotorsConfigReceive(void(*callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul), void* data);
+	void OnMotorsStateReceive(void(*callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8), void* data);
+	void OnMotorsConfigReceive(void(*callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, int m7pos, int m8pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul, float m7mul, float m8mul), void* data);
 	void OnMovementReceive(void(*callback)(void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch), void* data);
 	void OnPidReceive(void(*callback)(void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d), void* data);
 	void OnCamerasConfigReceive(void(*callback)(void* data, float camera1_maxVal, float camera1_minVal, float camera2_maxVal, float camera2_minVal), void* data);

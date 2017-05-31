@@ -87,7 +87,7 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		depth = main->_sensor_manager->GetDepth();
 	}, this);
 
-	_communicator->OnMotorsStateNeed([](void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6)
+	_communicator->OnMotorsStateNeed([](void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6, float& m7, float& m8)
 	{
 		auto main = static_cast<SimpleMain_t*>(data);
 
@@ -97,6 +97,8 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		m4 = main->_movement->GetMotorThrust(3);
 		m5 = main->_movement->GetMotorThrust(4);
 		m6 = main->_movement->GetMotorThrust(5);
+		m6 = main->_movement->GetMotorThrust(6);
+		m6 = main->_movement->GetMotorThrust(7);
 	}, this);
 
 	_communicator->OnScannedI2CDevicesNeed([](void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803)
@@ -157,7 +159,7 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 	}, this);
 
-	_communicator->OnMotorsStateReceive([](void* data, float m1, float m2, float m3, float m4, float m5, float m6)->void {
+	_communicator->OnMotorsStateReceive([](void* data, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8)->void {
 		auto main = static_cast<SimpleMain_t*>(data);
 
 		LOGLN("OnMotorsStateReceive");
@@ -173,6 +175,10 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		LOGLN(m5);
 		LOG("motor6: ");
 		LOGLN(m6);
+		LOG("motor5: ");
+		LOGLN(m7);
+		LOG("motor6: ");
+		LOGLN(m8);
 
 		main->_movement->SetMotorThrust(0, m1);
 		main->_movement->SetMotorThrust(1, m2);
@@ -180,6 +186,8 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_movement->SetMotorThrust(3, m4);
 		main->_movement->SetMotorThrust(4, m5);
 		main->_movement->SetMotorThrust(5, m6);
+		main->_movement->SetMotorThrust(6, m7);
+		main->_movement->SetMotorThrust(7, m8);
 
 	}, this);
 
@@ -252,12 +260,12 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_periphery_manager->SetFlashlightState(flashlight_state);
 	}, this);
 
-	_communicator->OnMotorsConfigReceive([](void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul)
+	_communicator->OnMotorsConfigReceive([](void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, int m7pos, int m8pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul, float m7mul, float m8mul)
 	{
 		auto main = static_cast<SimpleMain_t*>(data);
 
-		main->_movement->Motors()->SetMotorsPositions(m1pos, m2pos, m3pos, m4pos, m5pos, m6pos);
-		main->_movement->Motors()->SetMotorsMultipliers(m1mul, m2mul, m3mul, m4mul, m5mul, m6mul);
+		main->_movement->Motors()->SetMotorsPositions(m1pos, m2pos, m3pos, m4pos, m5pos, m6pos, m7pos, m8pos);
+		main->_movement->Motors()->SetMotorsMultipliers(m1mul, m2mul, m3mul, m4mul, m5mul, m6mul, m7mul, m8mul);
 	}, this);
 
 	_communicator->OnCamerasConfigReceive([](void* data, float cam1MaxVal, float cam1MinVal, float cam2MaxVal, float cam2MinVal)

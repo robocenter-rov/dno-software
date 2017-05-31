@@ -151,19 +151,25 @@ int SimpleCommunicator_t::Update() {
 					float M4;
 					float M5;
 					float M6;
+					float M7;
+					float M8;
 					READASFLOAT(M1, -1, 1);
 					READASFLOAT(M2, -1, 1);
 					READASFLOAT(M3, -1, 1);
 					READASFLOAT(M4, -1, 1);
 					READASFLOAT(M5, -1, 1);
 					READASFLOAT(M6, -1, 1);
+					READASFLOAT(M7, -1, 1);
+					READASFLOAT(M8, -1, 1);
 					_on_motors_state_receive.callback(_on_motors_state_receive.data,
 						M1,
 						M2,
 						M3,
 						M4,
 						M5,
-						M6
+						M6,
+						M7,
+						M8
 					);
 				} break;
 				case RBI_MOVEMENT: {
@@ -236,6 +242,8 @@ int SimpleCommunicator_t::Update() {
 							uint8_t M4Pos;
 							uint8_t M5Pos;
 							uint8_t M6Pos;
+							uint8_t M7Pos;
+							uint8_t M8Pos;
 						} MPositions;
 						struct {
 							float M1mul;
@@ -244,6 +252,8 @@ int SimpleCommunicator_t::Update() {
 							float M4mul;
 							float M5mul;
 							float M6mul;
+							float M7mul;
+							float M8mul;
 						} MMultipliers;
 						struct {
 							float camera1_maxVal;
@@ -299,13 +309,17 @@ int SimpleCommunicator_t::Update() {
 							config.MPositions.M4Pos,
 							config.MPositions.M5Pos,
 							config.MPositions.M6Pos,
+							config.MPositions.M7Pos,
+							config.MPositions.M8Pos,
 
 							config.MMultipliers.M1mul,
 							config.MMultipliers.M2mul,
 							config.MMultipliers.M3mul,
 							config.MMultipliers.M4mul,
 							config.MMultipliers.M5mul,
-							config.MMultipliers.M6mul
+							config.MMultipliers.M6mul,
+							config.MMultipliers.M7mul,
+							config.MMultipliers.M8mul
 						);
 
 						_on_cameras_config_receive.callback(_on_cameras_config_receive.data,
@@ -488,10 +502,12 @@ int SimpleCommunicator_t::Update() {
 				float m4;
 				float m5;
 				float m6;
+				float m7;
+				float m8;
 			} motors_state;
 
 			_on_motors_state_need.callback(_on_motors_state_need.data,
-				motors_state.m1, motors_state.m2, motors_state.m3, motors_state.m4, motors_state.m5, motors_state.m6
+				motors_state.m1, motors_state.m2, motors_state.m3, motors_state.m4, motors_state.m5, motors_state.m6, motors_state.m7, motors_state.m8
 			);
 
 			_connection_provider->Write(motors_state);
@@ -548,7 +564,7 @@ void SimpleCommunicator_t::OnPidsStateNeed(void(* callback)(void* data, float& d
 	_on_pids_state_need.data = data;
 }
 
-void SimpleCommunicator_t::OnMotorsStateNeed(void(* callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6), void* data) {
+void SimpleCommunicator_t::OnMotorsStateNeed(void(* callback)(void* data, float& m1, float& m2, float& m3, float& m4, float& m5, float& m6, float& m7, float& m8), void* data) {
 	_on_motors_state_need.callback = callback;
 	_on_motors_state_need.data = data;
 }
@@ -578,12 +594,12 @@ void SimpleCommunicator_t::OnDevicesStateReceive(void(* callback)(void* data, fl
 	_on_devices_state_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnMotorsStateReceive(void(* callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6), void* data) {
+void SimpleCommunicator_t::OnMotorsStateReceive(void(* callback)(void* data, float m1, float m2, float m3, float m4, float m5, float m6, float m7, float m8), void* data) {
 	_on_motors_state_receive.callback = callback;
 	_on_motors_state_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnMotorsConfigReceive(void(* callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul), void* data) {
+void SimpleCommunicator_t::OnMotorsConfigReceive(void(* callback)(void* data, int m1pos, int m2pos, int m3pos, int m4pos, int m5pos, int m6pos, int m7pos, int m8pos, float m1mul, float m2mul, float m3mul, float m4mul, float m5mul, float m6mul, float m7mul, float m8mul), void* data) {
 	_on_motors_config_receive.callback = callback;
 	_on_motors_config_receive.data = data;
 }

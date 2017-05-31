@@ -81,28 +81,32 @@ public:
 			-(_x_move_force / 4) * SQRT2 +
 			-(_y_move_force / 4) * SQRT2 - _z_rotate_force;
 		
-		float frontMotorThrust = _z_move_force / 2 + _y_rotate_force / 2;
-		float backMotorThrust = _z_move_force / 2 - _y_rotate_force / 2;
+		float frontMotorThrust = _z_move_force / 4 + _y_rotate_force / 2;
+		float backMotorThrust = _z_move_force / 4 - _y_rotate_force / 2;
+		float leftMotorThrust = _z_move_force / 4;
+		float rightMotorThrust = _z_move_force / 4;
 
-		float motorsThrust[6] = {
+		float motorsThrust[8] = {
 			frontLeftMotorThrust,
 			frontRightMotorThrust,
 			backLeftMotorThrust,
 			backRightMotorThrust,
 			frontMotorThrust,
-			backMotorThrust
+			backMotorThrust,
+			leftMotorThrust,
+			rightMotorThrust
 		};
 
 		float maxMotorThrust = 0;
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 8; i++) {
 			if (abs(motorsThrust[i]) > maxMotorThrust) {
 				maxMotorThrust = motorsThrust[i];
 			}
 		}
 
 		if (maxMotorThrust > 1) {
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < 8; i++) {
 				motorsThrust[i] /= maxMotorThrust;
 			}
 		}
