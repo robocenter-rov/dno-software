@@ -1,3 +1,6 @@
 [submodule "MATE_ROV_2017_DNO/Libs/Ethernet2"]
 	path = MATE_ROV_2017_DNO/Libs/Ethernet2
 	url = https://github.com/J-Veber/Ethernet2.git
+[submodule "MATE_ROV_2017_DNO/Libs/FastLED"]
+	path = MATE_ROV_2017_DNO/Libs/FastLED
+	url = https://github.com/J-Veber/FastLED.git
