@@ -10,6 +10,8 @@ Movement_t::Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_
 	_locax_x = _local_y = _local_z = 0;
 	_global_x = _global_y = _global_z = 0;
 	_local_yaw = _local_pitch = 0;
+
+	_last_call_time = 0;
 }
 
 Motors_t* Movement_t::Motors() const {
@@ -108,21 +110,27 @@ void Movement_t::Stop() {
 	_use_auto_depth = _use_auto_pitch = _use_auto_yaw = false;
 }
 
-void Movement_t::Update() const {
+void Movement_t::Update()
+{
 	if (!_use_motors_direct) {
 		_motors_force_distributor->ClearForces();
 		_motors_force_distributor->AddLocalMoveForce(_locax_x, _local_y, _local_z);
 		_motors_force_distributor->AddLocalRotateForce(_local_pitch, _local_yaw);
 		_motors_force_distributor->AddGlobalMoveForce(_global_x, _global_y, _global_z);
-		if (_use_auto_depth) {
-			_depth_regulator->Update(_motors_force_distributor);
+		if (millis() - _last_call_time >= 100)
+		{
+			_last_call_time = millis();
+			if (_use_auto_depth) {
+				_depth_regulator->Update(_motors_force_distributor);
+			}
+			if (_use_auto_yaw) {
+				_yaw_regulator->Update(_motors_force_distributor);
+			}
+			if (_use_auto_pitch) {
+				_pitch_regulator->Update(_motors_force_distributor);
+			}
 		}
-		if (_use_auto_yaw) {
-			_yaw_regulator->Update(_motors_force_distributor);
-		}
-		if (_use_auto_pitch) {
-			_pitch_regulator->Update(_motors_force_distributor);
-		}
+		
 		_motors_force_distributor->Update(_motors);
 	}
 }

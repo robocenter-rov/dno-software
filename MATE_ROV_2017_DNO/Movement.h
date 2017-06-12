@@ -22,6 +22,8 @@ private:
 	bool _use_auto_yaw = false;
 	bool _use_auto_pitch = false;
 	bool _use_auto_depth = false;
+
+	unsigned long _last_call_time;
 public:
 	Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, AutoYaw_t* yaw_regulator, AutoPitch_t* pitch_regulator, AutoDepth_t* depth_regulator);
 
@@ -52,7 +54,7 @@ public:
 
 	void Stop();
 
-	void Update() const;
+	void Update();
 
 	~Movement_t();
 };
