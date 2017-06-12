@@ -257,12 +257,12 @@ void SensorRotation_t::MadgwickAHRSupdateIMU(float gx, float gy, float gz, float
 SensorRotation_t::SensorRotation_t()
 {
 	delay(5);
-	_accel.init(ADXL345_ADDR_ALT_LOW);
-	_accel.set_bw(ADXL345_BW_12);
+	//_accel.init(ADXL345_ADDR_ALT_LOW);
+	//_accel.set_bw(ADXL345_BW_12);
 
-	_gyro.init(ITG3200_ADDR_AD0_LOW);
+	//_gyro.init(ITG3200_ADDR_AD0_LOW);
 
-	_magn.init(true);
+	//_magn.init(true);
 
 	_roll_updated = false;
 	_pitch_updated = false;
@@ -279,7 +279,7 @@ void SensorRotation_t::GetRotation(float& q0, float& q1, float& q2, float& q3) c
 void SensorRotation_t::GetRawData(int* raw_data) {
 	_accel.readAccel(raw_data, raw_data + 1, raw_data + 2);
 	_gyro.readGyroRaw(raw_data + 3, raw_data + 4, raw_data + 5);
-	_magn.getRaw(raw_data + 6, raw_data + 7, raw_data + 8);
+	//_magn.getRaw(raw_data + 6, raw_data + 7, raw_data + 8);
 }
 
 void SensorRotation_t::GetCalibratedData(float* calibrated_data) {
@@ -295,17 +295,17 @@ void SensorRotation_t::GetCalibratedData(float* calibrated_data) {
 	for (int i = 0; i < 3; i++) {
 		cal_gyro[i] = (rawData[i + 3] - _gyro_bias[i]) / _gyro_scale;
 	}
-
+	/*
 	float t_magn[3];
 	for (int i = 0; i < 3; i++) t_magn[i] = rawData[i + 6] - _magn_bias[i];
 	float cal_magn[3] = { 0, 0, 0 };
 	for (int i = 0; i<3; ++i)
 		for (int j = 0; j < 3; ++j)
-			cal_magn[i] += _magn_cal_matrix[i][j] * t_magn[j];
+			cal_magn[i] += _magn_cal_matrix[i][j] * t_magn[j];*/
 
 	memcpy(calibrated_data, cal_accel, sizeof cal_accel);
 	memcpy(calibrated_data + 3, cal_gyro, sizeof cal_gyro);
-	memcpy(calibrated_data + 6, cal_magn, sizeof cal_magn);
+	//memcpy(calibrated_data + 6, cal_magn, sizeof cal_magn);
 }
 
 void SensorRotation_t::SetCalibrationValues(const float gyro_bias[3], const float gyro_scale, 
