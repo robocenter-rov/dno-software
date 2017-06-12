@@ -177,22 +177,28 @@ int SimpleCommunicator_t::Update() {
 					struct {
 						bool auto_yaw : 1;
 						bool auto_pitch : 1;
-						bool x_control : 1;
-						bool y_control : 1;
-						bool z_control : 2;
+						bool auto_roll : 1;
+						bool auto_depth : 1;
 					} control_type;
 					#pragma pack(pop)
 
-					float x;
-					float y;
-					float z;
+					float local_x;
+					float local_y;
+					float local_z; 
+					float global_x;
+					float global_y;
+					float global_z;
 					float yaw;
 					float pitch;
+					float roll;
 
 					READ(control_type);
-					READASFLOAT(x, -4, 4);
-					READASFLOAT(y, -4, 4);
-					READ(z);
+					READASFLOAT(local_x, -4, 4);
+					READASFLOAT(local_y, -4, 4);
+					READASFLOAT(local_z, -4, 4);
+					READASFLOAT(global_x, -4, 4);
+					READASFLOAT(global_y, -4, 4);
+					READ(global_z);
 
 					if (control_type.auto_yaw) {
 						dr.ReadInt8AsFloat(yaw, -PI, PI);
@@ -203,20 +209,29 @@ int SimpleCommunicator_t::Update() {
 					if (control_type.auto_pitch) {
 						dr.ReadInt8AsFloat(pitch, -PI, PI);
 					} else {
-						dr.ReadInt8AsFloat(pitch, -2, 2);
+						dr.ReadInt8AsFloat(pitch, -4, 4);
+					}
+
+					if (control_type.auto_roll) {
+						dr.ReadInt8AsFloat(roll, -PI, PI);
+					} else {
+						dr.ReadInt8AsFloat(roll, -4, 4);
 					}
 
 					_on_movement_receive.callback(_on_movement_receive.data,
 						control_type.auto_yaw,
 						control_type.auto_pitch,
-						control_type.x_control,
-						control_type.y_control,
-						control_type.z_control,
-						x,
-						y,
-						z,
+						control_type.auto_roll,
+						control_type.auto_depth,
+						local_x,
+						local_y,
+						local_z,
+						global_x,
+						global_y,
+						global_z,
 						yaw,
-						pitch
+						pitch,
+						roll
 					);
 				} break;
 				case RBI_CONFIG: {
@@ -234,6 +249,10 @@ int SimpleCommunicator_t::Update() {
 							float pitch_p;
 							float pitch_i;
 							float pitch_d;
+
+							float roll_p;
+							float roll_i;
+							float roll_d;
 						} pids;
 						struct {
 							uint8_t M1Pos;
@@ -283,7 +302,7 @@ int SimpleCommunicator_t::Update() {
 					uint32_t config_hash;
 					config_hash = HashLy(config);
 
-					Serial.println("Received config");
+					//Serial.println("Received config");
 
 					if (_config_hash != config_hash)
 					{
@@ -299,7 +318,11 @@ int SimpleCommunicator_t::Update() {
 
 							config.pids.pitch_p,
 							config.pids.pitch_i,
-							config.pids.pitch_d
+							config.pids.pitch_d,
+
+							config.pids.roll_p,
+							config.pids.roll_i,
+							config.pids.roll_d
 						);
 
 						_on_motors_config_receive.callback(_on_motors_config_receive.data,
@@ -378,13 +401,13 @@ int SimpleCommunicator_t::Update() {
 		_connection_provider->Write(state);
 
 		if (_last_i2c_scan_token != _last_received_i2c_scan_token) {
-			bool scanned; bool pca1; bool pca2; bool hmc58x3; bool itg3200; bool adxl345; bool bmp085; bool ms5803;
+			bool scanned; bool pca1; bool pca2; bool pca3; bool hmc58x3; bool itg3200; bool adxl345; bool bmp085; bool ms5803;
 			_on_scanned_i2c_devices_need.callback(_on_scanned_i2c_devices_need.data,
-				scanned, pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803);
+				scanned, pca1, pca2, pca3, hmc58x3, itg3200, adxl345, bmp085, ms5803);
 
 			if (scanned) {
 				_last_i2c_scan_token = _last_received_i2c_scan_token;
-				_last_scanned_i2c_devices = { pca1, pca2, hmc58x3, itg3200, adxl345, bmp085, ms5803 };
+				_last_scanned_i2c_devices = { pca1, pca2, pca3, hmc58x3, itg3200, adxl345, bmp085, ms5803 };
 			}
 		}
 
@@ -481,12 +504,17 @@ int SimpleCommunicator_t::Update() {
 				float pitch_in;
 				float pitch_target;
 				float pitch_out;
+
+				float roll_in;
+				float roll_target;
+				float roll_out;
 			} pids_state;
 
 			_on_pids_state_need.callback(_on_pids_state_need.data,
 				pids_state.depth_in, pids_state.depth_target, pids_state.depth_out,
 				pids_state.yaw_in, pids_state.yaw_target, pids_state.yaw_out,
-				pids_state.pitch_in, pids_state.pitch_target, pids_state.pitch_out
+				pids_state.pitch_in, pids_state.pitch_target, pids_state.pitch_out,
+				pids_state.roll_in, pids_state.roll_target, pids_state.roll_out
 			);
 
 			_connection_provider->Write(pids_state);
@@ -559,7 +587,7 @@ void SimpleCommunicator_t::OnBluetoothMessageNeed(void(* callback)(void* data, c
 	_on_bluetooth_msg_need.data = data;
 }
 
-void SimpleCommunicator_t::OnPidsStateNeed(void(* callback)(void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_out, float& pitch_target), void* data) {
+void SimpleCommunicator_t::OnPidsStateNeed(void(* callback)(void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_out, float& pitch_target, float& roll_in, float& roll_out, float& roll_target), void* data) {
 	_on_pids_state_need.callback = callback;
 	_on_pids_state_need.data = data;
 }
@@ -569,7 +597,7 @@ void SimpleCommunicator_t::OnMotorsStateNeed(void(* callback)(void* data, float&
 	_on_motors_state_need.data = data;
 }
 
-void SimpleCommunicator_t::OnScannedI2CDevicesNeed(void(* callback)(void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803), void* data) {
+void SimpleCommunicator_t::OnScannedI2CDevicesNeed(void(* callback)(void* data, bool& scanned, bool& pca1, bool& pca2, bool& pca3, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803), void* data) {
 	_on_scanned_i2c_devices_need.callback = callback;
 	_on_scanned_i2c_devices_need.data = data;
 }
@@ -604,12 +632,12 @@ void SimpleCommunicator_t::OnMotorsConfigReceive(void(* callback)(void* data, in
 	_on_motors_config_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnMovementReceive(void(* callback)(void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch), void* data) {
+void SimpleCommunicator_t::OnMovementReceive(void(* callback)(void* data, bool auto_yaw, bool auto_pitch, bool auto_roll, bool auto_depth, float local_x, float local_y, float local_z, float global_x, float global_y, float global_z, float yaw, float pitch, float roll), void* data) {
 	_on_movement_receive.callback = callback;
 	_on_movement_receive.data = data;
 }
 
-void SimpleCommunicator_t::OnPidReceive(void(* callback)(void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d), void* data) {
+void SimpleCommunicator_t::OnPidReceive(void(* callback)(void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d, float roll_p, float roll_i, float roll_d), void* data) {
 	_on_pid_receive.callback = callback;
 	_on_pid_receive.data = data;
 }

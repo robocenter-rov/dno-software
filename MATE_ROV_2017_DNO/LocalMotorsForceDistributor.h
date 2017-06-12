@@ -9,12 +9,13 @@ private:
 	float _y_move_force;
 	float _z_move_force;
 
+	float _x_rotate_force;
 	float _y_rotate_force;
 	float _z_rotate_force;
 public:
 	LocalMotorsForceDistributor_t() {
 		_x_move_force = _y_move_force = _z_move_force = 0;
-		_y_rotate_force = _z_rotate_force = 0;
+		_x_rotate_force = _y_rotate_force = _z_rotate_force = 0;
 	}
 
 	void AddMoveForce(float x, float y, float z) {
@@ -23,7 +24,8 @@ public:
 		_z_move_force += z;
 	}
 
-	void AddRotateForce(float y, float z) {
+	void AddRotateForce(float x, float y, float z) {
+		_x_rotate_force += x;
 		_y_rotate_force += y;
 		_z_rotate_force += z;
 	}
@@ -46,7 +48,8 @@ public:
 		_z_move_force = z;
 	}
 
-	void SetRotateForce(float y, float z) {
+	void SetRotateForce(float x ,float y, float z) {
+		_x_rotate_force = x;
 		_y_rotate_force = y;
 		_z_rotate_force = z;
 	}
@@ -61,7 +64,7 @@ public:
 
 	void ClearForces() {
 		_x_move_force = _y_move_force = _z_move_force = 0;
-		_y_rotate_force = _z_rotate_force = 0;
+		_x_rotate_force = _y_rotate_force = _z_rotate_force = 0;
 	}
 
 	void Update(Motors_t* motors) const {
@@ -81,28 +84,26 @@ public:
 			-(_x_move_force / 4) * SQRT2 +
 			-(_y_move_force / 4) * SQRT2 - _z_rotate_force;
 		
-		float frontMotorThrust = _z_move_force / 4 + _y_rotate_force / 2;
-		float backMotorThrust = _z_move_force / 4 - _y_rotate_force / 2;
-		float leftMotorThrust = _z_move_force / 4;
-		float rightMotorThrust = _z_move_force / 4;
+		float frontLeftUpMotorThrust = _z_move_force / 4 + _x_rotate_force / 4 + _y_rotate_force / 4;
+		float frontRightUpMotorThrust = _z_move_force / 4 + _x_rotate_force / 4 - _y_rotate_force / 4;
+		float backLeftUpMotorThrust = _z_move_force / 4 - _x_rotate_force / 4 + _y_rotate_force / 4;
+		float backRightUpMotorThrust = _z_move_force / 4 - _x_rotate_force / 4 - _y_rotate_force / 4;
 
 		float motorsThrust[8] = {
 			frontLeftMotorThrust,
 			frontRightMotorThrust,
 			backLeftMotorThrust,
 			backRightMotorThrust,
-			frontMotorThrust,
-			backMotorThrust,
-			leftMotorThrust,
-			rightMotorThrust
+			frontLeftUpMotorThrust,
+			frontRightUpMotorThrust,
+			backLeftUpMotorThrust,
+			backRightUpMotorThrust
 		};
 
 		float maxMotorThrust = 0;
 
 		for (int i = 0; i < 8; i++) {
-			if (abs(motorsThrust[i]) > maxMotorThrust) {
-				maxMotorThrust = motorsThrust[i];
-			}
+			maxMotorThrust = max(abs(motorsThrust[i]), maxMotorThrust);
 		}
 
 		if (maxMotorThrust > 1) {
