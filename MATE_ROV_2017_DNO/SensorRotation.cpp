@@ -319,6 +319,11 @@ void SensorRotation_t::SetCalibrationValues(const float gyro_bias[3], const floa
 	memcpy(_magn_bias, magn_bias, sizeof _magn_bias);
 }
 
+void SensorRotation_t::GyroZeroCalibrate(unsigned int totSamples, unsigned int sampleDelayMS)
+{
+	_gyro.zeroCalibrate(totSamples, sampleDelayMS);
+}
+
 void SensorRotation_t::Update() {
 	unsigned long int now = micros();
 	_sampleFreq = 1.0 / ((now - _lastUpdate) / 1000000.0);

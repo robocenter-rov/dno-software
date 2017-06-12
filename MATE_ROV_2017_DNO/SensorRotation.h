@@ -50,6 +50,8 @@ public:
 	void SetCalibrationValues(const float gyro_bias[3], const float gyro_scale, 
 		const float accel_bias[3], const float accel_scale[3], const float magn_cal_matrix[3][3], const float magn_bias[3]);
 
+	void GyroZeroCalibrate(unsigned int totSamples, unsigned int sampleDelayMS);
+
 	void Update();
 
 	float GetPithch();

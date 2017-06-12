@@ -83,6 +83,8 @@ void setup() {
 		acc_bias, acc_scale,
 		magn_cal_matrix, magn_bias);
 
+	rotation_sensor->GyroZeroCalibrate(250, 100);
+
 	SensorManager_t* sensor_manager = new SensorManager_t(rotation_sensor, depth_sensor);
 
 	MotorsForceDistributor_t* motors_force_distributor = new MotorsForceDistributor_t(sensor_manager);
