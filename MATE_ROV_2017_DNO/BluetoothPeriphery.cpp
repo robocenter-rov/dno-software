@@ -18,7 +18,11 @@ bool BluetoothPeriphery_t::ReceiveBluetoothMessage(char* buff)
 		while (_bytes_readed < 7 && (byte = _serial->read()) > 0) {
 			LOG("Byte readed from bluetooth:");
 			LOGLN(byte);
-			_message_buffer[_bytes_readed++] = byte;
+			if (byte == 0x0A) {
+				_bytes_readed = 0;
+			} else {
+				_message_buffer[_bytes_readed++] = byte;
+			}
 		}
 		if (_bytes_readed == 7) {
 			memcpy(buff, _message_buffer, sizeof(char) * 7);
