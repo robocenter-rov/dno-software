@@ -11,10 +11,9 @@ private:
 	unsigned int _minPwmVal;
 
 	void _SetThrust() override;
-
 public:
 	PCA9685BrushlessMotor(Adafruit_PWMServoDriver *pwm, unsigned int pwmNum, 
-		unsigned int maxPwmVal = 4095, unsigned int minPwmVal = 0);
+		unsigned minPwmVal = 0, unsigned maxPwmVal = 4095);
 	~PCA9685BrushlessMotor();
 };
 
