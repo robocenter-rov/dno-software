@@ -84,10 +84,9 @@ bool PID::ComputeYaw()
 		/*Compute all the working error variables*/
 		double input = *myInput;
 		double error = *mySetpoint - input;
-		if (error > PI)
-		{
+		if (error > PI) {
 			error -= 2 * PI;
-		} else if (error < PI) {
+		} else if (error < -PI) {
 			error += 2 * PI;
 		}
 		ITerm += (ki * error);
