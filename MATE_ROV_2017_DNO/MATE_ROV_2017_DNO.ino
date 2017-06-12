@@ -13,13 +13,9 @@ Main_t* Main;
 void setup() {
 	Exceptions::Init();
 	Wire.begin();
-	Serial3.begin(19200);
 
 	pinMode(13, OUTPUT);
 
-#ifdef _DEBUG
-	Serial.begin(9600);
-#endif
 	Serial.begin(9600);
 	auto pwm1 = new Adafruit_PWMServoDriver(0x40);
 	auto pwm2 = new Adafruit_PWMServoDriver(0x41);
@@ -33,16 +29,23 @@ void setup() {
 	pwm3->setPWMFreq(500);
 
 	//motors->AddMotor(new PCA96685Motor_t(pwm1, 6, 5, 7)); // 0
-	Motors_t* motors = new Motors_t(
-		//new LedDebugMotor_t(13), // 0
-		new PCA9685BrushlessMotor(pwm3, 0, 2022, 3308),
-		new PCA9685BrushlessMotor(pwm3, 4, 2022, 3308),
-		new PCA9685BrushlessMotor(pwm3, 5, 2022, 3308), // 2
-		new PCA9685BrushlessMotor(pwm3, 8, 2022, 3308), // 3
-		new PCA9685BrushlessMotor(pwm3, 9, 2022, 3308), // 4
-		new PCA9685BrushlessMotor(pwm3, 10, 2022, 3308),
-		new PCA9685BrushlessMotor(pwm3, 11, 2022, 3308),
-		new PCA9685BrushlessMotor(pwm3, 12, 2022, 3308)
+	Motors_t* motors = new Motors_t(/*
+		new PCA96685Motor_t(pwm1, 6, 5, 7),
+		new PCA96685Motor_t(pwm1, 4, 3, 2), //1
+		new PCA96685Motor_t(pwm1, 14, 13, 15),
+		new PCA96685Motor_t(pwm1, 10, 11, 12), //2
+		new PCA96685Motor_t(pwm2, 2, 1, 0),
+		new PCA96685Motor_t(pwm2, 4, 5, 3),
+		new PCA96685Motor_t(pwm3, 4, 3, 2),
+		new PCA96685Motor_t(pwm3, 4, 3, 2)*/
+		new PCA9685BrushlessMotor(pwm3, 0, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 13, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 1, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 12, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 2, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 15, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 3, 2120, 3430),
+		new PCA9685BrushlessMotor(pwm3, 14, 2120, 3430)
 	); // 5
 	motors->StopMotors();
 	/*
@@ -55,17 +58,17 @@ void setup() {
 	*/
 	SensorRotation_t* rotation_sensor = new SensorRotation_t();
 	MS5803SensorDepth_t* depth_sensor = new MS5803SensorDepth_t(ADDRESS_HIGH, ADC_4096);
-
+	/*
 	float acc_bias[] = { 2.01769, -2.51933, -5.07049 };
 	float acc_scale[] = { 257.626, 257.65, 247.943 };
 	float gyro_bias[] = { 5.60526, 30.625, -17.5811 };
 	float gyro_scale = 1000;
-
-	/*
+	*/
+	
 	float acc_bias[] = { -6.4322, -6.7379, -28.5567 };
 	float acc_scale[] = { 253.999, 254.304, 249.271 };
 	float gyro_bias[] = { 23.750677, 24.255642, -5.145686 };
-	float gyro_scale = 950;*/
+	float gyro_scale = 950;
 
 	float magn_cal_matrix[3][3] =
 	{
@@ -86,17 +89,18 @@ void setup() {
 
 	AutoYaw_t* auto_yaw = new AutoYaw_t(sensor_manager);
 	AutoPitch_t* auto_pitch = new AutoPitch_t(sensor_manager);
+	AutoRoll_t* auto_roll = new AutoRoll_t(sensor_manager);
 	AutoDepth_t* auto_depth = new AutoDepth_t(sensor_manager);
 
-	Movement_t* movement = new Movement_t(motors, motors_force_distributor, auto_yaw, auto_pitch, auto_depth);
+	Movement_t* movement = new Movement_t(motors, motors_force_distributor, auto_yaw, auto_pitch, auto_roll, auto_depth);
 	
 	FlashlightPeriphery_t* flashlight_periphery = new FlashlightPeriphery_t(8);
 	
-	Serial1.begin(9600);
+	Serial1.begin(38400);
 	BluetoothPeriphery_t* bluetooth_periphery = new BluetoothPeriphery_t(&Serial1);
 
 	ArduinoServoMotor_t* camera1_periphery = new ArduinoServoMotor_t(rotation_sensor, 5);
-	ArduinoServoMotor_t* camera2_periphery = new ArduinoServoMotor_t(rotation_sensor, 3);
+	ArduinoServoMotor_t* camera2_periphery = new ArduinoServoMotor_t(rotation_sensor, 7);
 
 	PCA9685ServoMotor_t* servo1_periphery = new PCA9685ServoMotor_t(rotation_sensor, pwm1, 0);
 	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(rotation_sensor, pwm1, 1);
@@ -111,6 +115,7 @@ void setup() {
 
 	byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 	//ConnectionProvider_t* connection_provider = new UdpConnectionProvider_t(20, mac, IPAddress(192, 168, 0, 50), 3000);
+	Serial3.begin(19200);
 	ConnectionProvider_t* connection_provider = new UARTConnectionProvider(&Serial3, 300);
 	auto communicator = new SimpleCommunicator_t(connection_provider);
 
@@ -143,11 +148,11 @@ void loop() {
 			node = node->GetNext();
 		}
 		Exceptions::Release();
-		while (true) {
+		/*while (true) {
 			digitalWrite(13, HIGH);
 			delay(1000);
 			digitalWrite(13, LOW);
 			delay(1000);
-		}
+		}*/
 	}
 }
