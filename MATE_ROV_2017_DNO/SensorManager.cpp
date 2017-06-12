@@ -29,6 +29,10 @@ float SensorManager_t::GetRawDepth() {
 	return _sensorDepth->GetRawData();
 }
 
+SensorRotation_t* SensorManager_t::Rotation() {
+	return _sensorRotation;
+}
+
 void SensorManager_t::Update() const {
 	_sensorRotation->Update();
 }

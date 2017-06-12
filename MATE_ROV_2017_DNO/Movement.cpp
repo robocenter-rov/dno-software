@@ -1,15 +1,16 @@
 #include "Movement.h"
 
-Movement_t::Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, AutoYaw_t* yaw_regulator, AutoPitch_t* pitch_regulator, AutoDepth_t* depth_regulator) {
+Movement_t::Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, AutoYaw_t* yaw_regulator, AutoPitch_t* pitch_regulator, AutoRoll_t* roll_regulator, AutoDepth_t* depth_regulator) {
 	_motors = motors;
 	_motors_force_distributor = motors_force_distributor;
 	_yaw_regulator = yaw_regulator;
 	_pitch_regulator = pitch_regulator;
+	_roll_regulator = roll_regulator;
 	_depth_regulator = depth_regulator;
 
-	_locax_x = _local_y = _local_z = 0;
+	_local_x = _local_y = _local_z = 0;
 	_global_x = _global_y = _global_z = 0;
-	_local_yaw = _local_pitch = 0;
+	_local_yaw = _local_pitch = _local_roll = 0;
 
 	_last_call_time = 0;
 }
@@ -64,8 +65,20 @@ void Movement_t::SetPitchForce(float angleY) {
 	_use_motors_direct = false;
 }
 
+void Movement_t::SetRoll(float angleY) {
+	_roll_regulator->SetTarget(angleY);
+	_use_auto_pitch = true;
+	_use_motors_direct = false;
+}
+
+void Movement_t::SetRollForce(float angleY) {
+	_local_roll = angleY;
+	_use_auto_pitch = false;
+	_use_motors_direct = false;
+}
+
 void Movement_t::SetLocalForce(float x, float y, float z) {
-	_locax_x = x;
+	_local_x = x;
 	_local_y = y;
 	_local_z = z;
 	_use_motors_direct = false;
@@ -88,6 +101,10 @@ void Movement_t::SetPitchPid(float p, float i, float d) const {
 	_pitch_regulator->SetPid(p, i, d);
 }
 
+void Movement_t::SetRollPid(float p, float i, float d) const {
+	_roll_regulator->SetPid(p, i, d);
+}
+
 void Movement_t::SetDepthPid(float p, float i, float d) const {
 	_depth_regulator->SetPid(p, i, d);
 }
@@ -98,6 +115,10 @@ void Movement_t::GetYawPidState(float& in, float& target, float& out) const {
 
 void Movement_t::GetPitchPidState(float& in, float& target, float& out) const {
 	_pitch_regulator->GetPidState(in, target, out);
+}
+
+void Movement_t::GetRollPidState(float& in, float& target, float& out) const {
+	_roll_regulator->GetPidState(in, target, out);
 }
 
 void Movement_t::GetDepthPidState(float& in, float& target, float& out) const {
@@ -114,9 +135,9 @@ void Movement_t::Update()
 {
 	if (!_use_motors_direct) {
 		_motors_force_distributor->ClearForces();
-		_motors_force_distributor->AddLocalMoveForce(_locax_x, _local_y, _local_z);
-		_motors_force_distributor->AddLocalRotateForce(_local_pitch, _local_yaw);
-		_motors_force_distributor->AddGlobalMoveForce(_global_x, _global_y, _global_z);
+		_motors_force_distributor->AddLocalMoveForce(_local_x, _local_y, _local_z);
+		_motors_force_distributor->AddLocalRotateForce(_local_pitch, _local_roll, _local_yaw);
+		//_motors_force_distributor->AddGlobalMoveForce(_global_x, _global_y, _global_z);
 		if (millis() - _last_call_time >= 100)
 		{
 			_last_call_time = millis();
@@ -129,10 +150,12 @@ void Movement_t::Update()
 			if (_use_auto_pitch) {
 				_pitch_regulator->Update(_motors_force_distributor);
 			}
+
+			_motors_force_distributor->Update(_motors);
 		}
-		
-		_motors_force_distributor->Update(_motors);
 	}
 }
 
-Movement_t::~Movement_t() {}
+Movement_t::~Movement_t()
+{
+}

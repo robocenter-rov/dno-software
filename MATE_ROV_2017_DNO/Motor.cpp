@@ -1,3 +1,4 @@
+#include "Arduino.h"
 #include "Motor.h"
 
 Motor_t::Motor_t() {
@@ -6,7 +7,7 @@ Motor_t::Motor_t() {
 }
 
 void Motor_t::SetThrust(float thrust) {
-	_thrust = thrust;
+	_thrust = constrain(thrust, -1, 1);
 	_SetThrust();
 }
 

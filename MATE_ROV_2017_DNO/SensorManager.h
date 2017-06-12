@@ -19,5 +19,7 @@ public:
 	float GetDepth();
 	float GetRawDepth();
 
+	SensorRotation_t* Rotation();
+
 	void Update() const;
 };

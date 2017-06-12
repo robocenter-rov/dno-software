@@ -95,5 +95,7 @@ public:
 	void Update() const {
 		_camera1->Update();
 		_camera2->Update();
+		_m1->Update();
+		_m2->Update();
 	};
 };

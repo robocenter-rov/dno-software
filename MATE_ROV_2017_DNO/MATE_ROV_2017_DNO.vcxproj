@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClInclude Include="ArduinoServoMotor.h" />
     <ClInclude Include="AutoPitch.h" />
+    <ClInclude Include="AutoRoll.h" />
     <ClInclude Include="AutoYaw.h" />
     <ClInclude Include="BluetoothPeriphery.h" />
     <ClInclude Include="ByteArray.h" />
@@ -242,6 +243,7 @@
   <ItemGroup>
     <ClCompile Include="ArduinoServoMotor.cpp" />
     <ClCompile Include="AutoPitch.cpp" />
+    <ClCompile Include="AutoRoll.cpp" />
     <ClCompile Include="AutoYaw.cpp" />
     <ClCompile Include="BluetoothPeriphery.cpp" />
     <ClCompile Include="ConnectionProvider.cpp" />
@@ -299,7 +301,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.build.auto_discover_includes="1" arduino.upload.port="COM3" debug.local.portspeed="9600" />
+      <UserProperties arduino.build.auto_discover_includes="1" arduino.upload.port="COM10" debug.local.portspeed="9600" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

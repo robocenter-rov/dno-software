@@ -13,7 +13,7 @@ public:
 	void Update(MotorsForceDistributor_t* motors_force_distributor) {
 		_input = _sensor_manager->GetDepth();
 		_pid.Compute();
-		motors_force_distributor->AddGlobalMoveForce(0, 0, _output);
+		motors_force_distributor->AddLocalMoveForce(0, 0, _output);
 	}
 
 	void SetDepth(float target_depth) {

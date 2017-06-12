@@ -97,15 +97,16 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		m4 = main->_movement->GetMotorThrust(3);
 		m5 = main->_movement->GetMotorThrust(4);
 		m6 = main->_movement->GetMotorThrust(5);
-		m6 = main->_movement->GetMotorThrust(6);
-		m6 = main->_movement->GetMotorThrust(7);
+		m7 = main->_movement->GetMotorThrust(6);
+		m8 = main->_movement->GetMotorThrust(7);
 	}, this);
 
-	_communicator->OnScannedI2CDevicesNeed([](void* data, bool& scanned, bool& pca1, bool& pca2, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803)
+	_communicator->OnScannedI2CDevicesNeed([](void* data, bool& scanned, bool& pca1, bool& pca2, bool& pca3, bool& hmc58x3, bool& itg3200, bool& adxl345, bool& bmp085, bool& ms5803)
 	{
 		uint8_t adresses[] = {
 			0x40, // PCA1
 			0x41, // PCA2
+			0x43, // PCA2
 			0x1E, // HMC58X3
 			0x53, // ADXL345
 			0x68, // ITG3200
@@ -122,22 +123,24 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 		pca1 = s[0];
 		pca2 = s[1];
-		hmc58x3 = s[2];
-		itg3200 = s[3];
-		adxl345 = s[4];
-		bmp085 = s[5];
-		ms5803 = s[6];
+		pca3 = s[2];
+		hmc58x3 = s[3];
+		itg3200 = s[4];
+		adxl345 = s[5];
+		bmp085 = s[6];
+		ms5803 = s[7];
 
 		scanned = true;
 	}, this);
 
-	_communicator->OnPidsStateNeed([](void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_target, float& pitch_out)
+	_communicator->OnPidsStateNeed([](void* data, float& depth_in, float& depth_target, float& depth_out, float& yaw_in, float& yaw_target, float& yaw_out, float& pitch_in, float& pitch_target, float& pitch_out, float& roll_in, float& roll_target, float& roll_out)
 	{
 		auto main = static_cast<SimpleMain_t*>(data);
 
 		main->_movement->GetDepthPidState(depth_in, depth_target, depth_out);
 		main->_movement->GetYawPidState(yaw_in, yaw_target, yaw_out);
-		main->_movement->GetPitchPidState(pitch_in, pitch_target,pitch_out);
+		main->_movement->GetPitchPidState(pitch_in, pitch_target, pitch_out);
+		main->_movement->GetRollPidState(roll_in, roll_target, roll_out);
 	}, this);
 
 	_communicator->OnDevicesStateReceive([](void* data, float arm_pos, float hand_pos, float m1_pos, 
@@ -188,27 +191,16 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		main->_movement->SetMotorThrust(5, m6);
 		main->_movement->SetMotorThrust(6, m7);
 		main->_movement->SetMotorThrust(7, m8);
-
 	}, this);
 
-	_communicator->OnMovementReceive([](void* data, bool auto_yaw, bool auto_pitch, bool x_control, bool y_control, unsigned char z_control, float x, float y, float z, float yaw, float pitch)->void {
+	_communicator->OnMovementReceive([](void* data, bool auto_yaw, bool auto_pitch, bool auto_roll, bool auto_depth, float local_x, float local_y, float local_z, float global_x, float global_y, float global_z, float yaw, float pitch, float roll)->void {
 		auto main = static_cast<SimpleMain_t*>(data);
 
-		main->_movement->SetLocalForce(x, y, 0);
-
-		float global_x = x_control ? x : 0;
-		float global_y = y_control ? y : 0;
-		float global_z = z_control == 1 ? z : 0;
-
-		float local_x = !x_control ? x : 0;
-		float local_y = !y_control ? y : 0;
-		float local_z = !z_control ? z : 0;
-
-		main->_movement->SetGlobalMoveForce(global_x, global_y, global_z);
+		//main->_movement->SetGlobalMoveForce(global_x, global_y, global_z);
 		main->_movement->SetLocalForce(local_x, local_y, local_z);
 
-		if (z_control == 2) {
-			main->_movement->SetDepth(z);
+		if (auto_depth) {
+			main->_movement->SetDepth(global_z);
 		}
 
 		if (auto_yaw) {
@@ -222,14 +214,22 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 		} else {
 			main->_movement->SetPitchForce(pitch);
 		}
+
+		if (auto_pitch) {
+			main->_movement->SetRoll(roll);
+		}
+		else {
+			main->_movement->SetRollForce(roll);
+		}
 	}, this);
 
-	_communicator->OnPidReceive([](void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d)-> void {
+	_communicator->OnPidReceive([](void* data, float depth_p, float depth_i, float depth_d, float yaw_p, float yaw_i, float yaw_d, float pitch_p, float pitch_i, float pitch_d, float roll_p, float roll_i, float roll_d)-> void {
 		auto main = static_cast<SimpleMain_t*>(data);
 
 		main->_movement->SetDepthPid(depth_p, depth_i, depth_d);
 		main->_movement->SetYawPid(yaw_p, yaw_i, yaw_d);
 		main->_movement->SetPitchPid(pitch_p, pitch_i, pitch_d);
+		main->_movement->SetRollPid(roll_p, roll_i, roll_d);
 	}, this);
 
 	_communicator->OnStateReceive([](void* data, bool flashlight_state, bool read_bluetooth, bool send_raw_sensor_data, 

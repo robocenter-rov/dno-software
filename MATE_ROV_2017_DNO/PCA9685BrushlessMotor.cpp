@@ -9,12 +9,12 @@ void PCA9685BrushlessMotor::_SetThrust()
 }
 
 PCA9685BrushlessMotor::PCA9685BrushlessMotor(Adafruit_PWMServoDriver* pwm, unsigned pwmNum, 
-	unsigned maxPwmVal = 4095, unsigned minPwmVal = 0)
+	unsigned minPwmVal = 0, unsigned maxPwmVal = 4095)
 {
 	_pwm = pwm;
 	_pwmNum = pwmNum;
-	_maxPwmVal = maxPwmVal;
 	_minPwmVal = minPwmVal;
+	_maxPwmVal = maxPwmVal;
 }
 
 

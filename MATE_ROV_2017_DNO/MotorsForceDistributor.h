@@ -46,12 +46,12 @@ public:
 		SetLocalMoveForce(local_x, local_y, local_z);
 	}
 
-	void AddLocalRotateForce(float y, float z) {
-		_local_force_distrib.AddRotateForce(y, z);
+	void AddLocalRotateForce(float x, float y, float z) {
+		_local_force_distrib.AddRotateForce(x, y, z);
 	}
 
-	void SetLocalRotateForce(float y, float z) {
-		_local_force_distrib.SetRotateForce(y, z);
+	void SetLocalRotateForce(float x, float y, float z) {
+		_local_force_distrib.SetRotateForce(x, y, z);
 	}
 
 	void Update(Motors_t* motors) const {
