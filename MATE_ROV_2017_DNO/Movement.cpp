@@ -138,8 +138,7 @@ void Movement_t::Update()
 		_motors_force_distributor->AddLocalMoveForce(_local_x, _local_y, _local_z);
 		_motors_force_distributor->AddLocalRotateForce(_local_pitch, _local_roll, _local_yaw);
 		//_motors_force_distributor->AddGlobalMoveForce(_global_x, _global_y, _global_z);
-		if (millis() - _last_call_time >= 100)
-		{
+		if (millis() - _last_call_time >= 100) {
 			_last_call_time = millis();
 			if (_use_auto_depth) {
 				_depth_regulator->Update(_motors_force_distributor);
@@ -150,12 +149,12 @@ void Movement_t::Update()
 			if (_use_auto_pitch) {
 				_pitch_regulator->Update(_motors_force_distributor);
 			}
-
-			_motors_force_distributor->Update(_motors);
+			if (_use_auto_roll) {
+				_roll_regulator->Update(_motors_force_distributor);
+			}
 		}
+		_motors_force_distributor->Update(_motors);
 	}
 }
 
-Movement_t::~Movement_t()
-{
-}
+Movement_t::~Movement_t() {}
