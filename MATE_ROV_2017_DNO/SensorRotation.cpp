@@ -318,7 +318,7 @@ void SensorRotation_t::GetCalibratedData(float* calibrated_data) {
 void SensorRotation_t::SetCalibrationValues(const float gyro_bias[3], const float gyro_scale, 
 	const float accel_bias[3], const float accel_scale[3], const float magn_cal_matrix[3][3], const float magn_bias[3]) 
 {
-	memcpy(_gyro_bias, gyro_bias, sizeof _gyro_bias);
+	//memcpy(_gyro_bias, gyro_bias, sizeof _gyro_bias);
 	_gyro_scale = gyro_scale;
 	memcpy(_accel_bias, accel_bias, sizeof _accel_bias);
 	memcpy(_accel_scale, accel_scale, sizeof _accel_scale);
@@ -328,7 +328,18 @@ void SensorRotation_t::SetCalibrationValues(const float gyro_bias[3], const floa
 
 void SensorRotation_t::GyroZeroCalibrate(unsigned int totSamples, unsigned int sampleDelayMS)
 {
-	_gyro.zeroCalibrate(totSamples, sampleDelayMS);
+	memset(_gyro_bias, 0, sizeof _gyro_bias);
+	for (int i = 0; i < totSamples; i++) {
+		int gyro_x, gyro_y, gyro_z;
+		_gyro.readGyroRaw(&gyro_x, &gyro_y, &gyro_z);
+		_gyro_bias[0] += gyro_x;
+		_gyro_bias[1] += gyro_y;
+		_gyro_bias[2] += gyro_z;
+		delay(sampleDelayMS);
+	}
+	_gyro_bias[0] /= totSamples;
+	_gyro_bias[1] /= totSamples;
+	_gyro_bias[2] /= totSamples;
 }
 
 void SensorRotation_t::Update() {
