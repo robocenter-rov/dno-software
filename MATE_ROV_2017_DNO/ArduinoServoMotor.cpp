@@ -51,7 +51,7 @@ void ArduinoServoMotor_t::Update()
 {
 	if (_local) return;
 
-	float pitch = _sensor_rotation->GetPithch();
+	float pitch = _sensor_rotation->GetPitch();
 	_SetAngle(_angle - pitch);
 }
 

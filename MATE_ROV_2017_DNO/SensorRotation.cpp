@@ -338,7 +338,7 @@ void SensorRotation_t::Update() {
 	MadgwickAHRSupdateIMU(data[3], data[4], data[5], data[0], data[1], data[2]);
 }
 
-float SensorRotation_t::GetPithch()
+float SensorRotation_t::GetPitch()
 {
 	if (!_pitch_updated)
 	{

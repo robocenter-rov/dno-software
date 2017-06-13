@@ -54,7 +54,7 @@ public:
 
 	void Update();
 
-	float GetPithch();
+	float GetPitch();
 	float GetRoll();
 	float GetYaw();
 
