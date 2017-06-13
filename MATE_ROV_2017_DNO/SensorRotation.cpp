@@ -257,10 +257,10 @@ void SensorRotation_t::MadgwickAHRSupdateIMU(float gx, float gy, float gz, float
 SensorRotation_t::SensorRotation_t()
 {
 	delay(5);
-	//_accel.init(ADXL345_ADDR_ALT_LOW);
-	//_accel.set_bw(ADXL345_BW_12);
+	_accel.init(ADXL345_ADDR_ALT_LOW);
+	_accel.set_bw(ADXL345_BW_12);
 
-	//_gyro.init(ITG3200_ADDR_AD0_LOW);
+	_gyro.init(ITG3200_ADDR_AD0_LOW);
 
 	//_magn.init(true);
 
