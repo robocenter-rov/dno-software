@@ -5,28 +5,26 @@
 
 class FlashlightPeriphery_t {
 private:
-	int _pin;
 	bool _state;
+
+	virtual void _TurnOn() = 0;
+	virtual void _TurnOff() = 0;
 public:
-	FlashlightPeriphery_t(int pin) {
-		_pin = pin;
+	virtual ~FlashlightPeriphery_t() = default;
+
+	FlashlightPeriphery_t() {
 		_state = false;
-		pinMode(_pin, OUTPUT);
 	}
 
 	void TurnOn() {
-
 		LOGLN("Turning ON flashlight");
-
-		digitalWrite(_pin, HIGH);
+		_TurnOn();
 		_state = true;
 	}
 
 	void TurnOff() {
-
 		LOGLN("Turning OFF flashlight");
-
-		digitalWrite(_pin, LOW);
+		_TurnOff();
 		_state = false;
 	}
 
