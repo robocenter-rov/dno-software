@@ -12,7 +12,8 @@ Movement_t::Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_
 	_global_x = _global_y = _global_z = 0;
 	_local_yaw = _local_pitch = _local_roll = 0;
 
-	_last_call_time = 0;
+	_stabilization_update_frequncy = 100;
+	_last_stabilization_update_time = 0;
 }
 
 Motors_t* Movement_t::Motors() const {
@@ -125,6 +126,10 @@ void Movement_t::GetDepthPidState(float& in, float& target, float& out) const {
 	_depth_regulator->GetPidState(in, target, out);
 }
 
+void Movement_t::SetStabilizationUpdateFrequency(unsigned int stabilization_update_frequency) {
+	_stabilization_update_frequncy = stabilization_update_frequency;
+}
+
 void Movement_t::Stop() {
 	_motors->StopMotors();
 	_use_motors_direct = true;
@@ -138,8 +143,8 @@ void Movement_t::Update()
 		_motors_force_distributor->AddLocalMoveForce(_local_x, _local_y, _local_z);
 		_motors_force_distributor->AddLocalRotateForce(_local_pitch, _local_roll, _local_yaw);
 		//_motors_force_distributor->AddGlobalMoveForce(_global_x, _global_y, _global_z);
-		if (millis() - _last_call_time >= 100) {
-			_last_call_time = millis();
+		if (millis() - _last_stabilization_update_time >= _stabilization_update_frequncy) {
+			_last_stabilization_update_time = millis();
 			if (_use_auto_depth) {
 				_depth_regulator->Update(_motors_force_distributor);
 			}

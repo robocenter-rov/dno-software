@@ -26,7 +26,9 @@ private:
 	bool _use_auto_roll = false;
 	bool _use_auto_depth = false;
 
-	long int _last_call_time;
+	unsigned int _stabilization_update_frequncy;
+
+	unsigned long int _last_stabilization_update_time;
 public:
 	Movement_t(Motors_t* motors, MotorsForceDistributor_t* motors_force_distributor, AutoYaw_t* yaw_regulator, AutoPitch_t* pitch_regulator, AutoRoll_t* roll_regulator, AutoDepth_t* depth_regulator);
 
@@ -59,6 +61,8 @@ public:
 	void GetPitchPidState(float& in, float& target, float& out) const;
 	void GetRollPidState(float& in, float& target, float& out) const;
 	void GetDepthPidState(float& in, float& target, float& out) const;
+
+	void SetStabilizationUpdateFrequency(unsigned int stabilization_update_frequency);
 
 	void Stop();
 
