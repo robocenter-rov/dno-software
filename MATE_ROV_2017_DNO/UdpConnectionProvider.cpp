@@ -38,8 +38,6 @@ int UdpConnectionProvider_t::Begin() {
 	if (_local_ip) {
 #if _DEBUG
 		Serial.println("Using predefined ip: ");
-		_local_ip.printTo(Serial);
-		Serial.println();
 #endif
 		Ethernet.begin(_mac, _local_ip);
 	} else {
@@ -53,11 +51,11 @@ int UdpConnectionProvider_t::Begin() {
 		_local_ip = Ethernet.localIP();
 #if _DEBUG
 		Serial.print("DHCP gave me this IP address: ");
-		Ethernet.localIP().printTo(Serial);
-		Serial.println();
 #endif
 	}
 #if _DEBUG
+	Ethernet.localIP().printTo(Serial);
+	Serial.println();
 	Serial.print("Start UDP connection on port: ");
 	Serial.println(_local_port);
 #endif
