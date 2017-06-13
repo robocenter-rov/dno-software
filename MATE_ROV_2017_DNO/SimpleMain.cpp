@@ -290,6 +290,12 @@ SimpleMain_t::SimpleMain_t(SimpleCommunicator_t* communicator, Movement_t* movem
 
 		main->_sensor_manager->SetCalibrationValues(gyro_bias, gyro_scale, acc_bias, acc_scale, magn_matrix, magn_bias);
 	}, this);
+
+	_communicator->OnStabilizationUpdateFrequency([](void* data, int stabilization_update_frequency)
+	{
+		auto main = static_cast<SimpleMain_t*>(data);
+		main->_movement->SetStabilizationUpdateFrequency(stabilization_update_frequency);
+	}, this);
 }
 
 SimpleMain_t::~SimpleMain_t()

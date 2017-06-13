@@ -295,6 +295,7 @@ int SimpleCommunicator_t::Update() {
 							
 							float gyro_scale;
 						} IMUConfig;
+						int StabilizationUpdateFrequency;
 					} config;
 #pragma pack(pop)
 					READ(config);
@@ -366,6 +367,10 @@ int SimpleCommunicator_t::Update() {
 							config.IMUConfig.gyro_z_bias,
 
 							config.IMUConfig.gyro_scale
+						);
+
+						_on_stabilization_update_frequency_receive.callback(_on_stabilization_update_frequency_receive.data,
+							config.StabilizationUpdateFrequency
 						);
 
 						_config_hash = config_hash;
@@ -651,5 +656,10 @@ void SimpleCommunicator_t::OnCamerasConfigReceive(void (* callback)(void* data, 
 void SimpleCommunicator_t::OnIMUConfigReceive(void(* callback)(void* data, float acc_x_bias, float acc_y_bias, float acc_z_bias, float acc_x_scale, float acc_y_scale, float acc_z_scale, float gyro_x_bias, float gyro_y_bias, float gyro_z_bias, float gyro_scale), void* data) {
 	_on_imu_config_receive.callback = callback;
 	_on_imu_config_receive.data = data;
+}
+
+void SimpleCommunicator_t::OnStabilizationUpdateFrequency(void(* callback)(void* data, int stabilization_update_frequency), void* data) {
+	_on_stabilization_update_frequency_receive.callback = callback;
+	_on_stabilization_update_frequency_receive.data = data;
 }
 
