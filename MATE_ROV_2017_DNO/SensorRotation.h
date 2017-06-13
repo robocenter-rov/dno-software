@@ -31,12 +31,17 @@ private:
 	float _roll;
 	float _yaw;
 
+	float _gx, _gy, _gz;
+
 	bool _pitch_updated;
 	bool _roll_updated;
 	bool _yaw_updated;
+	bool _ypr_calc_cache_updated;
 
 	unsigned long int _lastUpdate = 0;
 	
+	void UpdateYprCalcCache();
+
 	void MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az);
 	void MadgwickAHRSupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz);
 	void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az);

@@ -11,6 +11,13 @@ static float invSqrt(float x) {
 	return y;
 }
 
+void SensorRotation_t::UpdateYprCalcCache() {
+	_gx = 2 * (_q1*_q3 - _q0*_q2);
+	_gy = 2 * (_q0*_q1 - _q2*_q3);
+	_gz = _q0*_q0 - _q1*_q1 - _q2*_q2 + _q3*_q3;
+	_ypr_calc_cache_updated = true;
+}
+
 void SensorRotation_t::MahonyAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az) {
 	float recipNorm;
 	float halfvx, halfvy, halfvz;
@@ -332,6 +339,7 @@ void SensorRotation_t::Update() {
 	_yaw_updated = false;
 	_roll_updated = false;
 	_pitch_updated = false;
+	_ypr_calc_cache_updated = false;
 
 	float data[9];
 	GetCalibratedData(data);
@@ -342,9 +350,10 @@ float SensorRotation_t::GetPitch()
 {
 	if (!_pitch_updated)
 	{
-		float q1, q2, q3, q4;
-		GetRotation(q1, q2, q3, q4);
-		_pitch = atan2(2 * q3 * q4 - 2 * q1 * q2, 2 * q1 * q1 + 2 * q4 * q4 - 1);
+		if (!_ypr_calc_cache_updated) {
+			UpdateYprCalcCache();
+		}
+		_pitch = atan(_gx / sqrt(_gy*_gy + _gz*_gz));
 		_pitch_updated = true;
 	}
 	return  _pitch;
@@ -354,9 +363,10 @@ float SensorRotation_t::GetRoll()
 {
 	if (!_roll_updated)
 	{
-		float q1, q2, q3, q4;
-		GetRotation(q1, q2, q3, q4);
-		_roll = -asin(2 * q2 * q4 + 2 * q1 * q3);
+		if (!_ypr_calc_cache_updated) {
+			UpdateYprCalcCache();
+		}
+		_roll = atan(_gy / sqrt(_gx*_gx + _gz*_gz));
 		_roll_updated = true;
 	}
 	return _roll;
