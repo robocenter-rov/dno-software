@@ -101,11 +101,11 @@ void setup() {
 	Serial1.begin(38400);
 	BluetoothPeriphery_t* bluetooth_periphery = new BluetoothPeriphery_t(&Serial1);
 
-	ArduinoServoMotor_t* camera1_periphery = new ArduinoServoMotor_t(rotation_sensor, 5);
-	ArduinoServoMotor_t* camera2_periphery = new ArduinoServoMotor_t(rotation_sensor, 7);
+	ServoPeriphery_t* camera1_periphery = new ArduinoServoMotor_t(rotation_sensor, 5);
+	ServoPeriphery_t* camera2_periphery = new ArduinoServoMotor_t(rotation_sensor, 7);
 
-	PCA9685ServoMotor_t* servo1_periphery = new PCA9685ServoMotor_t(rotation_sensor, pwm1, 0);
-	PCA9685ServoMotor_t* servo2_periphery = new PCA9685ServoMotor_t(rotation_sensor, pwm1, 1);
+	ServoPeriphery_t* servo1_periphery = new PCA9685ServoMotor_t(rotation_sensor, pwm1, 0);
+	ServoPeriphery_t* servo2_periphery = new PCA9685ServoMotor_t(rotation_sensor, pwm1, 1);
 
 	ManipulatorPeriphery_t* manipulator_periphery = new ManipulatorPeriphery_t(
 		new PCA96685Motor_t(pwm2, 9, 10, 8, 2000),
